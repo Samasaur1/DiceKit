@@ -1,3 +1,3 @@
 # DiceKit
 
-A description of this package.
+A Swift framework for simulating dice both real and unreal.
