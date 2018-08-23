@@ -38,69 +38,39 @@ final class RollTests: XCTestCase {
         XCTAssertNotEqual(_5.hashValue, _3.hashValue)
         XCTAssertEqual(_3.hashValue, r3.hashValue)
     }
-}
-
-
-
-
-public struct Roll {
-    let value: Int
-}
-
-extension Roll: Equatable {
-    public static func == (lhs: Roll, rhs: Roll) -> Bool {
-        return lhs.value == rhs.value
-    }
-}
-
-extension Roll: Comparable {
-    public static func < (lhs: Roll, rhs: Roll) -> Bool {
-        return lhs.value < rhs.value
-    }
-}
-
-extension Roll: Hashable {
-    public var hashValue: Int {
-        return value
-    }
-}
-
-extension Roll: CustomStringConvertible, CustomDebugStringConvertible {
-    public var description: String {
-        return "A roll with a value of \(value)"
+    
+    func testOperators() {
+        let _6 = Roll(value: 6)
+        let _5 = Roll(value: 5)
+        let _3 = Roll(value: 3)
+        let _2 = Roll(value: 2)
+        XCTAssertEqual(_2 + _3, _5)
+        XCTAssertEqual(_5 - _3, _2)
+        XCTAssertEqual(_2 * _3, _6)
+        XCTAssertEqual(_6 / _3, _2)
     }
     
-    public var debugDescription: String {
-        return "roll(value: \(value))"
-    }
-}
-
-extension Roll {
-    public static func + (lhs: Roll, rhs: Roll) -> Roll {
-        return Roll(value: lhs.value + rhs.value)
-    }
-    public static func - (lhs: Roll, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs.value - rhs.value, 0))
-    }
-    public static func * (lhs: Roll, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs.value * rhs.value, 0))
-    }
-    public static func / (lhs: Roll, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs.value / rhs.value, 0))
-    }
-}
-
-extension Roll {
-    public static func += (lhs: inout Roll, rhs: Roll) {
-        lhs = lhs + rhs
-    }
-    public static func -= (lhs: inout Roll, rhs: Roll) {
-        lhs = lhs - rhs
-    }
-    public static func *= (lhs: inout Roll, rhs: Roll) {
-        lhs = lhs * rhs
-    }
-    public static func /= (lhs: inout Roll, rhs: Roll) {
-        lhs = lhs / rhs
+    func testCompoundAssignmentOperators() {
+        let _6 = Roll(value: 6)
+        let _5 = Roll(value: 5)
+        let _3 = Roll(value: 3)
+        let _2 = Roll(value: 2)
+        var mutable: Roll
+        
+        mutable = Roll(value: 1)
+        mutable += _2
+        XCTAssertEqual(mutable, _3)
+        
+        mutable = Roll(value: 7)
+        mutable -= _5
+        XCTAssertEqual(mutable, _2)
+        
+        mutable = Roll(value: 2) //This should be redundant, but just in case...
+        mutable *= _3
+        XCTAssertEqual(mutable, _6)
+        
+        mutable = Roll(value: 10) //See above
+        mutable /= _2
+        XCTAssertEqual(mutable, _5)
     }
 }
