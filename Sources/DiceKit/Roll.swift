@@ -46,36 +46,6 @@ extension Roll {
 }
 
 extension Roll {
-    public static func + (lhs: Roll, rhs: Int) -> Roll {
-        return Roll(value: lhs.value + rhs)
-    }
-    public static func - (lhs: Roll, rhs: Int) -> Roll {
-        return Roll(value: max(lhs.value - rhs, 0))
-    }
-    public static func * (lhs: Roll, rhs: Int) -> Roll {
-        return Roll(value: max(lhs.value * rhs, 0))
-    }
-    public static func / (lhs: Roll, rhs: Int) -> Roll {
-        return Roll(value: max(lhs.value / rhs, 0))
-    }
-}
-
-extension Roll {
-    public static func + (lhs: Int, rhs: Roll) -> Roll {
-        return Roll(value: lhs + rhs.value)
-    }
-    public static func - (lhs: Int, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs - rhs.value, 0))
-    }
-    public static func * (lhs: Int, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs * rhs.value, 0))
-    }
-    public static func / (lhs: Int, rhs: Roll) -> Roll {
-        return Roll(value: max(lhs / rhs.value, 0))
-    }
-}
-
-extension Roll {
     public static func += (lhs: inout Roll, rhs: Roll) {
         lhs = lhs + rhs
     }

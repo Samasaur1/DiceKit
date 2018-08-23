@@ -3,5 +3,6 @@ import XCTest
 import DiceKitTests
 
 var tests = [XCTestCaseEntry]()
-tests += DiceKitTests.allTests()
+tests += DiceKitTests.__allTests()
+
 XCTMain(tests)
