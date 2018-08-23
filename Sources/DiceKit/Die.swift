@@ -7,7 +7,7 @@ public class Die {
 
 extension Die: Rollable {
     public func roll() -> Roll {
-        return Roll(value: Random.random(max: sides) + 1)
+        return Roll(value: random(max: sides) + 1)
     }
 }
 
