@@ -3,6 +3,12 @@ public class Dice {
     public init(_ dice: Die...) {
         self.dice = dice
     }
+    public init(dice: [Die]) {
+        self.dice = dice
+    }
+    public init(copyOf other: Dice) {
+        dice = other.dice.map { Die(sides: $0.sides) }
+    }
 }
 
 extension Dice: Rollable {
@@ -61,5 +67,35 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
             }
         }
         return desc
+    }
+}
+
+extension Dice {
+    public func copy() -> Dice {
+        return Dice(copyOf: self)
+    }
+}
+
+extension Dice {
+    public static func + (lhs: Dice, rhs: Die) -> Dice {
+        var dice = lhs.dice.map { Die(sides: $0.sides) }
+        dice.append(rhs)
+        return Dice(dice: dice)
+    }
+    public static func + (lhs: Die, rhs: Dice) -> Dice {
+        var dice = rhs.dice.map { Die(sides: $0.sides) }
+        dice.append(lhs)
+        return Dice(dice: dice)
+    }
+    
+    public static func + (lhs: Dice, rhs: Dice) -> Dice {
+        let lhsDiceCopy = lhs.dice.map { Die(sides: $0.sides) }
+        let rhsDiceCopy = rhs.dice.map { Die(sides: $0.sides) }
+        return Dice(dice: lhsDiceCopy + rhsDiceCopy)
+    }
+}
+extension Dice {
+    public static func += (lhs: inout Dice, rhs: Die) {
+        lhs = lhs + rhs
     }
 }
