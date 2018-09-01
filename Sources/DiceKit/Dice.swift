@@ -2,19 +2,19 @@ public class Dice {
     public let dice: [Die]
     public let modifier: Int
     public init(_ dice: Die...) {
-        self.dice = dice
+        self.dice = dice.sorted(by: >)
         self.modifier = 0
     }
     public init(dice: [Die]) {
-        self.dice = dice
+        self.dice = dice.sorted(by: >)
         self.modifier = 0
     }
     public init(_ dice: Die..., withModifier modifier: Int) {
-        self.dice = dice
+        self.dice = dice.sorted(by: >)
         self.modifier = modifier
     }
     public init(dice: [Die], withModifier modifier: Int) {
-        self.dice = dice
+        self.dice = dice.sorted(by: >)
         self.modifier = modifier
     }
     public init(copyOf other: Dice) {
@@ -45,20 +45,6 @@ extension Dice: Equatable {
         return true
     }
 }
-
-//extension Dice: Comparable {
-//    public static func < (lhs: Dice, rhs: Dice) -> Bool {
-//        return lhs.sides < rhs.sides
-//    }
-//}
-
-//extension Dice: Hashable {
-//    public var hashValue: Int {
-//        return sides
-//    }
-//
-//
-//}
 
 extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
