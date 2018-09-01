@@ -10,6 +10,16 @@ internal func random(min: Int = 0, max: Int) -> Int {
     return Int(arc4random_uniform(UInt32(max - min))) + min
 }
 
+/// An object that is rollable. It must have a `roll()` method that returns a `Roll` object.
+///
+/// **Implemented By**
+/// * `Die`
+/// * `Dice`
+///
+/// - Author: Samasaur
 public protocol Rollable {
+    /// Rolls this object and returns the result.
+    ///
+    /// - Returns: The result of the roll.
     func roll() -> Roll
 }
