@@ -95,6 +95,9 @@ extension Dice {
     }
 }
 extension Dice {
+    public static func += (lhs: inout Dice, rhs: Dice) {
+        lhs = lhs + rhs
+    }
     public static func += (lhs: inout Dice, rhs: Die) {
         lhs = lhs + rhs
     }
