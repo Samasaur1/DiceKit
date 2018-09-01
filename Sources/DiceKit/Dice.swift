@@ -1,13 +1,25 @@
 public class Dice {
     public let dice: [Die]
+    public let modifier: Int
     public init(_ dice: Die...) {
         self.dice = dice
+        self.modifier = 0
     }
     public init(dice: [Die]) {
         self.dice = dice
+        self.modifier = 0
+    }
+    public init(_ dice: Die..., withModifier modifier: Int) {
+        self.dice = dice
+        self.modifier = modifier
+    }
+    public init(dice: [Die], withModifier modifier: Int) {
+        self.dice = dice
+        self.modifier = modifier
     }
     public init(copyOf other: Dice) {
         dice = other.dice.map { $0.copy() }
+        modifier = other.modifier
     }
 }
 
@@ -93,6 +105,18 @@ extension Dice {
         let rhsDiceCopy = rhs.dice.map { $0.copy() }
         return Dice(dice: lhsDiceCopy + rhsDiceCopy)
     }
+    
+    public static func + (lhs: Dice, rhs: Int) -> Dice {
+        let dice = lhs.dice.map { $0.copy() }
+        return Dice(dice: dice, withModifier: rhs)
+    }
+    public static func + (lhs: Int, rhs: Dice) -> Dice {
+        let dice = rhs.dice.map { $0.copy() }
+        return Dice(dice: dice, withModifier: lhs)
+    }
+    public static func - (lhs: Dice, rhs: Int) -> Dice {
+        return lhs + (-rhs)
+    }
 }
 extension Dice {
     public static func += (lhs: inout Dice, rhs: Dice) {
@@ -100,5 +124,11 @@ extension Dice {
     }
     public static func += (lhs: inout Dice, rhs: Die) {
         lhs = lhs + rhs
+    }
+    public static func += (lhs: inout Dice, rhs: Int) {
+        lhs = lhs + rhs
+    }
+    public static func -= (lhs: inout Dice, rhs: Int) {
+        lhs = lhs - rhs
     }
 }
