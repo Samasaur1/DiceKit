@@ -6,6 +6,9 @@ public class Die {
         }
         self.sides = sides
     }
+    public init(copyOf other: Die) {
+        sides = other.sides
+    }
 }
 
 extension Die: Rollable {
@@ -39,6 +42,12 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
     
     public var debugDescription: String {
         return "\(sides)-sided-die"
+    }
+}
+
+extension Die {
+    public func copy() -> Die {
+        return Die(copyOf: self)
     }
 }
 
