@@ -49,27 +49,50 @@ extension Dice: Equatable {
 extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         var desc = ""
+        var diceRepeating: [Die: Int] = [:]
         for d in dice {
+            diceRepeating[d] = (diceRepeating[d] ?? 0) + 1
+        }
+        for (die, count) in diceRepeating.sorted(by: { $0.key > $1.key }) {
             if desc.isEmpty {
-                desc += d.description
+                desc += "\(count) \(die.sides)-sided di\(count == 1 ? "e" : "ce")"
             } else {
-                desc += ", \(d.description)"
+                desc += ", \(count) \(die.sides)-sided di\(count == 1 ? "e" : "ce")"
             }
         }
-        if desc.isEmpty {
-            desc = "No dice."
+        if modifier != 0 {
+            if desc.isEmpty {
+                desc += "A modifier of \(modifier)."
+            } else {
+                desc += " with a modifier of \(modifier)."
+            }
+        } else {
+            if desc.isEmpty {
+                desc = "No dice, without a modifier."
+            } else {
+                desc += " with no modifier."
+            }
         }
-        return "\(desc.replacingOccurrences(of: ".", with: ""))."
+        return desc
     }
     
     public var debugDescription: String {
         var desc = ""
+        var diceRepeating: [Die: Int] = [:]
         for d in dice {
+            diceRepeating[d] = (diceRepeating[d] ?? 0) + 1
+        }
+        for (die, count) in diceRepeating.sorted(by: { $0.key > $1.key }) {
             if desc.isEmpty {
-                desc += d.debugDescription
+                desc += "\(count)\(die.debugDescription)"
             } else {
-                desc += ", \(d.debugDescription)"
+                desc += " + \(count)\(die.debugDescription)"
             }
+        }
+        if modifier > 0 {
+            desc += " + \(modifier)"
+        } else if modifier < 0 {
+            desc += " - \(-modifier)"
         }
         return desc
     }
