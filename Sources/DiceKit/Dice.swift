@@ -7,7 +7,7 @@ public class Dice {
         self.dice = dice
     }
     public init(copyOf other: Dice) {
-        dice = other.dice.map { Die(sides: $0.sides) }
+        dice = other.dice.map { $0.copy() }
     }
 }
 
@@ -78,19 +78,19 @@ extension Dice {
 
 extension Dice {
     public static func + (lhs: Dice, rhs: Die) -> Dice {
-        var dice = lhs.dice.map { Die(sides: $0.sides) }
+        var dice = lhs.dice.map { $0.copy() }
         dice.append(rhs)
         return Dice(dice: dice)
     }
     public static func + (lhs: Die, rhs: Dice) -> Dice {
-        var dice = rhs.dice.map { Die(sides: $0.sides) }
+        var dice = rhs.dice.map { $0.copy() }
         dice.append(lhs)
         return Dice(dice: dice)
     }
     
     public static func + (lhs: Dice, rhs: Dice) -> Dice {
-        let lhsDiceCopy = lhs.dice.map { Die(sides: $0.sides) }
-        let rhsDiceCopy = rhs.dice.map { Die(sides: $0.sides) }
+        let lhsDiceCopy = lhs.dice.map { $0.copy() }
+        let rhsDiceCopy = rhs.dice.map { $0.copy() }
         return Dice(dice: lhsDiceCopy + rhsDiceCopy)
     }
 }
