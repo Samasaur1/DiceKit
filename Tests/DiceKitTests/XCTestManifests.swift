@@ -14,7 +14,7 @@ extension DiceTests {
 
 extension DieTests {
     static let __allTests = [
-        ("testExample", testExample),
+        ("testInitialization", testInitialization),
     ]
 }
 
