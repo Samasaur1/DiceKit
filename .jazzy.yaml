@@ -1,0 +1,19 @@
+clean: true
+author: Samasaur
+author_url: https://github.com/Samasaur1
+module: DiceKit
+module_version: 0.1.0
+# docset_icon:
+github_url: https://github.com/Samasaur1/DiceKit
+# github_file_prefix:
+skip_undocumented: true
+hide_documentation_coverage: false
+custom_categories:
+ - name: Rollables
+   children:
+   - Rollable
+   - Die
+   - Dice
+ - name: Results
+   children:
+   - Roll
