@@ -74,3 +74,9 @@ extension Die {
         return Die(sides: 100)!
     }
 }
+
+extension Die {
+    public static func + (lhs: Die, rhs: Die) -> Dice {
+        return Dice(lhs, rhs)
+    }
+}

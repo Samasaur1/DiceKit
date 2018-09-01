@@ -13,8 +13,3 @@ internal func random(min: Int = 0, max: Int) -> Int {
 public protocol Rollable {
     func roll() -> Roll
 }
-
-public func + (lhs: Die, rhs: Die) -> Dice {
-    return Dice(lhs, rhs)
-}
-
