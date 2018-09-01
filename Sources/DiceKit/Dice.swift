@@ -29,13 +29,20 @@ extension Dice: Rollable {
         for d in dice {
             result += d.roll()
         }
+        result += Roll(value: modifier)
         return result
     }
 }
 
 extension Dice: Equatable {
     public static func == (lhs: Dice, rhs: Dice) -> Bool {
-        return lhs.dice == rhs.dice
+        guard lhs.dice == rhs.dice else {
+            return false
+        }
+        guard lhs.modifier == rhs.modifier else {
+            return false
+        }
+        return true
     }
 }
 
