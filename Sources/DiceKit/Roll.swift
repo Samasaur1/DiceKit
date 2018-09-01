@@ -32,7 +32,7 @@ extension Roll: CustomStringConvertible, CustomDebugStringConvertible {
 
 extension Roll {
     public static func + (lhs: Roll, rhs: Roll) -> Roll {
-        return Roll(value: lhs.value + rhs.value)
+        return Roll(value: max(lhs.value + rhs.value, 0))
     }
     public static func - (lhs: Roll, rhs: Roll) -> Roll {
         return Roll(value: max(lhs.value - rhs.value, 0))
@@ -57,5 +57,11 @@ extension Roll {
     }
     public static func /= (lhs: inout Roll, rhs: Roll) {
         lhs = lhs / rhs
+    }
+}
+
+extension Roll {
+    public static var zero: Roll {
+        return Roll(value: 0)
     }
 }
