@@ -41,7 +41,7 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
     }
     
     public var debugDescription: String {
-        return "\(sides)-sided-die"
+        return "d\(sides)"
     }
 }
 
