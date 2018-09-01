@@ -1,6 +1,9 @@
 public class Die {
     public let sides: Int
-    public init(sides: Int) {
+    public init?(sides: Int) {
+        guard sides > 0 else {
+            return nil
+        }
         self.sides = sides
     }
 }
@@ -36,5 +39,29 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
     
     public var debugDescription: String {
         return "\(sides)-sided-die"
+    }
+}
+
+extension Die {
+    public static var d4: Die {
+        return Die(sides: 4)!
+    }
+    public static var d6: Die {
+        return Die(sides: 6)!
+    }
+    public static var d8: Die {
+        return Die(sides: 8)!
+    }
+    public static var d10: Die {
+        return Die(sides: 10)!
+    }
+    public static var d12: Die {
+        return Die(sides: 12)!
+    }
+    public static var d20: Die {
+        return Die(sides: 20)!
+    }
+    public static var d100: Die {
+        return Die(sides: 100)!
     }
 }
