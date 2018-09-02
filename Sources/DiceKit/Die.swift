@@ -41,6 +41,20 @@ extension Die: Rollable {
     public func roll() -> Roll {
         return Roll(value: random(max: sides) + 1)
     }
+    
+    /// The minimum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling a `1` on this die.
+    public var minimumResult: Roll {
+        return Roll(value: 1)
+    }
+    
+    /// The maximum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling the maximum on this die.
+    public var maximumResult: Roll {
+        return Roll(value: sides)
+    }
 }
 
 extension Die: Equatable {
