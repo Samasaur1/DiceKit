@@ -52,6 +52,14 @@ public class Dice {
     ///     }
     ///     // diceArray is [d6, d6, d4]
     public let dice: [Die: Int]
+    /// The number of dice in this `Dice` instance.
+    public var numberOfDice: Int {
+        var c = 0
+        for (_, count) in dice {
+            c += count
+        }
+        return c
+    }
     /// The modifier added or subtracted from these `Dice`
     ///
     /// This `Int` is added to the result whenever the `roll()` method is called.
@@ -132,6 +140,24 @@ extension Dice: Rollable {
         }
         result += Roll(value: modifier)
         return result
+    }
+    
+    /// The minimum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.
+    public var minimumResult: Roll {
+        return Roll(value: numberOfDice + modifier)
+    }
+    
+    /// The maximum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling the maximum on every die in this `Dice` object. It also includes the modifier, if applicable.
+    public var maximumResult: Roll {
+        var total = modifier
+        for (die, count) in dice {
+            total += (die.sides * count)
+        }
+        return Roll(value: total)
     }
 }
 

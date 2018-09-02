@@ -22,4 +22,10 @@ public protocol Rollable {
     ///
     /// - Returns: The result of the roll.
     func roll() -> Roll
+    
+    /// The minimum possible result from using the `roll()` method.
+    var minimumResult: Roll { get }
+    
+    /// The maximum possible result from using the `roll()` method.
+    var maximumResult: Roll { get }
 }
