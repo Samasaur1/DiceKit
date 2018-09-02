@@ -247,6 +247,12 @@ extension Dice {
 }
 
 extension Dice {
+    public var minimum: Int {
+        return numberOfDice + modifier
+    }
+}
+
+extension Dice {
     public static func + (lhs: Dice, rhs: Die) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
