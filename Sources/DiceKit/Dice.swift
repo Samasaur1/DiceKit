@@ -52,6 +52,14 @@ public class Dice {
     ///     }
     ///     // diceArray is [d6, d6, d4]
     public let dice: [Die: Int]
+    /// The number of dice in this `Dice` instance.
+    public var numberOfDice: Int {
+        var c = 0
+        for (_, count) in dice {
+            c += count
+        }
+        return c
+    }
     /// The modifier added or subtracted from these `Dice`
     ///
     /// This `Int` is added to the result whenever the `roll()` method is called.
