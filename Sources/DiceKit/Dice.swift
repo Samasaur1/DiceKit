@@ -250,6 +250,13 @@ extension Dice {
     public var minimum: Int {
         return numberOfDice + modifier
     }
+    public var maximum: Int {
+        var total = modifier
+        for (die, count) in dice {
+            total += (die.sides * count)
+        }
+        return total
+    }
 }
 
 extension Dice {
