@@ -247,18 +247,17 @@ extension Dice {
 }
 
 extension Dice {
-    public var minimum: Int {
-        return numberOfDice + modifier
+    public var minimumResult: Roll {
+        return Roll(value: numberOfDice + modifier)
     }
-    public var maximum: Int {
+    public var maximumResult: Roll {
         var total = modifier
         for (die, count) in dice {
             total += (die.sides * count)
         }
-        return total
+        return Roll(value: total)
     }
 }
-
 extension Dice {
     public static func + (lhs: Dice, rhs: Die) -> Dice {
         var dice: [Die] = []
