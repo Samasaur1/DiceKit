@@ -247,9 +247,15 @@ extension Dice {
 }
 
 extension Dice {
+    /// The minimum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.
     public var minimumResult: Roll {
         return Roll(value: numberOfDice + modifier)
     }
+    /// The maximum possible result from using the `roll()` method.
+    ///
+    /// This method simulates rolling the maximum on every die in this `Dice` object. It also includes the modifier, if applicable.
     public var maximumResult: Roll {
         var total = modifier
         for (die, count) in dice {
