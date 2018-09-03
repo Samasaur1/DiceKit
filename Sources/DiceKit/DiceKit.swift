@@ -24,8 +24,12 @@ public protocol Rollable {
     func roll() -> Roll
     
     /// The minimum possible result from using the `roll()` method.
+    ///
+    /// - Since: 0.2.0
     var minimumResult: Roll { get }
     
     /// The maximum possible result from using the `roll()` method.
+    ///
+    /// - Since: 0.2.0
     var maximumResult: Roll { get }
 }
