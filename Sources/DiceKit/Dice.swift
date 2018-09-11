@@ -328,6 +328,22 @@ extension Dice {
     public static func - (lhs: Dice, rhs: Int) -> Dice {
         return lhs + (-rhs)
     }
+    public static func * (lhs: Dice, rhs: Int) -> Dice {
+        var dice = lhs.copy()
+        for (die, _) in lhs.dice {
+            dice += die * (rhs - 1)
+        }
+        dice += lhs.modifier * (rhs - 1)
+        return dice
+    }
+    public static func * (lhs: Int, rhs: Dice) -> Dice {
+        var dice = rhs.copy()
+        for (die, _) in rhs.dice {
+            dice += die * (lhs - 1)
+        }
+        dice += rhs.modifier * (lhs - 1)
+        return dice
+    }
 }
 extension Dice {
     public static func += (lhs: inout Dice, rhs: Dice) {
@@ -341,5 +357,8 @@ extension Dice {
     }
     public static func -= (lhs: inout Dice, rhs: Int) {
         lhs = lhs - rhs
+    }
+    public static func *= (lhs: inout Dice, rhs: Int) {
+        lhs = lhs * rhs
     }
 }
