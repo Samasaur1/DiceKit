@@ -45,6 +45,8 @@ extension Die: Rollable {
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on this die.
+    ///
+    /// - Since: 0.2.0
     public var minimumResult: Roll {
         return Roll(value: 1)
     }
@@ -52,6 +54,8 @@ extension Die: Rollable {
     /// The maximum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling the maximum on this die.
+    ///
+    /// - Since: 0.2.0
     public var maximumResult: Roll {
         return Roll(value: sides)
     }
@@ -134,5 +138,13 @@ extension Die {
     }
     public static func + (lhs: Int, rhs: Die) -> Dice {
         return Dice(rhs, withModifier: lhs)
+    }
+    public static func * (lhs: Die, rhs: Int) -> Dice {
+        let dice = [Die].init(repeating: lhs, count: rhs)
+        return Dice(dice: dice)
+    }
+    public static func * (lhs: Int, rhs: Die) -> Dice {
+        let dice = [Die].init(repeating: rhs, count: lhs)
+        return Dice(dice: dice)
     }
 }

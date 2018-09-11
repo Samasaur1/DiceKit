@@ -53,6 +53,8 @@ public class Dice {
     ///     // diceArray is [d6, d6, d4]
     public let dice: [Die: Int]
     /// The number of dice in this `Dice` instance.
+    ///
+    /// - Since: 0.2.0
     public var numberOfDice: Int {
         var c = 0
         for (_, count) in dice {
@@ -145,6 +147,8 @@ extension Dice: Rollable {
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.
+    ///
+    /// - Since: 0.2.0
     public var minimumResult: Roll {
         return Roll(value: numberOfDice + modifier)
     }
@@ -152,6 +156,8 @@ extension Dice: Rollable {
     /// The maximum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling the maximum on every die in this `Dice` object. It also includes the modifier, if applicable.
+    ///
+    /// - Since: 0.2.0
     public var maximumResult: Roll {
         var total = modifier
         for (die, count) in dice {
@@ -322,6 +328,22 @@ extension Dice {
     public static func - (lhs: Dice, rhs: Int) -> Dice {
         return lhs + (-rhs)
     }
+    public static func * (lhs: Dice, rhs: Int) -> Dice {
+        var dice = lhs.copy()
+        for (die, _) in lhs.dice {
+            dice += die * (rhs - 1)
+        }
+        dice += lhs.modifier * (rhs - 1)
+        return dice
+    }
+    public static func * (lhs: Int, rhs: Dice) -> Dice {
+        var dice = rhs.copy()
+        for (die, _) in rhs.dice {
+            dice += die * (lhs - 1)
+        }
+        dice += rhs.modifier * (lhs - 1)
+        return dice
+    }
 }
 extension Dice {
     public static func += (lhs: inout Dice, rhs: Dice) {
@@ -335,5 +357,8 @@ extension Dice {
     }
     public static func -= (lhs: inout Dice, rhs: Int) {
         lhs = lhs - rhs
+    }
+    public static func *= (lhs: inout Dice, rhs: Int) {
+        lhs = lhs * rhs
     }
 }
