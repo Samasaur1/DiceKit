@@ -139,4 +139,12 @@ extension Die {
     public static func + (lhs: Int, rhs: Die) -> Dice {
         return Dice(rhs, withModifier: lhs)
     }
+    public static func * (lhs: Die, rhs: Int) -> Dice {
+        let dice = [Die].init(repeating: lhs, count: rhs)
+        return Dice(dice: dice)
+    }
+    public static func * (lhs: Int, rhs: Die) -> Dice {
+        let dice = [Die].init(repeating: rhs, count: lhs)
+        return Dice(dice: dice)
+    }
 }
