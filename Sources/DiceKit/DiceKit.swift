@@ -33,3 +33,8 @@ public protocol Rollable {
     /// - Since: 0.2.0
     var maximumResult: Roll { get }
 }
+
+public typealias DKDie = Die
+public typealias DKDice = Dice
+public typealias DKRoll = Roll
+public typealias DKRollable = Rollable
