@@ -144,6 +144,56 @@ extension Dice: Rollable {
         return result
     }
     
+    /// Rolls this `Dice` object the given number of times and returns the given result type.
+    ///
+    /// - Parameters:
+    ///   - times: The number of times to roll.
+    ///   - returnType: The type of result to return.
+    /// - Returns: The type of result performed with the given number of rolls.
+    ///
+    /// - Since: 0.5.0
+    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
+        var rolls: [Roll] = []
+        for _ in 0..<times {
+            rolls.append(roll())
+        }
+        switch returnType {
+        case .sum:
+            return rolls.sum
+        case .highest:
+            return rolls.max() ?? Roll.zero
+        case .lowest:
+            return rolls.min() ?? Roll.zero
+        case .outsides:
+            return (rolls.min() ?? Roll.zero) + (rolls.max() ?? Roll.zero)
+        case .dropHighest:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            return rolls.sum
+        case .dropLowest:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropOutsides:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropLow(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return Roll.zero }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            }
+            return rolls.sum
+        case .dropHigh(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return Roll.zero }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            }
+            return rolls.sum
+        }
+    }
+    
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.

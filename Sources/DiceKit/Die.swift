@@ -28,11 +28,6 @@ public class Die {
 }
 
 extension Die: Rollable {
-    /// Rolls this `Dice` object.
-    ///
-    /// This function rolls every `Die` included in this `Dice` object, adds them together, adds the modifier (if any), and returns the result
-    ///
-    /// - Returns: The sum of the rolls of every `Die` in this `Dice` + the modifier.
     /// Rolls this `Die` and returns the result as a `Roll`.
     ///
     /// This function returns a random integer in the range 1 to `sides`, inclusive (`[1, sides]`).
@@ -40,6 +35,56 @@ extension Die: Rollable {
     /// - Returns: A random value from `1` to `sides`.
     public func roll() -> Roll {
         return Roll(value: random(max: sides) + 1)
+    }
+    
+    /// Rolls this Die the given number of times and returns the given result type.
+    ///
+    /// - Parameters:
+    ///   - times: The number of times to roll.
+    ///   - returnType: The type of result to return.
+    /// - Returns: The type of result performed with the given number of rolls.
+    ///
+    /// - Since: 0.5.0
+    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
+        var rolls: [Roll] = []
+        for _ in 0..<times {
+            rolls.append(roll())
+        }
+        switch returnType {
+        case .sum:
+            return rolls.sum
+        case .highest:
+            return rolls.max() ?? Roll.zero
+        case .lowest:
+            return rolls.min() ?? Roll.zero
+        case .outsides:
+            return (rolls.min() ?? Roll.zero) + (rolls.max() ?? Roll.zero)
+        case .dropHighest:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            return rolls.sum
+        case .dropLowest:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropOutsides:
+            guard !rolls.isEmpty else { return Roll.zero }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropLow(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return Roll.zero }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            }
+            return rolls.sum
+        case .dropHigh(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return Roll.zero }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            }
+            return rolls.sum
+        }
     }
     
     /// The minimum possible result from using the `roll()` method.
