@@ -88,10 +88,18 @@ public class Dice {
         self.dice = newDice
         self.modifier = 0
     }
+    /// Creates a new `Dice` object with the given number of the specified die. This is essentially identical to `Dice(copyOf: die * count)`, but is more efficient.
+    ///
+    /// - Parameters:
+    ///   - die: The die to include in this `Dice` object.
+    ///   - count: The number of times the specified die should appear.
     public init(_ die: Die, count: Int) {
         self.dice = [die: count]
         self.modifier = 0
     }
+    /// Creates a new `Dice` object with the specified dice. They should be in a (die: Die, count: Int) form, with the die being the type of die to add, and the count being the number of times to add it.
+    ///
+    /// - Parameter dieIntTuples: The dice to add, in the form (dieType, count).
     public init(_ dieIntTuples: (die: Die, count: Int)...) {
         var newDice: [Die: Int] = [:]
         for (die, count) in dieIntTuples {
@@ -126,10 +134,20 @@ public class Dice {
         self.dice = newDice
         self.modifier = modifier
     }
+    /// Creates a new `Dice` object with the given number of the specified die, along with the specified modifier. This is essentially identical to `Dice(copyOf: (die * count) + modifier)`, but is more efficient.
+    ///
+    /// - Parameters:
+    ///   - die: The die to include in this `Dice` object.
+    ///   - count: The number of times the specified die should appear.
+    ///   - modifier: The modifier to apply to every roll.
     public init(_ die: Die, count: Int, withModifier modifier: Int) {
         self.dice = [die: count]
         self.modifier = modifier
     }
+    /// Creates a new `Dice` object with the specified dice and modifier. The dice should be in a (die: Die, count: Int) form, with the die being the type of die to add, and the count being the number of times to add it.
+    ///
+    /// - Parameter dieIntTuples: The dice to add, in the form (dieType, count).
+    ///   - modifier: The modifer to apply to every roll.
     public init(_ dieIntTuples: (die: Die, count: Int)..., withModifier modifier: Int) {
         var newDice: [Die: Int] = [:]
         for (die, count) in dieIntTuples {
