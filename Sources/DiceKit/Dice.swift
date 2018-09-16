@@ -88,6 +88,18 @@ public class Dice {
         self.dice = newDice
         self.modifier = 0
     }
+    public init(_ die: Die, count: Int) {
+        self.dice = [die: count]
+        self.modifier = 0
+    }
+    public init(_ dieIntTuples: (die: Die, count: Int)...) {
+        var newDice: [Die: Int] = [:]
+        for (die, count) in dieIntTuples {
+            newDice[die] = (newDice[die] ?? 0) + count
+        }
+        self.dice = newDice
+        self.modifier = 0
+    }
     /// Creates a new `Dice` object with the specified dice and modifier
     ///
     /// - Parameters:
@@ -110,6 +122,18 @@ public class Dice {
         var newDice: [Die: Int] = [:]
         for d in dice {
             newDice[d] = (newDice[d] ?? 0) + 1
+        }
+        self.dice = newDice
+        self.modifier = modifier
+    }
+    public init(_ die: Die, count: Int, withModifier modifier: Int) {
+        self.dice = [die: count]
+        self.modifier = modifier
+    }
+    public init(_ dieIntTuples: (die: Die, count: Int)..., withModifier modifier: Int) {
+        var newDice: [Die: Int] = [:]
+        for (die, count) in dieIntTuples {
+            newDice[die] = (newDice[die] ?? 0) + count
         }
         self.dice = newDice
         self.modifier = modifier
