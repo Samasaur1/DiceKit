@@ -375,6 +375,12 @@ extension Dice {
         }
         return Dice(dice: dice, withModifier: lhs)
     }
+    public static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
+        return lhs + (rhs.die * rhs.count)
+    }
+    public static func + (lhs: (die: Die, count: Int), rhs: Dice) -> Dice {
+        return rhs + (lhs.die * lhs.count)
+    }
     public static func - (lhs: Dice, rhs: Int) -> Dice {
         return lhs + (-rhs)
     }
@@ -403,6 +409,9 @@ extension Dice {
         lhs = lhs + rhs
     }
     public static func += (lhs: inout Dice, rhs: Int) {
+        lhs = lhs + rhs
+    }
+    public static func += (lhs: inout Dice, rhs: (die: Die, count: Int)) {
         lhs = lhs + rhs
     }
     public static func -= (lhs: inout Dice, rhs: Int) {
