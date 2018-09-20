@@ -2,7 +2,7 @@ os: osx
 language: generic
 sudo: false
 dist: trusty
-osx_image: xcode9
+osx_image: xcode10
 env:
 - SWIFT_VERSION=4.0
 - SWIFT_VERSION=4.0.2
