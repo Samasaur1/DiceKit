@@ -18,24 +18,12 @@ extension DieTests {
     ]
 }
 
-extension RollTests {
-    static let __allTests = [
-        ("testComparable", testComparable),
-        ("testCompoundAssignmentOperators", testCompoundAssignmentOperators),
-        ("testEquatable", testEquatable),
-        ("testHashable", testHashable),
-        ("testIntialization", testIntialization),
-        ("testOperators", testOperators),
-    ]
-}
-
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(DiceKitTests.__allTests),
         testCase(DiceTests.__allTests),
         testCase(DieTests.__allTests),
-        testCase(RollTests.__allTests),
     ]
 }
 #endif
