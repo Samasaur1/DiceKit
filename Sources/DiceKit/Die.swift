@@ -6,7 +6,7 @@
 ///
 /// - Author: Samasaur
 public class Die {
-    /// The number of sides on this `Die`.This value does not need to be possible (for example, it can be 13), but it *does* need to be larger than 0.
+    /// The number of sides on this `Die`. This value does not need to be possible (for example, it can be 13), but it *does* need to be larger than 0.
     public let sides: Int
     /// Creates a new `Die` with the given number of sides.
     ///
