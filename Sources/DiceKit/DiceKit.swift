@@ -60,9 +60,9 @@ internal extension Array where Element == Roll {
     internal var sum: Roll {
         var total = 0
         for r in self {
-            total += r.value
+            total += r
         }
-        return Roll(value: total)
+        return total
     }
 }
 
@@ -71,3 +71,7 @@ public typealias DKDice = Dice
 public typealias DKRoll = Roll
 public typealias DKRollable = Rollable
 public typealias DKMultipleRollResult = MultipleRollResult
+/// The result of any `roll` method from any `Rollable` type.
+///
+/// - Since: 0.8.0
+public typealias Roll = Int
