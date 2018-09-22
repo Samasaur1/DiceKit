@@ -184,13 +184,13 @@ extension Dice: Rollable {
     ///
     /// - Returns: The sum of the rolls of every `Die` in this `Dice` + the modifier.
     public func roll() -> Roll {
-        var result: Roll = Roll(value: 0)
+        var result = 0
         for (die, count) in dice {
             for _ in 0..<count {
                 result += die.roll()
             }
         }
-        result += Roll(value: modifier)
+        result += modifier
         return result
     }
     
@@ -211,32 +211,32 @@ extension Dice: Rollable {
         case .sum:
             return rolls.sum
         case .highest:
-            return rolls.max() ?? Roll.zero
+            return rolls.max() ?? 0
         case .lowest:
-            return rolls.min() ?? Roll.zero
+            return rolls.min() ?? 0
         case .outsides:
-            return (rolls.min() ?? Roll.zero) + (rolls.max() ?? Roll.zero)
+            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
         case .dropHighest:
-            guard !rolls.isEmpty else { return Roll.zero }
+            guard !rolls.isEmpty else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.max()!)!)
             return rolls.sum
         case .dropLowest:
-            guard !rolls.isEmpty else { return Roll.zero }
+            guard !rolls.isEmpty else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.min()!)!)
             return rolls.sum
         case .dropOutsides:
-            guard !rolls.isEmpty else { return Roll.zero }
+            guard !rolls.isEmpty else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.max()!)!)
             rolls.remove(at: rolls.index(of: rolls.min()!)!)
             return rolls.sum
         case .dropLow(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return Roll.zero }
+            guard rolls.count >= amountToDrop else { return 0 }
             for _ in 0..<amountToDrop {
                 rolls.remove(at: rolls.index(of: rolls.min()!)!)
             }
             return rolls.sum
         case .dropHigh(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return Roll.zero }
+            guard rolls.count >= amountToDrop else { return 0 }
             for _ in 0..<amountToDrop {
                 rolls.remove(at: rolls.index(of: rolls.max()!)!)
             }
@@ -250,7 +250,7 @@ extension Dice: Rollable {
     ///
     /// - Since: 0.2.0
     public var minimumResult: Roll {
-        return Roll(value: numberOfDice + modifier)
+        return numberOfDice + modifier
     }
     
     /// The maximum possible result from using the `roll()` method.
@@ -263,7 +263,7 @@ extension Dice: Rollable {
         for (die, count) in dice {
             total += (die.sides * count)
         }
-        return Roll(value: total)
+        return total
     }
 }
 
