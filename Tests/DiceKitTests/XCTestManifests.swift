@@ -14,7 +14,13 @@ extension DiceTests {
 
 extension DieTests {
     static let __allTests = [
+        ("testCopying", testCopying),
+        ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
+        ("testMaximumResultProperty", testMaximumResultProperty),
+        ("testMinimumResultProperty", testMinimumResultProperty),
+        ("testRolling", testRolling),
+        ("testSidesProperty", testSidesProperty),
     ]
 }
 
