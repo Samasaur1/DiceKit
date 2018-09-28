@@ -34,7 +34,7 @@ extension Die: Rollable {
     ///
     /// - Returns: A random value from `1` to `sides`.
     public func roll() -> Roll {
-        return random(max: sides) + 1
+        return Roll.random(in: 1...6)
     }
     
     /// Rolls this Die the given number of times and returns the given result type.
@@ -119,8 +119,8 @@ extension Die: Comparable {
 }
 
 extension Die: Hashable {
-    public var hashValue: Int {
-        return sides
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(sides)
     }
 }
 
@@ -152,7 +152,7 @@ extension Die {
     public static var d6: Die {
         return Die(sides: 6)!
     }
-    /// A eight-sided die (`d8`).
+    /// An eight-sided die (`d8`).
     public static var d8: Die {
         return Die(sides: 8)!
     }
