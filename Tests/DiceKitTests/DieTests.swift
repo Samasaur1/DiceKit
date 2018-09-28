@@ -12,10 +12,9 @@ final class DieTests: XCTestCase {
     }
     
     func testSidesProperty() {
-        for _ in 0..<10 {
-            let num = Int.random(in: 1...100)
-            let die = Die(sides: num)!
-            XCTAssertEqual(die.sides, num)
+        for i in 0..<100 {
+            let die = Die(sides: i)!
+            XCTAssertEqual(die.sides, i)
         }
     }
     
