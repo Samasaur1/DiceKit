@@ -1,3 +1,8 @@
+#if swift(>=4.2)
+#else
+import Foundation
+#endif
+
 /// A representation of a single die.
 ///
 /// It can be rolled using the `roll()` method, which will give a `Roll` result.
@@ -6,6 +11,9 @@
 ///
 /// - Author: Samasaur
 public class Die {
+    #if os(Linux)
+    private var initialized = false
+    #endif
     /// The number of sides on this `Die`. This value does not need to be possible (for example, it can be 13), but it *does* need to be larger than 0.
     public let sides: Int
     /// Creates a new `Die` with the given number of sides.
@@ -34,7 +42,21 @@ extension Die: Rollable {
     ///
     /// - Returns: A random value from `1` to `sides`.
     public func roll() -> Roll {
+        #if swift(>=4.2)
         return Roll.random(in: 1...6)
+        #else
+        #if os(macOS)
+        //macOS
+        return Int(arc4random_uniform(UInt32(sides))) + 1
+        #else
+        //Linux
+        if !initialized {
+            srandom(UInt32(time(nil)))
+            initialized = true
+        }
+        return (random() % sides) + 1
+        #endif
+        #endif
     }
     
     /// Rolls this Die the given number of times and returns the given result type.
@@ -119,9 +141,15 @@ extension Die: Comparable {
 }
 
 extension Die: Hashable {
+    #if swift(>=4.2)
     public func hash(into hasher: inout Hasher) {
         hasher.combine(sides)
     }
+    #else
+    public var hashValue: Int {
+        return sides
+    }
+    #endif
 }
 
 extension Die: CustomStringConvertible, CustomDebugStringConvertible {
