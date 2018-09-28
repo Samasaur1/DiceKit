@@ -22,8 +22,6 @@ matrix:
     env: SWIFT_VERSION=4.2
   - os: linux
     osx_image: xcode9
-  allow_failures:
-  - os: linux
 install:
 - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 script:
