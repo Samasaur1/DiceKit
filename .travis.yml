@@ -26,3 +26,15 @@ install:
 - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 script:
 - swift test
+before_deploy:
+- jazzy
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: master
+  local-dir: docs/
+  email: docbot@travis-ci.com
+  name: Documentation Bot
