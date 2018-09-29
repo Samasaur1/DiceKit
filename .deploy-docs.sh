@@ -1,5 +1,7 @@
 set -o errexit
 
+gem install jazzy
+
 rm -rf docs
 rm -rf DiceKit.xcodeproj
 swift package generate-xcodeproj
