@@ -30,4 +30,11 @@ deploy:
   provider: script
   script: .deploy-docs.sh
   on:
-    branch: master
+  - branch: master
+    os: osx
+    env: SWIFT_VERSION=4.2
+    osx_image: xcode10
+  - branch: development
+    os: osx
+    env: SWIFT_VERSION=4.2
+    osx_image: xcode10
