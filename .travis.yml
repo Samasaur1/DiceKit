@@ -29,6 +29,7 @@ matrix:
     os: osx
     env:
     - SWIFT_VERSION=4.2
+    global_env:
     - DEPLOY=FALSE
   include:
   - osx_image: xcode10
