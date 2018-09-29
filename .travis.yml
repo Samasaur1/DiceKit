@@ -33,16 +33,14 @@ jobs:
     script: swift test
   - stage: test
     if:
-    - branch != master
-    - type != pull_request
+    - branch != master && type != pull_request
     osx_image: xcode10
     os: osx
     env: SWIFT_VERSION=4.2
     script: swift test
   - stage: deploy
     if:
-    - branch = master
-    - type = push
+    - branch = master && type = push
     osx_image: xcode10
     os: osx
     env: SWIFT_VERSION=4.2
