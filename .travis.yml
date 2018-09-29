@@ -30,7 +30,7 @@ deploy:
   provider: script
   script: .deploy-docs.sh
   on:
-  - branch:
+    branch:
     - master
     - development
     os: osx
