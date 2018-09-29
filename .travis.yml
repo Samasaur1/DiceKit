@@ -30,7 +30,7 @@ matrix:
     - DEPLOY=TRUE
 install:
 - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-- if $DEPLOY; gem install jazzy; fi
+- if $DEPLOY; then gem install jazzy; fi
 script:
 - swift test
 deploy:
