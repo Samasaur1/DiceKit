@@ -85,7 +85,7 @@ public enum MultipleRollResult {
 /// An enum representing a comparison between two `Roll`s.
 ///
 /// - Since: UPDATE_ME
-public enum RollComparison {
+public enum RollComparison: CaseIterable {
     /// If it is greater than or equal to the target.
     case orHigher
     /// If it is less than or equal to the target.
