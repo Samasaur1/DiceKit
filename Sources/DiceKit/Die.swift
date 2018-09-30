@@ -152,6 +152,25 @@ extension Die: Rollable {
     public var maximumResult: Roll {
         return sides
     }
+    
+    /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check reachibility for.
+    ///   - comparisonType: The comparison to use when checking reachibility.
+    /// - Returns: Whether or not this die can reach the target, using the given comparison.
+    ///
+    /// - Since: UPDATE_ME
+    public func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool {
+        switch comparisonType {
+        case .orHigher:
+            return maximumResult >= target
+        case .exactly:
+            return minimumResult <= target && maximumResult >= target
+        case .orLower:
+            return minimumResult <= target
+        }
+    }
 }
 
 extension Die: Equatable {

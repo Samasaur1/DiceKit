@@ -346,6 +346,34 @@ extension Dice: Rollable {
         }
         return total
     }
+    
+    /// Determines whether this `Dice` object can reach the target `Roll` using the given comparison type.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check reachibility for.
+    ///   - comparisonType: The comparison to use when checking reachibility.
+    /// - Returns: Whether or not this `Dice` object can reach the target, using the given comparison.
+    ///
+    /// - Since: UPDATE_ME
+    public func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool {
+        switch comparisonType {
+        case .orHigher:
+            return maximumResult >= target
+        case .exactly:
+            if modifier > target {
+                return false
+            }
+            if maximumResult < target {
+                return false
+            }
+            if minimumResult > target {
+                return false
+            }
+            return true
+        case .orLower:
+            return minimumResult <= target
+        }
+    }
 }
 
 extension Dice: Equatable {
