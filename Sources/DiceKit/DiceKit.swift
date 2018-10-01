@@ -81,7 +81,7 @@ public enum MultipleRollResult {
     /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 12 (2 + 4 + 6)
     case dropHigh(amountToDrop: Int)
 }
-
+#if swift(>=4.2)
 /// An enum representing a comparison between two `Roll`s.
 ///
 /// - Since: UPDATE_ME
@@ -93,6 +93,19 @@ public enum RollComparison: CaseIterable {
     /// If it is exactly equal to the target.
     case exactly
 }
+#else
+/// An enum representing a comparison between two `Roll`s.
+///
+/// - Since: UPDATE_ME
+public enum RollComparison {
+    /// If it is greater than or equal to the target.
+    case orHigher
+    /// If it is less than or equal to the target.
+    case orLower
+    /// If it is exactly equal to the target.
+    case exactly
+}
+#endif
 
 internal extension Array where Element == Roll {
     internal var sum: Roll {
