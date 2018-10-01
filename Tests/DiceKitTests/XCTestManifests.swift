@@ -15,6 +15,7 @@ extension DiceTests {
 extension DieTests {
     static let __allTests = [
         ("testComparable", testComparable),
+        ("testCanReach", testCanReach),
         ("testCopying", testCopying),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
