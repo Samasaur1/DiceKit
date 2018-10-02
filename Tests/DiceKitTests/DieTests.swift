@@ -22,9 +22,9 @@ final class DieTests: XCTestCase {
         let firstDie = Die.d6
         let secondDie = Die.init(copyOf: firstDie)
         let thirdDie = firstDie.copy()
-        XCTAssertEqual(firstDie.sides, secondDie.sides) //Testing Equatable is separate
-        XCTAssertEqual(firstDie.sides, thirdDie.sides)
-        XCTAssertEqual(secondDie.sides, thirdDie.sides)
+        XCTAssertEqual(firstDie, secondDie)
+        XCTAssertEqual(firstDie, thirdDie)
+        XCTAssertEqual(secondDie, thirdDie)
     }
     
     func testRolling() {
@@ -77,5 +77,26 @@ final class DieTests: XCTestCase {
         XCTAssertEqual(initializedWithCopyD6, initializedD6)
         XCTAssertEqual(initializedWithCopyD6, copiedD6)
         XCTAssertNotEqual(initializedWithCopyD6, d4)
+    }
+    
+    func testComparable() {
+        let d6 = Die.d6
+        let d6_2 = Die.d6
+        let d4 = Die.d4
+        
+        XCTAssertGreaterThan(d6, d4)
+        XCTAssertGreaterThanOrEqual(d6, d6_2)
+        XCTAssertLessThan(d4, d6)
+        XCTAssertLessThanOrEqual(d6, d6_2)
+    }
+    
+    func testStaticVarDice() {
+        XCTAssertEqual(Die.d4, Die(sides: 4)!)
+        XCTAssertEqual(Die.d6, Die(sides: 6)!)
+        XCTAssertEqual(Die.d8, Die(sides: 8)!)
+        XCTAssertEqual(Die.d10, Die(sides: 10)!)
+        XCTAssertEqual(Die.d12, Die(sides: 12)!)
+        XCTAssertEqual(Die.d20, Die(sides: 20)!)
+        XCTAssertEqual(Die.d100, Die(sides: 100)!)
     }
 }

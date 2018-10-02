@@ -2,7 +2,7 @@ import XCTest
 
 extension DiceKitTests {
     static let __allTests = [
-        ("testExample", testExample),
+        ("testDieToDiceOperators", testDieToDiceOperators),
     ]
 }
 
@@ -14,6 +14,7 @@ extension DiceTests {
 
 extension DieTests {
     static let __allTests = [
+        ("testComparable", testComparable),
         ("testCopying", testCopying),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
@@ -21,6 +22,7 @@ extension DieTests {
         ("testMinimumResultProperty", testMinimumResultProperty),
         ("testRolling", testRolling),
         ("testSidesProperty", testSidesProperty),
+        ("testStaticVarDice", testStaticVarDice),
     ]
 }
 

@@ -32,15 +32,45 @@ public protocol Rollable {
     var maximumResult: Roll { get }
 }
 
+/// An enum representing the type of result to return from rolling multiple times.
+///
+/// - sum: Return the sum of all rolls.
+/// - highest: Return the highest roll.
+/// - lowest: Return the lowest roll.
+/// - outsides: Return the sum of the highest and the lowest roll.
+/// - dropHighest: Return the sum of everything but the highest roll.
+/// - dropLowest: Return the sum of everything except the lowest roll.
+/// - dropOutsides: Return the sum of everything except the highest and lowest rolls.
+/// - dropLow: Return the sum of everything except the given number of lowest rolls.
+/// - dropHigh: Return the sum of everything except the given number of highest rolls.
+///
+/// - Since: 0.5.0
 public enum MultipleRollResult {
+    /// Return the sum of all rolls.
     case sum
+    /// Return the highest roll.
     case highest
+    /// Return the lowest roll.
     case lowest
+    /// Return the sum of the highest and the lowest roll.
     case outsides
+    /// Return the sum of everything but the highest roll.
     case dropHighest
+    /// Return the sum of everything except the lowest roll. This is used in Pathfinder character generation.
     case dropLowest
+    /// Return the sum of everything except the highest and lowest rolls.
     case dropOutsides
+    /// Return the sum of everything except the given number of lowest rolls.
+    ///
+    /// This removes the given number of rolls from the low end of the list, and then returns the sum of the remaining rolls. If `amountToDrop` is 0, it acts like `sum`; if it's 1, it acts like `dropLowest`.
+    ///
+    /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 24 (10 + 8 + 6)
     case dropLow(amountToDrop: Int)
+    /// Return the sum of everything except the given number of highest rolls.
+    ///
+    /// This removes the given number of rolls from the high end of the list, and then returns the sum of the remaining rolls. If `amountToDrop` is 0, it acts like `sum`; if it's 1, it acts like `dropHighest`.
+    ///
+    /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 12 (2 + 4 + 6)
     case dropHigh(amountToDrop: Int)
 }
 
