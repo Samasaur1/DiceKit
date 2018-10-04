@@ -1,3 +1,4 @@
+import ProtocolKit
 #if swift(>=4.2)
 #else
 import Foundation
@@ -188,7 +189,7 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-extension Die {
+extension Die: Copiable {
     /// Returns a copy of the given `Die` with separate memory.
     ///
     /// - Returns: A copy of the given `Die`, with the same number of sides, at a different memory location.

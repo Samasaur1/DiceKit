@@ -1,3 +1,4 @@
+import ProtocolKit
 /// A collection of `Die` objects and/or a modifier that can be rolled using the `roll()` method.
 ///
 /// The properties of `Dice` objects are immutable; use the addition operators to combine them with other `Die` objects or modifiers. You can use compound assignment operators if you want, so long as you declare the `Dice` object as a `var` instead of a `let` constant.
@@ -442,7 +443,7 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-extension Dice {
+extension Dice: Copiable {
     /// Returns a copy of the given `Dice` with separate memory.
     ///
     /// - Returns: A copy of the given `Dice`, with the same information, at a different memory location.
