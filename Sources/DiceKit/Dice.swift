@@ -164,6 +164,55 @@ public class Dice {
         self.dice = newDice
         self.modifier = modifier
     }
+    public init?(_ str: String) {
+        var dice: [Int: Int] = [:]
+        var mods: [Int] = []
+        
+        guard Set(str).isSubset(of: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "D", "d"]) else {
+            return nil
+        }
+        
+        let plusSplit = str.split(whereSeparator: { $0 == "+" })
+        for positiveExp in plusSplit {
+            let exp = positiveExp.split(whereSeparator: { $0 == "-" })
+            let ex = String(exp.first!)//positive
+            if ex.isNumeric {
+                mods.append(Int(ex)!)
+            } else if ex.contains("D") || ex.contains("d") {
+                let d = ex.split(whereSeparator: { $0 == "d" || $0 == "D" })
+                if d.count == 1 {
+                    let sides = Int(String(d.first!))!
+                    dice[sides] = (dice[sides] ?? 0) + 1
+                } else if d.count == 2 {
+                    let m = Int(String(d.first!))!
+                    let s = Int(String(d.last!))!
+                    dice[s] = (dice[s] ?? 0) + m
+                } else { return nil }
+            } else { return nil }
+            for ex in exp.dropFirst() {//negative
+                if String(ex).isNumeric {
+                    mods.append(-Int(String(ex))!)
+                } else if ex.contains("D") || ex.contains("d") {
+                    let d = ex.split(whereSeparator: { $0 == "d" || $0 == "D" })
+                    if d.count == 1 {
+                        let sides = Int(String(d.first!))!
+                        dice[sides] = (dice[sides] ?? 0) - 1
+                    } else if d.count == 2 {
+                        let m = Int(String(d.first!))!
+                        let s = Int(String(d.last!))!
+                        dice[s] = (dice[s] ?? 0) - m
+                    } else { return nil }
+                } else { return nil }
+            }
+        }
+        
+        var tempDice: [Die: Int] = [:]
+        for (d, c) in dice {
+            tempDice[Die(sides: d)!] = c
+        }
+        self.dice = tempDice
+        self.modifier = mods.sum
+    }
     /// Creates a new `Dice` object that is a copy of the given `Dice` object.
     ///
     /// - Parameter other: The other `Dice` object to copy.
@@ -174,6 +223,14 @@ public class Dice {
         }
         self.dice = newDice
         modifier = other.modifier
+    }
+}
+
+extension String {
+    var isNumeric: Bool {
+        guard !self.isEmpty else { return false }
+        let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        return Set(self).isSubset(of: nums)
     }
 }
 

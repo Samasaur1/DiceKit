@@ -27,6 +27,28 @@ public class Die {
         }
         self.sides = sides
     }
+    public init?(_ str: String) {
+        if str.isEmpty {
+            return nil
+        }
+        if let _ = Int(str.prefix(1)) {
+            //number
+            guard let num = Int(str) else { return nil }
+            guard num > 0 else { return nil }
+            self.sides = num
+        } else if str.prefix(1).caseInsensitiveCompare("D") == .orderedSame {
+            str.dropFirst()
+            if let _ = Int(str.prefix(1)) {
+                guard let num = Int(str) else { return nil }
+                guard num > 0 else { return nil }
+                self.sides = num
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
     /// Creates a new `Die` that is a copy of the given `Die`.
     ///
     /// - Parameter other: The other `Die` to copy.
