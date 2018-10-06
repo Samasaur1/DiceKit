@@ -31,15 +31,14 @@ public class Die {
         if str.isEmpty {
             return nil
         }
-        if let _ = Int(str.prefix(1)) {
-            //number
+        if str.isNumeric {
             guard let num = Int(str) else { return nil }
             guard num > 0 else { return nil }
             self.sides = num
         } else if String(str.prefix(1)).caseInsensitiveCompare("D") == .orderedSame {
-            let s = str.dropFirst()
-            if let _ = Int(s.prefix(1)) {
-                guard let num = Int(s) else { return nil }
+            let remaining = String(str.dropFirst())
+            if remaining.isNumeric {
+                guard let num = Int(remaining) else { return nil }
                 guard num > 0 else { return nil }
                 self.sides = num
             } else {
