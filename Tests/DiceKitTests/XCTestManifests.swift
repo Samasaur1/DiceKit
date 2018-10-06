@@ -23,6 +23,7 @@ extension DieTests {
         ("testCopying", testCopying),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
+        ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMaximumResultProperty", testMaximumResultProperty),
         ("testMinimumResultProperty", testMinimumResultProperty),
         ("testMultipleDigitStringParsing", testMultipleDigitStringParsing),
