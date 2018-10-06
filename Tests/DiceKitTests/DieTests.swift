@@ -11,6 +11,34 @@ final class DieTests: XCTestCase {
         XCTAssertNotNil(d6)
     }
     
+    func testSingleDigitStringParsing() {
+        let d6_1 = Die("6")
+        let d6_2 = Die("d6")
+        let d6_3 = Die("D6")
+        
+        XCTAssertNotNil(d6_1)
+        XCTAssertNotNil(d6_2)
+        XCTAssertNotNil(d6_3)
+        
+        XCTAssertEqual(d6_1, Die.d6)
+        XCTAssertEqual(d6_2, Die.d6)
+        XCTAssertEqual(d6_3, Die.d6)
+    }
+    
+    func testMultipleDigitStringParsing() {
+        let d12_1 = Die("12")
+        let d12_2 = Die("d12")
+        let d12_3 = Die("D12")
+        
+        XCTAssertNotNil(d12_1)
+        XCTAssertNotNil(d12_2)
+        XCTAssertNotNil(d12_3)
+        
+        XCTAssertEqual(d12_1, Die.d12)
+        XCTAssertEqual(d12_2, Die.d12)
+        XCTAssertEqual(d12_3, Die.d12)
+    }
+    
     func testSidesProperty() {
         for i in 1...100 {
             let die = Die(sides: i)!
