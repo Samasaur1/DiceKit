@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "DiceKit", targets: ["DiceKit"]),
     ],
     dependencies: [
-        .package(url: "git@github.com:Samasaur1/ProtocolKit.git", from: "1.0.0"),
+        .package(url: "https://github.com/Samasaur1/ProtocolKit.git", from: "1.0.0"),
     ],
     targets: [
         .target(name: "DiceKit", dependencies: ["ProtocolKit"]),
