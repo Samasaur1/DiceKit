@@ -39,6 +39,28 @@ final class DieTests: XCTestCase {
         XCTAssertEqual(d12_3, Die.d12)
     }
     
+    func testInvalidStringParsing() {
+        // Assorted
+        XCTAssertNil(Die("")) // empty
+        XCTAssertNil(Die("d")) // d without value
+        XCTAssertNil(Die("q1")) // other that d in front
+        XCTAssertNil(Die("d1b")) // binary (other form with d)
+        XCTAssertNil(Die("1o")) // octal (other forw without d)
+        XCTAssertNil(Die("one")) // spelled out
+        XCTAssertNil(Die("A")) // hexadecimal
+        XCTAssertNil(Die("DiceKit")) // string
+        
+        //Negative
+        XCTAssertNil(Die("-6"))
+        XCTAssertNil(Die("-d6"))
+        XCTAssertNil(Die("d-6"))
+        
+        //Positive
+        XCTAssertNil(Die("+6"))
+        XCTAssertNil(Die("+d6"))
+        XCTAssertNil(Die("d+6"))
+    }
+    
     func testSidesProperty() {
         for i in 1...100 {
             let die = Die(sides: i)!
