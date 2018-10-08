@@ -9,8 +9,9 @@ extension DiceKitTests {
 extension DiceTests {
     static let __allTests = [
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
-        ("testMultipleDieStringParsing", testMultipleDieStringParsing),
         ("testMultipleModifierStringParsing", testMultipleModifierStringParsing),
+        ("testMultipleRepeatedDieStringParsing", testMultipleRepeatedDieStringParsing),
+        ("testMultipleSeparateDieStringParsing", testMultipleSeparateDieStringParsing),
         ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),
         ("testSingleDieStringParsing", testSingleDieStringParsing),
         ("testSingleModifierStringParsing", testSingleModifierStringParsing),

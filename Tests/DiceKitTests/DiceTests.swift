@@ -41,8 +41,28 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(negative5_2, Dice(dice: [], withModifier: -5))
     }
     
-    func testMultipleDieStringParsing() {
+    func testMultipleRepeatedDieStringParsing() {
+        let dice2d6 = Dice("2d6")
+        let dice3d4 = Dice("3D4")
+        let dice12d12 = Dice("12d12")
+        let dice1d100 = Dice("1d100")
+        let dice1000d1 = Dice("1000d1")
         
+        XCTAssertNotNil(dice2d6)
+        XCTAssertNotNil(dice3d4)
+        XCTAssertNotNil(dice12d12)
+        XCTAssertNotNil(dice1d100)
+        XCTAssertNotNil(dice1000d1)
+        
+        XCTAssertEqual(dice2d6, Dice(Die.d6, Die.d6))
+        XCTAssertEqual(dice3d4, Dice(Die.d4, Die.d4, Die.d4))
+        XCTAssertEqual(dice12d12, Dice((Die.d12, 12)))
+        XCTAssertEqual(dice1d100, Dice(Die.d100))
+        XCTAssertEqual(dice1000d1, Dice((Die(sides: 1)!, 1000)))
+    }
+    
+    func testMultipleSeparateDieStringParsing() {
+        let dice2d6 = Dice("2d6")
     }
     
     func testMultipleModifierStringParsing() {
