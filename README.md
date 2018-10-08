@@ -1,6 +1,12 @@
+<img src="https://github.com/Samasaur1/DiceKit/raw/logo/logo/logo-black-alone.png" height="150" align="left">
+
 # DiceKit
 
 A Swift framework for simulating dice both real and unreal.
+
+&nbsp;
+
+&nbsp;
 
 | Branch | Status |
 | ------ | ------ |
