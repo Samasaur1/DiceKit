@@ -4,9 +4,7 @@
 
 A Swift framework for simulating dice both real and unreal.
 
-&nbsp;
-
-&nbsp;
+---
 
 | Branch | Status |
 | ------ | ------ |
