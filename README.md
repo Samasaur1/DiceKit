@@ -1,4 +1,4 @@
-<img src="https://github.com/Samasaur1/DiceKit/raw/development/logo/logo-black-alone.png" height="150" align="left">
+<img src="https://github.com/Samasaur1/DiceKit/raw/master/logo/logo-black-alone.png" height="150" align="left">
 
 # DiceKit
 
