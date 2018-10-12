@@ -168,6 +168,8 @@ public class Dice {
         var dice: [Int: Int] = [:]
         var mods: [Int] = []
         
+        let str = str.filter({ $0 != " " })
+        
         guard Set(str).isSubset(of: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "D", "d"]) else {
             return nil
         }
