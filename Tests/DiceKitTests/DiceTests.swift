@@ -100,4 +100,8 @@ final class DiceTests: XCTestCase {
     func testMultipleDieAndMultipleModifierStringParsing() {
         
     }
+    
+    func testInvalidStringParsing() {
+        
+    }
 }
