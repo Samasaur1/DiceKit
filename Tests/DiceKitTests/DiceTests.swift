@@ -58,11 +58,35 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(dice3d4, Dice(Die.d4, Die.d4, Die.d4))
         XCTAssertEqual(dice12d12, Dice((Die.d12, 12)))
         XCTAssertEqual(dice1d100, Dice(Die.d100))
-        XCTAssertEqual(dice1000d1, Dice((Die(sides: 1)!, 1000)))
+        XCTAssertEqual(dice1000d1, Dice(Die(sides: 1)!, count: 1000))
     }
     
     func testMultipleSeparateDieStringParsing() {
-        let dice2d6 = Dice("2d6")
+        let dice2d6withSpaces = Dice("d6 + 1d6")
+        let dice2d6withoutSpaces = Dice("d6+1d6")
+        let dice1d4plus1d6withSpaces = Dice("d4 + 1d6")
+        let dice1d4plus1d6withoutSpaces = Dice("1d4+d6")
+        
+        XCTAssertNotNil(dice2d6withSpaces)
+        XCTAssertNotNil(dice2d6withoutSpaces)
+        XCTAssertNotNil(dice1d4plus1d6withSpaces)
+        XCTAssertNotNil(dice1d4plus1d6withoutSpaces)
+        
+        XCTAssertEqual(dice2d6withSpaces, Dice(Die.d6, Die.d6))
+        XCTAssertEqual(dice2d6withoutSpaces, Dice(Die.d6, Die.d6))
+        XCTAssertEqual(dice1d4plus1d6withSpaces, Dice(Die.d4, Die.d6))
+        XCTAssertEqual(dice1d4plus1d6withoutSpaces, Dice(Die.d4, Die.d6))
+        
+        
+        
+        let dice6d6withSpaces = Dice("d6 + 2d6 + 3d6")
+        let dice6d6withoutSpaces = Dice("d6+2d6+3d6")
+        
+        XCTAssertNotNil(dice6d6withSpaces)
+        XCTAssertNotNil(dice6d6withoutSpaces)
+        
+        XCTAssertEqual(dice6d6withSpaces, Dice(Die.d6, count: 6))
+        XCTAssertEqual(dice6d6withoutSpaces, Dice(Die.d6, count: 6))
     }
     
     func testMultipleModifierStringParsing() {
