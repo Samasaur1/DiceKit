@@ -2,6 +2,14 @@ import XCTest
 @testable import DiceKit
 
 final class DiceTests: XCTestCase {
+    func testEmptyStringParsing() {
+        let empty = Dice("")
+        
+        XCTAssertNotNil(empty)
+        
+        XCTAssertEqual(empty, Dice(dice: [], withModifier: 0))
+    }
+    
     func testSingleDieStringParsing() {
         let dice6_1 = Dice("d6")
         let dice6_2 = Dice("D6")
@@ -143,6 +151,18 @@ final class DiceTests: XCTestCase {
     }
     
     func testInvalidStringParsing() {
+        // Assorted
+        XCTAssertNil(Dice("d")) // d without value
+        XCTAssertNil(Dice("q1")) // other that d in front
+        XCTAssertNil(Dice("d1b")) // binary (other form with d)
+        XCTAssertNil(Dice("1o")) // octal (other forw without d)
+        XCTAssertNil(Dice("one")) // spelled out
+        XCTAssertNil(Dice("A")) // hexadecimal
+        XCTAssertNil(Dice("DiceKit")) // string
+        XCTAssertNil(Dice("d+6")) // split
         
+        //Negative
+        XCTAssertNil(Dice("-d6"))
+        XCTAssertNil(Dice("d-6"))
     }
 }
