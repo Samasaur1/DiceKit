@@ -90,7 +90,23 @@ final class DiceTests: XCTestCase {
     }
     
     func testMultipleModifierStringParsing() {
+        let _2plus3 = Dice("2+3")
+        let _7minus2 = Dice("7-2")
+        let negative2plus7 = Dice("-2+7")
+        let negative2minus3 = Dice("-2-3")
+        let _2minus7 = Dice("+2-7")
         
+        XCTAssertNotNil(_2plus3)
+        XCTAssertNotNil(_7minus2)
+        XCTAssertNotNil(negative2plus7)
+        XCTAssertNotNil(negative2minus3)
+        XCTAssertNotNil(_2minus7)
+        
+        XCTAssertEqual(_2plus3, Dice(dice: [], withModifier: 5))
+        XCTAssertEqual(_7minus2, Dice(dice: [], withModifier: 5))
+        XCTAssertEqual(negative2plus7, Dice(dice: [], withModifier: 5))
+        XCTAssertEqual(negative2minus3, Dice(dice: [], withModifier: -5))
+        XCTAssertEqual(_2minus7, Dice(dice: [], withModifier: -5))
     }
     
     func testSingleDieAndSingleModifierStringParsing() {
