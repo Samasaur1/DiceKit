@@ -110,7 +110,32 @@ final class DiceTests: XCTestCase {
     }
     
     func testSingleDieAndSingleModifierStringParsing() {
+        //Sucessfuls
+        let d6plus6_1 = Dice("d6+6")
+        let d6plus6_2 = Dice("6+d6")
+        let d4minus4_1 = Dice("d4-4")
+        let d4minus4_2 = Dice("-4+d4")
         
+        //Unsucessfuls - NIL
+        let negatived8plus8_1 = Dice("-d8+8")
+        let negatived8plus8_2 = Dice("8-d8")
+        let negatived8minus8_1 = Dice("-d8-8")
+        let negatived8minus8_2 = Dice("-8-d8")
+        
+        XCTAssertNotNil(d6plus6_1)
+        XCTAssertNotNil(d6plus6_2)
+        XCTAssertNotNil(d4minus4_1)
+        XCTAssertNotNil(d4minus4_2)
+        
+        XCTAssertNil(negatived8plus8_1)
+        XCTAssertNil(negatived8plus8_2)
+        XCTAssertNil(negatived8minus8_1)
+        XCTAssertNil(negatived8minus8_2)
+        
+        XCTAssertEqual(d6plus6_1, Dice(dice: [Die.d6], withModifier: 6))
+        XCTAssertEqual(d6plus6_2, Dice(dice: [Die.d6], withModifier: 6))
+        XCTAssertEqual(d4minus4_1, Dice(dice: [Die.d4], withModifier: -4))
+        XCTAssertEqual(d4minus4_2, Dice(dice: [Die.d4], withModifier: -4))
     }
     
     func testMultipleDieAndMultipleModifierStringParsing() {
