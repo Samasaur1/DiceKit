@@ -147,7 +147,68 @@ final class DiceTests: XCTestCase {
     }
     
     func testMultipleDieAndMultipleModifierStringParsing() {
+        //2d6+12
+        let D6plus6plus6plusD6 = Dice("d6+6+6+d6")
+        let _6plusD6plusD6plus6 = Dice("6+d6+d6+6")
+        let D6plus6plusD6plus6 = Dice("d6+6+d6+6")
+        let _6plusD6plus6plusD6 = Dice("6+d6+6+d6")
         
+        //2d4-8
+        let D4minus4minus4plusD4 = Dice("d4-4-4+d4")
+        let negative4plusD4plusD4minus4 = Dice("-4+d4+d4-4")
+        let D4minus4plusD4minus4 = Dice("d4-4+d4-4")
+        let negative4plusD4minus4plusD4 = Dice("-4+d4-4+d4")
+        
+        //2d8
+        let D8plus8minus8plusD8 = Dice("d8+8-8+d8")
+        let negative8plusD8plusD8plus8 = Dice("-8+d8+d8+8")
+        let D8plus8plusD8minus8 = Dice("d8+8+d8-8")
+        let negative8plusD8plus8plusD8 = Dice("-8+d8+8+d8")
+        
+        //20
+        let D10plus10plus10minusD10 = Dice("d10+10+10-d10")
+        let _10plusD10minusD10plus10 = Dice("10+d10-d10+10")
+        let D10plus10minusD10plus10 = Dice("d10+10-d10+10")
+        let _10plusD10plus10minusD10 = Dice("10+d10+10-d10")
+        
+        
+        XCTAssertNotNil(D6plus6plus6plusD6)
+        XCTAssertNotNil(_6plusD6plusD6plus6)
+        XCTAssertNotNil(D6plus6plusD6plus6)
+        XCTAssertNotNil(_6plusD6plus6plusD6)
+        XCTAssertNotNil(D4minus4minus4plusD4)
+        XCTAssertNotNil(negative4plusD4plusD4minus4)
+        XCTAssertNotNil(D4minus4plusD4minus4)
+        XCTAssertNotNil(negative4plusD4minus4plusD4)
+        XCTAssertNotNil(D8plus8minus8plusD8)
+        XCTAssertNotNil(negative8plusD8plusD8plus8)
+        XCTAssertNotNil(D8plus8plusD8minus8)
+        XCTAssertNotNil(negative8plusD8plus8plusD8)
+        XCTAssertNotNil(D10plus10plus10minusD10)
+        XCTAssertNotNil(_10plusD10minusD10plus10)
+        XCTAssertNotNil(D10plus10minusD10plus10)
+        XCTAssertNotNil(_10plusD10plus10minusD10)
+        
+        
+        XCTAssertEqual(D6plus6plus6plusD6, Dice(dice: [Die.d6, Die.d6], withModifier: 12))
+        XCTAssertEqual(_6plusD6plusD6plus6, Dice(dice: [Die.d6, Die.d6], withModifier: 12))
+        XCTAssertEqual(D6plus6plusD6plus6, Dice(dice: [Die.d6, Die.d6], withModifier: 12))
+        XCTAssertEqual(_6plusD6plus6plusD6, Dice(dice: [Die.d6, Die.d6], withModifier: 12))
+        
+        XCTAssertEqual(D4minus4minus4plusD4, Dice(dice: [Die.d4, Die.d4], withModifier: -8))
+        XCTAssertEqual(negative4plusD4plusD4minus4, Dice(dice: [Die.d4, Die.d4], withModifier: -8))
+        XCTAssertEqual(D4minus4plusD4minus4, Dice(dice: [Die.d4, Die.d4], withModifier: -8))
+        XCTAssertEqual(negative4plusD4minus4plusD4, Dice(dice: [Die.d4, Die.d4], withModifier: -8))
+        
+        XCTAssertEqual(D8plus8minus8plusD8, Dice(dice: [Die.d8, Die.d8], withModifier: 0))
+        XCTAssertEqual(negative8plusD8plusD8plus8, Dice(dice: [Die.d8, Die.d8], withModifier: 0))
+        XCTAssertEqual(D8plus8plusD8minus8, Dice(dice: [Die.d8, Die.d8], withModifier: 0))
+        XCTAssertEqual(negative8plusD8plus8plusD8, Dice(dice: [Die.d8, Die.d8], withModifier: 0))
+        
+        XCTAssertEqual(D10plus10plus10minusD10, Dice(dice: [], withModifier: 20))
+        XCTAssertEqual(_10plusD10minusD10plus10, Dice(dice: [], withModifier: 20))
+        XCTAssertEqual(D10plus10minusD10plus10, Dice(dice: [], withModifier: 20))
+        XCTAssertEqual(_10plusD10plus10minusD10, Dice(dice: [], withModifier: 20))
     }
     
     func testInvalidStringParsing() {
