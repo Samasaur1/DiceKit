@@ -228,8 +228,10 @@ public class Dice {
         
         var tempDice: [Die: Int] = [:]
         for (d, c) in dice {
-            if c <= 0 {
+            if c < 0 {
                 return nil
+            } else if c == 0 {
+                continue
             }
             tempDice[Die(sides: d)!] = c
         }
