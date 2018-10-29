@@ -164,6 +164,13 @@ public class Dice {
         self.dice = newDice
         self.modifier = modifier
     }
+    /// Creates a new `Dice` object from the specified string in dice notation.
+    ///
+    /// You cannot have a negative die **AS A RESULT** (`-d6`), a die with negative sides (`d-6`), or a die with 0 sides (`d0`). You cannot have an unreal modifier or use any operator except for addition and subtraction.
+    ///
+    /// You can have `-d6`s in your string, so long as they cancel each other out so that the final result is at least `0d6`.
+    ///
+    /// - Parameter str: The string to convert.
     public init?(_ str: String) {
         var dice: [Int: Int] = [:]
         var mods: [Int] = []
