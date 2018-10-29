@@ -164,6 +164,87 @@ public class Dice {
         self.dice = newDice
         self.modifier = modifier
     }
+    /// Creates a new `Dice` object from the specified string in dice notation.
+    ///
+    /// You cannot have a negative die **AS A RESULT** (`-d6`), a die with negative sides (`d-6`), or a die with 0 sides (`d0`). You cannot have an unreal modifier or use any operator except for addition and subtraction.
+    ///
+    /// You can have `-d6`s in your string, so long as they cancel each other out so that the final result is at least `0d6`.
+    ///
+    /// - Parameter str: The string to convert.
+    public init?(_ str: String) {
+        var dice: [Int: Int] = [:]
+        var mods: [Int] = []
+        
+        let str = str.filter({ $0 != " " })
+        
+        guard Set(str).isSubset(of: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "D", "d"]) else {
+            return nil
+        }
+        
+        let plusSplit = str.split(whereSeparator: { $0 == "+" })
+        for positiveExp in plusSplit {
+            let exp = positiveExp.split(whereSeparator: { $0 == "-" })
+            if positiveExp.starts(with: "-") {
+                for ex in exp {//negative
+                    if String(ex).isNumeric {
+                        mods.append(-Int(String(ex))!)
+                    } else if ex.contains("D") || ex.contains("d") {
+                        let d = ex.split(whereSeparator: { $0 == "d" || $0 == "D" })
+                        if d.count == 1 {
+                            let sides = Int(String(d.first!))!
+                            dice[sides] = (dice[sides] ?? 0) - 1
+                        } else if d.count == 2 {
+                            let m = Int(String(d.first!))!
+                            let s = Int(String(d.last!))!
+                            dice[s] = (dice[s] ?? 0) - m
+                        } else { return nil }
+                    } else { return nil }
+                }
+            } else {
+                let ex = String(exp.first!)//positive
+                if ex.isNumeric {
+                    mods.append(Int(ex)!)
+                } else if ex.contains("D") || ex.contains("d") {
+                    let d = ex.split(whereSeparator: { $0 == "d" || $0 == "D" })
+                    if d.count == 1 {
+                        let sides = Int(String(d.first!))!
+                        dice[sides] = (dice[sides] ?? 0) + 1
+                    } else if d.count == 2 {
+                        let m = Int(String(d.first!))!
+                        let s = Int(String(d.last!))!
+                        dice[s] = (dice[s] ?? 0) + m
+                    } else { return nil }
+                } else { return nil }
+                for ex in exp.dropFirst() {//negative
+                    if String(ex).isNumeric {
+                        mods.append(-Int(String(ex))!)
+                    } else if ex.contains("D") || ex.contains("d") {
+                        let d = ex.split(whereSeparator: { $0 == "d" || $0 == "D" })
+                        if d.count == 1 {
+                            let sides = Int(String(d.first!))!
+                            dice[sides] = (dice[sides] ?? 0) - 1
+                        } else if d.count == 2 {
+                            let m = Int(String(d.first!))!
+                            let s = Int(String(d.last!))!
+                            dice[s] = (dice[s] ?? 0) - m
+                        } else { return nil }
+                    } else { return nil }
+                }
+            }
+        }
+        
+        var tempDice: [Die: Int] = [:]
+        for (d, c) in dice {
+            if c < 0 {
+                return nil
+            } else if c == 0 {
+                continue
+            }
+            tempDice[Die(sides: d)!] = c
+        }
+        self.dice = tempDice
+        self.modifier = mods.sum
+    }
     /// Creates a new `Dice` object that is a copy of the given `Dice` object.
     ///
     /// - Parameter other: The other `Dice` object to copy.
