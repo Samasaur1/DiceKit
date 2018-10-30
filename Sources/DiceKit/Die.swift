@@ -27,32 +27,6 @@ public class Die {
         }
         self.sides = sides
     }
-    /// Creates a new `Die` from the given string in dice notation.
-    ///
-    /// You cannot have a negative die (`-d6`), a die with negative sides (`d-6`), or a die with 0 sides (`d0`). Because this is a `Die` initializer, you can only have one die (no `2d6`).
-    ///
-    /// - Parameter str: The string to convert from.
-    public init?(_ str: String) {
-        if str.isEmpty {
-            return nil
-        }
-        if str.isNumeric {
-            guard let num = Int(str) else { return nil }
-            guard num > 0 else { return nil }
-            self.sides = num
-        } else if String(str.prefix(1)).caseInsensitiveCompare("D") == .orderedSame {
-            let remaining = String(str.dropFirst())
-            if remaining.isNumeric {
-                guard let num = Int(remaining) else { return nil }
-                guard num > 0 else { return nil }
-                self.sides = num
-            } else {
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
     /// Creates a new `Die` that is a copy of the given `Die`.
     ///
     /// - Parameter other: The other `Die` to copy.
