@@ -11,6 +11,56 @@ final class DieTests: XCTestCase {
         XCTAssertNotNil(d6)
     }
     
+    func testSingleDigitStringParsing() {
+        let d6_1 = Die("6")
+        let d6_2 = Die("d6")
+        let d6_3 = Die("D6")
+        
+        XCTAssertNotNil(d6_1)
+        XCTAssertNotNil(d6_2)
+        XCTAssertNotNil(d6_3)
+        
+        XCTAssertEqual(d6_1, Die.d6)
+        XCTAssertEqual(d6_2, Die.d6)
+        XCTAssertEqual(d6_3, Die.d6)
+    }
+    
+    func testMultipleDigitStringParsing() {
+        let d12_1 = Die("12")
+        let d12_2 = Die("d12")
+        let d12_3 = Die("D12")
+        
+        XCTAssertNotNil(d12_1)
+        XCTAssertNotNil(d12_2)
+        XCTAssertNotNil(d12_3)
+        
+        XCTAssertEqual(d12_1, Die.d12)
+        XCTAssertEqual(d12_2, Die.d12)
+        XCTAssertEqual(d12_3, Die.d12)
+    }
+    
+    func testInvalidStringParsing() {
+        // Assorted
+        XCTAssertNil(Die("")) // empty
+        XCTAssertNil(Die("d")) // d without value
+        XCTAssertNil(Die("q1")) // other that d in front
+        XCTAssertNil(Die("d1b")) // binary (other form with d)
+        XCTAssertNil(Die("1o")) // octal (other forw without d)
+        XCTAssertNil(Die("one")) // spelled out
+        XCTAssertNil(Die("A")) // hexadecimal
+        XCTAssertNil(Die("DiceKit")) // string
+        
+        //Negative
+        XCTAssertNil(Die("-6"))
+        XCTAssertNil(Die("-d6"))
+        XCTAssertNil(Die("d-6"))
+        
+        //Positive
+        XCTAssertNil(Die("+6"))
+        XCTAssertNil(Die("+d6"))
+        XCTAssertNil(Die("d+6"))
+    }
+    
     func testSidesProperty() {
         for i in 1...100 {
             let die = Die(sides: i)!
