@@ -8,7 +8,15 @@ extension DiceKitTests {
 
 extension DiceTests {
     static let __allTests = [
-        ("testExample", testExample),
+        ("testEmptyStringParsing", testEmptyStringParsing),
+        ("testInvalidStringParsing", testInvalidStringParsing),
+        ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
+        ("testMultipleModifierStringParsing", testMultipleModifierStringParsing),
+        ("testMultipleRepeatedDieStringParsing", testMultipleRepeatedDieStringParsing),
+        ("testMultipleSeparateDieStringParsing", testMultipleSeparateDieStringParsing),
+        ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),
+        ("testSingleDieStringParsing", testSingleDieStringParsing),
+        ("testSingleModifierStringParsing", testSingleModifierStringParsing),
     ]
 }
 
@@ -18,10 +26,13 @@ extension DieTests {
         ("testCopying", testCopying),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
+        ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMaximumResultProperty", testMaximumResultProperty),
         ("testMinimumResultProperty", testMinimumResultProperty),
+        ("testMultipleDigitStringParsing", testMultipleDigitStringParsing),
         ("testRolling", testRolling),
         ("testSidesProperty", testSidesProperty),
+        ("testSingleDigitStringParsing", testSingleDigitStringParsing),
         ("testStaticVarDice", testStaticVarDice),
     ]
 }
