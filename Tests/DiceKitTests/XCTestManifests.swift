@@ -8,6 +8,7 @@ extension DiceKitTests {
 
 extension DiceTests {
     static let __allTests = [
+        ("testEmptyStringParsing", testEmptyStringParsing),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
         ("testMultipleModifierStringParsing", testMultipleModifierStringParsing),
