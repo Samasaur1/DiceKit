@@ -69,7 +69,7 @@ extension Die: Rollable {
     /// - Returns: A random value from `1` to `sides`.
     public func roll() -> Roll {
         #if swift(>=4.2)
-        return Roll.random(in: 1...6)
+        return Roll.random(in: 1...sides)
         #else
         #if os(macOS)
         //macOS
