@@ -174,6 +174,8 @@ What follows is a list of styles that you should follow.
   let some_constant = Some_class()
   ```
 
+* Use argument labels liberally
+
 * If you have any questions, do your best and ask in your PR (or in some other way)
 
 ## Attribution
