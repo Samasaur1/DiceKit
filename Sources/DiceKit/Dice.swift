@@ -460,7 +460,7 @@ extension Dice {
             }
         }
         dice.append(rhs)
-        return Dice(dice: dice)
+        return Dice(dice: dice, withModifier: lhs.modifier)
     }
     public static func + (lhs: Die, rhs: Dice) -> Dice {
         var dice: [Die] = []
@@ -470,7 +470,7 @@ extension Dice {
             }
         }
         dice.append(lhs)
-        return Dice(dice: dice)
+        return Dice(dice: dice, withModifier: rhs.modifier)
     }
     
     public static func + (lhs: Dice, rhs: Dice) -> Dice {
@@ -485,7 +485,7 @@ extension Dice {
                 dice.append(d.copy())
             }
         }
-        return Dice(dice: dice)
+        return Dice(dice: dice, withModifier: rhs.modifier + lhs.modifier)
     }
     
     public static func + (lhs: Dice, rhs: Int) -> Dice {
@@ -495,7 +495,7 @@ extension Dice {
                 dice.append(d.copy())
             }
         }
-        return Dice(dice: dice, withModifier: rhs)
+        return Dice(dice: dice, withModifier: lhs.modifier + rhs)
     }
     public static func + (lhs: Int, rhs: Dice) -> Dice {
         var dice: [Die] = []
@@ -504,7 +504,7 @@ extension Dice {
                 dice.append(d.copy())
             }
         }
-        return Dice(dice: dice, withModifier: lhs)
+                return Dice(dice: dice, withModifier: lhs + rhs.modifier)
     }
     public static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
         return lhs + (rhs.die * rhs.count)
@@ -517,16 +517,16 @@ extension Dice {
     }
     public static func * (lhs: Dice, rhs: Int) -> Dice {
         var dice = lhs.copy()
-        for (die, _) in lhs.dice {
-            dice += die * (rhs - 1)
+        for (die, count) in lhs.dice {
+            dice += die * (count * (rhs - 1))
         }
         dice += lhs.modifier * (rhs - 1)
         return dice
     }
     public static func * (lhs: Int, rhs: Dice) -> Dice {
         var dice = rhs.copy()
-        for (die, _) in rhs.dice {
-            dice += die * (lhs - 1)
+        for (die, count) in rhs.dice {
+            dice += die * ((lhs - 1) * count)
         }
         dice += rhs.modifier * (lhs - 1)
         return dice
