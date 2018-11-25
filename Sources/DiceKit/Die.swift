@@ -126,6 +126,21 @@ extension Die: Rollable {
     public var maximumResult: Roll {
         return sides
     }
+  
+    /// The exact (float) average result from using the `roll()` method.
+    /// This is used in the Dice method to avoid rounding errors.
+    ///
+    /// - Since: UPDATE_ME
+    public var floatAverageResult: Float {
+      return Float(sides + 1) / 2
+    }
+  
+    /// The average result from using the `roll()` method.
+    ///
+    /// - Since: UPDATE_ME
+    public var averageResult: Roll {
+      return   Int(floatAverageResult.rounded())
+    }
     
     /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.
     ///
