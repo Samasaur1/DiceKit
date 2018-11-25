@@ -30,6 +30,11 @@ public protocol Rollable {
     ///
     /// - Since: 0.2.0
     var maximumResult: Roll { get }
+  
+    /// The average result from using the `roll()` method.
+    ///
+    /// - Since: UPDATE_ME
+    var averageResult: Roll { get }
     
     /// Determines whether or not this object can reach the target Roll, compared by the given comparison.
     ///

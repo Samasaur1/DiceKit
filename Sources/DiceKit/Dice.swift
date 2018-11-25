@@ -346,6 +346,19 @@ extension Dice: Rollable {
         }
         return total
     }
+  
+    /// The average result from using the `roll()` method.
+    /// It is calculated with double numbers to avoid rounding errors.
+    ///
+    /// - Since: UPDATE_ME
+    public var averageResult: Roll {
+      var doubleAverage: Double = 0
+      for (die,count) in self.dice {
+        doubleAverage += Double(count) * die.doubleAverageResult
+      }
+      let average = Int(doubleAverage.rounded())
+      return average + self.modifier
+    }
     
     /// Determines whether this `Dice` object can reach the target `Roll` using the given comparison type.
     ///
