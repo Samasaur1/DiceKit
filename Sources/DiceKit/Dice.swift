@@ -267,15 +267,15 @@ extension Dice: Rollable {
     }
   
     /// The average result from using the `roll()` method.
-    /// It is calculated with floating numbers to avoid rounding errors.
+    /// It is calculated with double numbers to avoid rounding errors.
     ///
     /// - Since: UPDATE_ME
     public var averageResult: Roll {
-      var floatAverage: Float = 0
+      var doubleAverage: Double = 0
       for (die,count) in self.dice {
-        floatAverage += Float(count) * die.floatAverageResult
+        doubleAverage += Double(count) * die.doubleAverageResult
       }
-      let average = Int(floatAverage.rounded())
+      let average = Int(doubleAverage.rounded())
       return average + self.modifier
     }
     
