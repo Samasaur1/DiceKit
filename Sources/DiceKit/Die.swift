@@ -152,6 +152,40 @@ extension Die: Rollable {
     public var maximumResult: Roll {
         return sides
     }
+  
+    /// The exact (double) average result from using the `roll()` method.
+    /// This is used in the Dice method to avoid rounding errors.
+    ///
+    /// - Since: UPDATE_ME
+    public var doubleAverageResult: Double {
+      return Double(sides + 1) / 2
+    }
+  
+    /// The average result from using the `roll()` method.
+    ///
+    /// - Since: UPDATE_ME
+    public var averageResult: Roll {
+      return   Int(doubleAverageResult.rounded())
+    }
+    
+    /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check reachibility for.
+    ///   - comparisonType: The comparison to use when checking reachibility.
+    /// - Returns: Whether or not this die can reach the target, using the given comparison.
+    ///
+    /// - Since: UPDATE_ME
+    public func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool {
+        switch comparisonType {
+        case .orHigher:
+            return maximumResult >= target
+        case .exactly:
+            return minimumResult <= target && maximumResult >= target
+        case .orLower:
+            return minimumResult <= target
+        }
+    }
 }
 
 extension Die: Equatable {

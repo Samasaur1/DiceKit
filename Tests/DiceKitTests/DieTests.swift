@@ -102,6 +102,26 @@ final class DieTests: XCTestCase {
         }
     }
     
+    func testCanReach() {
+        let d6 = Die.d6
+        
+        for target in 1...6 {
+            #if swift(>=4.2)
+            for type in RollComparison.allCases {
+                XCTAssertTrue(d6.canReach(target, type))
+            }
+            #else
+            for type in [RollComparison.orLower, RollComparison.exactly, RollComparison.orHigher] {
+                XCTAssertTrue(d6.canReach(target, type))
+            }
+            #endif
+        }
+        
+        XCTAssertTrue(d6.canReach(8, .orLower))
+        XCTAssertFalse(d6.canReach(8, .exactly))
+        XCTAssertFalse(d6.canReach(8, .orHigher))
+    }
+    
     func testEquatable() {
         let d6 = Die.d6
         let initializedD6 = Die(sides: 6)!
