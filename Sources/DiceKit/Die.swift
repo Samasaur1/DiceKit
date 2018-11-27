@@ -165,7 +165,7 @@ extension Die: Rollable {
     ///
     /// - Since: UPDATE_ME
     public var averageResult: Roll {
-      return   Int(doubleAverageResult.rounded())
+      return Int(doubleAverageResult.rounded())
     }
     
     /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.

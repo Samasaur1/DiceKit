@@ -226,4 +226,19 @@ final class DiceTests: XCTestCase {
         XCTAssertNil(Dice("-d6"))
         XCTAssertNil(Dice("d-6"))
     }
+    
+    func testAverageResult() {
+        XCTAssertEqual(Dice(dice: [Die.d6], withModifier: 6).averageResult, 10)
+        
+        for _ in 1...5 {
+            let numDice = Int.random(in: 1...1000)
+            guard let die = Die(sides: Int.random(in: 1...1000)) else {
+                XCTFail()
+                continue
+            }
+            let mod = Int.random(in: -1000...1000)
+            let d = Dice(die, count: numDice, withModifier: mod)
+            XCTAssertEqual(d.averageResult, Int((die.doubleAverageResult * Double(numDice) + Double(mod)).rounded()))
+        }
+    }
 }

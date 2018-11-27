@@ -122,6 +122,43 @@ final class DieTests: XCTestCase {
         XCTAssertFalse(d6.canReach(8, .orHigher))
     }
     
+    func testAverageResult() {
+        XCTAssertEqual(Die.d6.averageResult, 4)
+        
+        for _ in 1...5 {
+            let r = Int.random(in: 1...10_000)
+            guard let d = Die(sides: r) else {
+                XCTFail()
+                continue
+            }
+            XCTAssertEqual(d.averageResult, Int((Double(r + 1)/2).rounded()))
+        }
+    }
+    
+    func testDoubleAverageResult() {
+        XCTAssertEqual(Die.d6.doubleAverageResult, 3.5)
+        
+        for _ in 1...5 {
+            let r = Int.random(in: 1...10_000)
+            guard let d = Die(sides: r) else {
+                XCTFail()
+                continue
+            }
+            XCTAssertEqual(d.doubleAverageResult, Double(r + 1)/2)
+        }
+    }
+    
+    func testMinAverageMax() {
+        for _ in 1...10 {
+            guard let d = Die(sides: Int.random(in: 1...1000000)) else {
+                XCTFail()
+                continue
+            }
+            XCTAssertLessThanOrEqual(d.minimumResult, d.averageResult)
+            XCTAssertLessThanOrEqual(d.averageResult, d.maximumResult)
+        }
+    }
+    
     func testEquatable() {
         let d6 = Die.d6
         let initializedD6 = Die(sides: 6)!
