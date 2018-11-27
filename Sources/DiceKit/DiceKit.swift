@@ -33,7 +33,7 @@ public protocol Rollable {
   
     /// The average result from using the `roll()` method.
     ///
-    /// - Since: UPDATE_ME
+    /// - Since: 0.15.0
     var averageResult: Roll { get }
     
     /// Determines whether or not this object can reach the target Roll, compared by the given comparison.
@@ -42,6 +42,8 @@ public protocol Rollable {
     ///   - target: The target to check reachibility for.
     ///   - comparisonType: The method of checking reachibility.
     /// - Returns: Whether or not this object can reach the target using the given method of comparison.
+    ///
+    /// - Since: 0.15.0
     func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool
 }
 
@@ -89,7 +91,7 @@ public enum MultipleRollResult {
 #if swift(>=4.2)
 /// An enum representing a comparison between two `Roll`s.
 ///
-/// - Since: UPDATE_ME
+/// - Since: 0.15.0
 public enum RollComparison: CaseIterable {
     /// If it is greater than or equal to the target.
     case orHigher
@@ -101,7 +103,7 @@ public enum RollComparison: CaseIterable {
 #else
 /// An enum representing a comparison between two `Roll`s.
 ///
-/// - Since: UPDATE_ME
+/// - Since: 0.15.0
 public enum RollComparison {
     /// If it is greater than or equal to the target.
     case orHigher
