@@ -141,3 +141,14 @@ public typealias DKMultipleRollResult = MultipleRollResult
 ///
 /// - Since: 0.8.0
 public typealias Roll = Int
+
+#if swift(>=4.2)
+//Swift 4.2+ provides an Int.random function
+#else
+#if os(macOS)
+//macOS doesn't need to be seeded
+#else
+//Linux pre-Swift 4.2 needs to initialize using srandom(UInt32(time(nil))), but only once
+internal var initialized = false
+#endif
+#endif

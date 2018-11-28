@@ -231,8 +231,34 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(Dice(dice: [Die.d6], withModifier: 6).averageResult, 10)
         
         for _ in 1...5 {
-            let numDice = Int.random(in: 1...1000)
-            guard let die = Die(sides: Int.random(in: 1...1000)) else {
+            #if swift(>=4.2)
+            let numDice = Int.random(in: 1...10_000)
+            #else
+            #if os(macOS)
+            let numDice = Int(arc4random_uniform(UInt32(10_000))) + 1
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let numDice = (random() % 10_000) + 1
+            #endif
+            #endif
+            
+            #if swift(>=4.2)
+            let optionalDie = Die(sides: Int.random(in: 1...10_000))
+            #else
+            #if os(macOS)
+            let optionalDie = Die(sides: Int(arc4random_uniform(UInt32(10_000))) + 1)
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let optionalDie = Die(sides: (random() % 10_000) + 1)
+            #endif
+            #endif
+            guard let die = optionalDie else {
                 XCTFail()
                 continue
             }

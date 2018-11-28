@@ -126,7 +126,19 @@ final class DieTests: XCTestCase {
         XCTAssertEqual(Die.d6.averageResult, 4)
         
         for _ in 1...5 {
+            #if swift(>=4.2)
             let r = Int.random(in: 1...10_000)
+            #else
+            #if os(macOS)
+            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let r = (random() % 10_000) + 1
+            #endif
+            #endif
             guard let d = Die(sides: r) else {
                 XCTFail()
                 continue
@@ -139,7 +151,19 @@ final class DieTests: XCTestCase {
         XCTAssertEqual(Die.d6.doubleAverageResult, 3.5)
         
         for _ in 1...5 {
+            #if swift(>=4.2)
             let r = Int.random(in: 1...10_000)
+            #else
+            #if os(macOS)
+            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let r = (random() % 10_000) + 1
+            #endif
+            #endif
             guard let d = Die(sides: r) else {
                 XCTFail()
                 continue
