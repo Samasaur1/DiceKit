@@ -273,7 +273,7 @@ final class DiceTests: XCTestCase {
                 srandom(UInt32(time(nil)))
                 DiceKit.initialized = true
             }
-            let numDice = (random() % 2001) - 1001
+            let mod = (random() % 2001) - 1001
             #endif
             #endif
             let d = Dice(die, count: numDice, withModifier: mod)
