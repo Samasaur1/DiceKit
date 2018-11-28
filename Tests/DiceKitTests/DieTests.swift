@@ -174,7 +174,20 @@ final class DieTests: XCTestCase {
     
     func testMinAverageMax() {
         for _ in 1...10 {
-            guard let d = Die(sides: Int.random(in: 1...1000000)) else {
+            #if swift(>=4.2)
+            let optionalDie = Die(sides: Int.random(in: 1...1000000))
+            #else
+            #if os(macOS)
+            let optionalDie = Die(sides: Int(arc4random_uniform(UInt32(1000000))) + 1)
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let optionalDie = Die(sides: (random() % 1000000) + 1)
+            #endif
+            #endif
+            guard let d = optionalDie else {
                 XCTFail()
                 continue
             }
