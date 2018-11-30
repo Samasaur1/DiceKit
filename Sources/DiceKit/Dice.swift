@@ -373,9 +373,6 @@ extension Dice: Rollable {
         case .orHigher:
             return maximumResult >= target
         case .exactly:
-            if modifier > target {
-                return false
-            }
             if maximumResult < target {
                 return false
             }
