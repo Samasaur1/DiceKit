@@ -11,9 +11,6 @@ import Foundation
 ///
 /// - Author: Samasaur
 public class Die {
-    #if os(Linux)
-    private var initialized = false
-    #endif
     /// The number of sides on this `Die`. This value does not need to be possible (for example, it can be 13), but it *does* need to be larger than 0.
     public let sides: Int
     /// Creates a new `Die` with the given number of sides.
@@ -76,9 +73,9 @@ extension Die: Rollable {
         return Int(arc4random_uniform(UInt32(sides))) + 1
         #else
         //Linux
-        if !initialized {
+        if !DiceKit.initialized {
             srandom(UInt32(time(nil)))
-            initialized = true
+            DiceKit.initialized = true
         }
         return (random() % sides) + 1
         #endif
@@ -151,6 +148,40 @@ extension Die: Rollable {
     /// - Since: 0.2.0
     public var maximumResult: Roll {
         return sides
+    }
+  
+    /// The exact (double) average result from using the `roll()` method.
+    /// This is used in the Dice method to avoid rounding errors.
+    ///
+    /// - Since: 0.15.0
+    public var doubleAverageResult: Double {
+      return Double(sides + 1) / 2
+    }
+  
+    /// The average result from using the `roll()` method.
+    ///
+    /// - Since: 0.15.0
+    public var averageResult: Roll {
+      return Int(doubleAverageResult.rounded())
+    }
+    
+    /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check reachibility for.
+    ///   - comparisonType: The comparison to use when checking reachibility.
+    /// - Returns: Whether or not this die can reach the target, using the given comparison.
+    ///
+    /// - Since: 0.15.0
+    public func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool {
+        switch comparisonType {
+        case .orHigher:
+            return maximumResult >= target
+        case .exactly:
+            return minimumResult <= target && maximumResult >= target
+        case .orLower:
+            return minimumResult <= target
+        }
     }
 }
 

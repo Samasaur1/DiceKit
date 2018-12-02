@@ -2,7 +2,7 @@ clean: true
 author: Samasaur
 author_url: https://github.com/Samasaur1
 module: DiceKit
-module_version: 0.14.2
+module_version: 0.15.0
 # docset_icon:
 github_url: https://github.com/Samasaur1/DiceKit
 # github_file_prefix:

@@ -346,6 +346,44 @@ extension Dice: Rollable {
         }
         return total
     }
+  
+    /// The average result from using the `roll()` method.
+    /// It is calculated with double numbers to avoid rounding errors.
+    ///
+    /// - Since: 0.15.0
+    public var averageResult: Roll {
+      var doubleAverage: Double = 0
+      for (die,count) in self.dice {
+        doubleAverage += Double(count) * die.doubleAverageResult
+      }
+      let average = Int(doubleAverage.rounded())
+      return average + self.modifier
+    }
+    
+    /// Determines whether this `Dice` object can reach the target `Roll` using the given comparison type.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check reachibility for.
+    ///   - comparisonType: The comparison to use when checking reachibility.
+    /// - Returns: Whether or not this `Dice` object can reach the target, using the given comparison.
+    ///
+    /// - Since: 0.15.0
+    public func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool {
+        switch comparisonType {
+        case .orHigher:
+            return maximumResult >= target
+        case .exactly:
+            if maximumResult < target {
+                return false
+            }
+            if minimumResult > target {
+                return false
+            }
+            return true
+        case .orLower:
+            return minimumResult <= target
+        }
+    }
 }
 
 extension Dice: Equatable {

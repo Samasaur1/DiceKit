@@ -8,6 +8,7 @@ extension DiceKitTests {
 
 extension DiceTests {
     static let __allTests = [
+        ("testAverageResult", testAverageResult),
         ("testEmptyStringParsing", testEmptyStringParsing),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
@@ -22,12 +23,16 @@ extension DiceTests {
 
 extension DieTests {
     static let __allTests = [
+        ("testAverageResult", testAverageResult),
+        ("testCanReach", testCanReach),
         ("testComparable", testComparable),
         ("testCopying", testCopying),
+        ("testDoubleAverageResult", testDoubleAverageResult),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMaximumResultProperty", testMaximumResultProperty),
+        ("testMinAverageMax", testMinAverageMax),
         ("testMinimumResultProperty", testMinimumResultProperty),
         ("testMultipleDigitStringParsing", testMultipleDigitStringParsing),
         ("testRolling", testRolling),

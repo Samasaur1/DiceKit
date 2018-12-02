@@ -102,6 +102,100 @@ final class DieTests: XCTestCase {
         }
     }
     
+    func testCanReach() {
+        let d6 = Die.d6
+        
+        for target in 1...6 {
+            #if swift(>=4.2)
+            for type in RollComparison.allCases {
+                XCTAssertTrue(d6.canReach(target, type))
+            }
+            #else
+            for type in [RollComparison.orLower, RollComparison.exactly, RollComparison.orHigher] {
+                XCTAssertTrue(d6.canReach(target, type))
+            }
+            #endif
+        }
+        
+        XCTAssertTrue(d6.canReach(8, .orLower))
+        XCTAssertFalse(d6.canReach(8, .exactly))
+        XCTAssertFalse(d6.canReach(8, .orHigher))
+    }
+    
+    func testAverageResult() {
+        XCTAssertEqual(Die.d6.averageResult, 4)
+        
+        for _ in 1...5 {
+            #if swift(>=4.2)
+            let r = Int.random(in: 1...10_000)
+            #else
+            #if os(macOS)
+            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let r = (random() % 10_000) + 1
+            #endif
+            #endif
+            guard let d = Die(sides: r) else {
+                XCTFail()
+                continue
+            }
+            XCTAssertEqual(d.averageResult, Int((Double(r + 1)/2).rounded()))
+        }
+    }
+    
+    func testDoubleAverageResult() {
+        XCTAssertEqual(Die.d6.doubleAverageResult, 3.5)
+        
+        for _ in 1...5 {
+            #if swift(>=4.2)
+            let r = Int.random(in: 1...10_000)
+            #else
+            #if os(macOS)
+            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let r = (random() % 10_000) + 1
+            #endif
+            #endif
+            guard let d = Die(sides: r) else {
+                XCTFail()
+                continue
+            }
+            XCTAssertEqual(d.doubleAverageResult, Double(r + 1)/2)
+        }
+    }
+    
+    func testMinAverageMax() {
+        for _ in 1...10 {
+            #if swift(>=4.2)
+            let optionalDie = Die(sides: Int.random(in: 1...1000000))
+            #else
+            #if os(macOS)
+            let optionalDie = Die(sides: Int(arc4random_uniform(UInt32(1000000))) + 1)
+            #else
+            if !DiceKit.initialized {
+                srandom(UInt32(time(nil)))
+                DiceKit.initialized = true
+            }
+            let optionalDie = Die(sides: (random() % 1000000) + 1)
+            #endif
+            #endif
+            guard let d = optionalDie else {
+                XCTFail()
+                continue
+            }
+            XCTAssertLessThanOrEqual(d.minimumResult, d.averageResult)
+            XCTAssertLessThanOrEqual(d.averageResult, d.maximumResult)
+        }
+    }
+    
     func testEquatable() {
         let d6 = Die.d6
         let initializedD6 = Die(sides: 6)!
