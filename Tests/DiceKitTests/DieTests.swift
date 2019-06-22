@@ -43,9 +43,9 @@ final class DieTests: XCTestCase {
         // Assorted
         XCTAssertNil(Die("")) // empty
         XCTAssertNil(Die("d")) // d without value
-        XCTAssertNil(Die("q1")) // other that d in front
+        XCTAssertNil(Die("q1")) // other than d in front
         XCTAssertNil(Die("d1b")) // binary (other form with d)
-        XCTAssertNil(Die("1o")) // octal (other forw without d)
+        XCTAssertNil(Die("1o")) // octal (other form without d)
         XCTAssertNil(Die("one")) // spelled out
         XCTAssertNil(Die("A")) // hexadecimal
         XCTAssertNil(Die("DiceKit")) // string
