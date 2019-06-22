@@ -4,6 +4,8 @@ import Foundation
 #endif
 
 /// A class that masks a side, returning a custom value in lieu of a number.
+///
+/// - Author: Samasaur
 public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure it is at least Equatable.
     
     /// Create a new DieSide with the given value.
@@ -39,6 +41,8 @@ public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure 
 /// A class that allows for dice with custom sides instead of numbers.
 ///
 /// This class wraps a `Die` instance, and when `roll()` is called on this, it calls the Die's `roll()` method and maps the output to one of the `DieSide`s passed to the initializer.
+///
+/// - Author: Samasaur
 public class CustomDie<Output: Hashable> {
     /// The `Die` that internally powers the `CustomDie`.
     private let die: Die
@@ -142,18 +146,14 @@ extension CustomDie: Equatable {
     }
 }
 
+#if swift(>=4.2)
 extension CustomDie: Hashable {
-    #if swift(>=4.2)
     public func hash(into hasher: inout Hasher) {
         hasher.combine(sides)
         hasher.combine(die)
     }
-    #else
-    public var hashValue: Int {
-        return sides.hashValue ^ die.hashValue
-    }
-    #endif
 }
+#endif
 
 extension CustomDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
