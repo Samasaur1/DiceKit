@@ -37,7 +37,7 @@ final class CustomDieTests: XCTestCase {
                 gotWorld = true
             }
         }
-        XCTAssertTrue(gotHello && gotWorld, #"One side was never rolled!\#nGot "Hello":\#t\#(gotHello)\#nGot "World":\#t\#(gotWorld)"#)
+        XCTAssertTrue(gotHello && gotWorld, "One side was never rolled!\nGot \"Hello\":\t\(gotHello)\nGot \"World\":\t\(gotWorld)")
     }
     
     func testEquatable() {
