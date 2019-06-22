@@ -3,7 +3,7 @@ import XCTest
 
 final class DiceTests: XCTestCase {
     func testEmptyStringParsing() {
-        let empty = Dice("")
+        let empty = try? Dice("")
         
         XCTAssertNotNil(empty)
         
@@ -11,11 +11,11 @@ final class DiceTests: XCTestCase {
     }
     
     func testSingleDieStringParsing() {
-        let dice6_1 = Dice("d6")
-        let dice6_2 = Dice("D6")
-        let dice12 = Dice("d12")
-        let dice100 = Dice("d100")
-        let dice726 = Dice("d726")
+        let dice6_1 = try? Dice("d6")
+        let dice6_2 = try? Dice("D6")
+        let dice12 = try? Dice("d12")
+        let dice100 = try? Dice("d100")
+        let dice726 = try? Dice("d726")
         
         XCTAssertNotNil(dice6_1)
         XCTAssertNotNil(dice6_2)
@@ -27,16 +27,16 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(dice6_2, Dice(Die.d6))
         XCTAssertEqual(dice12, Dice(Die.d12))
         XCTAssertEqual(dice100, Dice(Die.d100))
-        XCTAssertEqual(dice726, Dice(Die(sides: 726)!))
+        XCTAssertEqual(dice726, Dice(try! Die(sides: 726)))
         
-        XCTAssertNil(Dice("-d6"))
+        XCTAssertNil(try? Dice("-d6"))
     }
     
     func testSingleModifierStringParsing() {
-        let positive5_1 = Dice("5")
-        let positive5_2 = Dice("+5")
-        let negative5_1 = Dice("-5")
-        let negative5_2 = Dice("+-5")
+        let positive5_1 = try? Dice("5")
+        let positive5_2 = try? Dice("+5")
+        let negative5_1 = try? Dice("-5")
+        let negative5_2 = try? Dice("+-5")
         
         XCTAssertNotNil(positive5_1)
         XCTAssertNotNil(positive5_2)
@@ -50,11 +50,11 @@ final class DiceTests: XCTestCase {
     }
     
     func testMultipleRepeatedDieStringParsing() {
-        let dice2d6 = Dice("2d6")
-        let dice3d4 = Dice("3D4")
-        let dice12d12 = Dice("12d12")
-        let dice1d100 = Dice("1d100")
-        let dice1000d1 = Dice("1000d1")
+        let dice2d6 = try? Dice("2d6")
+        let dice3d4 = try? Dice("3D4")
+        let dice12d12 = try? Dice("12d12")
+        let dice1d100 = try? Dice("1d100")
+        let dice1000d1 = try? Dice("1000d1")
         
         XCTAssertNotNil(dice2d6)
         XCTAssertNotNil(dice3d4)
@@ -66,14 +66,14 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(dice3d4, Dice(Die.d4, Die.d4, Die.d4))
         XCTAssertEqual(dice12d12, Dice((Die.d12, 12)))
         XCTAssertEqual(dice1d100, Dice(Die.d100))
-        XCTAssertEqual(dice1000d1, Dice(Die(sides: 1)!, count: 1000))
+        XCTAssertEqual(dice1000d1, Dice(try! Die(sides: 1), count: 1000))
     }
     
     func testMultipleSeparateDieStringParsing() {
-        let dice2d6withSpaces = Dice("d6 + 1d6")
-        let dice2d6withoutSpaces = Dice("d6+1d6")
-        let dice1d4plus1d6withSpaces = Dice("d4 + 1d6")
-        let dice1d4plus1d6withoutSpaces = Dice("1d4+d6")
+        let dice2d6withSpaces = try? Dice("d6 + 1d6")
+        let dice2d6withoutSpaces = try? Dice("d6+1d6")
+        let dice1d4plus1d6withSpaces = try? Dice("d4 + 1d6")
+        let dice1d4plus1d6withoutSpaces = try? Dice("1d4+d6")
         
         XCTAssertNotNil(dice2d6withSpaces)
         XCTAssertNotNil(dice2d6withoutSpaces)
@@ -87,8 +87,8 @@ final class DiceTests: XCTestCase {
         
         
         
-        let dice6d6withSpaces = Dice("d6 + 2d6 + 3d6")
-        let dice6d6withoutSpaces = Dice("d6+2d6+3d6")
+        let dice6d6withSpaces = try? Dice("d6 + 2d6 + 3d6")
+        let dice6d6withoutSpaces = try? Dice("d6+2d6+3d6")
         
         XCTAssertNotNil(dice6d6withSpaces)
         XCTAssertNotNil(dice6d6withoutSpaces)
@@ -98,11 +98,11 @@ final class DiceTests: XCTestCase {
     }
     
     func testMultipleModifierStringParsing() {
-        let _2plus3 = Dice("2+3")
-        let _7minus2 = Dice("7-2")
-        let negative2plus7 = Dice("-2+7")
-        let negative2minus3 = Dice("-2-3")
-        let _2minus7 = Dice("+2-7")
+        let _2plus3 = try? Dice("2+3")
+        let _7minus2 = try? Dice("7-2")
+        let negative2plus7 = try? Dice("-2+7")
+        let negative2minus3 = try? Dice("-2-3")
+        let _2minus7 = try? Dice("+2-7")
         
         XCTAssertNotNil(_2plus3)
         XCTAssertNotNil(_7minus2)
@@ -119,16 +119,16 @@ final class DiceTests: XCTestCase {
     
     func testSingleDieAndSingleModifierStringParsing() {
         //Sucessfuls
-        let d6plus6_1 = Dice("d6+6")
-        let d6plus6_2 = Dice("6+d6")
-        let d4minus4_1 = Dice("d4-4")
-        let d4minus4_2 = Dice("-4+d4")
+        let d6plus6_1 = try? Dice("d6+6")
+        let d6plus6_2 = try? Dice("6+d6")
+        let d4minus4_1 = try? Dice("d4-4")
+        let d4minus4_2 = try? Dice("-4+d4")
         
         //Unsucessfuls - NIL
-        let negatived8plus8_1 = Dice("-d8+8")
-        let negatived8plus8_2 = Dice("8-d8")
-        let negatived8minus8_1 = Dice("-d8-8")
-        let negatived8minus8_2 = Dice("-8-d8")
+        let negatived8plus8_1 = try? Dice("-d8+8")
+        let negatived8plus8_2 = try? Dice("8-d8")
+        let negatived8minus8_1 = try? Dice("-d8-8")
+        let negatived8minus8_2 = try? Dice("-8-d8")
         
         XCTAssertNotNil(d6plus6_1)
         XCTAssertNotNil(d6plus6_2)
@@ -148,28 +148,28 @@ final class DiceTests: XCTestCase {
     
     func testMultipleDieAndMultipleModifierStringParsing() {
         //2d6+12
-        let D6plus6plus6plusD6 = Dice("d6+6+6+d6")
-        let _6plusD6plusD6plus6 = Dice("6+d6+d6+6")
-        let D6plus6plusD6plus6 = Dice("d6+6+d6+6")
-        let _6plusD6plus6plusD6 = Dice("6+d6+6+d6")
+        let D6plus6plus6plusD6 = try? Dice("d6+6+6+d6")
+        let _6plusD6plusD6plus6 = try? Dice("6+d6+d6+6")
+        let D6plus6plusD6plus6 = try? Dice("d6+6+d6+6")
+        let _6plusD6plus6plusD6 = try? Dice("6+d6+6+d6")
         
         //2d4-8
-        let D4minus4minus4plusD4 = Dice("d4-4-4+d4")
-        let negative4plusD4plusD4minus4 = Dice("-4+d4+d4-4")
-        let D4minus4plusD4minus4 = Dice("d4-4+d4-4")
-        let negative4plusD4minus4plusD4 = Dice("-4+d4-4+d4")
+        let D4minus4minus4plusD4 = try? Dice("d4-4-4+d4")
+        let negative4plusD4plusD4minus4 = try? Dice("-4+d4+d4-4")
+        let D4minus4plusD4minus4 = try? Dice("d4-4+d4-4")
+        let negative4plusD4minus4plusD4 = try? Dice("-4+d4-4+d4")
         
         //2d8
-        let D8plus8minus8plusD8 = Dice("d8+8-8+d8")
-        let negative8plusD8plusD8plus8 = Dice("-8+d8+d8+8")
-        let D8plus8plusD8minus8 = Dice("d8+8+d8-8")
-        let negative8plusD8plus8plusD8 = Dice("-8+d8+8+d8")
+        let D8plus8minus8plusD8 = try? Dice("d8+8-8+d8")
+        let negative8plusD8plusD8plus8 = try? Dice("-8+d8+d8+8")
+        let D8plus8plusD8minus8 = try? Dice("d8+8+d8-8")
+        let negative8plusD8plus8plusD8 = try? Dice("-8+d8+8+d8")
         
         //20
-        let D10plus10plus10minusD10 = Dice("d10+10+10-d10")
-        let _10plusD10minusD10plus10 = Dice("10+d10-d10+10")
-        let D10plus10minusD10plus10 = Dice("d10+10-d10+10")
-        let _10plusD10plus10minusD10 = Dice("10+d10+10-d10")
+        let D10plus10plus10minusD10 = try? Dice("d10+10+10-d10")
+        let _10plusD10minusD10plus10 = try? Dice("10+d10-d10+10")
+        let D10plus10minusD10plus10 = try? Dice("d10+10-d10+10")
+        let _10plusD10plus10minusD10 = try? Dice("10+d10+10-d10")
         
         
         XCTAssertNotNil(D6plus6plus6plusD6)
@@ -213,18 +213,18 @@ final class DiceTests: XCTestCase {
     
     func testInvalidStringParsing() {
         // Assorted
-        XCTAssertNil(Dice("d")) // d without value
-        XCTAssertNil(Dice("q1")) // other that d in front
-        XCTAssertNil(Dice("d1b")) // binary (other form with d)
-        XCTAssertNil(Dice("1o")) // octal (other forw without d)
-        XCTAssertNil(Dice("one")) // spelled out
-        XCTAssertNil(Dice("A")) // hexadecimal
-        XCTAssertNil(Dice("DiceKit")) // string
-        XCTAssertNil(Dice("d+6")) // split
+        XCTAssertNil(try? Dice("d")) // d without value
+        XCTAssertNil(try? Dice("q1")) // other that d in front
+        XCTAssertNil(try? Dice("d1b")) // binary (other form with d)
+        XCTAssertNil(try? Dice("1o")) // octal (other forw without d)
+        XCTAssertNil(try? Dice("one")) // spelled out
+        XCTAssertNil(try? Dice("A")) // hexadecimal
+        XCTAssertNil(try? Dice("DiceKit")) // string
+        XCTAssertNil(try? Dice("d+6")) // split
         
         //Negative
-        XCTAssertNil(Dice("-d6"))
-        XCTAssertNil(Dice("d-6"))
+        XCTAssertNil(try? Dice("-d6"))
+        XCTAssertNil(try? Dice("d-6"))
     }
     
     func testAverageResult() {
@@ -246,16 +246,16 @@ final class DiceTests: XCTestCase {
             #endif
             
             #if swift(>=4.2)
-            let optionalDie = Die(sides: Int.random(in: 1...10_000))
+            let optionalDie = try? Die(sides: Int.random(in: 1...10_000))
             #else
             #if os(macOS)
-            let optionalDie = Die(sides: Int(arc4random_uniform(UInt32(10_000))) + 1)
+            let optionalDie = try? Die(sides: Int(arc4random_uniform(UInt32(10_000))) + 1)
             #else
             if !DiceKit.initialized {
                 srandom(UInt32(time(nil)))
                 DiceKit.initialized = true
             }
-            let optionalDie = Die(sides: (random() % 10_000) + 1)
+            let optionalDie = try? Die(sides: (random() % 10_000) + 1)
             #endif
             #endif
             guard let die = optionalDie else {

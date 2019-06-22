@@ -3,18 +3,18 @@ import XCTest
 
 final class DieTests: XCTestCase {
     func testInitialization() {
-        let negativeOneDie = Die(sides: -1)
-        let zeroDie = Die(sides: 0)
-        let d6 = Die(sides: 6)
+        let negativeOneDie = try? Die(sides: -1)
+        let zeroDie = try? Die(sides: 0)
+        let d6 = try? Die(sides: 6)
         XCTAssertNil(negativeOneDie)
         XCTAssertNil(zeroDie)
         XCTAssertNotNil(d6)
     }
     
     func testSingleDigitStringParsing() {
-        let d6_1 = Die("6")
-        let d6_2 = Die("d6")
-        let d6_3 = Die("D6")
+        let d6_1 = try? Die("6")
+        let d6_2 = try? Die("d6")
+        let d6_3 = try? Die("D6")
         
         XCTAssertNotNil(d6_1)
         XCTAssertNotNil(d6_2)
@@ -26,9 +26,9 @@ final class DieTests: XCTestCase {
     }
     
     func testMultipleDigitStringParsing() {
-        let d12_1 = Die("12")
-        let d12_2 = Die("d12")
-        let d12_3 = Die("D12")
+        let d12_1 = try? Die("12")
+        let d12_2 = try? Die("d12")
+        let d12_3 = try? Die("D12")
         
         XCTAssertNotNil(d12_1)
         XCTAssertNotNil(d12_2)
@@ -41,29 +41,29 @@ final class DieTests: XCTestCase {
     
     func testInvalidStringParsing() {
         // Assorted
-        XCTAssertNil(Die("")) // empty
-        XCTAssertNil(Die("d")) // d without value
-        XCTAssertNil(Die("q1")) // other than d in front
-        XCTAssertNil(Die("d1b")) // binary (other form with d)
-        XCTAssertNil(Die("1o")) // octal (other form without d)
-        XCTAssertNil(Die("one")) // spelled out
-        XCTAssertNil(Die("A")) // hexadecimal
-        XCTAssertNil(Die("DiceKit")) // string
+        XCTAssertNil(try? Die("")) // empty
+        XCTAssertNil(try? Die("d")) // d without value
+        XCTAssertNil(try? Die("q1")) // other than d in front
+        XCTAssertNil(try? Die("d1b")) // binary (other form with d)
+        XCTAssertNil(try? Die("1o")) // octal (other form without d)
+        XCTAssertNil(try? Die("one")) // spelled out
+        XCTAssertNil(try? Die("A")) // hexadecimal
+        XCTAssertNil(try? Die("DiceKit")) // string
         
         //Negative
-        XCTAssertNil(Die("-6"))
-        XCTAssertNil(Die("-d6"))
-        XCTAssertNil(Die("d-6"))
+        XCTAssertNil(try? Die("-6"))
+        XCTAssertNil(try? Die("-d6"))
+        XCTAssertNil(try? Die("d-6"))
         
         //Positive
-        XCTAssertNil(Die("+6"))
-        XCTAssertNil(Die("+d6"))
-        XCTAssertNil(Die("d+6"))
+        XCTAssertNil(try? Die("+6"))
+        XCTAssertNil(try? Die("+d6"))
+        XCTAssertNil(try? Die("d+6"))
     }
     
     func testSidesProperty() {
         for i in 1...100 {
-            let die = Die(sides: i)!
+            let die = try! Die(sides: i)
             XCTAssertEqual(die.sides, i)
         }
     }
@@ -90,14 +90,14 @@ final class DieTests: XCTestCase {
     
     func testMinimumResultProperty() {
         for i in 1...25 {
-            let d = Die(sides: i)!
+            let d = try! Die(sides: i)
             XCTAssertEqual(d.minimumResult, 1)
         }
     }
     
     func testMaximumResultProperty() {
         for i in 1...25 {
-            let d = Die(sides: i)!
+            let d = try! Die(sides: i)
             XCTAssertEqual(d.maximumResult, d.sides)
         }
     }
@@ -139,7 +139,7 @@ final class DieTests: XCTestCase {
             let r = (random() % 10_000) + 1
             #endif
             #endif
-            guard let d = Die(sides: r) else {
+            guard let d = try? Die(sides: r) else {
                 XCTFail()
                 continue
             }
@@ -164,7 +164,7 @@ final class DieTests: XCTestCase {
             let r = (random() % 10_000) + 1
             #endif
             #endif
-            guard let d = Die(sides: r) else {
+            guard let d = try? Die(sides: r) else {
                 XCTFail()
                 continue
             }
@@ -175,16 +175,16 @@ final class DieTests: XCTestCase {
     func testMinAverageMax() {
         for _ in 1...10 {
             #if swift(>=4.2)
-            let optionalDie = Die(sides: Int.random(in: 1...1000000))
+            let optionalDie = try? Die(sides: Int.random(in: 1...1000000))
             #else
             #if os(macOS)
-            let optionalDie = Die(sides: Int(arc4random_uniform(UInt32(1000000))) + 1)
+            let optionalDie = try? Die(sides: Int(arc4random_uniform(UInt32(1000000))) + 1)
             #else
             if !DiceKit.initialized {
                 srandom(UInt32(time(nil)))
                 DiceKit.initialized = true
             }
-            let optionalDie = Die(sides: (random() % 1000000) + 1)
+            let optionalDie = try? Die(sides: (random() % 1000000) + 1)
             #endif
             #endif
             guard let d = optionalDie else {
@@ -198,7 +198,7 @@ final class DieTests: XCTestCase {
     
     func testEquatable() {
         let d6 = Die.d6
-        let initializedD6 = Die(sides: 6)!
+        let initializedD6 = try! Die(sides: 6)
         let copiedD6 = Die.d6.copy()
         let initializedWithCopyD6 = Die(copyOf: Die.d6)
         let d4 = Die.d4
@@ -235,12 +235,12 @@ final class DieTests: XCTestCase {
     }
     
     func testStaticVarDice() {
-        XCTAssertEqual(Die.d4, Die(sides: 4)!)
-        XCTAssertEqual(Die.d6, Die(sides: 6)!)
-        XCTAssertEqual(Die.d8, Die(sides: 8)!)
-        XCTAssertEqual(Die.d10, Die(sides: 10)!)
-        XCTAssertEqual(Die.d12, Die(sides: 12)!)
-        XCTAssertEqual(Die.d20, Die(sides: 20)!)
-        XCTAssertEqual(Die.d100, Die(sides: 100)!)
+        XCTAssertEqual(Die.d4, try! Die(sides: 4))
+        XCTAssertEqual(Die.d6, try! Die(sides: 6))
+        XCTAssertEqual(Die.d8, try! Die(sides: 8))
+        XCTAssertEqual(Die.d10, try! Die(sides: 10))
+        XCTAssertEqual(Die.d12, try! Die(sides: 12))
+        XCTAssertEqual(Die.d20, try! Die(sides: 20))
+        XCTAssertEqual(Die.d100, try! Die(sides: 100))
     }
 }

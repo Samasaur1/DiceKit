@@ -55,21 +55,30 @@ public class CustomDie<Output: Hashable> {
         let newSides = sides.mapValues { ds in
             return ds == side ? newSide : ds
         }
-        return CustomDie(sides: [DieSide<Output>](newSides.values))!
+        return try! CustomDie(sides: [DieSide<Output>](newSides.values))
+    }
+    
+    /// Creates a new `CustomDie` with the given sides.
+    ///
+    /// - Parameter sides: The sides of the die.
+    /// - Throws: An `Error.IllegalNumberOfSides` error when the number of sides is less than or equal to 0
+    public convenience init(_ sides: DieSide<Output>...) throws {
+        try self.init(sides: sides)
     }
     
     /// Creates a new `CustomDie` with the given sides.
     ///
     /// - Parameter sidesArr: The sides of the die.
-    public init?(sides sidesArr: [DieSide<Output>]) {
+    /// - Throws: An `Error.IllegalNumberOfSides` error when the number of sides is less than or equal to 0
+    public init(sides sidesArr: [DieSide<Output>]) throws {
         guard sidesArr.count > 0 else {
-            return nil
+            throw Error.illegalNumberOfSides(attempt: sidesArr.count)
         }
         var sidesDict: [Roll: DieSide<Output>] = [:]
         for (i, el) in sidesArr.enumerated() {
             sidesDict[i + 1] = el
         }
-        die = Die(sides: sidesArr.count)!
+        die = try! Die(sides: sidesArr.count)
         sides = sidesDict
         
     }

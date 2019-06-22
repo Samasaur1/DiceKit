@@ -152,3 +152,11 @@ public typealias Roll = Int
 internal var initialized = false
 #endif
 #endif
+
+public enum Error: Swift.Error {
+    case illegalNumberOfSides(attempt: Int)
+    case emptyString
+    case nonNumericString
+    case illegalString(string: String)
+}
+public typealias DKError = DiceKit.Error

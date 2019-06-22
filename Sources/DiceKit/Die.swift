@@ -18,9 +18,10 @@ public class Die {
     /// This initializer will fail if the number of sides is `<= 0`.
     ///
     /// - Parameter sides: The number of sides for this die.
-    public init?(sides: Int) {
+    /// - Throws: An `Error.IllegalNumberOfSides` error when the number of sides is less than or equal to 0
+    public init(sides: Int) throws {
         guard sides > 0 else {
-            return nil
+            throw Error.illegalNumberOfSides(attempt: sides)
         }
         self.sides = sides
     }
@@ -29,25 +30,26 @@ public class Die {
     /// You cannot have a negative die (`-d6`), a die with negative sides (`d-6`), or a die with 0 sides (`d0`). Because this is a `Die` initializer, you can only have one die (no `2d6`).
     ///
     /// - Parameter str: The string to convert from.
-    public init?(_ str: String) {
+    /// - Throws: Numerous errors if the string is malformed or empty.
+    public init(_ str: String) throws {
         if str.isEmpty {
-            return nil
+            throw Error.emptyString
         }
         if str.isNumeric {
-            guard let num = Int(str) else { return nil }
-            guard num > 0 else { return nil }
+            guard let num = Int(str) else { throw Error.nonNumericString }
+            guard num > 0 else { throw Error.illegalNumberOfSides(attempt: num) }
             self.sides = num
         } else if String(str.prefix(1)).caseInsensitiveCompare("D") == .orderedSame {
             let remaining = String(str.dropFirst())
             if remaining.isNumeric {
-                guard let num = Int(remaining) else { return nil }
-                guard num > 0 else { return nil }
+                guard let num = Int(remaining) else { throw Error.nonNumericString }
+                guard num > 0 else { throw Error.illegalNumberOfSides(attempt: num) }
                 self.sides = num
             } else {
-                return nil
+                throw Error.nonNumericString
             }
         } else {
-            return nil
+            throw Error.illegalString(string: str)
         }
     }
     /// Creates a new `Die` that is a copy of the given `Die`.
@@ -231,31 +233,31 @@ extension Die {
 extension Die {
     /// A four-sided die (`d4`).
     public static var d4: Die {
-        return Die(sides: 4)!
+        return try! Die(sides: 4)
     }
     /// A six-sided die (`d6`).
     public static var d6: Die {
-        return Die(sides: 6)!
+        return try! Die(sides: 6)
     }
     /// An eight-sided die (`d8`).
     public static var d8: Die {
-        return Die(sides: 8)!
+        return try! Die(sides: 8)
     }
     /// A ten-sided die (`d10`).
     public static var d10: Die {
-        return Die(sides: 10)!
+        return try! Die(sides: 10)
     }
     /// A twelve-sided die (`d12`).
     public static var d12: Die {
-        return Die(sides: 12)!
+        return try! Die(sides: 12)
     }
     /// A twenty-sided die (`d20`).
     public static var d20: Die {
-        return Die(sides: 20)!
+        return try! Die(sides: 20)
     }
     /// A one hundred-sided die (`d100`).
     public static var d100: Die {
-        return Die(sides: 100)!
+        return try! Die(sides: 100)
     }
 }
 
