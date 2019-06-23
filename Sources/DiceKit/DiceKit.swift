@@ -180,7 +180,7 @@ internal extension Array where Element == Double {
         return total
     }
 }
-#if swift(<5.1)
+#if !swift(>=5.1) //Can't use `#if swift(<5.1)` for earlier than Swift 5
 internal extension Sequence {
     func count(where predicate: (Element) throws -> Bool) rethrows -> Int {
         var count = 0
