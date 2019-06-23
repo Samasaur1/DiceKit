@@ -1,5 +1,6 @@
 /// A class that masks a side, returning a custom value in lieu of a number.
 ///
+#warning("Update Since")/// - Since: UPDATE_ME
 /// - Author: Samasaur
 public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure it is at least Equatable.
     
@@ -13,9 +14,7 @@ public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure 
     /// The value that this DieSide will return when rolled.
     public let value: OutputType
     
-    //MARK: Equatable & Hashable
-    
-    public static func == (lhs: DieSide, rhs: DieSide) -> Bool {
+    public static func == (lhs: DieSide, rhs: DieSide) -> Bool { //IMPORTANT NOTE: THIS DOES NOT ACCEPT `DieSide`s WITH DIFFERENT GENERIC ARGUMENTS
         guard type(of: lhs.value) == type(of: rhs.value) else {
             return false
         }
@@ -31,6 +30,7 @@ public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure 
 ///
 /// This class wraps a `Die` instance, and when `roll()` is called on this, it calls the Die's `roll()` method and maps the output to one of the `DieSide`s passed to the initializer.
 ///
+#warning("Update Since")/// - Since: UPDATE_ME
 /// - Author: Samasaur
 public class CustomDie<Output: Hashable> {
     /// The `Die` that internally powers the `CustomDie`.

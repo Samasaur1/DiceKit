@@ -225,6 +225,8 @@ public typealias Roll = Int
 /// - emptyDictionary: An empty dictionary was passed to something that needs a non-empty dictionary.
 /// - negativeArgument: An argument passed was negative, and only positive ones are allowed.
 /// - chanceOverOne: The chance of something happening was over 1, an impossibility.
+///
+#warning("Update Since")/// - Since: UPDATE_ME
 public enum Error: Swift.Error {
     /// A number of sides was passed that wasn't allowed.
     /// - Parameter attempt: The number of sides that was passed.
