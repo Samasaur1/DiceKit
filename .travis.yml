@@ -9,7 +9,6 @@ os:
 osx_image: xcode10
 
 env:
-- SWIFT_VERSION=4.1.3
 - SWIFT_VERSION=4.2.4
 
 jobs:

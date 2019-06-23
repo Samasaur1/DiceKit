@@ -71,11 +71,11 @@ extension DieTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__DieTests = [
-        ("testAverageResult", testAverageResult),
+        ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReach", testCanReach),
         ("testComparable", testComparable),
         ("testCopying", testCopying),
-        ("testDoubleAverageResult", testDoubleAverageResult),
+        ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
         ("testInvalidStringParsing", testInvalidStringParsing),

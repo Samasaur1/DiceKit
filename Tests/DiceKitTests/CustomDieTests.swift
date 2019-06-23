@@ -56,30 +56,28 @@ final class CustomDieTests: XCTestCase {
     }
     
     func testHashable() {
-        #if swift(>=4.2)
         let d1 = try! CustomDie(sides: [DieSide("Hello"), DieSide("World")])
         let d2 = try! CustomDie(sides: [DieSide("Hello"), DieSide("World")])
-        let d2prime = try! CustomDie(DieSide("Hello"), DieSide("World"))
-        let d3 = try! CustomDie(sides: [DieSide(4), DieSide(9)])
+        let d3 = try! CustomDie(DieSide("Hello"), DieSide("World"))
+        let d4 = try! CustomDie(sides: [DieSide(4), DieSide(9)])
         var h1 = Hasher()
         h1.combine(d1)
         let hv1 = h1.finalize()
         var h2 = Hasher()
         h2.combine(d2)
         let hv2 = h2.finalize()
-        var h2prime = Hasher()
-        h2prime.combine(d2prime)
-        let hv2prime = h2prime.finalize()
         var h3 = Hasher()
         h3.combine(d3)
         let hv3 = h3.finalize()
+        var h4 = Hasher()
+        h4.combine(d4)
+        let hv4 = h4.finalize()
         XCTAssertEqual(hv1, hv2)
-        XCTAssertEqual(hv1, hv2prime)
-        XCTAssertEqual(hv2, hv2prime)
-        XCTAssertNotEqual(hv1, hv3)
-        XCTAssertNotEqual(hv2, hv3)
-        XCTAssertEqual(hv2prime, hv3)
-        #endif
+        XCTAssertEqual(hv1, hv3)
+        XCTAssertNotEqual(hv1, hv4)
+        XCTAssertEqual(hv2, hv3)
+        XCTAssertNotEqual(hv2, hv4)
+        XCTAssertNotEqual(hv3, hv4)
     }
     
     func testSidesProperty() {

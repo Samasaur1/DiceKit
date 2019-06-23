@@ -231,51 +231,15 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(Dice(dice: [Die.d6], withModifier: 6).averageResult, 10)
         
         for _ in 1...5 {
-            #if swift(>=4.2)
             let numDice = Int.random(in: 1...10_000)
-            #else
-            #if os(macOS)
-            let numDice = Int(arc4random_uniform(UInt32(10_000))) + 1
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let numDice = (random() % 10_000) + 1
-            #endif
-            #endif
             
-            #if swift(>=4.2)
             let optionalDie = try? Die(sides: Int.random(in: 1...10_000))
-            #else
-            #if os(macOS)
-            let optionalDie = try? Die(sides: Int(arc4random_uniform(UInt32(10_000))) + 1)
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let optionalDie = try? Die(sides: (random() % 10_000) + 1)
-            #endif
-            #endif
             guard let die = optionalDie else {
                 XCTFail()
                 continue
             }
             
-            #if swift(>=4.2)
             let mod = Int.random(in: -1000...1000) // 0...2000 // 1...2001
-            #else
-            #if os(macOS)
-            let mod = Int(arc4random_uniform(UInt32(2001))) - 1001
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let mod = (random() % 2001) - 1001
-            #endif
-            #endif
             let d = Dice(die, count: numDice, withModifier: mod)
             XCTAssertEqual(d.averageResult, Int((die.doubleAverageResult * Double(numDice) + Double(mod)).rounded()))
         }

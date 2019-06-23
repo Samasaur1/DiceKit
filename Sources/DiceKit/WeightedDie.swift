@@ -1,8 +1,3 @@
-#if swift(>=4.2)
-#else
-import Foundation
-#endif
-
 public struct Chance {
     public let n: Int
     public let d: Int
@@ -87,6 +82,12 @@ extension Chance: Equatable {
         return lhs.fraction == rhs.fraction
     }
 }
+extension Chance: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(n)
+        hasher.combine(d)
+    }
+}
 extension Chance: ExpressibleByFloatLiteral {
     public typealias FloatLiteralType = Double
     public init(floatLiteral value: Chance.FloatLiteralType) {
@@ -100,6 +101,9 @@ public struct Chances {
     }
     public init(chances: [Roll: Chance]) {
         self.dict = chances
+    }
+    public init(chances: (Roll, Chance)...) {
+        self.init(chances: chances)
     }
     public init(chances: [(Roll, Chance)]) {
         self.dict = [:]
@@ -120,6 +124,11 @@ public struct Chances {
 extension Chances: Equatable {
     public static func == (lhs: Chances, rhs: Chances) -> Bool {
         return lhs.dict == rhs.dict
+    }
+}
+extension Chances: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(dict)
     }
 }
 public class WeightedDie {
@@ -144,22 +153,13 @@ public class WeightedDie {
 
 extension WeightedDie: Rollable {
     public func roll() -> Roll {
-        fatalError("Not implemented")
-//        #if swift(>=4.2)
-//        return Roll.random(in: 1...sides)
-//        #else
-//        #if os(macOS)
-//        //macOS
-//        return Int(arc4random_uniform(UInt32(sides))) + 1
-//        #else
-//        //Linux
-//        if !DiceKit.initialized {
-//            srandom(UInt32(time(nil)))
-//            DiceKit.initialized = true
-//        }
-//        return (random() % sides) + 1
-//        #endif
-//        #endif
+        let rand = Double.random(in: 0..<chances.map { $0.value.value }.sum)
+        var baseline = 0.0
+        for (roll, chance) in chances.mapValues({ $0.value }) {
+            if rand < (chance + baseline) { return roll }
+            baseline += chance
+        }
+        fatalError("The WeightedDie roll() function never returned")
     }
     
     /// The minimum possible result from using the `roll()` method.
@@ -177,11 +177,20 @@ extension WeightedDie: Rollable {
     }
     
     public var doubleAverageResult: Double {
-        return Double(sides + 1) / 2//TODO: avg
+        let m = 1.0 / chances.map { $0.value.value }.sum
+        return chances.mapValues { $0.value * m }.map { Double($0.key) * $0.value }.sum
+        
+        //The above is a condensed version of the below
+        
+//        let sum = chances.map { $0.value.value }.sum
+//        let multiplier = 1.0 / sum
+//        let newChances = chances.mapValues { $0.value * multiplier } //this makes the chances add up to 1
+//        let result = newChances.map { Double($0.key) * $0.value }.sum
+//        return result
     }
     
     public var averageResult: Roll {
-        return Int(doubleAverageResult.rounded()) //TODO: avg
+        return Int(doubleAverageResult.rounded())
     }
     
     /// Determines whether this `WeightedDie` can reach the target `Roll` using the given comparison type.
@@ -210,13 +219,11 @@ extension WeightedDie: Equatable {
     }
 }
 
-#if swift(>=4.2)
 extension WeightedDie: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(chances)
     }
 }
-#endif
 
 extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {

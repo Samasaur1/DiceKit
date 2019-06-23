@@ -3,6 +3,7 @@
 /// **Implemented By**
 /// * `Die`
 /// * `Dice`
+/// * `WeightedDie`
 ///
 /// - Author: Samasaur
 public protocol Rollable {
@@ -140,7 +141,6 @@ public enum MultipleRollResult {
     /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 12 (2 + 4 + 6)
     case dropHigh(amountToDrop: Int)
 }
-#if swift(>=4.2)
 /// An enum representing a comparison between two `Roll`s.
 ///
 /// - Since: 0.15.0
@@ -152,19 +152,6 @@ public enum RollComparison: CaseIterable {
     /// If it is exactly equal to the target.
     case exactly
 }
-#else
-/// An enum representing a comparison between two `Roll`s.
-///
-/// - Since: 0.15.0
-public enum RollComparison {
-    /// If it is greater than or equal to the target.
-    case orHigher
-    /// If it is less than or equal to the target.
-    case orLower
-    /// If it is exactly equal to the target.
-    case exactly
-}
-#endif
 
 internal extension Array where Element == Roll {
     internal var sum: Roll {
@@ -181,6 +168,16 @@ internal extension String {
         guard !self.isEmpty else { return false }
         let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         return Set(self).isSubset(of: nums)
+    }
+}
+
+internal extension Array where Element == Double {
+    internal var sum: Double {
+        var total = 0.0
+        for el in self {
+            total += el
+        }
+        return total
     }
 }
 #if swift(<5.1)
@@ -209,17 +206,6 @@ public typealias DKMultipleRollResult = MultipleRollResult
 /// - Since: 0.8.0
 public typealias Roll = Int
 
-#if swift(>=4.2)
-//Swift 4.2+ provides an Int.random function
-#else
-#if os(macOS)
-//macOS doesn't need to be seeded
-#else
-//Linux pre-Swift 4.2 needs to initialize using srandom(UInt32(time(nil))), but only once
-internal var initialized = false
-#endif
-#endif
-
 public enum Error: Swift.Error {
     case illegalNumberOfSides(attempt: Int)
     case emptyString
@@ -231,3 +217,4 @@ public enum Error: Swift.Error {
     case chanceOverOne
 }
 public typealias DKError = DiceKit.Error
+public typealias DKWeightedDie = WeightedDie
