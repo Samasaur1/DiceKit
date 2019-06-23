@@ -276,56 +276,6 @@ extension Dice: Rollable {
         return result
     }
     
-    /// Rolls this `Dice` object the given number of times and returns the given result type.
-    ///
-    /// - Parameters:
-    ///   - times: The number of times to roll.
-    ///   - returnType: The type of result to return.
-    /// - Returns: The type of result performed with the given number of rolls.
-    ///
-    /// - Since: 0.5.0
-    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
-        var rolls: [Roll] = []
-        for _ in 0..<times {
-            rolls.append(roll())
-        }
-        switch returnType {
-        case .sum:
-            return rolls.sum
-        case .highest:
-            return rolls.max() ?? 0
-        case .lowest:
-            return rolls.min() ?? 0
-        case .outsides:
-            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
-        case .dropHighest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            return rolls.sum
-        case .dropLowest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropOutsides:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropLow(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            }
-            return rolls.sum
-        case .dropHigh(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            }
-            return rolls.sum
-        }
-    }
-    
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.
@@ -491,6 +441,12 @@ extension Dice {
 }
 
 extension Dice {
+    /// Adds some `Dice` and a `Die` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice to add.
+    ///   - rhs: The die to add.
+    /// - Returns: A new `Dice` object comprising of the `Die` and `Dice` added together.
     public static func + (lhs: Dice, rhs: Die) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
@@ -501,6 +457,12 @@ extension Dice {
         dice.append(rhs)
         return Dice(dice: dice, withModifier: lhs.modifier)
     }
+    /// Adds some `Dice` and a `Die` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The die to add.
+    ///   - rhs: The dice to add.
+    /// - Returns: A new `Dice` object comprising of the `Die` and `Dice` added together.
     public static func + (lhs: Die, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
@@ -512,6 +474,12 @@ extension Dice {
         return Dice(dice: dice, withModifier: rhs.modifier)
     }
     
+    /// Adds some `Dice` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The first set of dice to add.
+    ///   - rhs: The second set of dice to add.
+    /// - Returns: A new `Dice` object comprising of the `Dice` added together.
     public static func + (lhs: Dice, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
@@ -527,6 +495,12 @@ extension Dice {
         return Dice(dice: dice, withModifier: rhs.modifier + lhs.modifier)
     }
     
+    /// Adds a modifier to a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice.
+    ///   - rhs: The modifier to add.
+    /// - Returns: A new `Dice` object comprising of the modifier added to the first dice.
     public static func + (lhs: Dice, rhs: Int) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
@@ -536,6 +510,12 @@ extension Dice {
         }
         return Dice(dice: dice, withModifier: lhs.modifier + rhs)
     }
+    /// Adds a modifier to a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The modifier to add.
+    ///   - rhs: The dice.
+    /// - Returns: A new `Dice` object comprising of the modifier added to the first dice.
     public static func + (lhs: Int, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
@@ -543,17 +523,46 @@ extension Dice {
                 dice.append(d.copy())
             }
         }
-                return Dice(dice: dice, withModifier: lhs + rhs.modifier)
+        return Dice(dice: dice, withModifier: lhs + rhs.modifier)
     }
+    /// Adds the given dice to the given `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The `Dice` object.
+    ///   - rhs: The dice to add, in `(Die, Int)` tuples.
+    /// - Returns: <#return value description#>
     public static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
         return lhs + (rhs.die * rhs.count)
     }
+    /// Adds the given dice to the given `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice to add, in `(Die, Int)` tuples.
+    ///   - rhs: The `Dice` object.
     public static func + (lhs: (die: Die, count: Int), rhs: Dice) -> Dice {
         return rhs + (lhs.die * lhs.count)
     }
+    /// Subtracts a modifier from a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice.
+    ///   - rhs: The modifier to subtract.
+    /// - Returns: A new `Dice` object comprising of the modifier subtracted from the first dice.
     public static func - (lhs: Dice, rhs: Int) -> Dice {
         return lhs + (-rhs)
     }
+    /// Multiplies the given `Dice` object by the given multiplier.
+    ///
+    /// This multiplies the count of each type of die, and the multiplier:
+    ///
+    ///    let dice = Dice((Die.d6, 6), (Die.d4, 4), withModifier: 2)
+    ///    let newDice = dice * 3
+    ///    //newDice is now 18d6 + 12d4 + 6
+    ///
+    /// - Parameters:
+    ///   - lhs: The `Dice` object to multiply.
+    ///   - rhs: The multiplier.
+    /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     public static func * (lhs: Dice, rhs: Int) -> Dice {
         var dice = lhs.copy()
         for (die, count) in lhs.dice {
@@ -562,6 +571,18 @@ extension Dice {
         dice += lhs.modifier * (rhs - 1)
         return dice
     }
+    /// Multiplies the given `Dice` object by the given multiplier.
+    ///
+    /// This multiplies the count of each type of die, and the multiplier:
+    ///
+    ///    let dice = Dice((Die.d6, 6), (Die.d4, 4), withModifier: 2)
+    ///    let newDice = dice * 3
+    ///    //newDice is now 18d6 + 12d4 + 6
+    ///
+    /// - Parameters:
+    ///   - lhs: The multiplier.
+    ///   - rhs: The `Dice` object to multiply.
+    /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     public static func * (lhs: Int, rhs: Dice) -> Dice {
         var dice = rhs.copy()
         for (die, count) in rhs.dice {
