@@ -133,12 +133,16 @@ public enum MultipleRollResult {
     /// This removes the given number of rolls from the low end of the list, and then returns the sum of the remaining rolls. If `amountToDrop` is 0, it acts like `sum`; if it's 1, it acts like `dropLowest`.
     ///
     /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 24 (10 + 8 + 6)
+    ///
+    /// - Parameter amountToDrop: The amount to drop from the low end of the rolls.
     case dropLow(amountToDrop: Int)
     /// Return the sum of everything except the given number of highest rolls.
     ///
     /// This removes the given number of rolls from the high end of the list, and then returns the sum of the remaining rolls. If `amountToDrop` is 0, it acts like `sum`; if it's 1, it acts like `dropHighest`.
     ///
     /// For example, if the rolls were 2, 8, 6, 4, and 10, and `amountToDrop` is 3, then the result would be 12 (2 + 4 + 6)
+    ///
+    /// - Parameter amountToDrop: The amount to drop from the high end of the rolls.
     case dropHigh(amountToDrop: Int)
 }
 /// An enum representing a comparison between two `Roll`s.
@@ -196,10 +200,15 @@ internal extension Sequence {
 #error("Do we still need this?")
 #endif
 
+/// See `Die`.
 public typealias DKDie = Die
+/// See `Dice`.
 public typealias DKDice = Dice
+/// See `Roll`.
 public typealias DKRoll = Roll
+/// See `Rollable`.
 public typealias DKRollable = Rollable
+/// See `MultipleRollResult`.
 public typealias DKMultipleRollResult = MultipleRollResult
 /// The result of any `roll` method from any `Rollable` type.
 ///
@@ -207,14 +216,24 @@ public typealias DKMultipleRollResult = MultipleRollResult
 public typealias Roll = Int
 
 public enum Error: Swift.Error {
+    /// A number of sides was passed that wasn't allowed.
+    /// - Parameter attempt: The number of sides that was passed.
     case illegalNumberOfSides(attempt: Int)
+    /// An empty string was passed to a string parser that doesn't accept empty strings.
     case emptyString
+    /// A string was passed with nonnumeric characters that weren't expected.
     case nonNumericString
+    /// An illegal string was passed.
+    ///
+    /// Generally, one of the other string-related errors will be thrown. This error will only be thrown if the others don't apply.
+    ///
+    /// - Parameter string: The string that was passed.
     case illegalString(string: String)
     case divisionByZero
     case emptyDictionary
     case negativeArgument
     case chanceOverOne
 }
+/// See `Error`.
 public typealias DKError = DiceKit.Error
 public typealias DKWeightedDie = WeightedDie
