@@ -1,17 +1,38 @@
+/// A struct that represents the chance or probability of something happening.
+///
+/// Chances are stored as fractions, and the constructors that take decimal values use some algorithm off of StackOverflow to convert them to fractions.
+///
+#warning("Update Since")/// - Since: UPDATE_ME
+/// - Author: Samasaur
 public struct Chance {
+    /// The numerator of the fraction
     public let n: Int
+    /// The denominator of the fraction
     public let d: Int
+    /// The decimal representation of the fraction.
     public var value: Double {
         return Double(n) / Double(d)
     }
+    /// The fraction as a tuple (numerator, denominator).
     public var fraction: (Int, Int) {
         return (n, d)
     }
     
+    /// Creates a new `Chance` object of the fraction form 1/d.
+    ///
+    /// - Parameter d: The denominator of the fraction.
+    /// - Returns: A new fraction with the given denominator and a numerator of 1.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public static func oneOut(of d: Int) throws -> Chance {
         return try self.init(1, outOf: d)
     }
     
+    /// Creates a new `Chance` object of the fraction form n/d.
+    ///
+    /// - Parameters:
+    ///   - n: The numerator of the fraction.
+    ///   - d: The denominator of the fraction.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public init(_ n: Int, outOf d: Int) throws {
         guard d != 0 else {
             throw Error.divisionByZero
@@ -42,10 +63,20 @@ public struct Chance {
         self.d = simple.d
     }
     
+    /// Creates a new `Chance` object of the fraction form 1/d.
+    ///
+    /// - Parameter d: The denominator of the fraction.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public init(oneOutOf d: Int) throws {
         try self.init(1, outOf: d)
     }
     
+    /// Creates a new `Chance` object approximating the given decimal.
+    ///
+    /// This uses some algorithm off of StackOverflow.
+    ///
+    /// - Parameter x0: The decimal value to convert to a fraction.
+    /// - Throws: `Error.negativeArgument` or `Error.chanceOverOne`
     public init(approximating x0: Double) throws {
         guard x0 != 0 else {
             try self.init(0, outOf: 1)
@@ -74,7 +105,9 @@ public struct Chance {
         try self.init(h, outOf: k)
     }
     
+    /// A `Chance` of zero.
     public static let zero = try! Chance(0, outOf: 1)
+    /// A `Chance` of one.
     public static let one = try! Chance(1, outOf: 1)
 }
 extension Chance: Equatable {
@@ -90,28 +123,53 @@ extension Chance: Hashable {
 }
 extension Chance: ExpressibleByFloatLiteral {
     public typealias FloatLiteralType = Double
+    /// Creates a new `Chance` object approximating the given decimal. There is no error-checking!
+    ///
+    /// This function calls `init(approximating:)`, and will crash if that function throws an error.
+    ///
+    /// - Parameter value: The decimal value to convert to a fraction.
     public init(floatLiteral value: Chance.FloatLiteralType) {
         try! self.init(approximating: value)
     }
 }
 
+/// A struct that represents the chances of different `Roll`s happening.
+///
+#warning("Update Since")/// - Since: UPDATE_ME
+/// - Author: Samasaur
 public struct Chances {
+    /// Creates a new `Chances` object with no data.
     public init() {
         self.dict = [:]
     }
+    /// Creates a new `Chances` object with the given chances.
+    ///
+    /// - Parameter chances: The rolls and the chances of them occurring.
     public init(chances: [Roll: Chance]) {
         self.dict = chances
     }
+    /// Creates a new `Chances` object with the given chances.
+    ///
+    /// - Parameter chances: The rolls and the chances of them occurring.
     public init(chances: (Roll, Chance)...) {
         self.init(chances: chances)
     }
+    /// Creates a new `Chances` object with the given chances.
+    ///
+    /// - Parameter chances: The rolls and the chances of them occurring.
     public init(chances: [(Roll, Chance)]) {
         self.dict = [:]
         for (roll, chance) in chances {
             self.dict[roll] = chance
         }
     }
+    /// The rolls and the chances of them occurring.
     internal var dict: [Roll: Chance]
+    /// The chance of the given roll occurring.
+    ///
+    /// This subscript can be used to get or set the chance.
+    ///
+    /// - Parameter roll: The roll to query/set the chance of occurring.
     public subscript(of roll: Roll) -> Chance {
         get {
             return dict[roll] ?? Chance.zero
@@ -131,8 +189,20 @@ extension Chances: Hashable {
         hasher.combine(dict)
     }
 }
+
+/// A representation of a weighted die; i.e. a die whose sides do not necessarily have the same chance of being rolled.
+///
+/// The chances of specific rolls are passed using a `Chances` object. It is recommended to create the object separately, because it is easier to manipulate the `Chance`s that way.
+///
+#warning("Update Since")/// - Since: UPDATE_ME
+/// - Author: Samasaur
 public class WeightedDie {
+    /// The rolls and the chances of them occurring.
     public let chances: [Roll: Chance]
+    /// Creates a new `WeightedDie` with the given rolls and chances of them occurring.
+    ///
+    /// - Parameter c: The rolls and the chances of them occurring.
+    /// - Throws: `Error.emptyDictionary`
     public init(chances c: Chances) throws {
         chances = c.dict
         guard !chances.isEmpty else {
@@ -140,6 +210,7 @@ public class WeightedDie {
         }
     }
 
+    /// The number of possible `Roll`s.
     public var sides: Int {
         return chances.values.count { $0.n > 0 }
     }
@@ -152,6 +223,9 @@ public class WeightedDie {
 }
 
 extension WeightedDie: Rollable {
+    /// Rolls this `WeightedDie` and returns the result as a `Roll`.
+    ///
+    /// - Returns: One of the possible `Roll`s as given in the initializer, proportionally likely as given there.
     public func roll() -> Roll {
         let rand = Double.random(in: 0..<chances.map { $0.value.value }.sum)
         var baseline = 0.0
@@ -163,19 +237,16 @@ extension WeightedDie: Rollable {
     }
     
     /// The minimum possible result from using the `roll()` method.
-    ///
-    /// - Since: 0.2.0
     public var minimumResult: Roll {
         return chances.filter { $0.value.n > 0 }.sorted { $0.key < $1.key }.first!.key
     }
     
     /// The maximum possible result from using the `roll()` method.
-    ///
-    /// - Since: 0.2.0
     public var maximumResult: Roll {
         return chances.filter { $0.value.n > 0 }.sorted { $0.key < $1.key }.last!.key
     }
     
+    /// The exact (double) average result from using the `roll()` method.
     public var doubleAverageResult: Double {
         let m = 1.0 / chances.map { $0.value.value }.sum
         return chances.mapValues { $0.value * m }.map { Double($0.key) * $0.value }.sum
@@ -189,6 +260,7 @@ extension WeightedDie: Rollable {
 //        return result
     }
     
+    /// The average result from using the `roll()` method.
     public var averageResult: Roll {
         return Int(doubleAverageResult.rounded())
     }
