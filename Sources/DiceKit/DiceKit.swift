@@ -215,6 +215,16 @@ public typealias DKMultipleRollResult = MultipleRollResult
 /// - Since: 0.8.0
 public typealias Roll = Int
 
+/// An enum representing any error that could be thrown during the use of DiceKit.
+///
+/// - illegalNumberOfSides: A number of sides was passed that wasn't allowed.
+/// - emptyString: An empty string was passed to a string parser that doesn't accept empty strings.
+/// - nonNumericString: A string was passed with nonnumeric characters that weren't expected.
+/// - illegalString: An illegal string was passed.
+/// - divisionByZero: Zero was passed to something that would have divided by it.
+/// - emptyDictionary: An empty dictionary was passed to something that needs a non-empty dictionary.
+/// - negativeArgument: An argument passed was negative, and only positive ones are allowed.
+/// - chanceOverOne: The chance of something happening was over 1, an impossibility.
 public enum Error: Swift.Error {
     /// A number of sides was passed that wasn't allowed.
     /// - Parameter attempt: The number of sides that was passed.
@@ -229,11 +239,22 @@ public enum Error: Swift.Error {
     ///
     /// - Parameter string: The string that was passed.
     case illegalString(string: String)
+    /// Zero was passed to something that would have divided by it.
     case divisionByZero
+    /// An empty dictionary was passed to something that needs a non-empty dictionary.
     case emptyDictionary
+    /// Arguments were passed that resulted in something being negative that needed to be positive. This doesn't necessarily mean that the arguments passed in this case were negative, and it is possible to pass some negative arguments, as long as they cancel each other out. All this error means is that the result of a computation would have been negative.
     case negativeArgument
+    /// The chance of something happening was over 1, an impossibility.
+    ///
+    /// This error was most likely thrown when creating a `Chance` instance. However, a `Chances` object can have `Chance`s that *sum* to over 1.
     case chanceOverOne
 }
 /// See `Error`.
 public typealias DKError = DiceKit.Error
+/// See `WeightedDie`.
 public typealias DKWeightedDie = WeightedDie
+/// See `Chance`.
+public typealias DKChance = Chance
+/// See `Chances`.
+public typealias DKChances = Chances
