@@ -59,6 +59,7 @@ final class CustomDieTests: XCTestCase {
         #if swift(>=4.2)
         let d1 = try! CustomDie(sides: [DieSide("Hello"), DieSide("World")])
         let d2 = try! CustomDie(sides: [DieSide("Hello"), DieSide("World")])
+        let d2prime = try! CustomDie(DieSide("Hello"), DieSide("World"))
         let d3 = try! CustomDie(sides: [DieSide(4), DieSide(9)])
         var h1 = Hasher()
         h1.combine(d1)
@@ -66,18 +67,24 @@ final class CustomDieTests: XCTestCase {
         var h2 = Hasher()
         h2.combine(d2)
         let hv2 = h2.finalize()
+        var h2prime = Hasher()
+        h2prime.combine(d2prime)
+        let hv2prime = h2prime.finalize()
         var h3 = Hasher()
         h3.combine(d3)
         let hv3 = h3.finalize()
         XCTAssertEqual(hv1, hv2)
+        XCTAssertEqual(hv1, hv2prime)
+        XCTAssertEqual(hv2, hv2prime)
         XCTAssertNotEqual(hv1, hv3)
         XCTAssertNotEqual(hv2, hv3)
+        XCTAssertEqual(hv2prime, hv3)
         #endif
     }
     
     func testSidesProperty() {
         let d1 = try! CustomDie(sides: [DieSide("Hello"), DieSide("World")])
-        XCTAssertEqual(d1.sides.values.sorted { $0.value > $1.value }, [DieSide("Hello"), DieSide("World")].sorted { $0.value > $1.value })
+        XCTAssertEqual(d1.sides.values.sorted { $0.value < $1.value }, [DieSide("Hello"), DieSide("World")].sorted { $0.value < $1.value })
     }
     
     func testReplacing() {

@@ -47,6 +47,58 @@ public protocol Rollable {
     func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool
 }
 
+extension Rollable {
+    /// Rolls this object the given number of times and returns the given result type.
+    ///
+    /// - Parameters:
+    ///   - times: The number of times to roll.
+    ///   - returnType: The type of result to return.
+    /// - Returns: The type of result performed with the given number of rolls.
+    ///
+    /// - Since: 0.5.0
+    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
+        var rolls: [Roll] = []
+        for _ in 0..<times {
+            rolls.append(roll())
+        }
+        switch returnType {
+        case .sum:
+            return rolls.sum
+        case .highest:
+            return rolls.max() ?? 0
+        case .lowest:
+            return rolls.min() ?? 0
+        case .outsides:
+            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
+        case .dropHighest:
+            guard !rolls.isEmpty else { return 0 }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            return rolls.sum
+        case .dropLowest:
+            guard !rolls.isEmpty else { return 0 }
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropOutsides:
+            guard !rolls.isEmpty else { return 0 }
+            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            return rolls.sum
+        case .dropLow(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return 0 }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            }
+            return rolls.sum
+        case .dropHigh(let amountToDrop):
+            guard rolls.count >= amountToDrop else { return 0 }
+            for _ in 0..<amountToDrop {
+                rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            }
+            return rolls.sum
+        }
+    }
+}
+
 /// An enum representing the type of result to return from rolling multiple times.
 ///
 /// - sum: Return the sum of all rolls.
@@ -131,6 +183,21 @@ internal extension String {
         return Set(self).isSubset(of: nums)
     }
 }
+#if swift(<5.1)
+internal extension Sequence {
+    func count(where predicate: (Element) throws -> Bool) rethrows -> Int {
+        var count = 0
+        for e in self {
+            if try predicate(e) {
+                count += 1
+            }
+        }
+        return count
+    }
+}
+#else
+#error("Do we still need this?")
+#endif
 
 public typealias DKDie = Die
 public typealias DKDice = Dice
@@ -158,5 +225,9 @@ public enum Error: Swift.Error {
     case emptyString
     case nonNumericString
     case illegalString(string: String)
+    case divisionByZero
+    case emptyDictionary
+    case negativeArgument
+    case chanceOverOne
 }
 public typealias DKError = DiceKit.Error
