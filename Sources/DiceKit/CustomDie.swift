@@ -1,8 +1,3 @@
-#if swift(>=4.2)
-#else
-import Foundation
-#endif
-
 /// A class that masks a side, returning a custom value in lieu of a number.
 ///
 /// - Author: Samasaur
@@ -27,15 +22,9 @@ public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure 
         return lhs.value == rhs.value
     }
     
-    #if swift(>=4.2)
     public func hash(into hasher: inout Hasher) {
         hasher.combine(value)
     }
-    #else
-    public var hashValue: Int {
-        return value.hashValue
-    }
-    #endif
 }
 
 /// A class that allows for dice with custom sides instead of numbers.
@@ -146,14 +135,12 @@ extension CustomDie: Equatable {
     }
 }
 
-#if swift(>=4.2)
 extension CustomDie: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(sides)
         hasher.combine(die)
     }
 }
-#endif
 
 extension CustomDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {

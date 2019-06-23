@@ -106,15 +106,9 @@ final class DieTests: XCTestCase {
         let d6 = Die.d6
         
         for target in 1...6 {
-            #if swift(>=4.2)
             for type in RollComparison.allCases {
                 XCTAssertTrue(d6.canReach(target, type))
             }
-            #else
-            for type in [RollComparison.orLower, RollComparison.exactly, RollComparison.orHigher] {
-                XCTAssertTrue(d6.canReach(target, type))
-            }
-            #endif
         }
         
         XCTAssertTrue(d6.canReach(8, .orLower))
@@ -122,23 +116,11 @@ final class DieTests: XCTestCase {
         XCTAssertFalse(d6.canReach(8, .orHigher))
     }
     
-    func testAverageResult() {
+    func testAverageResultProperty() {
         XCTAssertEqual(Die.d6.averageResult, 4)
         
         for _ in 1...5 {
-            #if swift(>=4.2)
             let r = Int.random(in: 1...10_000)
-            #else
-            #if os(macOS)
-            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let r = (random() % 10_000) + 1
-            #endif
-            #endif
             guard let d = try? Die(sides: r) else {
                 XCTFail()
                 continue
@@ -147,23 +129,11 @@ final class DieTests: XCTestCase {
         }
     }
     
-    func testDoubleAverageResult() {
+    func testDoubleAverageResultProperty() {
         XCTAssertEqual(Die.d6.doubleAverageResult, 3.5)
         
         for _ in 1...5 {
-            #if swift(>=4.2)
             let r = Int.random(in: 1...10_000)
-            #else
-            #if os(macOS)
-            let r = Int(arc4random_uniform(UInt32(10_000))) + 1
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let r = (random() % 10_000) + 1
-            #endif
-            #endif
             guard let d = try? Die(sides: r) else {
                 XCTFail()
                 continue
@@ -174,19 +144,7 @@ final class DieTests: XCTestCase {
     
     func testMinAverageMax() {
         for _ in 1...10 {
-            #if swift(>=4.2)
             let optionalDie = try? Die(sides: Int.random(in: 1...1000000))
-            #else
-            #if os(macOS)
-            let optionalDie = try? Die(sides: Int(arc4random_uniform(UInt32(1000000))) + 1)
-            #else
-            if !DiceKit.initialized {
-                srandom(UInt32(time(nil)))
-                DiceKit.initialized = true
-            }
-            let optionalDie = try? Die(sides: (random() % 1000000) + 1)
-            #endif
-            #endif
             guard let d = optionalDie else {
                 XCTFail()
                 continue

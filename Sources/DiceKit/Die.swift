@@ -1,8 +1,3 @@
-#if swift(>=4.2)
-#else
-import Foundation
-#endif
-
 /// A representation of a single die.
 ///
 /// It can be rolled using the `roll()` method, which will give a `Roll` result.
@@ -39,7 +34,7 @@ public class Die {
             guard let num = Int(str) else { throw Error.nonNumericString }
             guard num > 0 else { throw Error.illegalNumberOfSides(attempt: num) }
             self.sides = num
-        } else if String(str.prefix(1)).caseInsensitiveCompare("D") == .orderedSame {
+        } else if String(str.prefix(1)).lowercased() == "d" {
             let remaining = String(str.dropFirst())
             if remaining.isNumeric {
                 guard let num = Int(remaining) else { throw Error.nonNumericString }
@@ -67,71 +62,7 @@ extension Die: Rollable {
     ///
     /// - Returns: A random value from `1` to `sides`.
     public func roll() -> Roll {
-        #if swift(>=4.2)
         return Roll.random(in: 1...sides)
-        #else
-        #if os(macOS)
-        //macOS
-        return Int(arc4random_uniform(UInt32(sides))) + 1
-        #else
-        //Linux
-        if !DiceKit.initialized {
-            srandom(UInt32(time(nil)))
-            DiceKit.initialized = true
-        }
-        return (random() % sides) + 1
-        #endif
-        #endif
-    }
-    
-    /// Rolls this Die the given number of times and returns the given result type.
-    ///
-    /// - Parameters:
-    ///   - times: The number of times to roll.
-    ///   - returnType: The type of result to return.
-    /// - Returns: The type of result performed with the given number of rolls.
-    ///
-    /// - Since: 0.5.0
-    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
-        var rolls: [Roll] = []
-        for _ in 0..<times {
-            rolls.append(roll())
-        }
-        switch returnType {
-        case .sum:
-            return rolls.sum
-        case .highest:
-            return rolls.max() ?? 0
-        case .lowest:
-            return rolls.min() ?? 0
-        case .outsides:
-            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
-        case .dropHighest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            return rolls.sum
-        case .dropLowest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropOutsides:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropLow(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            }
-            return rolls.sum
-        case .dropHigh(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            }
-            return rolls.sum
-        }
     }
     
     /// The minimum possible result from using the `roll()` method.
@@ -200,15 +131,9 @@ extension Die: Comparable {
 }
 
 extension Die: Hashable {
-    #if swift(>=4.2)
     public func hash(into hasher: inout Hasher) {
         hasher.combine(sides)
     }
-    #else
-    public var hashValue: Int {
-        return sides
-    }
-    #endif
 }
 
 extension Die: CustomStringConvertible, CustomDebugStringConvertible {
