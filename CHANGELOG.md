@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Chances`
 - `Chance`
 - More documentation
+- Hound support
+- SwiftLint support
 
 ### Changed
 - Changed failable initializers into throwing initializers
