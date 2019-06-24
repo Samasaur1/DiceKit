@@ -2,7 +2,7 @@ clean: true
 author: Samasaur
 author_url: https://github.com/Samasaur1
 module: DiceKit
-module_version: 0.15.0
+module_version: 0.16.0
 # docset_icon:
 github_url: https://github.com/Samasaur1/DiceKit
 # github_file_prefix:
@@ -14,6 +14,15 @@ custom_categories:
    - Rollable
    - Die
    - Dice
+   - WeightedDie
  - name: Results
    children:
    - Roll
+ - name: Custom Dice
+   children:
+   - CustomDie
+   - DieSide
+ - name: Probability
+   children:
+   - Chances
+   - Chance

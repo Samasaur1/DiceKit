@@ -164,6 +164,9 @@ public class Dice {
         self.dice = newDice
         self.modifier = modifier
     }
+
+    //swiftlint:disable function_body_length
+
     /// Creates a new `Dice` object from the specified string in dice notation.
     ///
     /// You cannot have a negative die **AS A RESULT** (`-d6`), a die with negative sides (`d-6`), or a die with 0 sides (`d0`). You cannot have an unreal modifier or use any operator except for addition and subtraction.
@@ -171,16 +174,17 @@ public class Dice {
     /// You can have `-d6`s in your string, so long as they cancel each other out so that the final result is at least `0d6`.
     ///
     /// - Parameter str: The string to convert.
-    public init?(_ str: String) {
+    /// - Throws: An `Error.IllegalNumberOfSides` error when the number of sides is less than or equal to 0
+    public init(_ str: String) throws {
         var dice: [Int: Int] = [:]
         var mods: [Int] = []
-        
+
         let str = str.filter({ $0 != " " })
-        
+
         guard Set(str).isSubset(of: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "D", "d"]) else {
-            return nil
+            throw Error.illegalString(string: str)
         }
-        
+
         let plusSplit = str.split(whereSeparator: { $0 == "+" })
         for positiveExp in plusSplit {
             let exp = positiveExp.split(whereSeparator: { $0 == "-" })
@@ -194,11 +198,11 @@ public class Dice {
                             let sides = Int(String(d.first!))!
                             dice[sides] = (dice[sides] ?? 0) - 1
                         } else if d.count == 2 {
-                            let m = Int(String(d.first!))!
-                            let s = Int(String(d.last!))!
-                            dice[s] = (dice[s] ?? 0) - m
-                        } else { return nil }
-                    } else { return nil }
+                            let multiplier = Int(String(d.first!))!
+                            let sides = Int(String(d.last!))!
+                            dice[sides] = (dice[sides] ?? 0) - multiplier
+                        } else { throw Error.illegalString(string: str) } //Too many "d"s (e.g. 3d4d6)
+                    } else { throw Error.illegalString(string: str) } //non-numeric and not a d, so...
                 }
             } else {
                 let ex = String(exp.first!)//positive
@@ -210,11 +214,11 @@ public class Dice {
                         let sides = Int(String(d.first!))!
                         dice[sides] = (dice[sides] ?? 0) + 1
                     } else if d.count == 2 {
-                        let m = Int(String(d.first!))!
-                        let s = Int(String(d.last!))!
-                        dice[s] = (dice[s] ?? 0) + m
-                    } else { return nil }
-                } else { return nil }
+                        let multiplier = Int(String(d.first!))!
+                        let sides = Int(String(d.last!))!
+                        dice[sides] = (dice[sides] ?? 0) + multiplier
+                    } else { throw Error.illegalString(string: str) } //Too many "d"s (e.g. 3d4d6)
+                } else { throw Error.illegalString(string: str) } //non-numeric and not a d, so...
                 for ex in exp.dropFirst() {//negative
                     if String(ex).isNumeric {
                         mods.append(-Int(String(ex))!)
@@ -224,27 +228,29 @@ public class Dice {
                             let sides = Int(String(d.first!))!
                             dice[sides] = (dice[sides] ?? 0) - 1
                         } else if d.count == 2 {
-                            let m = Int(String(d.first!))!
-                            let s = Int(String(d.last!))!
-                            dice[s] = (dice[s] ?? 0) - m
-                        } else { return nil }
-                    } else { return nil }
+                            let multiplier = Int(String(d.first!))!
+                            let sides = Int(String(d.last!))!
+                            dice[sides] = (dice[sides] ?? 0) - multiplier
+                        } else { throw Error.illegalString(string: str) } //Too many "d"s (e.g. 3d4d6)
+                    } else { throw Error.illegalString(string: str) } //non-numeric and not a d, so...
                 }
             }
         }
-        
+
         var tempDice: [Die: Int] = [:]
         for (d, c) in dice {
             if c < 0 {
-                return nil
+                throw Error.illegalString(string: str)
             } else if c == 0 {
                 continue
             }
-            tempDice[Die(sides: d)!] = c
+            tempDice[try! Die(sides: d)] = c //swiftlint:disable:this force_try
         }
         self.dice = tempDice
         self.modifier = mods.sum
     }
+    //swiftlint:enable function_body_length
+
     /// Creates a new `Dice` object that is a copy of the given `Dice` object.
     ///
     /// - Parameter other: The other `Dice` object to copy.
@@ -274,57 +280,7 @@ extension Dice: Rollable {
         result += modifier
         return result
     }
-    
-    /// Rolls this `Dice` object the given number of times and returns the given result type.
-    ///
-    /// - Parameters:
-    ///   - times: The number of times to roll.
-    ///   - returnType: The type of result to return.
-    /// - Returns: The type of result performed with the given number of rolls.
-    ///
-    /// - Since: 0.5.0
-    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
-        var rolls: [Roll] = []
-        for _ in 0..<times {
-            rolls.append(roll())
-        }
-        switch returnType {
-        case .sum:
-            return rolls.sum
-        case .highest:
-            return rolls.max() ?? 0
-        case .lowest:
-            return rolls.min() ?? 0
-        case .outsides:
-            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
-        case .dropHighest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            return rolls.sum
-        case .dropLowest:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropOutsides:
-            guard !rolls.isEmpty else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            return rolls.sum
-        case .dropLow(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.min()!)!)
-            }
-            return rolls.sum
-        case .dropHigh(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            }
-            return rolls.sum
-        }
-    }
-    
+
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on *every* die in this `Dice` object. It also includes the modifier, if applicable.
@@ -333,7 +289,7 @@ extension Dice: Rollable {
     public var minimumResult: Roll {
         return numberOfDice + modifier
     }
-    
+
     /// The maximum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling the maximum on every die in this `Dice` object. It also includes the modifier, if applicable.
@@ -346,20 +302,20 @@ extension Dice: Rollable {
         }
         return total
     }
-  
+
     /// The average result from using the `roll()` method.
     /// It is calculated with double numbers to avoid rounding errors.
     ///
     /// - Since: 0.15.0
     public var averageResult: Roll {
       var doubleAverage: Double = 0
-      for (die,count) in self.dice {
+      for (die, count) in self.dice {
         doubleAverage += Double(count) * die.doubleAverageResult
       }
       let average = Int(doubleAverage.rounded())
       return average + self.modifier
     }
-    
+
     /// Determines whether this `Dice` object can reach the target `Roll` using the given comparison type.
     ///
     /// - Parameters:
@@ -436,7 +392,7 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
         }
         return desc
     }
-    
+
     /// A short, debug-usable description of this `Dice` object.
     ///
     ///     Dice().debugDescription // 0
@@ -480,17 +436,23 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     }
 }
 
-extension Dice {
+public extension Dice {
     /// Returns a copy of the given `Dice` with separate memory.
     ///
     /// - Returns: A copy of the given `Dice`, with the same information, at a different memory location.
-    public func copy() -> Dice {
+    func copy() -> Dice {
         return Dice(copyOf: self)
     }
 }
 
-extension Dice {
-    public static func + (lhs: Dice, rhs: Die) -> Dice {
+public extension Dice {
+    /// Adds some `Dice` and a `Die` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice to add.
+    ///   - rhs: The die to add.
+    /// - Returns: A new `Dice` object comprising of the `Die` and `Dice` added together.
+    static func + (lhs: Dice, rhs: Die) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
@@ -500,7 +462,13 @@ extension Dice {
         dice.append(rhs)
         return Dice(dice: dice, withModifier: lhs.modifier)
     }
-    public static func + (lhs: Die, rhs: Dice) -> Dice {
+    /// Adds some `Dice` and a `Die` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The die to add.
+    ///   - rhs: The dice to add.
+    /// - Returns: A new `Dice` object comprising of the `Die` and `Dice` added together.
+    static func + (lhs: Die, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
             for _ in 0..<c {
@@ -510,8 +478,14 @@ extension Dice {
         dice.append(lhs)
         return Dice(dice: dice, withModifier: rhs.modifier)
     }
-    
-    public static func + (lhs: Dice, rhs: Dice) -> Dice {
+
+    /// Adds some `Dice` together, creating a new `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The first set of dice to add.
+    ///   - rhs: The second set of dice to add.
+    /// - Returns: A new `Dice` object comprising of the `Dice` added together.
+    static func + (lhs: Dice, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
@@ -525,8 +499,14 @@ extension Dice {
         }
         return Dice(dice: dice, withModifier: rhs.modifier + lhs.modifier)
     }
-    
-    public static func + (lhs: Dice, rhs: Int) -> Dice {
+
+    /// Adds a modifier to a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice.
+    ///   - rhs: The modifier to add.
+    /// - Returns: A new `Dice` object comprising of the modifier added to the first dice.
+    static func + (lhs: Dice, rhs: Int) -> Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
@@ -535,25 +515,61 @@ extension Dice {
         }
         return Dice(dice: dice, withModifier: lhs.modifier + rhs)
     }
-    public static func + (lhs: Int, rhs: Dice) -> Dice {
+    /// Adds a modifier to a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The modifier to add.
+    ///   - rhs: The dice.
+    /// - Returns: A new `Dice` object comprising of the modifier added to the first dice.
+    static func + (lhs: Int, rhs: Dice) -> Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
             for _ in 0..<c {
                 dice.append(d.copy())
             }
         }
-                return Dice(dice: dice, withModifier: lhs + rhs.modifier)
+        return Dice(dice: dice, withModifier: lhs + rhs.modifier)
     }
-    public static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
+    /// Adds the given dice to the given `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The `Dice` object.
+    ///   - rhs: The dice to add, in `(Die, Int)` tuples.
+    /// - Returns: A new `Dice` object comprising of the new dice added to the initial `Dice` object.
+    static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
         return lhs + (rhs.die * rhs.count)
     }
-    public static func + (lhs: (die: Die, count: Int), rhs: Dice) -> Dice {
+    /// Adds the given dice to the given `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice to add, in `(Die, Int)` tuples.
+    ///   - rhs: The `Dice` object.
+    /// - Returns: A new `Dice` object comprising of the new dice added to the initial `Dice` object.
+    static func + (lhs: (die: Die, count: Int), rhs: Dice) -> Dice {
         return rhs + (lhs.die * lhs.count)
     }
-    public static func - (lhs: Dice, rhs: Int) -> Dice {
+    /// Subtracts a modifier from a `Dice` object.
+    ///
+    /// - Parameters:
+    ///   - lhs: The dice.
+    ///   - rhs: The modifier to subtract.
+    /// - Returns: A new `Dice` object comprising of the modifier subtracted from the first dice.
+    static func - (lhs: Dice, rhs: Int) -> Dice {
         return lhs + (-rhs)
     }
-    public static func * (lhs: Dice, rhs: Int) -> Dice {
+    /// Multiplies the given `Dice` object by the given multiplier.
+    ///
+    /// This multiplies the count of each type of die, and the multiplier:
+    ///
+    ///    let dice = Dice((Die.d6, 6), (Die.d4, 4), withModifier: 2)
+    ///    let newDice = dice * 3
+    ///    //newDice is now 18d6 + 12d4 + 6
+    ///
+    /// - Parameters:
+    ///   - lhs: The `Dice` object to multiply.
+    ///   - rhs: The multiplier.
+    /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
+    static func * (lhs: Dice, rhs: Int) -> Dice {
         var dice = lhs.copy()
         for (die, count) in lhs.dice {
             dice += die * (count * (rhs - 1))
@@ -561,7 +577,19 @@ extension Dice {
         dice += lhs.modifier * (rhs - 1)
         return dice
     }
-    public static func * (lhs: Int, rhs: Dice) -> Dice {
+    /// Multiplies the given `Dice` object by the given multiplier.
+    ///
+    /// This multiplies the count of each type of die, and the multiplier:
+    ///
+    ///    let dice = Dice((Die.d6, 6), (Die.d4, 4), withModifier: 2)
+    ///    let newDice = dice * 3
+    ///    //newDice is now 18d6 + 12d4 + 6
+    ///
+    /// - Parameters:
+    ///   - lhs: The multiplier.
+    ///   - rhs: The `Dice` object to multiply.
+    /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
+    static func * (lhs: Int, rhs: Dice) -> Dice {
         var dice = rhs.copy()
         for (die, count) in rhs.dice {
             dice += die * ((lhs - 1) * count)
@@ -570,23 +598,25 @@ extension Dice {
         return dice
     }
 }
-extension Dice {
-    public static func += (lhs: inout Dice, rhs: Dice) {
+public extension Dice {
+    //swiftlint:disable shorthand_operator
+    static func += (lhs: inout Dice, rhs: Dice) {
         lhs = lhs + rhs
     }
-    public static func += (lhs: inout Dice, rhs: Die) {
+    static func += (lhs: inout Dice, rhs: Die) {
         lhs = lhs + rhs
     }
-    public static func += (lhs: inout Dice, rhs: Int) {
+    static func += (lhs: inout Dice, rhs: Int) {
         lhs = lhs + rhs
     }
-    public static func += (lhs: inout Dice, rhs: (die: Die, count: Int)) {
+    static func += (lhs: inout Dice, rhs: (die: Die, count: Int)) {
         lhs = lhs + rhs
     }
-    public static func -= (lhs: inout Dice, rhs: Int) {
+    static func -= (lhs: inout Dice, rhs: Int) {
         lhs = lhs - rhs
     }
-    public static func *= (lhs: inout Dice, rhs: Int) {
+    static func *= (lhs: inout Dice, rhs: Int) {
         lhs = lhs * rhs
     }
+    //swiftlint:enable shorthand_operator
 }
