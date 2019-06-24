@@ -1,5 +1,7 @@
 included:
   - Sources
+excluded:
+  - Tests
 analyzer_rules:
   - unused_import
   - unused_private_declaration
