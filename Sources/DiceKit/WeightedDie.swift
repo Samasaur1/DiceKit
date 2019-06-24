@@ -17,7 +17,7 @@ public struct Chance {
     public var fraction: (Int, Int) {
         return (n, d)
     }
-    
+
     /// Creates a new `Chance` object of the fraction form 1/d.
     ///
     /// - Parameter d: The denominator of the fraction.
@@ -26,7 +26,7 @@ public struct Chance {
     public static func oneOut(of d: Int) throws -> Chance {
         return try self.init(1, outOf: d)
     }
-    
+
     /// Creates a new `Chance` object of the fraction form n/d.
     ///
     /// - Parameters:
@@ -45,24 +45,26 @@ public struct Chance {
         guard n <= d else {
             throw Error.chanceOverOne
         }
-        let simplify: (Int, Int) -> (n: Int, d: Int) = { (top, bottom) in
+        let simplify: (Int, Int) -> (n: Int, d: Int) = { top, bottom in
+            //swiftline:disable all
             var x = top
             var y = bottom
-            while (y != 0) {
+            while y != 0 {
                 let buffer = y
                 y = x % y
                 x = buffer
             }
             let hcfVal = x
-            let newTopVal = top/hcfVal
-            let newBottomVal = bottom/hcfVal
+            let newTopVal = top / hcfVal
+            let newBottomVal = bottom / hcfVal
+            //swiftlint:enable all
             return(newTopVal, newBottomVal)
         }
         let simple = simplify(n, d)
         self.n = simple.n
         self.d = simple.d
     }
-    
+
     /// Creates a new `Chance` object of the fraction form 1/d.
     ///
     /// - Parameter d: The denominator of the fraction.
@@ -70,7 +72,7 @@ public struct Chance {
     public init(oneOutOf d: Int) throws {
         try self.init(1, outOf: d)
     }
-    
+
     /// Creates a new `Chance` object approximating the given decimal.
     ///
     /// This uses some algorithm off of StackOverflow.
@@ -92,23 +94,27 @@ public struct Chance {
         guard x0 < 1 else {
             throw Error.chanceOverOne
         }
+        //swiftlint:disable all
         let eps = 1.0E-6
         var x = x0
         var a = x.rounded(.down)
         var (h1, k1, h, k) = (1, 0, Int(a), 1)
-        
+
         while x - a > eps * Double(k) * Double(k) {
-            x = 1.0/(x - a)
+            x = 1.0 / (x - a)
             a = x.rounded(.down)
             (h1, k1, h, k) = (h, k, h1 + Int(a) * h, k1 + Int(a) * k)
         }
+        //swiftlint:enable all
         try self.init(h, outOf: k)
     }
-    
+
+    //swiftlint:disable force_try
     /// A `Chance` of zero.
     public static let zero = try! Chance(0, outOf: 1)
     /// A `Chance` of one.
     public static let one = try! Chance(1, outOf: 1)
+    //swiftlint:enable force_try
 }
 extension Chance: Equatable {
     public static func == (lhs: Chance, rhs: Chance) -> Bool {
@@ -129,7 +135,7 @@ extension Chance: ExpressibleByFloatLiteral {
     ///
     /// - Parameter value: The decimal value to convert to a fraction.
     public init(floatLiteral value: Chance.FloatLiteralType) {
-        try! self.init(approximating: value)
+        try! self.init(approximating: value) //swiftlint:disable:this force_try
     }
 }
 
@@ -235,36 +241,36 @@ extension WeightedDie: Rollable {
         }
         fatalError("The WeightedDie roll() function never returned")
     }
-    
+
     /// The minimum possible result from using the `roll()` method.
     public var minimumResult: Roll {
-        return chances.filter { $0.value.n > 0 }.sorted { $0.key < $1.key }.first!.key
+        return chances.filter { $0.value.n > 0 }.min { $0.key < $1.key }!.key
     }
-    
+
     /// The maximum possible result from using the `roll()` method.
     public var maximumResult: Roll {
-        return chances.filter { $0.value.n > 0 }.sorted { $0.key < $1.key }.last!.key
+        return chances.filter { $0.value.n > 0 }.max { $0.key < $1.key }!.key
     }
-    
+
     /// The exact (double) average result from using the `roll()` method.
     public var doubleAverageResult: Double {
         let m = 1.0 / chances.map { $0.value.value }.sum
         return chances.mapValues { $0.value * m }.map { Double($0.key) * $0.value }.sum
-        
+
         //The above is a condensed version of the below
-        
+
 //        let sum = chances.map { $0.value.value }.sum
 //        let multiplier = 1.0 / sum
 //        let newChances = chances.mapValues { $0.value * multiplier } //this makes the chances add up to 1
 //        let result = newChances.map { Double($0.key) * $0.value }.sum
 //        return result
     }
-    
+
     /// The average result from using the `roll()` method.
     public var averageResult: Roll {
         return Int(doubleAverageResult.rounded())
     }
-    
+
     /// Determines whether this `WeightedDie` can reach the target `Roll` using the given comparison type.
     ///
     /// - Parameters:
@@ -301,42 +307,42 @@ extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         return "A weighted die."
     }
-    
+
     public var debugDescription: String {
         return "A WeightedDie"
     }
 }
 
-extension WeightedDie {
+public extension WeightedDie {
     /// Returns a copy of the given `WeightedDie` with separate memory.
     ///
     /// - Returns: A copy of the given `WeightedDie`, with the same number of sides, at a different memory location.
-    public func copy() -> WeightedDie {
+    func copy() -> WeightedDie {
         return WeightedDie(copyOf: self)
     }
 }
 
-//extension WeightedDie {
-//    public static func + (lhs: WeightedDie, rhs: WeightedDie) -> Dice {
+//public extension WeightedDie {
+//    static func + (lhs: WeightedDie, rhs: WeightedDie) -> Dice {
 //        return Dice(lhs, rhs)
 //    }
-//    public static func + (lhs: WeightedDie, rhs: Int) -> Dice {
+//    static func + (lhs: WeightedDie, rhs: Int) -> Dice {
 //        return Dice(lhs, withModifier: rhs)
 //    }
-//    public static func + (lhs: Int, rhs: WeightedDie) -> Dice {
+//    static func + (lhs: Int, rhs: WeightedDie) -> Dice {
 //        return Dice(rhs, withModifier: lhs)
 //    }
-//    public static func + (lhs: WeightedDie, rhs: (WeightedDie: WeightedDie, count: Int)) -> Dice {
+//    static func + (lhs: WeightedDie, rhs: (WeightedDie: WeightedDie, count: Int)) -> Dice {
 //        return lhs + (rhs.WeightedDie * rhs.count)
 //    }
-//    public static func + (lhs: (WeightedDie: WeightedDie, count: Int), rhs: WeightedDie) -> Dice {
+//    static func + (lhs: (WeightedDie: WeightedDie, count: Int), rhs: WeightedDie) -> Dice {
 //        return rhs + (lhs.WeightedDie * lhs.count)
 //    }
-//    public static func * (lhs: WeightedDie, rhs: Int) -> Dice {
+//    static func * (lhs: WeightedDie, rhs: Int) -> Dice {
 //        let dice = [WeightedDie].init(repeating: lhs, count: rhs)
 //        return Dice(dice: dice)
 //    }
-//    public static func * (lhs: Int, rhs: WeightedDie) -> Dice {
+//    static func * (lhs: Int, rhs: WeightedDie) -> Dice {
 //        let dice = [WeightedDie].init(repeating: rhs, count: lhs)
 //        return Dice(dice: dice)
 //    }

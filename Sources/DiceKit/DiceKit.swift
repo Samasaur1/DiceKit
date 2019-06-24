@@ -11,7 +11,7 @@ public protocol Rollable {
     ///
     /// - Returns: The result of the roll.
     func roll() -> Roll
-    
+
     /// Rolls this object the given number of times and returns the given result type.
     ///
     /// - Parameters:
@@ -21,22 +21,22 @@ public protocol Rollable {
     ///
     /// - Since: 0.5.0
     func roll(times: Int, _ returnType: MultipleRollResult) -> Roll
-    
+
     /// The minimum possible result from using the `roll()` method.
     ///
     /// - Since: 0.2.0
     var minimumResult: Roll { get }
-    
+
     /// The maximum possible result from using the `roll()` method.
     ///
     /// - Since: 0.2.0
     var maximumResult: Roll { get }
-  
+
     /// The average result from using the `roll()` method.
     ///
     /// - Since: 0.15.0
     var averageResult: Roll { get }
-    
+
     /// Determines whether or not this object can reach the target Roll, compared by the given comparison.
     ///
     /// - Parameters:
@@ -48,7 +48,7 @@ public protocol Rollable {
     func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool
 }
 
-extension Rollable {
+public extension Rollable {
     /// Rolls this object the given number of times and returns the given result type.
     ///
     /// - Parameters:
@@ -57,7 +57,7 @@ extension Rollable {
     /// - Returns: The type of result performed with the given number of rolls.
     ///
     /// - Since: 0.5.0
-    public func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
+    func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
         var rolls: [Roll] = []
         for _ in 0..<times {
             rolls.append(roll())

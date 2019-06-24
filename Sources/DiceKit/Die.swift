@@ -64,7 +64,7 @@ extension Die: Rollable {
     public func roll() -> Roll {
         return Roll.random(in: 1...sides)
     }
-    
+
     /// The minimum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling a `1` on this die.
@@ -73,7 +73,7 @@ extension Die: Rollable {
     public var minimumResult: Roll {
         return 1
     }
-    
+
     /// The maximum possible result from using the `roll()` method.
     ///
     /// This method simulates rolling the maximum on this die.
@@ -82,7 +82,7 @@ extension Die: Rollable {
     public var maximumResult: Roll {
         return sides
     }
-  
+
     /// The exact (double) average result from using the `roll()` method.
     /// This is used in the Dice method to avoid rounding errors.
     ///
@@ -90,14 +90,14 @@ extension Die: Rollable {
     public var doubleAverageResult: Double {
       return Double(sides + 1) / 2
     }
-  
+
     /// The average result from using the `roll()` method.
     ///
     /// - Since: 0.15.0
     public var averageResult: Roll {
       return Int(doubleAverageResult.rounded())
     }
-    
+
     /// Determines whether this `Die` can reach the target `Roll` using the given comparison type.
     ///
     /// - Parameters:
@@ -140,73 +140,75 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         return "A \(sides)-sided die."
     }
-    
+
     public var debugDescription: String {
         return "d\(sides)"
     }
 }
 
-extension Die {
+public extension Die {
     /// Returns a copy of the given `Die` with separate memory.
     ///
     /// - Returns: A copy of the given `Die`, with the same number of sides, at a different memory location.
-    public func copy() -> Die {
+    func copy() -> Die {
         return Die(copyOf: self)
     }
 }
 
-extension Die {
+public extension Die {
+    //swiftlint:disable force_try
     /// A four-sided die (`d4`).
-    public static var d4: Die {
+    static var d4: Die {
         return try! Die(sides: 4)
     }
     /// A six-sided die (`d6`).
-    public static var d6: Die {
+    static var d6: Die {
         return try! Die(sides: 6)
     }
     /// An eight-sided die (`d8`).
-    public static var d8: Die {
+    static var d8: Die {
         return try! Die(sides: 8)
     }
     /// A ten-sided die (`d10`).
-    public static var d10: Die {
+    static var d10: Die {
         return try! Die(sides: 10)
     }
     /// A twelve-sided die (`d12`).
-    public static var d12: Die {
+    static var d12: Die {
         return try! Die(sides: 12)
     }
     /// A twenty-sided die (`d20`).
-    public static var d20: Die {
+    static var d20: Die {
         return try! Die(sides: 20)
     }
     /// A one hundred-sided die (`d100`).
-    public static var d100: Die {
+    static var d100: Die {
         return try! Die(sides: 100)
     }
+    //swiftlint:enable force_try
 }
 
-extension Die {
-    public static func + (lhs: Die, rhs: Die) -> Dice {
+public extension Die {
+    static func + (lhs: Die, rhs: Die) -> Dice {
         return Dice(lhs, rhs)
     }
-    public static func + (lhs: Die, rhs: Int) -> Dice {
+    static func + (lhs: Die, rhs: Int) -> Dice {
         return Dice(lhs, withModifier: rhs)
     }
-    public static func + (lhs: Int, rhs: Die) -> Dice {
+    static func + (lhs: Int, rhs: Die) -> Dice {
         return Dice(rhs, withModifier: lhs)
     }
-    public static func + (lhs: Die, rhs: (die: Die, count: Int)) -> Dice {
+    static func + (lhs: Die, rhs: (die: Die, count: Int)) -> Dice {
         return lhs + (rhs.die * rhs.count)
     }
-    public static func + (lhs: (die: Die, count: Int), rhs: Die) -> Dice {
+    static func + (lhs: (die: Die, count: Int), rhs: Die) -> Dice {
         return rhs + (lhs.die * lhs.count)
     }
-    public static func * (lhs: Die, rhs: Int) -> Dice {
+    static func * (lhs: Die, rhs: Int) -> Dice {
         let dice = [Die].init(repeating: lhs, count: rhs)
         return Dice(dice: dice)
     }
-    public static func * (lhs: Int, rhs: Die) -> Dice {
+    static func * (lhs: Int, rhs: Die) -> Dice {
         let dice = [Die].init(repeating: rhs, count: lhs)
         return Dice(dice: dice)
     }
