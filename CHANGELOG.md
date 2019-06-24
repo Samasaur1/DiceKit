@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.16.1] - 2019-06-24
+### Added
+- Testing on Swift 5.0.1 and Xcode 10.2
+
+### Fixed
+- Auto-deploying docs
+
 ## [0.16.0] - 2019-06-24
 ### Added
 - `CustomDie`
@@ -134,6 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.16.1]: https://github.com/Samasaur1/DiceKit/compare/v0.16.0...v0.16.1
 [0.16.0]: https://github.com/Samasaur1/DiceKit/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/Samasaur1/DiceKit/compare/v0.14.0...v0.15.0
 [0.14.1]: https://github.com/Samasaur1/DiceKit/compare/v0.14.0...v0.14.1
