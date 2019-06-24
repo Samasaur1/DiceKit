@@ -226,7 +226,7 @@ public typealias Roll = Int
 /// - negativeArgument: An argument passed was negative, and only positive ones are allowed.
 /// - chanceOverOne: The chance of something happening was over 1, an impossibility.
 ///
-#warning("Update Since")/// - Since: UPDATE_ME
+/// - Since: 0.16.0
 public enum Error: Swift.Error {
     /// A number of sides was passed that wasn't allowed.
     /// - Parameter attempt: The number of sides that was passed.

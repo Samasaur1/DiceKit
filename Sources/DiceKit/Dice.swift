@@ -530,7 +530,7 @@ extension Dice {
     /// - Parameters:
     ///   - lhs: The `Dice` object.
     ///   - rhs: The dice to add, in `(Die, Int)` tuples.
-    /// - Returns: <#return value description#>
+    /// - Returns: A new `Dice` object comprising of the new dice added to the initial `Dice` object.
     public static func + (lhs: Dice, rhs: (die: Die, count: Int)) -> Dice {
         return lhs + (rhs.die * rhs.count)
     }
@@ -539,6 +539,7 @@ extension Dice {
     /// - Parameters:
     ///   - lhs: The dice to add, in `(Die, Int)` tuples.
     ///   - rhs: The `Dice` object.
+    /// - Returns: A new `Dice` object comprising of the new dice added to the initial `Dice` object.
     public static func + (lhs: (die: Die, count: Int), rhs: Dice) -> Dice {
         return rhs + (lhs.die * lhs.count)
     }

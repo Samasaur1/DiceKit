@@ -2,7 +2,7 @@
 ///
 /// Chances are stored as fractions, and the constructors that take decimal values use some algorithm off of StackOverflow to convert them to fractions.
 ///
-#warning("Update Since")/// - Since: UPDATE_ME
+/// - Since: 0.16.0
 /// - Author: Samasaur
 public struct Chance {
     /// The numerator of the fraction
@@ -135,7 +135,7 @@ extension Chance: ExpressibleByFloatLiteral {
 
 /// A struct that represents the chances of different `Roll`s happening.
 ///
-#warning("Update Since")/// - Since: UPDATE_ME
+/// - Since: 0.16.0
 /// - Author: Samasaur
 public struct Chances {
     /// Creates a new `Chances` object with no data.
@@ -194,7 +194,7 @@ extension Chances: Hashable {
 ///
 /// The chances of specific rolls are passed using a `Chances` object. It is recommended to create the object separately, because it is easier to manipulate the `Chance`s that way.
 ///
-#warning("Update Since")/// - Since: UPDATE_ME
+/// - Since: 0.16.0
 /// - Author: Samasaur
 public class WeightedDie {
     /// The rolls and the chances of them occurring.

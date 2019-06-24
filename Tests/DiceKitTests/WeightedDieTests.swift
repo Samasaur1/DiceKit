@@ -90,18 +90,10 @@ final class WeightedDieTests: XCTestCase {
         let w2 = try! WeightedDie(chances: Chances(chances: [1: 1.0]))
         let w3 = try! WeightedDie(chances: Chances(chances: [(1, 1.0)]))
         let w4 = try! WeightedDie(chances: Chances(chances: [2: 0.5]))
-        var h1 = Hasher()
-        h1.combine(w)
-        let hv1 = h1.finalize()
-        var h2 = Hasher()
-        h2.combine(w2)
-        let hv2 = h2.finalize()
-        var h3 = Hasher()
-        h3.combine(w3)
-        let hv3 = h3.finalize()
-        var h4 = Hasher()
-        h4.combine(w4)
-        let hv4 = h4.finalize()
+        let hv1 = w.hashValue //hashValue is now a computed property, don't worry
+        let hv2 = w2.hashValue
+        let hv3 = w3.hashValue
+        let hv4 = w4.hashValue
         XCTAssertEqual(hv1, hv2)
         XCTAssertEqual(hv1, hv3)
         XCTAssertNotEqual(hv1, hv4)
