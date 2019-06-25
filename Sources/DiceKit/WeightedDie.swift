@@ -138,6 +138,42 @@ extension Chance: ExpressibleByFloatLiteral {
         try! self.init(approximating: value) //swiftlint:disable:this force_try
     }
 }
+public extension Chance {
+    /// The greatest common divisor/factor of two integers.
+    ///
+    /// - Parameters:
+    ///   - a: The first integer.
+    ///   - b: The second integer.
+    /// - Returns: The greatest common divisor of the two integers.
+    static func gcd(_ a: Int, _ b: Int) -> Int {
+        var a = abs(a)
+        var b = abs(b)
+        if (b > a) {
+            swap(&a, &b)
+        }
+        while b != 0 {
+            (a, b) = (b, a % b)
+        }
+        return abs(a)
+    }
+
+    /// The least/lowest common multiple of two integers.
+    ///
+    /// - Parameters:
+    ///   - a: The first integer.
+    ///   - b: The second integer.
+    /// - Returns: The lowest common multiple of the two integers.
+    static func lcm(_ a: Int, _ b: Int) -> Int {
+        return abs(a * b) / gcd(a, b)
+    }
+
+    static func + (lhs: Chance, rhs: Chance) -> Chance {
+        let lcm = Chance.lcm(lhs.d, rhs.d)
+        let lnum = lhs.n * lcm / lhs.d
+        let rnum = rhs.n * lcm / rhs.d
+        return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
+    }
+}
 
 /// A struct that represents the chances of different `Roll`s happening.
 ///
@@ -287,6 +323,29 @@ extension WeightedDie: Rollable {
             return (chances[target]?.n ?? 0) > 0
         case .orLower:
             return minimumResult <= target
+        }
+    }
+
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    public func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
+        guard target >= minimumResult else {
+            return .zero
+        }
+        guard target <= maximumResult else {
+            return .zero
+        }
+        switch comparisonType {
+        case .orLower:
+            return chance(of: target, .exactly) + chance(of: target - 1, .orLower)
+        case .exactly:
+            return chances[target] ?? .zero
+        case .orHigher:
+            return chance(of: target, .exactly) + chance(of: target + 1, .orHigher)
         }
     }
 }

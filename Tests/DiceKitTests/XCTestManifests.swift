@@ -6,6 +6,7 @@ extension ChanceTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__ChanceTests = [
+        ("testAddition", testAddition),
         ("testDoubleApproximation", testDoubleApproximation),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
@@ -30,6 +31,7 @@ extension CustomDieTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__CustomDieTests = [
+        ("testChance", testChance),
         ("testEquatable", testEquatable),
         ("testHashable", testHashable),
         ("testInitialization", testInitialization),
@@ -54,6 +56,7 @@ extension DiceTests {
     // to regenerate.
     static let __allTests__DiceTests = [
         ("testAverageResult", testAverageResult),
+        ("testChance", testChance),
         ("testEmptyStringParsing", testEmptyStringParsing),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
@@ -85,6 +88,7 @@ extension DieTests {
     static let __allTests__DieTests = [
         ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReach", testCanReach),
+        ("testChance", testChance),
         ("testComparable", testComparable),
         ("testCopying", testCopying),
         ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),
@@ -109,6 +113,7 @@ extension WeightedDieTests {
     static let __allTests__WeightedDieTests = [
         ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReachProperty", testCanReachProperty),
+        ("testChance", testChance),
         ("testChancesProperty", testChancesProperty),
         ("testCopying", testCopying),
         ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),

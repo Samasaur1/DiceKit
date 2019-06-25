@@ -201,4 +201,17 @@ final class DieTests: XCTestCase {
         XCTAssertEqual(Die.d20, try! Die(sides: 20))
         XCTAssertEqual(Die.d100, try! Die(sides: 100))
     }
+    
+    func testChance() {
+        let d = Die.d6
+        
+        let chance = d.chance(of: 4, .exactly)
+        XCTAssertEqual(chance, try! Chance.init(oneOutOf: 6))
+        
+        let chance2 = d.chance(of: 7, .orHigher)
+        XCTAssertEqual(chance2, Chance.zero)
+        
+        let chance3 = d.chance(of: 5, .orLower)
+        XCTAssertEqual(chance3, try! Chance.init(5, outOf: 6))
+    }
 }

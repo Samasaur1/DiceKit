@@ -154,4 +154,17 @@ final class WeightedDieTests: XCTestCase {
         XCTAssertFalse(w.canReach(0, .orLower))
         XCTAssertFalse(w.canReach(0, .exactly))
     }
+    
+    func testChance() {
+        let w = try! WeightedDie(chances: Chances(chances: (1, 0.25), (2, 0.05), (3, 0.05), (4, 0.05), (5, 0.1), (6, 0.5)))
+        
+        let chance = w.chance(of: 4, .exactly)
+        XCTAssertEqual(chance, 0.05)
+        
+        let chance2 = w.chance(of: 7, .orHigher)
+        XCTAssertEqual(chance2, Chance.zero)
+        
+        let chance3 = w.chance(of: 5, .orLower)
+        XCTAssertEqual(chance3, 0.5)
+    }
 }

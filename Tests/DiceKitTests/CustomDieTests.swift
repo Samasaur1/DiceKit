@@ -85,4 +85,16 @@ final class CustomDieTests: XCTestCase {
         XCTAssertNotEqual(d1, d2)
 //        XCTAssertEqual(d2.sides, d3.sides) //The order of this may be different, so it is not necessarily equal
     }
+    
+    func testChance() {
+        let d = try! CustomDie(DieSide(2), DieSide(4), DieSide(6), DieSide(8), DieSide(10), DieSide(10))
+        
+        let chance = d.chance(of: DieSide(1))
+        let chance2 = d.chance(of: DieSide(2))
+        let chance3 = d.chance(of: DieSide(10))
+        
+        XCTAssertEqual(chance, Chance.zero)
+        XCTAssertEqual(chance2, try! Chance.init(oneOutOf: 6))
+        XCTAssertEqual(chance3, try! Chance.init(2, outOf: 6))
+    }
 }

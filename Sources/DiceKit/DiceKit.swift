@@ -46,6 +46,14 @@ public protocol Rollable {
     ///
     /// - Since: 0.15.0
     func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool
+
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance
 }
 
 public extension Rollable {
@@ -158,7 +166,7 @@ public enum RollComparison: CaseIterable {
 }
 
 internal extension Array where Element == Roll {
-    internal var sum: Roll {
+    var sum: Roll {
         var total = 0
         for r in self {
             total += r
@@ -168,7 +176,7 @@ internal extension Array where Element == Roll {
 }
 
 internal extension String {
-    internal var isNumeric: Bool {
+    var isNumeric: Bool {
         guard !self.isEmpty else { return false }
         let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         return Set(self).isSubset(of: nums)
@@ -176,12 +184,22 @@ internal extension String {
 }
 
 internal extension Array where Element == Double {
-    internal var sum: Double {
+    var sum: Double {
         var total = 0.0
         for el in self {
             total += el
         }
         return total
+    }
+}
+
+internal extension Sequence where Element: Equatable {
+    var uniqueElements: [Element] {
+        return self.reduce(into: []) { uniqueElements, element in
+            if !uniqueElements.contains(element) {
+                uniqueElements.append(element)
+            }
+        }
     }
 }
 #if !swift(>=5.1) //Can't use `#if swift(<5.1)` for earlier than Swift 5

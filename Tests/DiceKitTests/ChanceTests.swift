@@ -118,4 +118,12 @@ final class ChanceTests: XCTestCase {
         XCTAssertEqual(c5, c3)
         XCTAssertEqual(c5, c4)
     }
+    
+    func testAddition() {
+        let oneSixth = try! Chance(1, outOf: 6)
+        let oneThird = try! Chance(1, outOf: 3)
+        let oneHalf = try! Chance(1, outOf: 2)
+        
+        XCTAssertEqual(oneSixth + oneThird, oneHalf)
+    }
 }

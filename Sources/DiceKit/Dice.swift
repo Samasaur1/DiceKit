@@ -340,6 +340,125 @@ extension Dice: Rollable {
             return minimumResult <= target
         }
     }
+
+    //swiftlint:disable cyclomatic_complexity
+
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    public func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
+        guard canReach(target, comparisonType) else {
+            return .zero
+        }
+
+        switch comparisonType {
+        case .orLower:
+            return chance(of: target, .exactly) + chance(of: target - 1, .orLower)
+        case .exactly:
+            let newTarget = target - modifier
+
+            var sortedDice: [Die] = []
+            for (die, count) in dice {
+                for _ in 0..<count {
+                    sortedDice.append(die)
+                }
+            }
+            sortedDice = sortedDice.sorted()
+
+            guard sortedDice.count > 1 else { //canReach checks for >0
+                return sortedDice[0].chance(of: newTarget, comparisonType)
+            }
+
+            //determine number of ways to sum to newTarget
+            //A "partition" is the number of ways to sum to n using positive integers where order doesn't matter
+            //A "composition" is the number of ways to sum to n using positive integers where order does matter
+            //We want a composition
+            //        let partitions = Dice.getPartitions(n: newTarget).map { $0.filter { $0 > 0} }
+            let partitions = Dice.getPartitions(ofSize: numberOfDice, forTarget: newTarget)
+            var compositions: [[Int]] = []
+            for partition in partitions {
+                compositions += Dice.getPermutations(of: partition)
+            }
+            compositions = compositions.uniqueElements
+            //compositions is now all possible ways, but they can't all be done with the dice we have.
+            let num = compositions.filter { $0.count == numberOfDice }.filter { arr in
+                for i in 0..<numberOfDice {
+                    guard sortedDice[i].canReach(arr[i], .exactly) else {
+                        return false
+                    }
+                }
+                return true
+            }
+
+            var max = 1
+            for (die, count) in dice {
+                for _ in 0..<count {
+                    max *= die.sides
+                }
+            }
+
+            return (try? .init(num.count, outOf: max)) ?? .zero
+        case .orHigher:
+            return chance(of: target, .exactly) + chance(of: target + 1, .orHigher)
+        }
+    }
+
+    static func getPartitions(ofSize size: Int, forTarget target: Int) -> [[Int]] {
+        guard size > 0 else {
+            return []
+        }
+        guard size <= target else {
+            return []
+        }
+        if size == target {
+            return [[Int].init(repeating: 1, count: size)]
+        }
+        if size == 1 {
+            return [[target]]
+        }
+
+        var partitions: [[Int]] = []
+
+        var p = [Int].init(repeating: 1, count: size)
+        p[0] = target - size + 1
+        partitions.append(p)
+        for i in 1..<size {
+            for part in partitions {
+                p = part
+                repeat {
+                    p[i - 1] -= 1
+                    p[i] += 1
+                    partitions.append(p)
+                } while p[i - 1] > p[i]
+            }
+        }
+
+        return partitions
+    }
+
+    static func getPermutations(of array: [Int]) -> [[Int]] {
+        var permutations: [[Int]] = []
+        func permuteWirth(_ a: [Int], _ n: Int) {
+            if n == 0 {
+                permutations.append(a)
+            } else {
+                var a = a
+                permuteWirth(a, n - 1)
+                for i in 0..<n {
+                    a.swapAt(i, n)
+                    permuteWirth(a, n - 1)
+                    a.swapAt(i, n)
+                }
+            }
+        }
+        permuteWirth(array, array.count - 1)
+        return permutations
+    }
+
+    //swiftlint:enable cyclomatic_complexity
 }
 
 extension Dice: Equatable {

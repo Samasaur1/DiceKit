@@ -244,4 +244,16 @@ final class DiceTests: XCTestCase {
             XCTAssertEqual(d.averageResult, Int((die.doubleAverageResult * Double(numDice) + Double(mod)).rounded()))
         }
     }
+    
+    func testChance() {
+        let d = Dice(Die.d6, count: 2)
+        let chance = d.chance(of: 2, .exactly)
+        XCTAssertEqual(chance, try! Chance(1, outOf: 36))
+        
+        let chance2 = d.chance(of: 2, .orHigher)
+        XCTAssertEqual(chance2, Chance.one)
+        
+        let chance3 = d.chance(of: 1, .orLower)
+        XCTAssertEqual(chance3, Chance.zero)
+    }
 }
