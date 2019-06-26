@@ -1,7 +1,7 @@
 ---
 name: PR to development
 about: Merging a feature or buxfix into development
-title: 'Version $VERSION: $DESCRIPTION'
+title: '$DESCRIPTION'
 labels: needs-labeling
 assignees: ''
 
