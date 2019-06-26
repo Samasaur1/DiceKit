@@ -19,7 +19,3 @@ Here's what has to happen:
 - [ ] This
 - [ ] PR
 - [ ] Ensure the changelog has everything new that is being added
-
----
-
-> Once this PR has been found to be satisfactory, a maintainer may add the `merge-when-green` label to it. This will wait for tests to pass, then merge the PR.
