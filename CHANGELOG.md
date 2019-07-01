@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.17.0] - UPDATE_ME
+### Added
+- New feature guidelines
+- Issue and pull request templates (PR #57)
+- `Rollable`
+  - `chance(of:_:)`
+  - `probabilities`
+  - `chance(of:)` for rolling in ranges
+- `Chance`
+  - `gcd(_:_:)` and `lcm(_:_:)`
+  - `+`, `-`, and `+=` operators
+  - `normalized` — proportionally scales every Chance until the sum is 1
+
+### Fixed
+- Latest compatible version links to refer to releases rather than the tree at the specified tag
+
 ## [0.16.1] - 2019-06-24
 ### Added
 - Testing on Swift 5.0.1 and Xcode 10.2
