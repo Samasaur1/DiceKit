@@ -113,9 +113,9 @@ final class WeightedDieTests: XCTestCase {
     func testChancesProperty() {
         let chances = Chances(chances: [1: try! Chance.oneOut(of: 9)])
         let w = try! WeightedDie(chances: chances)
-        XCTAssertEqual(w.chances, chances.dict)
+        XCTAssertEqual(w.chances, chances.normalized.dict)
         let w2 = try! WeightedDie(chances: Chances(chances: [1: try! Chance(1, outOf: 9)]))
-        XCTAssertEqual(w2.chances, chances.dict)
+        XCTAssertEqual(w2.chances, chances.normalized.dict)
         XCTAssertEqual(w2.chances, w.chances)
     }
     

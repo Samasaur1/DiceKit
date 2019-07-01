@@ -148,7 +148,7 @@ public extension Chance {
     static func gcd(_ a: Int, _ b: Int) -> Int {
         var a = abs(a)
         var b = abs(b)
-        if (b > a) {
+        if b > a {
             swap(&a, &b)
         }
         while b != 0 {
@@ -172,6 +172,20 @@ public extension Chance {
         let lnum = lhs.n * lcm / lhs.d
         let rnum = rhs.n * lcm / rhs.d
         return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
+    }
+
+    static func += (lhs: inout Chance, rhs: Chance) {
+        lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
+    }
+}
+
+fileprivate extension Dictionary.Values where Dictionary.Value == Chance {
+    var sum: Chance {
+        var total = Chance.zero
+        for element in self {
+            total += element
+        }
+        return total
     }
 }
 
@@ -220,6 +234,11 @@ public struct Chances {
             dict[roll] = newValue
         }
     }
+
+    public var normalized: Chances {
+        let multiplier = 1.0 / dict.values.sum.value
+        return Chances(chances: dict.mapValues { Chance(floatLiteral: $0.value * multiplier) })
+    }
 }
 extension Chances: Equatable {
     public static func == (lhs: Chances, rhs: Chances) -> Bool {
@@ -246,7 +265,7 @@ public class WeightedDie {
     /// - Parameter c: The rolls and the chances of them occurring.
     /// - Throws: `Error.emptyDictionary`
     public init(chances c: Chances) throws {
-        chances = c.dict
+        chances = c.normalized.dict
         guard !chances.isEmpty else {
             throw Error.emptyDictionary
         }
