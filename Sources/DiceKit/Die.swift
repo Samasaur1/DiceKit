@@ -56,7 +56,7 @@ public class Die {
 
     /// The probabilities of all possible rolls.
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     public lazy var probabilities: Chances = {
         var chances = Chances()
         let chance = try! Chance(1, outOf: sides) //swiftlint:disable:this force_try

@@ -106,7 +106,7 @@ public extension CustomDie {
     /// - Parameter roll: The `DieSide` to check the chance of rolling.
     /// - Returns: The chance of rolling the given `DieSide`.
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     func chance(of roll: DieSide<Output>) -> Chance {
 //        guard sides.values.contains(roll) else {
 //            return .zero

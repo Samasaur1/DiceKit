@@ -146,7 +146,7 @@ public extension Chance {
     ///   - b: The second integer.
     /// - Returns: The greatest common divisor of the two integers.
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     static func gcd(_ a: Int, _ b: Int) -> Int {
         var a = abs(a)
         var b = abs(b)
@@ -166,12 +166,19 @@ public extension Chance {
     ///   - b: The second integer.
     /// - Returns: The lowest common multiple of the two integers.
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     static func lcm(_ a: Int, _ b: Int) -> Int {
         return abs(a * b) / gcd(a, b)
     }
 
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// Adds two `Chance` instances together.
+    ///
+    /// - Parameters:
+    ///   - lhs: The augend (first summand).
+    ///   - rhs: The addend (second summand).
+    /// - Returns: The sum of the two `Chance` instances.
+    ///
+    /// - Since: 0.17.0
     static func + (lhs: Chance, rhs: Chance) -> Chance {
         let lcm = Chance.lcm(lhs.d, rhs.d)
         let lnum = lhs.n * lcm / lhs.d
@@ -179,7 +186,14 @@ public extension Chance {
         return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
     }
 
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// Subtracts one `Chance` instance from another.
+    ///
+    /// - Parameters:
+    ///   - lhs: The minuend (the value to be subtracted from).
+    ///   - rhs: The subtrahend (the value to subtract).
+    /// - Returns: The difference of the two values.
+    ///
+    /// - Since: 0.17.0
     static func - (lhs: Chance, rhs: Chance) -> Chance {
         let lcm = Chance.lcm(lhs.d, rhs.d)
         let lnum = lhs.n * lcm / lhs.d
@@ -187,7 +201,13 @@ public extension Chance {
         return (try? .init(lnum - rnum, outOf: lcm)) ?? .zero
     }
 
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// Adds the two `Chance` instances and sets the left-hand instance to the sum.
+    ///
+    /// - Parameters:
+    ///   - lhs: The summand that will be set to the sum.
+    ///   - rhs: The summand that will not be set to the sum.
+    ///
+    /// - Since: 0.17.0
     static func += (lhs: inout Chance, rhs: Chance) {
         lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
     }
@@ -250,7 +270,7 @@ public struct Chances {
     }
     /// A normalized version of this `Chances` instance. The sum of the `Chance`s will be 1
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     public var normalized: Chances {
         let multiplier = 1.0 / dict.values.sum.value
         return Chances(chances: dict.mapValues { Chance(floatLiteral: $0.value * multiplier) })
@@ -300,7 +320,7 @@ public class WeightedDie {
 
     /// The probabilities of all possible rolls.
     ///
-    //TODO: Update docs/ - Since: UPDATE_ME
+    /// - Since: 0.17.0
     public lazy var probabilities: Chances = {
         return Chances(chances: chances)
     }()
