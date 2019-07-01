@@ -263,6 +263,9 @@ public class Dice {
         modifier = other.modifier
     }
 
+    /// The probabilities of all possible rolls.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     public lazy var probabilities: Chances = {
         var chances = Chances()
         for i in minimumResult...maximumResult {

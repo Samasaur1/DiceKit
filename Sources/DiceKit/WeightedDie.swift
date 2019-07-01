@@ -145,6 +145,8 @@ public extension Chance {
     ///   - a: The first integer.
     ///   - b: The second integer.
     /// - Returns: The greatest common divisor of the two integers.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     static func gcd(_ a: Int, _ b: Int) -> Int {
         var a = abs(a)
         var b = abs(b)
@@ -163,10 +165,13 @@ public extension Chance {
     ///   - a: The first integer.
     ///   - b: The second integer.
     /// - Returns: The lowest common multiple of the two integers.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     static func lcm(_ a: Int, _ b: Int) -> Int {
         return abs(a * b) / gcd(a, b)
     }
 
+    //TODO: Update docs/ - Since: UPDATE_ME
     static func + (lhs: Chance, rhs: Chance) -> Chance {
         let lcm = Chance.lcm(lhs.d, rhs.d)
         let lnum = lhs.n * lcm / lhs.d
@@ -174,6 +179,15 @@ public extension Chance {
         return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
     }
 
+    //TODO: Update docs/ - Since: UPDATE_ME
+    static func - (lhs: Chance, rhs: Chance) -> Chance {
+        let lcm = Chance.lcm(lhs.d, rhs.d)
+        let lnum = lhs.n * lcm / lhs.d
+        let rnum = rhs.n * lcm / rhs.d
+        return (try? .init(lnum - rnum, outOf: lcm)) ?? .zero
+    }
+
+    //TODO: Update docs/ - Since: UPDATE_ME
     static func += (lhs: inout Chance, rhs: Chance) {
         lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
     }
@@ -234,7 +248,9 @@ public struct Chances {
             dict[roll] = newValue
         }
     }
-
+    /// A normalized version of this `Chances` instance. The sum of the `Chance`s will be 1
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     public var normalized: Chances {
         let multiplier = 1.0 / dict.values.sum.value
         return Chances(chances: dict.mapValues { Chance(floatLiteral: $0.value * multiplier) })
@@ -282,6 +298,9 @@ public class WeightedDie {
         chances = other.chances
     }
 
+    /// The probabilities of all possible rolls.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     public lazy var probabilities: Chances = {
         return Chances(chances: chances)
     }()

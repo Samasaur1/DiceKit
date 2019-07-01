@@ -53,8 +53,53 @@ public protocol Rollable {
     ///   - target: The target to check the chance for.
     ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
     /// - Returns: The chance of rolling the target using the given method of comparison.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance
 
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: Range<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: ClosedRange<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeFrom<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeUpTo<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeThrough<Roll>) -> Chance
+
+    /// The probabilities of all possible rolls.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     var probabilities: Chances { get }
 }
 
@@ -109,6 +154,14 @@ public extension Rollable {
         }
     }
 
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
     func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
         switch comparisonType {
         case .orLower:
@@ -132,6 +185,61 @@ public extension Rollable {
             }
             return sum
         }
+    }
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: Range<Roll>) -> Chance {
+        var sum = Chance.zero
+        for i in range {
+            sum += probabilities[of: i]
+        }
+        return sum
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: ClosedRange<Roll>) -> Chance {
+        var sum = Chance.zero
+        for i in range {
+            sum += probabilities[of: i]
+        }
+        return sum
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeFrom<Roll>) -> Chance {
+        return chance(of: range.lowerBound, .orHigher)
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeUpTo<Roll>) -> Chance {
+        return chance(of: range.upperBound, .orLower) - chance(of: range.upperBound, .exactly)
+    }
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    //TODO: Update docs/ - Since: UPDATE_ME
+    func chance(of range: PartialRangeThrough<Roll>) -> Chance {
+        return chance(of: range.upperBound, .orLower)
     }
 }
 
