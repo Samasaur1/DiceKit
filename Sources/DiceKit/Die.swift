@@ -53,6 +53,15 @@ public class Die {
     public init(copyOf other: Die) {
         sides = other.sides
     }
+
+    public lazy var probabilities: Chances = {
+        var chances = Chances()
+        let chance = try! Chance(1, outOf: sides) //swiftlint:disable:this force_try
+        for i in 1...sides {
+            chances[of: i] = chance
+        }
+        return chances
+    }()
 }
 
 extension Die: Rollable {
@@ -114,26 +123,6 @@ extension Die: Rollable {
             return minimumResult <= target && maximumResult >= target
         case .orLower:
             return minimumResult <= target
-        }
-    }
-
-    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
-    ///
-    /// - Parameters:
-    ///   - target: The target to check the chance for.
-    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
-    /// - Returns: The chance of rolling the target using the given method of comparison.
-    public func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
-        guard canReach(target, comparisonType) else {
-            return .zero
-        }
-        switch comparisonType {
-        case .orLower:
-            return chance(of: target, .exactly) + chance(of: target - 1, .orLower)
-        case .exactly:
-            return (try? .init(oneOutOf: sides)) ?? .zero
-        case .orHigher:
-            return chance(of: target, .exactly) + chance(of: target + 1, .orHigher)
         }
     }
 }

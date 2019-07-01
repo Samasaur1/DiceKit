@@ -281,6 +281,10 @@ public class WeightedDie {
     public init(copyOf other: WeightedDie) {
         chances = other.chances
     }
+
+    public lazy var probabilities: Chances = {
+        return Chances(chances: chances)
+    }()
 }
 
 extension WeightedDie: Rollable {
@@ -342,29 +346,6 @@ extension WeightedDie: Rollable {
             return (chances[target]?.n ?? 0) > 0
         case .orLower:
             return minimumResult <= target
-        }
-    }
-
-    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
-    ///
-    /// - Parameters:
-    ///   - target: The target to check the chance for.
-    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
-    /// - Returns: The chance of rolling the target using the given method of comparison.
-    public func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
-        guard target >= minimumResult else {
-            return .zero
-        }
-        guard target <= maximumResult else {
-            return .zero
-        }
-        switch comparisonType {
-        case .orLower:
-            return chance(of: target, .exactly) + chance(of: target - 1, .orLower)
-        case .exactly:
-            return chances[target] ?? .zero
-        case .orHigher:
-            return chance(of: target, .exactly) + chance(of: target + 1, .orHigher)
         }
     }
 }

@@ -54,6 +54,8 @@ public protocol Rollable {
     ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
     /// - Returns: The chance of rolling the target using the given method of comparison.
     func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance
+
+    var probabilities: Chances { get }
 }
 
 public extension Rollable {
@@ -104,6 +106,31 @@ public extension Rollable {
                 rolls.remove(at: rolls.index(of: rolls.max()!)!)
             }
             return rolls.sum
+        }
+    }
+
+    func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
+        switch comparisonType {
+        case .orLower:
+            guard minimumResult <= target else {
+                return Chance.zero
+            }
+            var sum = Chance.zero
+            for i in minimumResult...target {
+                sum += probabilities[of: i]
+            }
+            return sum
+        case .exactly:
+            return probabilities[of: target]
+        case .orHigher:
+            guard target <= maximumResult else {
+                return Chance.zero
+            }
+            var sum = Chance.zero
+            for i in target...maximumResult {
+                sum += probabilities[of: i]
+            }
+            return sum
         }
     }
 }
