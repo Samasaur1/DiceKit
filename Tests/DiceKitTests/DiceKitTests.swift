@@ -1,5 +1,5 @@
-import XCTest
 @testable import DiceKit
+import XCTest
 
 final class DiceKitTests: XCTestCase {
     func testDiePlusDiceAdding() {
@@ -8,35 +8,35 @@ final class DiceKitTests: XCTestCase {
         XCTAssertEqual(dice + Die.d6, dice2)
         XCTAssertNotEqual(dice + Die.d8, dice2)
     }
-    
+
     func testDicePlusTupleAdding() {
         let dice = Dice(.d4, withModifier: 5)
         let dice2 = Dice(.d4, .d6, .d6, withModifier: 5)
         XCTAssertEqual(dice + (Die.d6, 2), dice2)
         XCTAssertNotEqual(dice + (Die.d6, 1), dice2)
     }
-    
+
     func testDiePlusDieAdding() {
         let dice = Dice(.d4, .d6)
         XCTAssertEqual(Die.d4 + Die.d6, dice)
         XCTAssertNotEqual(Die.d4 + Die.d8, dice)
     }
-    
+
     func testDiePlusIntAdding() {
         let dice = Dice(.d6, withModifier: 5)
         XCTAssertEqual(Die.d6 + 5, dice)
     }
-    
+
     func testDiePlusTupleAdding() {
         let dice = Dice(.d6, .d4, .d4)
         XCTAssertEqual(Die.d6 + (.d4, 2), dice)
     }
-    
+
     func testDieTimesIntMultiplication() {
         let dice = Dice(.d6, count: 3)
         XCTAssertEqual(.d6 * 3, dice)
     }
-    
+
     func testRollable() {
         for _ in 0...3 {
             let r = try! getRollable()
