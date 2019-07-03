@@ -167,4 +167,20 @@ final class WeightedDieTests: XCTestCase {
         let chance3 = w.chance(of: 5, .orLower)
         XCTAssertEqual(chance3, 0.5)
     }
+    
+    func testRollingMultipleTimes() {
+        #warning("Not implemented")
+    }
+    
+    func testChanceInRange() {
+        #warning("Not implemented")
+    }
+    
+    func testAverageResult() {
+        #warning("Not implemented")
+    }
+    
+    func testDoubleAverageResult() {
+        #warning("Not implemented")
+    }
 }

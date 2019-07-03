@@ -214,4 +214,47 @@ final class DieTests: XCTestCase {
         let chance3 = d.chance(of: 5, .orLower)
         XCTAssertEqual(chance3, try! Chance(5, outOf: 6))
     }
+    
+    func testRollingMultipleTimes() {
+        #warning("Not implemented")
+    }
+    
+    func testChanceInRange() {
+        let d6 = Die.d6
+        XCTAssertEqual(d6.chance(of: 1...6), .one)
+        XCTAssertEqual(d6.chance(of: 2...4), try! .init(1, outOf: 2))
+        XCTAssertEqual(d6.chance(of: 7...26), .zero)
+        
+        XCTAssertEqual(d6.chance(of: -5..<10), .one)
+        XCTAssertEqual(d6.chance(of: 2..<4), try! .init(1, outOf: 3))
+        XCTAssertEqual(d6.chance(of: 7..<26), .zero)
+        
+        XCTAssertEqual(d6.chance(of: 1...), .one)
+        XCTAssertEqual(d6.chance(of: 6...), try! .init(1, outOf: 6))
+        XCTAssertEqual(d6.chance(of: 7...), .zero)
+        
+        XCTAssertEqual(d6.chance(of: ..<7), .one)
+        XCTAssertEqual(d6.chance(of: ..<3), try! .init(1, outOf: 3))
+        XCTAssertEqual(d6.chance(of: ..<1), .zero)
+        
+        XCTAssertEqual(d6.chance(of: ...7), .one)
+        XCTAssertEqual(d6.chance(of: ...3), try! .init(1, outOf: 2))
+        XCTAssertEqual(d6.chance(of: ...0), .zero)
+    }
+    
+    func testDescription() {
+        for _ in 0..<10 {
+            let rand = Int.random(in: 1...1_000_000)
+            let d = try! Die(sides: rand)
+            XCTAssertEqual(d.description, "A \(d.sides)-sided die.")
+        }
+        XCTAssertEqual(Die.d6.description, "A 6-sided die.")
+        
+        for _ in 0..<10 {
+            let rand = Int.random(in: 1...1_000_000)
+            let d = try! Die(sides: rand)
+            XCTAssertEqual(d.debugDescription, "d\(d.sides)")
+        }
+        XCTAssertEqual(Die.d6.debugDescription, "d6")
+    }
 }

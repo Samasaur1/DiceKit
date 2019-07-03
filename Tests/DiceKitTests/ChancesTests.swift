@@ -32,4 +32,14 @@ final class ChancesTests: XCTestCase {
         c[of: 5] = 0.4
         XCTAssertEqual(c[of: 5], 0.4)
     }
+    
+    func testHashable() {
+        let c = Chances(chances: [:]).hashValue
+        let c2 = Chances(chances: []).hashValue
+        let c3 = Chances().hashValue
+        
+        XCTAssertEqual(c, c2)
+        XCTAssertEqual(c, c3)
+        XCTAssertEqual(c2, c3)
+    }
 }

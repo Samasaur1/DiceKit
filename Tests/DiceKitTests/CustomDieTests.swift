@@ -48,11 +48,18 @@ final class CustomDieTests: XCTestCase {
         let d3 = try! CustomDie(sides: [DieSide("One"), DieSide("Two")])
         let d4 = try! CustomDie(sides: [DieSide("Two"), DieSide("One")])
         XCTAssertEqual(d3, d4)
+        
+        let d5 = try! CustomDie(sides: [DieSide("One"), DieSide("Two"), DieSide("Three")])
 
         XCTAssertNotEqual(d1, d3)
         XCTAssertNotEqual(d1, d4)
         XCTAssertNotEqual(d2, d3)
         XCTAssertNotEqual(d2, d4)
+        
+        XCTAssertNotEqual(d1, d5)
+        XCTAssertNotEqual(d2, d5)
+        XCTAssertNotEqual(d3, d5)
+        XCTAssertNotEqual(d4, d5)
     }
 
     func testHashable() {

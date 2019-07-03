@@ -252,4 +252,70 @@ final class DiceTests: XCTestCase {
         let chance3 = d.chance(of: 1, .orLower)
         XCTAssertEqual(chance3, Chance.zero)
     }
+    
+    func testInitialization() {
+        #warning("Not implemented")
+    }
+    
+    func testCopying() {
+        #warning("Not implemented")
+    }
+    
+    func testRolling() {
+        #warning("Not implemented")
+    }
+    
+    func testCanReach() {
+        //See DiceKitTests.testRollable()
+    }
+    
+    func testEquatable() {
+        #warning("Not implemented")
+    }
+    
+    func testDescription() {
+        let dice = Dice(.d6, .d6, .d4, withModifier: 2)
+        XCTAssertEqual(dice.description, "2 6-sided dice, 1 4-sided die, with a modifier of 2.")
+        XCTAssertEqual(dice.debugDescription, "2d6 + 1d4 + 2")
+    }
+    
+    func testDicePlusDiceAdding() {
+        #warning("Not implemented")
+    }
+    
+    func testDicePlusIntAdding() {
+        #warning("Not implemented")
+    }
+    
+    func testDiceMinusIntSubtracting() {
+        #warning("Not implemented")
+    }
+    
+    func testDiceTimesIntMultiplication() {
+        #warning("Not implemented")
+    }
+    
+    func testDicePlusDiceAdditionAssignment() {
+        #warning("Not implemented")
+    }
+    
+    func testDicePlusIntAdditionAssignment() {
+        #warning("Not implemented")
+    }
+    
+    func testDiceMinusIntSubtractionAssignment() {
+        #warning("Not implemented")
+    }
+    
+    func testDiceTimesIntMultiplicationAssignment() {
+        #warning("Not implemented")
+    }
+    
+    func testRollingMultipleTimes() {
+        #warning("Not implemented")
+    }
+    
+    func testChanceInRange() {
+        #warning("Not implemented")
+    }
 }

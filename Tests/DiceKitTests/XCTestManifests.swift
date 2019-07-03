@@ -11,6 +11,7 @@ extension ChanceTests {
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
         ("testProperties", testProperties),
+        ("testSubtraction", testSubtraction),
     ]
 }
 
@@ -21,6 +22,7 @@ extension ChancesTests {
     static let __allTests__ChancesTests = [
         ("testDictionaryProperty", testDictionaryProperty),
         ("testEquatable", testEquatable),
+        ("testHashable", testHashable),
         ("testInitialization", testInitialization),
         ("testSubscript", testSubscript),
     ]
@@ -46,7 +48,13 @@ extension DiceKitTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__DiceKitTests = [
-        ("testDieToDiceOperators", testDieToDiceOperators),
+        ("testDicePlusTupleAdding", testDicePlusTupleAdding),
+        ("testDiePlusDiceAdding", testDiePlusDiceAdding),
+        ("testDiePlusDieAdding", testDiePlusDieAdding),
+        ("testDiePlusIntAdding", testDiePlusIntAdding),
+        ("testDiePlusTupleAdding", testDiePlusTupleAdding),
+        ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
+        ("testRollable", testRollable),
     ]
 }
 
@@ -56,13 +64,29 @@ extension DiceTests {
     // to regenerate.
     static let __allTests__DiceTests = [
         ("testAverageResult", testAverageResult),
+        ("testCanReach", testCanReach),
         ("testChance", testChance),
+        ("testChanceInRange", testChanceInRange),
+        ("testCopying", testCopying),
+        ("testDescription", testDescription),
+        ("testDiceMinusIntSubtracting", testDiceMinusIntSubtracting),
+        ("testDiceMinusIntSubtractionAssignment", testDiceMinusIntSubtractionAssignment),
+        ("testDicePlusDiceAdding", testDicePlusDiceAdding),
+        ("testDicePlusDiceAdditionAssignment", testDicePlusDiceAdditionAssignment),
+        ("testDicePlusIntAdding", testDicePlusIntAdding),
+        ("testDicePlusIntAdditionAssignment", testDicePlusIntAdditionAssignment),
+        ("testDiceTimesIntMultiplication", testDiceTimesIntMultiplication),
+        ("testDiceTimesIntMultiplicationAssignment", testDiceTimesIntMultiplicationAssignment),
         ("testEmptyStringParsing", testEmptyStringParsing),
+        ("testEquatable", testEquatable),
+        ("testInitialization", testInitialization),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),
         ("testMultipleModifierStringParsing", testMultipleModifierStringParsing),
         ("testMultipleRepeatedDieStringParsing", testMultipleRepeatedDieStringParsing),
         ("testMultipleSeparateDieStringParsing", testMultipleSeparateDieStringParsing),
+        ("testRolling", testRolling),
+        ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),
         ("testSingleDieStringParsing", testSingleDieStringParsing),
         ("testSingleModifierStringParsing", testSingleModifierStringParsing),
@@ -89,8 +113,10 @@ extension DieTests {
         ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReach", testCanReach),
         ("testChance", testChance),
+        ("testChanceInRange", testChanceInRange),
         ("testComparable", testComparable),
         ("testCopying", testCopying),
+        ("testDescription", testDescription),
         ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
@@ -100,6 +126,7 @@ extension DieTests {
         ("testMinimumResultProperty", testMinimumResultProperty),
         ("testMultipleDigitStringParsing", testMultipleDigitStringParsing),
         ("testRolling", testRolling),
+        ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSidesProperty", testSidesProperty),
         ("testSingleDigitStringParsing", testSingleDigitStringParsing),
         ("testStaticVarDice", testStaticVarDice),
@@ -111,11 +138,14 @@ extension WeightedDieTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__WeightedDieTests = [
+        ("testAverageResult", testAverageResult),
         ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReachProperty", testCanReachProperty),
         ("testChance", testChance),
+        ("testChanceInRange", testChanceInRange),
         ("testChancesProperty", testChancesProperty),
         ("testCopying", testCopying),
+        ("testDoubleAverageResult", testDoubleAverageResult),
         ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),
         ("testEquatable", testEquatable),
         ("testHashable", testHashable),
@@ -123,6 +153,7 @@ extension WeightedDieTests {
         ("testMaximumResultProperty", testMaximumResultProperty),
         ("testMinimumResultProperty", testMinimumResultProperty),
         ("testRolling", testRolling),
+        ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSidesProperty", testSidesProperty),
     ]
 }

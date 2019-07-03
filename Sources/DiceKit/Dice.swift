@@ -479,7 +479,7 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     ///
     ///     Dice(withModifier: 5).description // A modifier of 5.
     ///
-    ///     Dice(Die.d6, withModifier: 5).description // 1 six-sided die, with a modifier of 5.
+    ///     Dice(Die.d6, withModifier: 5).description // 1 6-sided die, with a modifier of 5.
     ///
     ///     Dice(Die.d6, Die.d6, Die.d4, withModifier: 5).description // 2 6-sided dice, 1 four-sided die, with a modifier of 5.
     public var description: String {
