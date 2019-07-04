@@ -249,7 +249,7 @@ public struct Chances {
     /// - Parameter chances: The rolls and the chances of them occurring.
     public init(chances: [(Roll, Chance)]) {
         self.dict = [:]
-        for (roll, chance) in chances {
+        for (roll, chance) in chances where chance.n > 0 {
             self.dict[roll] = chance
         }
     }
