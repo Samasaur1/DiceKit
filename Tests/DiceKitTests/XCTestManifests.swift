@@ -152,6 +152,7 @@ extension WeightedDieTests {
         ("testInitialization", testInitialization),
         ("testMaximumResultProperty", testMaximumResultProperty),
         ("testMinimumResultProperty", testMinimumResultProperty),
+        ("testProbabilities", testProbabilities),
         ("testRolling", testRolling),
         ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSidesProperty", testSidesProperty)

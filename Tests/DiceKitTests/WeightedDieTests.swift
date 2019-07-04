@@ -183,4 +183,8 @@ final class WeightedDieTests: XCTestCase {
     func testDoubleAverageResult() {
         #warning("Not implemented")
     }
+    
+    func testProbabilities() {
+        #warning("Not implemented")
+    }
 }
