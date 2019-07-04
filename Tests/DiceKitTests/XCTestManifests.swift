@@ -11,7 +11,7 @@ extension ChanceTests {
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),
         ("testProperties", testProperties),
-        ("testSubtraction", testSubtraction)
+        ("testSubtraction", testSubtraction),
     ]
 }
 
@@ -24,7 +24,7 @@ extension ChancesTests {
         ("testEquatable", testEquatable),
         ("testHashable", testHashable),
         ("testInitialization", testInitialization),
-        ("testSubscript", testSubscript)
+        ("testSubscript", testSubscript),
     ]
 }
 
@@ -39,7 +39,7 @@ extension CustomDieTests {
         ("testInitialization", testInitialization),
         ("testReplacing", testReplacing),
         ("testRolling", testRolling),
-        ("testSidesProperty", testSidesProperty)
+        ("testSidesProperty", testSidesProperty),
     ]
 }
 
@@ -54,7 +54,7 @@ extension DiceKitTests {
         ("testDiePlusIntAdding", testDiePlusIntAdding),
         ("testDiePlusTupleAdding", testDiePlusTupleAdding),
         ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
-        ("testRollable", testRollable)
+        ("testRollable", testRollable),
     ]
 }
 
@@ -89,7 +89,7 @@ extension DiceTests {
         ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),
         ("testSingleDieStringParsing", testSingleDieStringParsing),
-        ("testSingleModifierStringParsing", testSingleModifierStringParsing)
+        ("testSingleModifierStringParsing", testSingleModifierStringParsing),
     ]
 }
 
@@ -101,7 +101,7 @@ extension DieSideTests {
         ("testEquatable", testEquatable),
         ("testHashable", testHashable),
         ("testInitialization", testInitialization),
-        ("testValueProperty", testValueProperty)
+        ("testValueProperty", testValueProperty),
     ]
 }
 
@@ -129,7 +129,7 @@ extension DieTests {
         ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSidesProperty", testSidesProperty),
         ("testSingleDigitStringParsing", testSingleDigitStringParsing),
-        ("testStaticVarDice", testStaticVarDice)
+        ("testStaticVarDice", testStaticVarDice),
     ]
 }
 
@@ -155,7 +155,7 @@ extension WeightedDieTests {
         ("testProbabilities", testProbabilities),
         ("testRolling", testRolling),
         ("testRollingMultipleTimes", testRollingMultipleTimes),
-        ("testSidesProperty", testSidesProperty)
+        ("testSidesProperty", testSidesProperty),
     ]
 }
 
@@ -168,7 +168,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(DiceTests.__allTests__DiceTests),
         testCase(DieSideTests.__allTests__DieSideTests),
         testCase(DieTests.__allTests__DieTests),
-        testCase(WeightedDieTests.__allTests__WeightedDieTests)
+        testCase(WeightedDieTests.__allTests__WeightedDieTests),
     ]
 }
 #endif
