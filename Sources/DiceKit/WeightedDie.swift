@@ -135,7 +135,28 @@ extension Chance: ExpressibleByFloatLiteral {
     ///
     /// - Parameter value: The decimal value to convert to a fraction.
     public init(floatLiteral value: Chance.FloatLiteralType) {
-        try! self.init(approximating: value) //swiftlint:disable:this force_try
+        do {
+            try self.init(approximating: value)
+        } catch let err as Error {
+            print(err, to: &STDERR)
+            self = .zero
+        } catch let err {
+            print("""
+                
+                <ERROR>
+                
+                Initializing a Chance using init(floatLiteral:) threw a non-DiceKit error, which shouldn't ever happen.
+                Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
+                and provide the following information:
+                
+                floatLiteral:   \(value)
+                err:            \(err)
+                
+                </ERROR>
+                
+                """, to: &STDERR)
+            fatalError("Non-DiceKit error came back from Chance.init(approximating:)\n\nSee above\n")
+        }
     }
 }
 public extension Chance {

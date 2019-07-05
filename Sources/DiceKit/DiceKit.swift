@@ -413,3 +413,22 @@ public typealias DKWeightedDie = WeightedDie
 public typealias DKChance = Chance
 /// See `Chances`.
 public typealias DKChances = Chances
+
+import Foundation
+internal struct FileHandleOutputStream: TextOutputStream {
+    private let fileHandle: FileHandle
+    let encoding: String.Encoding
+    
+    init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {
+        self.fileHandle = fileHandle
+        self.encoding = encoding
+    }
+    
+    mutating func write(_ string: String) {
+        if let data = string.data(using: encoding) {
+            fileHandle.write(data)
+        }
+    }
+}
+internal var STDERR = FileHandleOutputStream(.standardError)
+internal var STDOUT = FileHandleOutputStream(.standardOutput)
