@@ -7,6 +7,9 @@ final class WeightedDieTests: XCTestCase {
         let w2 = try? WeightedDie(chances: Chances())
         XCTAssertNotNil(w)
         XCTAssertNil(w2)
+        
+        XCTAssertNoThrow(try WeightedDie(chances: Chances(chances: [1: try! Chance.oneOut(of: 9)])))
+        XCTAssertThrowsError(try WeightedDie(chances: Chances()))
     }
 
     func testCopying() {
