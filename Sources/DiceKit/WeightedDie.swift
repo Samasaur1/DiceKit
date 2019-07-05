@@ -358,7 +358,22 @@ extension WeightedDie: Rollable {
             if rand < (chance + baseline) { return roll }
             baseline += chance
         }
-        fatalError("The WeightedDie roll() function never returned")
+        print("""
+            
+            <ERROR>
+            
+            The WeightedDie roll() function never returned, which shouldn't ever happen.
+            Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
+            and provide the following information:
+            
+            chances:        \(self.chances)
+            rand:           \(rand)
+            chances sum:    \(chances.map { $0.value.value }.sum)
+            
+            </ERROR>
+            
+            """, to: &STDERR)
+        fatalError("The WeightedDie roll() function never returned\n\nSee above\n")
     }
 
     /// The minimum possible result from using the `roll()` method.
