@@ -293,7 +293,11 @@ public struct Chances {
     ///
     /// - Since: 0.17.0
     public var normalized: Chances {
-        let multiplier = 1.0 / dict.values.sum.value
+        let sum = dict.values.sum.value
+        guard sum != 0 else {
+            return Chances()
+        }
+        let multiplier = 1.0 / sum
         return Chances(chances: dict.mapValues { Chance(floatLiteral: $0.value * multiplier) })
     }
 }
