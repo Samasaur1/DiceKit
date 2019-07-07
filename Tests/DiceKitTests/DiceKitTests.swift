@@ -37,15 +37,55 @@ final class DiceKitTests: XCTestCase {
         XCTAssertEqual(.d6 * 3, dice)
     }
 
-    func testRollable() {
+//    func testRollable() {
+//        for _ in 0...3 {
+//            let r = try! getRollable()
+//            for _ in 0...3 {
+//                let roll = r.roll()
+//                XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+//                XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
+//                XCTAssert(r.canReach(roll, .exactly))
+//            }
+//        }
+//    }
+    func testDieRollable() {
+        let r = try! getRollable(die: true)
         for _ in 0...3 {
-            let r = try! getRollable()
-            for _ in 0...3 {
-                let roll = r.roll()
-                XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-                XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
-                XCTAssert(r.canReach(roll, .exactly))
+            let roll = r.roll()
+            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
+            XCTAssert(r.canReach(roll, .exactly))
+        }
+    }
+    func testDiceRollable() {
+        let r = try! { () -> Dice in
+            var d = Dice(dice: [])
+            for i in 1...Int.random(in: 2...5) {
+                d += (try getRollable(die: true) as! Die, i % 3)
             }
+            d += Int.random(in: -10...10)
+            return d
+            }()
+        for _ in 0...3 {
+            let roll = r.roll()
+            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
+            XCTAssert(r.canReach(roll, .exactly))
+        }
+    }
+    func testWeightedDieRollable() {
+        let r = try! { () -> WeightedDie in
+            var c = Chances()
+            for _ in 1...Int.random(in: 2...25) {
+                c[of: Int.random(in: 1...25)] = try Chance(approximating: Double.random(in: 0..<1))
+            }
+            return try WeightedDie(chances: c)
+            }()
+        for _ in 0...3 {
+            let roll = r.roll()
+            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
+            XCTAssert(r.canReach(roll, .exactly))
         }
     }
 }
