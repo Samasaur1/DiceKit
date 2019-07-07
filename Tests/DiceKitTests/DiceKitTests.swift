@@ -69,6 +69,7 @@ final class DiceKitTests: XCTestCase {
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+            print(r, to: &STDERR)
             XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
             XCTAssert(r.canReach(roll, .exactly))
         }
