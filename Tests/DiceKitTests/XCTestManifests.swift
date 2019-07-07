@@ -49,7 +49,6 @@ extension DiceKitTests {
     // to regenerate.
     static let __allTests__DiceKitTests = [
         ("testDicePlusTupleAdding", testDicePlusTupleAdding),
-        ("testDiceRollable", testDiceRollable),
         ("testDiePlusDiceAdding", testDiePlusDiceAdding),
         ("testDiePlusDieAdding", testDiePlusDieAdding),
         ("testDiePlusIntAdding", testDiePlusIntAdding),
@@ -57,6 +56,7 @@ extension DiceKitTests {
         ("testDieRollable", testDieRollable),
         ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
         ("testWeightedDieRollable", testWeightedDieRollable),
+        ("testDiceRollable", testDiceRollable),
     ]
 }
 
