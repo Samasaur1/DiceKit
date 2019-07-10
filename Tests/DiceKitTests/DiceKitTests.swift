@@ -73,21 +73,24 @@ final class DiceKitTests: XCTestCase {
         }
     }
     func testDiceRollable() {
-//        let r = try! { () -> Dice in
-//            var d = Dice(dice: [])
-//            for i in 1...Int.random(in: 2...5) {
-//                d += (try getRollable(die: true) as! Die, i % 3)
-//            }
-//            d += Int.random(in: -10...10)
-//            return d
-//            }()
-//        for _ in 0...3 {
-//            let roll = r.roll()
-//            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-//            print(r, to: &STDERR)
-//            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0, "Roll was \(roll)")
-//            XCTAssert(r.canReach(roll, .exactly))
-//        }
+        let r = try! { () -> Dice in
+            var d = Dice(dice: [])
+            for i in 1...Int.random(in: 2...5) {
+                d += (try getRollable(die: true) as! Die, i % 3)
+            }
+            d += Int.random(in: -10...10)
+            return d
+            }()
+        for _ in 0...3 {
+            let roll = r.roll()
+            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+            print(r, to: &STDERR)
+            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0, "Roll was \(roll)")
+            XCTAssert(r.canReach(roll, .exactly))
+        }
+    }
+    
+    func test2d5plusd18minus4() {
         let d = try! Dice("2d25+d18-4")
         print(d.probabilities.dict.mapValues { $0.value }.sorted { $0.key < $1.key }, to: &STDERR)
         for _ in 0...3 {

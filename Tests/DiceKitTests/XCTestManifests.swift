@@ -48,7 +48,9 @@ extension DiceKitTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__DiceKitTests = [
+        ("test2d5plusd18minus4", test2d5plusd18minus4),
         ("testDicePlusTupleAdding", testDicePlusTupleAdding),
+        ("testDiceRollable", testDiceRollable),
         ("testDiePlusDiceAdding", testDiePlusDiceAdding),
         ("testDiePlusDieAdding", testDiePlusDieAdding),
         ("testDiePlusIntAdding", testDiePlusIntAdding),
@@ -56,7 +58,6 @@ extension DiceKitTests {
         ("testDieRollable", testDieRollable),
         ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
         ("testWeightedDieRollable", testWeightedDieRollable),
-        ("testDiceRollable", testDiceRollable),
     ]
 }
 
