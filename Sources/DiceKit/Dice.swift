@@ -369,7 +369,7 @@ extension Dice: Rollable {
         guard sortedDice.count > 1 else { //canReach checks for >0
             return sortedDice[0].chance(of: newTarget, .exactly)
         }
-        
+
         var successful: [[Int]] = []
         var array = [Int].init(repeating: 0, count: sortedDice.count)
         func recurse(index: Int, loop: Int) {

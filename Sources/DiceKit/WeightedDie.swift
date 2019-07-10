@@ -142,18 +142,18 @@ extension Chance: ExpressibleByFloatLiteral {
             self = .zero
         } catch let err {
             print("""
-                
+
                 <ERROR>
-                
+
                 Initializing a Chance using init(floatLiteral:) threw a non-DiceKit error, which shouldn't ever happen.
                 Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
                 and provide the following information:
-                
+
                 floatLiteral:   \(value)
                 err:            \(err)
-                
+
                 </ERROR>
-                
+
                 """, to: &STDERR)
             fatalError("Non-DiceKit error came back from Chance.init(approximating:)\n\nSee above\n")
         }
@@ -363,19 +363,19 @@ extension WeightedDie: Rollable {
             baseline += chance
         }
         print("""
-            
+
             <ERROR>
-            
+
             The WeightedDie roll() function never returned, which shouldn't ever happen.
             Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
             and provide the following information:
-            
+
             chances:        \(self.chances)
             rand:           \(rand)
             chances sum:    \(chances.map { $0.value.value }.sum)
-            
+
             </ERROR>
-            
+
             """, to: &STDERR)
         fatalError("The WeightedDie roll() function never returned\n\nSee above\n")
     }
