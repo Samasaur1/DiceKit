@@ -369,27 +369,32 @@ extension Dice: Rollable {
         guard sortedDice.count > 1 else { //canReach checks for >0
             return sortedDice[0].chance(of: newTarget, .exactly)
         }
-
-        //determine number of ways to sum to newTarget
-        //A "partition" is the number of ways to sum to n using positive integers where order doesn't matter
-        //A "composition" is the number of ways to sum to n using positive integers where order does matter
-        //We want a composition
-        //        let partitions = Dice.getPartitions(n: newTarget).map { $0.filter { $0 > 0} }
-        let partitions = Dice.getPartitions(ofSize: numberOfDice, forTarget: newTarget)
-        var compositions: [[Int]] = []
-        for partition in partitions {
-            compositions += Dice.getPermutations(of: partition)
-        }
-        compositions = compositions.uniqueElements
-        //compositions is now all possible ways, but they can't all be done with the dice we have.
-        let num = compositions.filter { $0.count == numberOfDice }.filter { arr in
-            for i in 0..<numberOfDice {
-                guard sortedDice[i].canReach(arr[i], .exactly) else {
-                    return false
+        
+        var successful: [[Int]] = []
+        var array = [Int].init(repeating: 0, count: sortedDice.count)
+        func recurse(index: Int, loop: Int) {
+            array[loop - 1] = index
+            if loop != numberOfDice {
+                recurse(index: 1, loop: loop + 1)
+                if index == sortedDice[loop - 1].sides {
+                    return
+                } else {
+                    recurse(index: index + 1, loop: loop)
+                }
+            } else {
+                //begin code
+                if array.sum == newTarget {
+                    successful.append(array)
+                }
+                //end code
+                if index == sortedDice[loop - 1].sides {
+                    return
+                } else {
+                    recurse(index: index + 1, loop: loop)
                 }
             }
-            return true
         }
+        recurse(index: 1, loop: 1)
 
         var max = 1
         for (die, count) in dice {
@@ -398,62 +403,8 @@ extension Dice: Rollable {
             }
         }
 
-        return (try? .init(num.count, outOf: max)) ?? .zero
+        return (try? .init(successful.count, outOf: max)) ?? .zero
     }
-
-    private static func getPartitions(ofSize size: Int, forTarget target: Int) -> [[Int]] {
-        guard size > 0 else {
-            return []
-        }
-        guard size <= target else {
-            return []
-        }
-        if size == target {
-            return [[Int].init(repeating: 1, count: size)]
-        }
-        if size == 1 {
-            return [[target]]
-        }
-
-        var partitions: [[Int]] = []
-
-        var p = [Int].init(repeating: 1, count: size)
-        p[0] = target - size + 1
-        partitions.append(p)
-        for i in 1..<size {
-            for part in partitions {
-                p = part
-                repeat {
-                    p[i - 1] -= 1
-                    p[i] += 1
-                    partitions.append(p)
-                } while p[i - 1] > p[i]
-            }
-        }
-
-        return partitions
-    }
-
-    private static func getPermutations(of array: [Int]) -> [[Int]] {
-        var permutations: [[Int]] = []
-        func permuteWirth(_ a: [Int], _ n: Int) {
-            if n == 0 {
-                permutations.append(a)
-            } else {
-                var a = a
-                permuteWirth(a, n - 1)
-                for i in 0..<n {
-                    a.swapAt(i, n)
-                    permuteWirth(a, n - 1)
-                    a.swapAt(i, n)
-                }
-            }
-        }
-        permuteWirth(array, array.count - 1)
-        return permutations
-    }
-
-    //swiftlint:enable cyclomatic_complexity
 }
 
 extension Dice: Equatable {
