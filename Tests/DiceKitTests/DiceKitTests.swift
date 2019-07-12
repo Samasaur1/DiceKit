@@ -37,17 +37,18 @@ final class DiceKitTests: XCTestCase {
         XCTAssertEqual(.d6 * 3, dice)
     }
 
-//    func testRollable() {
-//        for _ in 0...3 {
-//            let r = try! getRollable()
-//            for _ in 0...3 {
-//                let roll = r.roll()
-//                XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-//                XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
-//                XCTAssert(r.canReach(roll, .exactly))
-//            }
-//        }
-//    }
+    func testRollable() {
+        for _ in 0...3 {
+            let r = try! getRollable()
+            for _ in 0...3 {
+                let roll = r.roll()
+                XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
+                XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
+                XCTAssert(r.canReach(roll, .exactly))
+            }
+        }
+    }
+    
     func testDieRollable() {
         let r = try! getRollable(die: true)
         for _ in 0...3 {
@@ -57,6 +58,7 @@ final class DiceKitTests: XCTestCase {
             XCTAssert(r.canReach(roll, .exactly))
         }
     }
+    
     func testWeightedDieRollable() {
         let r = try! { () -> WeightedDie in
             var c = Chances()
@@ -72,6 +74,7 @@ final class DiceKitTests: XCTestCase {
             XCTAssert(r.canReach(roll, .exactly))
         }
     }
+    
     func testDiceRollable() {
         let r = try! { () -> Dice in
             var d = Dice(dice: [])

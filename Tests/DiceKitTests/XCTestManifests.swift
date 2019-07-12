@@ -57,6 +57,7 @@ extension DiceKitTests {
         ("testDiePlusTupleAdding", testDiePlusTupleAdding),
         ("testDieRollable", testDieRollable),
         ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
+        ("testRollable", testRollable),
         ("testWeightedDieRollable", testWeightedDieRollable),
     ]
 }
@@ -73,13 +74,9 @@ extension DiceTests {
         ("testCopying", testCopying),
         ("testDescription", testDescription),
         ("testDiceMinusIntSubtracting", testDiceMinusIntSubtracting),
-        ("testDiceMinusIntSubtractionAssignment", testDiceMinusIntSubtractionAssignment),
         ("testDicePlusDiceAdding", testDicePlusDiceAdding),
-        ("testDicePlusDiceAdditionAssignment", testDicePlusDiceAdditionAssignment),
         ("testDicePlusIntAdding", testDicePlusIntAdding),
-        ("testDicePlusIntAdditionAssignment", testDicePlusIntAdditionAssignment),
         ("testDiceTimesIntMultiplication", testDiceTimesIntMultiplication),
-        ("testDiceTimesIntMultiplicationAssignment", testDiceTimesIntMultiplicationAssignment),
         ("testEmptyStringParsing", testEmptyStringParsing),
         ("testEquatable", testEquatable),
         ("testInitialization", testInitialization),

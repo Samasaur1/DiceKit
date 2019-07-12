@@ -280,35 +280,48 @@ final class DiceTests: XCTestCase {
     }
     
     func testDicePlusDiceAdding() {
-        #warning("Not implemented")
+        let dice1 = Dice(.d10, .d6, .d6, .d4, withModifier: 2)
+        let dice2 = Dice(.d6, .d4, .d8, withModifier: 2)
+        let sum = dice1 + dice2
+        
+        XCTAssertEqual(sum, Dice(.d10, .d8, .d6, .d6, .d6, .d4, .d4, withModifier: 4))
+        
+        var mutable = dice1.copy()
+        mutable += dice2
+        XCTAssertEqual(sum, mutable)
     }
     
     func testDicePlusIntAdding() {
-        #warning("Not implemented")
+        let dice = Dice(.d6, .d6, .d4, withModifier: 2)
+        let sum = dice + 2
+        
+        XCTAssertEqual(sum, Dice(.d6, .d6, .d4, withModifier: 2))
+        
+        var mutable = dice.copy()
+        mutable += 2
+        XCTAssertEqual(sum, mutable)
     }
     
     func testDiceMinusIntSubtracting() {
-        #warning("Not implemented")
+        let dice = Dice(.d6, .d6, .d4, withModifier: 2)
+        let sum = dice - 1
+        
+        XCTAssertEqual(sum, Dice(.d6, .d6, .d4, withModifier: 1))
+        
+        var mutable = dice.copy()
+        mutable -= 1
+        XCTAssertEqual(sum, mutable)
     }
     
     func testDiceTimesIntMultiplication() {
-        #warning("Not implemented")
-    }
-    
-    func testDicePlusDiceAdditionAssignment() {
-        #warning("Not implemented")
-    }
-    
-    func testDicePlusIntAdditionAssignment() {
-        #warning("Not implemented")
-    }
-    
-    func testDiceMinusIntSubtractionAssignment() {
-        #warning("Not implemented")
-    }
-    
-    func testDiceTimesIntMultiplicationAssignment() {
-        #warning("Not implemented")
+        let dice = Dice(.d6, .d6, .d4, withModifier: 3)
+        let sum = dice * 2
+        
+        XCTAssertEqual(sum, Dice(.d6, .d6, .d6, .d6, .d4, .d4, withModifier: 6))
+        
+        var mutable = dice.copy()
+        mutable *= 2
+        XCTAssertEqual(sum, mutable)
     }
     
     func testRollingMultipleTimes() {
