@@ -295,7 +295,7 @@ final class DiceTests: XCTestCase {
         let dice = Dice(.d6, .d6, .d4, withModifier: 2)
         let sum = dice + 2
         
-        XCTAssertEqual(sum, Dice(.d6, .d6, .d4, withModifier: 2))
+        XCTAssertEqual(sum, Dice(.d6, .d6, .d4, withModifier: 4))
         
         var mutable = dice.copy()
         mutable += 2
