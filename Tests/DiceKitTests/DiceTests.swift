@@ -258,7 +258,12 @@ final class DiceTests: XCTestCase {
     }
     
     func testCopying() {
-        #warning("Not implemented")
+        let _1 = Dice(.d6, count: 2, withModifier: 3)
+        let _2 = Dice(copyOf: _1)
+        let _3 = _1.copy()
+        XCTAssertEqual(_1, _2)
+        XCTAssertEqual(_1, _3)
+        XCTAssertEqual(_2, _3)
     }
     
     func testRolling() {
@@ -270,7 +275,19 @@ final class DiceTests: XCTestCase {
     }
     
     func testEquatable() {
-        #warning("Not implemented")
+        let _2d6 = Dice(.d6, count: 2)
+        let __2d6 = Dice(.d6, .d6)
+        XCTAssertEqual(_2d6, __2d6)
+        let _2d6plus1 = Dice(.d6, count: 2, withModifier: 1)
+        XCTAssertNotEqual(_2d6, _2d6plus1)
+        let _d6 = Dice(.d6)
+        XCTAssertNotEqual(_d6, _2d6)
+        let _d6plus1 = Dice(.d6, withModifier: 1)
+        XCTAssertNotEqual(_d6plus1, _2d6plus1)
+        let _2d4 = Dice(.d4, count: 2)
+        XCTAssertNotEqual(_2d4, _2d6)
+        let _d4 = Dice(.d4)
+        XCTAssertNotEqual(_d4, _d6)
     }
     
     func testDescription() {
