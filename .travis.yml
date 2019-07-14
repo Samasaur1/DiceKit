@@ -17,22 +17,22 @@ jobs:
   - osx_image: xcode10.2
     os: linux
     env: SWIFT_VERSION=5.0.1
-    script: swift test
+    script: travis_wait swift test
   - stage: test
     if: branch != master OR type = pull_request
     osx_image: xcode10.2
     os: osx
     env: SWIFT_VERSION=5.0.1
-    script: swift test
+    script: travis_wait swift test
   - stage: deploy
     if: branch = master AND type = push
     osx_image: xcode10.2
     os: osx
     env: SWIFT_VERSION=5.0.1
-    script: bash .deploy-docs.sh
+    script: travis_wait bash .deploy-docs.sh
 
 install:
 - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 
 script:
-- swift test
+- travis_wait swift test
