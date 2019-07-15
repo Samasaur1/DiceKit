@@ -124,3 +124,11 @@ internal func getRollable(die: Bool = false) throws -> Rollable {
         return try getRollable(die: true)
     }
 }
+
+internal func XCTAssertAllEqual<T>(_ items: T..., file: StaticString = #file, line: UInt = #line, _ message: String = "") where T: Equatable {
+    for item in items {
+        for other in items {
+            XCTAssertEqual(item, other, message, file: file, line: line)
+        }
+    }
+}

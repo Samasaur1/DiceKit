@@ -254,7 +254,22 @@ final class DiceTests: XCTestCase {
     }
     
     func testInitialization() {
-        #warning("Not implemented")
+        //String parsing is handled separately
+        
+        let d = Dice(.d6, .d6, .d4)
+        let d2 = Dice(dice: [.d6, .d6, .d4])
+        let d3 = Dice(.d6, count: 2) + Dice(.d4, count: 1)
+        let d4 = Dice((die: .d6, count: 2), (.d4, 1))
+        
+        XCTAssertAllEqual(d, d2, d3, d4)
+        
+        let _d7 = try! Die(sides: 7)
+        let d5 = Dice(.d8, _d7.copy(), withModifier: 6)
+        let d6 = Dice(dice: [.d8, _d7.copy()], withModifier: 6)
+        let d7 = Dice(.d8, count: 1, withModifier: 6) + _d7.copy()
+        let d8 = Dice((.d8, 1), (_d7.copy(), 1), withModifier: 6)
+        
+        XCTAssertAllEqual(d5, d6, d7, d8)
     }
     
     func testCopying() {
