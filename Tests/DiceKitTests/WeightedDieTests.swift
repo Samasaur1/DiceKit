@@ -176,18 +176,34 @@ final class WeightedDieTests: XCTestCase {
     }
     
     func testChanceInRange() {
-        #warning("Not implemented")
-    }
-    
-    func testAverageResult() {
-        #warning("Not implemented")
-    }
-    
-    func testDoubleAverageResult() {
-        #warning("Not implemented")
+        let chances = Chances(chances: [1: try! .oneOut(of: 5), 2: .zero, 3: .zero, 4: try! .init(oneOutOf: 10), 5: .zero, 6: try! .init(7, outOf: 10)])
+        let w = try! WeightedDie(chances: chances)
+        
+        XCTAssertEqual(w.chance(of: 1...6), .one)
+        XCTAssertEqual(w.chance(of: 1..<6), try! .init(3, outOf: 10))
+        XCTAssertEqual(w.chance(of: 2..<4), .zero)
+        XCTAssertEqual(w.chance(of: 2...5), try! .init(oneOutOf: 10))
+        
+        XCTAssertEqual(w.chance(of: 5...), try! .init(7, outOf: 10))
+        XCTAssertEqual(w.chance(of: ...1), try! .oneOut(of: 5))
+        XCTAssertEqual(w.chance(of: ..<1), .zero)
     }
     
     func testProbabilities() {
-        #warning("Not implemented")
+        let chances = Chances(chances: [1: try! Chance.oneOut(of: 9), 2: .zero])
+        let w = try! WeightedDie(chances: chances)
+        
+        XCTAssertEqual(w.probabilities, chances.normalized)
+        XCTAssertEqual(w.probabilities[of: 1], .one)
+        XCTAssertEqual(w.probabilities[of: 2], .zero)
+        XCTAssertEqual(w.probabilities[of: 3], .zero)
+        
+        let c2 = Chances(chances: [1: try! Chance.oneOut(of: 9), 2: try! .init(3, outOf: 9)])
+        let w2 = try! WeightedDie(chances: c2)
+        
+        XCTAssertEqual(w2.probabilities, c2.normalized)
+        XCTAssertEqual(w2.probabilities[of: 1], try! .init(1, outOf: 4))
+        XCTAssertEqual(w2.probabilities[of: 2], try! .init(3, outOf: 4))
+        XCTAssertEqual(w2.probabilities[of: 3], .zero)
     }
 }

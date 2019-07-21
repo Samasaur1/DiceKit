@@ -216,7 +216,16 @@ final class DieTests: XCTestCase {
     }
     
     func testRollingMultipleTimes() {
-        #warning("Not implemented")
+        let die = Die.d6
+        var rolled = [Bool].init(repeating: false, count: 13)
+        rolled[0] = true
+        rolled[1] = true//0 and 1 can't be rolled
+        while rolled.contains(false) {
+            let r = die.roll(times: 2, .sum)
+            XCTAssertGreaterThanOrEqual(r, 2)
+            XCTAssertLessThanOrEqual(r, 12) //If the die is changed away from a d6, change this
+            rolled[r] = true
+        }
     }
     
     func testChanceInRange() {
