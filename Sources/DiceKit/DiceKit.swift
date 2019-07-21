@@ -432,3 +432,27 @@ internal struct FileHandleOutputStream: TextOutputStream {
 }
 internal var STDERR = FileHandleOutputStream(.standardError)
 internal var STDOUT = FileHandleOutputStream(.standardOutput)
+internal func memoize<I: Hashable, O>(_ body: @escaping (I) -> O) -> (I) -> O {
+    var dict: [I: O] = [:]
+    func f(_ input: I) -> O {
+        if let result = dict[input] {
+            return result
+        }
+        let result = body(input)
+        dict[input] = result
+        return result
+    }
+    return f
+}
+internal func memoize<I: Hashable, O>(_ body: @escaping ((I) -> O, I) -> O) -> (I) -> O {
+    var dict: [I: O] = [:]
+    func f(_ input: I) -> O {
+        if let result = dict[input] {
+            return result
+        }
+        let result = body(f, input)
+        dict[input] = result
+        return result
+    }
+    return f
+}
