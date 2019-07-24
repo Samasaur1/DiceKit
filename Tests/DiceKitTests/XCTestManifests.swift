@@ -85,6 +85,7 @@ extension DiceTests {
         ("testMultipleModifierStringParsing", testMultipleModifierStringParsing),
         ("testMultipleRepeatedDieStringParsing", testMultipleRepeatedDieStringParsing),
         ("testMultipleSeparateDieStringParsing", testMultipleSeparateDieStringParsing),
+        ("testNegativeMultipleDieStringParsing", testNegativeMultipleDieStringParsing),
         ("testRolling", testRolling),
         ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),
@@ -138,14 +139,12 @@ extension WeightedDieTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__WeightedDieTests = [
-        ("testAverageResult", testAverageResult),
         ("testAverageResultProperty", testAverageResultProperty),
         ("testCanReachProperty", testCanReachProperty),
         ("testChance", testChance),
         ("testChanceInRange", testChanceInRange),
         ("testChancesProperty", testChancesProperty),
         ("testCopying", testCopying),
-        ("testDoubleAverageResult", testDoubleAverageResult),
         ("testDoubleAverageResultProperty", testDoubleAverageResultProperty),
         ("testEquatable", testEquatable),
         ("testHashable", testHashable),
