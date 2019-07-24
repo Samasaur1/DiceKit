@@ -115,7 +115,7 @@ internal func getRollable(die: Bool = false) throws -> Rollable {
     case 3:
         var c = Chances()
         for _ in 1...Int.random(in: 2...25) {
-            c[of: Int.random(in: 1...25)] = try Chance(approximating: Double.random(in: 0..<1))
+            c[of: Int.random(in: 1...25)] = try Chance(approximating: round(Double.random(in: 0..<1))*100000/100000)
         }
         return try WeightedDie(chances: c)
     default:
