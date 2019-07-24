@@ -361,7 +361,12 @@ final class DiceTests: XCTestCase {
     }
     
     func testChanceInRange() {
-        #warning("DiceTests.testChanceInRange not implemented")
+        let dice = Dice(.d6, .d6, withModifier: 1)
+        XCTAssertEqual(dice.chance(of: 3...13), .one)
+        XCTAssertEqual(dice.chance(of: 3..<4), try! .init(3, outOf: 36))
+        XCTAssertEqual(dice.chance(of: 8...), try! .init(7, outOf: 12))
+        XCTAssertEqual(dice.chance(of: ...7), try! .init(5, outOf: 12))
+        XCTAssertEqual(dice.chance(of: ..<3), .zero)
     }
     
     func testNegativeMultipleDieStringParsing() {
