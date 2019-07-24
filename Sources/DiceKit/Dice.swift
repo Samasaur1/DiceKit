@@ -266,13 +266,7 @@ public class Dice {
     /// The probabilities of all possible rolls.
     ///
     /// - Since: 0.17.0
-    public lazy var probabilities: Chances = {
-        var chances = Chances()
-        for i in minimumResult...maximumResult {
-            chances[of: i] = calculateChance(of: i)
-        }
-        return chances
-    }()
+    public lazy var probabilities: Chances = calculateChances()
 }
 
 extension Dice: Rollable {
@@ -351,13 +345,9 @@ extension Dice: Rollable {
             return minimumResult <= target
         }
     }
-
-    private func calculateChance(of target: Roll) -> Chance {
-        guard canReach(target, .exactly) else {
-            return .zero
-        }
-        let newTarget = target - modifier
-
+    
+    private func calculateChances() -> Chances {
+        //Gets an array of all the dice (which can include multiple of the same die) to loop through.
         var sortedDice: [Die] = []
         for (die, count) in dice {
             for _ in 0..<count {
@@ -365,13 +355,14 @@ extension Dice: Rollable {
             }
         }
         sortedDice = sortedDice.sorted()
-
-        guard sortedDice.count > 1 else { //canReach checks for >0
-            return sortedDice[0].chance(of: newTarget, .exactly)
-        }
-
-        var successful: [[Int]] = []
+        
+        //This will store [target: array of compositions that match that target]
+        var dict: [Roll: [[Int]]] = [:]
+        //This stores the current composition that we are considering
         var array = [Int].init(repeating: 0, count: sortedDice.count)
+        //This simulates n nested loops, where n is not known at compile time (in fact, it's the number of dice)
+        //It goes through every possible combination of dice. For example:
+        // [1, 1, 1, 1], [1, 1, 1, 2] ... [1, 1, 1, n], [1, 1, 2, 1] ... [1, 1, 2, n] ... [1, 1, m, n], [1, 2, 1, 1] ...
         func recurse(index: Int, loop: Int) {
             array[loop - 1] = index
             if loop != numberOfDice {
@@ -383,8 +374,11 @@ extension Dice: Rollable {
                 }
             } else {
                 //begin code
-                if array.sum == newTarget {
-                    successful.append(array)
+                let target = array.sum + modifier //modifier is very important
+                if dict[target] != nil {
+                    dict[target]!.append(array)
+                } else {
+                    dict[target] = [array]
                 }
                 //end code
                 if index == sortedDice[loop - 1].sides {
@@ -395,15 +389,21 @@ extension Dice: Rollable {
             }
         }
         recurse(index: 1, loop: 1)
-
+        
+        //Calculates the number of possible combinations of rolls
         var max = 1
         for (die, count) in dice {
             for _ in 0..<count {
                 max *= die.sides
             }
         }
-
-        return (try? .init(successful.count, outOf: max)) ?? .zero
+        
+        //Maps the compositions to the number of them, which is converted to a Chance and put in a Chances
+        var c = Chances()
+        c.dict = dict.mapValues { (arr: [[Int]]) -> Chance in
+            return (try? .init(arr.count, outOf: max)) ?? .zero
+        }
+        return c
     }
 }
 
