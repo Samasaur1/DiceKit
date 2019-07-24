@@ -50,7 +50,7 @@ final class DiceKitTests: XCTestCase {
     }
     
     func testDieRollable() {
-        let r = try! getRollable(die: true)
+        let r = try! getDie()
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
@@ -60,13 +60,7 @@ final class DiceKitTests: XCTestCase {
     }
     
     func testWeightedDieRollable() {
-        let r = try! { () -> WeightedDie in
-            var c = Chances()
-            for _ in 1...Int.random(in: 2...25) {
-                c[of: Int.random(in: 1...25)] = try Chance(approximating: Double.random(in: 0..<1))
-            }
-            return try WeightedDie(chances: c)
-            }()
+        let r = try! getWeightedDie()
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
@@ -76,14 +70,7 @@ final class DiceKitTests: XCTestCase {
     }
     
     func testDiceRollable() {
-        let r = try! { () -> Dice in
-            var d = Dice(dice: [])
-            for i in 1...Int.random(in: 2...5) {
-                d += (try getRollable(die: true) as! Die, i % 3)
-            }
-            d += Int.random(in: -10...10)
-            return d
-            }()
+        let r = try! getDice()
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
@@ -103,45 +90,38 @@ final class DiceKitTests: XCTestCase {
     func testFileHandleOutputStream__INTERNAL_UTILITY_METHOD() {
         print("STDOUT", to: &STDOUT)
         print("STDERR", to: &STDERR)
-        
-        
-//        internal struct FileHandleOutputStream: TextOutputStream {
-//            private let fileHandle: FileHandle
-//            let encoding: String.Encoding//
-//
-//            init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {//String.Encoding
-//                self.fileHandle = fileHandle
-//                self.encoding = encoding
-//            }
-//
-//            mutating func write(_ string: String) {
-//                if let data = string.data(using: encoding) {//String.data
-//                    fileHandle.write(data)
-//                }
-//            }
-//        }
-//        internal var STDERR = FileHandleOutputStream(.standardError)
-//        internal var STDOUT = FileHandleOutputStream(.standardOutput)
     }
+}
+
+internal func getDie() throws -> Die {
+    return try Die(sides: Int.random(in: 1...25))
+}
+
+internal func getDice() throws -> Dice {
+    var d = Dice(dice: [])
+    for i in 1...Int.random(in: 2...5) {
+        d += (try getRollable(die: true) as! Die, i % 3)
+    }
+    d += Int.random(in: -10...10)
+    return d
+}
+
+internal func getWeightedDie() throws -> WeightedDie {
+    var c = Chances()
+    for _ in 1...Int.random(in: 2...25) {
+        c[of: Int.random(in: 1...25)] = try Chance(approximating: round(Double.random(in: 0..<1))*100000/100000)
+    }
+    return try WeightedDie(chances: c)
 }
 
 internal func getRollable(die: Bool = false) throws -> Rollable {
     switch die ? 1 : Int.random(in: 1...5) {
     case 1:
-        return try Die(sides: Int.random(in: 1...25))
+        return try getDie()
     case 2:
-        var d = Dice(dice: [])
-        for i in 1...Int.random(in: 2...5) {
-            d += (try getRollable(die: true) as! Die, i % 3)
-        }
-        d += Int.random(in: -10...10)
-        return d
+        return try getDice()
     case 3:
-        var c = Chances()
-        for _ in 1...Int.random(in: 2...25) {
-            c[of: Int.random(in: 1...25)] = try Chance(approximating: round(Double.random(in: 0..<1))*100000/100000)
-        }
-        return try WeightedDie(chances: c)
+        return try getWeightedDie()
     default:
         return try getRollable(die: true)
     }
