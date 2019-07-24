@@ -6,21 +6,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.17.0] - UPDATE_ME
+## [0.17.0] - 2019-07-24
 ### Added
 - New feature guidelines
 - Issue and pull request templates (PR #57)
 - `Rollable`
   - `chance(of:_:)`
-  - `probabilities`
+  - `probabilities` — property of type `Chances`
   - `chance(of:)` for rolling in ranges
+- `CustomDie`
+  - `chance(of:)` for a specific possibility
 - `Chance`
   - `gcd(_:_:)` and `lcm(_:_:)`
   - `+`, `-`, and `+=` operators
   - `normalized` — proportionally scales every Chance until the sum is 1
 
+### Changed
+- `Chances`
+  - No longer has entries in the dictionary for `Roll`s where the `Chance` is 0
+
 ### Fixed
 - Latest compatible version links to refer to releases rather than the tree at the specified tag
+- `Rollable`
+  - `roll(times:_:)` would crash when called like so: `roll(times: 1, .dropOutsides)`
 
 ## [0.16.1] - 2019-06-24
 ### Added
