@@ -99,6 +99,30 @@ final class DiceKitTests: XCTestCase {
             XCTAssertGreaterThan(d.probabilities[of: roll].value, 0, "Roll was \(roll)")
         }
     }
+    
+    func testFileHandleOutputStream__INTERNAL_UTILITY_METHOD() {
+        print("STDOUT", to: &STDOUT)
+        print("STDERR", to: &STDERR)
+        
+        
+//        internal struct FileHandleOutputStream: TextOutputStream {
+//            private let fileHandle: FileHandle
+//            let encoding: String.Encoding//
+//
+//            init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {//String.Encoding
+//                self.fileHandle = fileHandle
+//                self.encoding = encoding
+//            }
+//
+//            mutating func write(_ string: String) {
+//                if let data = string.data(using: encoding) {//String.data
+//                    fileHandle.write(data)
+//                }
+//            }
+//        }
+//        internal var STDERR = FileHandleOutputStream(.standardError)
+//        internal var STDOUT = FileHandleOutputStream(.standardOutput)
+    }
 }
 
 internal func getRollable(die: Bool = false) throws -> Rollable {

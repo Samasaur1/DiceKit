@@ -417,42 +417,18 @@ public typealias DKChances = Chances
 import Foundation
 internal struct FileHandleOutputStream: TextOutputStream {
     private let fileHandle: FileHandle
-    let encoding: String.Encoding
+    let encoding: String.Encoding//Not on Linux — I think
 
-    init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {
+    init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {//String.Encoding not on Linux
         self.fileHandle = fileHandle
         self.encoding = encoding
     }
 
     mutating func write(_ string: String) {
-        if let data = string.data(using: encoding) {
+        if let data = string.data(using: encoding) {//String.data not on Linux
             fileHandle.write(data)
         }
     }
 }
 internal var STDERR = FileHandleOutputStream(.standardError)
 internal var STDOUT = FileHandleOutputStream(.standardOutput)
-internal func memoize<I: Hashable, O>(_ body: @escaping (I) -> O) -> (I) -> O {
-    var dict: [I: O] = [:]
-    func f(_ input: I) -> O {
-        if let result = dict[input] {
-            return result
-        }
-        let result = body(input)
-        dict[input] = result
-        return result
-    }
-    return f
-}
-internal func memoize<I: Hashable, O>(_ body: @escaping ((I) -> O, I) -> O) -> (I) -> O {
-    var dict: [I: O] = [:]
-    func f(_ input: I) -> O {
-        if let result = dict[input] {
-            return result
-        }
-        let result = body(f, input)
-        dict[input] = result
-        return result
-    }
-    return f
-}

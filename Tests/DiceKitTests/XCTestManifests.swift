@@ -57,6 +57,7 @@ extension DiceKitTests {
         ("testDiePlusTupleAdding", testDiePlusTupleAdding),
         ("testDieRollable", testDieRollable),
         ("testDieTimesIntMultiplication", testDieTimesIntMultiplication),
+        ("testFileHandleOutputStream__INTERNAL_UTILITY_METHOD", testFileHandleOutputStream__INTERNAL_UTILITY_METHOD),
         ("testRollable", testRollable),
         ("testWeightedDieRollable", testWeightedDieRollable),
     ]
