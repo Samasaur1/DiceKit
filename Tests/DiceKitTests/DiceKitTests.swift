@@ -109,7 +109,7 @@ internal func getDice() throws -> Dice {
 internal func getWeightedDie() throws -> WeightedDie {
     var c = Chances()
     for _ in 1...Int.random(in: 2...25) {
-        c[of: Int.random(in: 1...25)] = try Chance(approximating: round(Double.random(in: 0..<1))*100000/100000)
+        c[of: Int.random(in: 1...25)] = try Chance(approximating: round(Double.random(in: 0..<1))*10000/10000)
     }
     return try WeightedDie(chances: c)
 }

@@ -282,7 +282,7 @@ final class DiceTests: XCTestCase {
     }
     
     func testRolling() {
-        #warning("Not implemented")
+        #warning("DiceTests.testRolling not implemented")
     }
     
     func testCanReach() {
@@ -357,11 +357,11 @@ final class DiceTests: XCTestCase {
     }
     
     func testRollingMultipleTimes() {
-        #warning("Not implemented")
+        #warning("DiceTests.testRollingMultipleTimes not implemented")
     }
     
     func testChanceInRange() {
-        #warning("Not implemented")
+        #warning("DiceTests.testChanceInRange not implemented")
     }
     
     func testNegativeMultipleDieStringParsing() {

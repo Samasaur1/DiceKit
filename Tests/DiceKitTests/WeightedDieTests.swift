@@ -137,11 +137,11 @@ final class WeightedDieTests: XCTestCase {
     }
 
     func testDoubleAverageResultProperty() {
-        #warning("testDoubleAverageResultProperty not implemented")
+        #warning("WeightedDieTests.testDoubleAverageResultProperty not implemented")
     }
 
     func testAverageResultProperty() {
-        #warning("testAverageResultProperty not implemented")
+        #warning("WeightedDieTests.testAverageResultProperty not implemented")
     }
 
     func testCanReachProperty() {
@@ -172,7 +172,7 @@ final class WeightedDieTests: XCTestCase {
     }
     
     func testRollingMultipleTimes() {
-        #warning("Not implemented")
+        #warning("WeightedDieTests.testRollingMultipleTimes not implemented")
     }
     
     func testChanceInRange() {
