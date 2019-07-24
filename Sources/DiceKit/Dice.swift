@@ -345,7 +345,7 @@ extension Dice: Rollable {
             return minimumResult <= target
         }
     }
-    
+
     private func calculateChances() -> Chances {
         //Gets an array of all the dice (which can include multiple of the same die) to loop through.
         var sortedDice: [Die] = []
@@ -355,7 +355,7 @@ extension Dice: Rollable {
             }
         }
         sortedDice = sortedDice.sorted()
-        
+
         //This will store [target: array of compositions that match that target]
         var dict: [Roll: [[Int]]] = [:]
         //This stores the current composition that we are considering
@@ -389,7 +389,7 @@ extension Dice: Rollable {
             }
         }
         recurse(index: 1, loop: 1)
-        
+
         //Calculates the number of possible combinations of rolls
         var max = 1
         for (die, count) in dice {
@@ -397,7 +397,7 @@ extension Dice: Rollable {
                 max *= die.sides
             }
         }
-        
+
         //Maps the compositions to the number of them, which is converted to a Chance and put in a Chances
         var c = Chances()
         c.dict = dict.mapValues { (arr: [[Int]]) -> Chance in
