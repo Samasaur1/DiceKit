@@ -41,7 +41,6 @@ final class DiceKitTests: XCTestCase {
         for i in 0...3 {
             let r = try! getRollable()
             print("\(r)", to: &STDOUT)
-            print("\(r)", to: &STDERR)
             for _ in 0...3 {
                 let roll = r.roll()
                 XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
@@ -49,7 +48,6 @@ final class DiceKitTests: XCTestCase {
                 XCTAssert(r.canReach(roll, .exactly))
             }
             print("Rollable {\(r)}, #\(i+1) completed", to: &STDOUT)
-            print("Rollable {\(r)}, #\(i+1) completed", to: &STDERR)
         }
     }
     
@@ -66,7 +64,6 @@ final class DiceKitTests: XCTestCase {
     func testWeightedDieRollable() {
         let r = try! getWeightedDie()
         print("\(r)", to: &STDOUT)
-        print("\(r)", to: &STDERR)
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
@@ -78,7 +75,6 @@ final class DiceKitTests: XCTestCase {
     func testDiceRollable() {
         let r = try! getDice()
         print("\(r)", to: &STDOUT)
-        print("\(r)", to: &STDERR)
         for _ in 0...3 {
             let roll = r.roll()
             XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
