@@ -38,7 +38,7 @@ final class DiceKitTests: XCTestCase {
     }
 
     func testRollable() {
-        for _ in 0...3 {
+        for i in 0...3 {
             let r = try! getRollable()
             for _ in 0...3 {
                 let roll = r.roll()
@@ -46,6 +46,8 @@ final class DiceKitTests: XCTestCase {
                 XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
                 XCTAssert(r.canReach(roll, .exactly))
             }
+            print("Rollable {\(r)}, #\(i+1) completed", to: &STDOUT)
+            print("Rollable {\(r)}, #\(i+1) completed", to: &STDERR)
         }
     }
     

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.17.0] - 2019-07-24
+## [0.17.0] - 2019-07-25
 ### Added
 - New feature guidelines
 - Issue and pull request templates (PR #57)
