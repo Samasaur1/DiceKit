@@ -104,7 +104,7 @@ internal func getDie() throws -> Die {
 internal func getDice() throws -> Dice {
     var d = Dice(dice: [])
     for i in 1...Int.random(in: 2...5) {
-        d += (try getRollable(die: true) as! Die, i % 3)
+        d += (try getDie(), i % 3)
     }
     d += Int.random(in: -10...10)
     return d
@@ -115,7 +115,16 @@ internal func getWeightedDie() throws -> WeightedDie {
     for _ in 1...Int.random(in: 3...10) {
         c[of: Int.random(in: 1...500)] = try Chance(approximating: round(Double.random(in: 0..<1))*1000/1000)
     }
-    return try WeightedDie(chances: c)
+    let w: WeightedDie
+    do {
+        w = try WeightedDie(chances: c)
+    } catch Error.emptyDictionary {
+        print("Empty dictionary at line \(#line) in file \(#file)", to: &STDERR)
+        w = try getWeightedDie()
+    } catch let err {
+        throw err
+    }
+    return w
 }
 
 internal func getRollable(die: Bool = false) throws -> Rollable {
