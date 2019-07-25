@@ -103,7 +103,8 @@ internal func getDie() throws -> Die {
 
 internal func getDice() throws -> Dice {
     var d = Dice(dice: [])
-    for _ in 1...Int.random(in: 2..<5) {
+    let numDice = Int.random(in: 1...4)
+    while d.numberOfDice < numDice {
         d += (try getDie(), Bool.random() ? 2 : 1)
     }
     d += Int.random(in: -10...10)
