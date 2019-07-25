@@ -234,6 +234,15 @@ public extension Chance {
     }
 }
 
+extension Chance: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        return "\(n) out of \(d)"
+    }
+    public var debugDescription: String {
+        return "\(n)/\(d)"
+    }
+}
+
 fileprivate extension Dictionary.Values where Dictionary.Value == Chance {
     var sum: Chance {
         var total = Chance.zero
@@ -443,11 +452,11 @@ extension WeightedDie: Hashable {
 
 extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        return "A weighted die."
+        return "A weighted die with chances: \(chances)"
     }
 
     public var debugDescription: String {
-        return "A WeightedDie"
+        return "A WeightedDie: \(chances)"
     }
 }
 

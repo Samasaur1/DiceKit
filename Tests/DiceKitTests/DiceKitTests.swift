@@ -40,6 +40,8 @@ final class DiceKitTests: XCTestCase {
     func testRollable() {
         for i in 0...3 {
             let r = try! getRollable()
+            print("\(r)", to: &STDOUT)
+            print("\(r)", to: &STDERR)
             for _ in 0...3 {
                 let roll = r.roll()
                 XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
