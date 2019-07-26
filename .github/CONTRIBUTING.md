@@ -119,7 +119,7 @@ If you decide to do this, thank you. Keep in mind that we may request changes in
 Unsure where to begin contributing to DiceKit? You can start by looking through these `good first issue` and `help wanted` issues:
 
 - [Beginner issues](https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) - issues which should only require a few lines of code, and a test or two.
-- [Help wanted issues](https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) - issues that we're finding a more difficult than normal, but that you may find easy.
+- [Help wanted issues](https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) - issues that we're finding more difficult than normal, but that you may find easy.
 
 ## Styleguide
 

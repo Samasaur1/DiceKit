@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.17.0] - 2019-07-26
 ### Added
 - New feature guidelines
-- Issue and pull request templates (PR #57)
+- Issue and pull request templates
 - `Rollable`
   - `chance(of:_:)`
   - `probabilities` — property of type `Chances`

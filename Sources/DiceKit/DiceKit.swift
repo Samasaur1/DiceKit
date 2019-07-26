@@ -327,16 +327,6 @@ internal extension Array where Element == Double {
         return total
     }
 }
-
-internal extension Sequence where Element: Equatable {
-    var uniqueElements: [Element] {
-        return self.reduce(into: []) { uniqueElements, element in
-            if !uniqueElements.contains(element) {
-                uniqueElements.append(element)
-            }
-        }
-    }
-}
 #if !swift(>=5.1) //Can't use `#if swift(<5.1)` for earlier than Swift 5
 internal extension Sequence {
     func count(where predicate: (Element) throws -> Bool) rethrows -> Int {
