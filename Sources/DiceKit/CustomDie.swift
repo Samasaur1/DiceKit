@@ -100,6 +100,19 @@ public extension CustomDie {
          
         */
     }
+
+    /// Determined the chance of rolling the given `DieSide`.
+    ///
+    /// - Parameter roll: The `DieSide` to check the chance of rolling.
+    /// - Returns: The chance of rolling the given `DieSide`.
+    ///
+    /// - Since: 0.17.0
+    func chance(of roll: DieSide<Output>) -> Chance {
+//        guard sides.values.contains(roll) else {
+//            return .zero
+//        } //This isn't needed because of the count(where:)
+        return (try? .init(sides.count(where: { $0.value == roll }), outOf: sides.count)) ?? .zero
+    }
 }
 
 extension CustomDie: Equatable {

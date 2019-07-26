@@ -262,6 +262,11 @@ public class Dice {
         self.dice = newDice
         modifier = other.modifier
     }
+
+    /// The probabilities of all possible rolls.
+    ///
+    /// - Since: 0.17.0
+    public lazy var probabilities: Chances = calculateChances()
 }
 
 extension Dice: Rollable {
@@ -340,6 +345,66 @@ extension Dice: Rollable {
             return minimumResult <= target
         }
     }
+
+    private func calculateChances() -> Chances {
+        //Gets an array of all the dice (which can include multiple of the same die) to loop through.
+        var sortedDice: [Die] = []
+        for (die, count) in dice {
+            for _ in 0..<count {
+                sortedDice.append(die)
+            }
+        }
+        sortedDice = sortedDice.sorted()
+
+        //This will store [target: array of compositions that match that target]
+        var dict: [Roll: [[Int]]] = [:]
+        //This stores the current composition that we are considering
+        var array = [Int].init(repeating: 0, count: sortedDice.count)
+        //This simulates n nested loops, where n is not known at compile time (in fact, it's the number of dice)
+        //It goes through every possible combination of dice. For example:
+        // [1, 1, 1, 1], [1, 1, 1, 2] ... [1, 1, 1, n], [1, 1, 2, 1] ... [1, 1, 2, n] ... [1, 1, m, n], [1, 2, 1, 1] ...
+        func recurse(index: Int, loop: Int) {
+            array[loop - 1] = index
+            if loop != numberOfDice {
+                recurse(index: 1, loop: loop + 1)
+                if index == sortedDice[loop - 1].sides {
+                    return
+                } else {
+                    recurse(index: index + 1, loop: loop)
+                }
+            } else {
+                //begin code
+                let target = array.sum + modifier //modifier is very important
+                if dict[target] != nil {
+                    dict[target]!.append(array)
+                } else {
+                    dict[target] = [array]
+                }
+                //end code
+                if index == sortedDice[loop - 1].sides {
+                    return
+                } else {
+                    recurse(index: index + 1, loop: loop)
+                }
+            }
+        }
+        recurse(index: 1, loop: 1)
+
+        //Calculates the number of possible combinations of rolls
+        var max = 1
+        for (die, count) in dice {
+            for _ in 0..<count {
+                max *= die.sides
+            }
+        }
+
+        //Maps the compositions to the number of them, which is converted to a Chance and put in a Chances
+        var c = Chances()
+        c.dict = dict.mapValues { (arr: [[Int]]) -> Chance in
+            return (try? .init(arr.count, outOf: max)) ?? .zero
+        }
+        return c
+    }
 }
 
 extension Dice: Equatable {
@@ -365,7 +430,7 @@ extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
     ///
     ///     Dice(withModifier: 5).description // A modifier of 5.
     ///
-    ///     Dice(Die.d6, withModifier: 5).description // 1 six-sided die, with a modifier of 5.
+    ///     Dice(Die.d6, withModifier: 5).description // 1 6-sided die, with a modifier of 5.
     ///
     ///     Dice(Die.d6, Die.d6, Die.d4, withModifier: 5).description // 2 6-sided dice, 1 four-sided die, with a modifier of 5.
     public var description: String {

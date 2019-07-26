@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.17.0] - 2019-07-26
+### Added
+- New feature guidelines
+- Issue and pull request templates
+- `Rollable`
+  - `chance(of:_:)`
+  - `probabilities` — property of type `Chances`
+  - `chance(of:)` for rolling in ranges
+- `CustomDie`
+  - `chance(of:)` for a specific possibility
+- `Chance`
+  - `gcd(_:_:)` and `lcm(_:_:)`
+  - `+`, `-`, and `+=` operators
+  - `normalized` — proportionally scales every Chance until the sum is 1
+
+### Changed
+- `Chances`
+  - No longer has entries in the dictionary for `Roll`s where the `Chance` is 0
+
+### Fixed
+- Latest compatible version links to refer to releases rather than the tree at the specified tag
+- `Rollable`
+  - `roll(times:_:)` would crash when called like so: `roll(times: 1, .dropOutsides)`
+
 ## [0.16.1] - 2019-06-24
 ### Added
 - Testing on Swift 5.0.1 and Xcode 10.2
@@ -141,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.17.0]: https://github.com/Samasaur1/Dicekit/compare/v0.16.1...v0.17.0
 [0.16.1]: https://github.com/Samasaur1/DiceKit/compare/v0.16.0...v0.16.1
 [0.16.0]: https://github.com/Samasaur1/DiceKit/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/Samasaur1/DiceKit/compare/v0.14.0...v0.15.0

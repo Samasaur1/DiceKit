@@ -135,7 +135,121 @@ extension Chance: ExpressibleByFloatLiteral {
     ///
     /// - Parameter value: The decimal value to convert to a fraction.
     public init(floatLiteral value: Chance.FloatLiteralType) {
-        try! self.init(approximating: value) //swiftlint:disable:this force_try
+        do {
+            try self.init(approximating: value)
+        } catch let err as Error {
+            print(err, to: &STDERR)
+            self = .zero
+        } catch let err {
+            print("""
+
+                <ERROR>
+
+                Initializing a Chance using init(floatLiteral:) threw a non-DiceKit error, which shouldn't ever happen.
+                Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
+                and provide the following information:
+
+                floatLiteral:   \(value)
+                err:            \(err)
+
+                </ERROR>
+
+                """, to: &STDERR)
+            fatalError("Non-DiceKit error came back from Chance.init(approximating:)\n\nSee above\n")
+        }
+    }
+}
+public extension Chance {
+    /// The greatest common divisor/factor of two integers.
+    ///
+    /// - Parameters:
+    ///   - a: The first integer.
+    ///   - b: The second integer.
+    /// - Returns: The greatest common divisor of the two integers.
+    ///
+    /// - Since: 0.17.0
+    static func gcd(_ a: Int, _ b: Int) -> Int {
+        var a = abs(a)
+        var b = abs(b)
+        if b > a {
+            swap(&a, &b)
+        }
+        while b != 0 {
+            (a, b) = (b, a % b)
+        }
+        return abs(a)
+    }
+
+    /// The least/lowest common multiple of two integers.
+    ///
+    /// - Parameters:
+    ///   - a: The first integer.
+    ///   - b: The second integer.
+    /// - Returns: The lowest common multiple of the two integers.
+    ///
+    /// - Since: 0.17.0
+    static func lcm(_ a: Int, _ b: Int) -> Int {
+        return abs(a * b) / gcd(a, b)
+    }
+
+    /// Adds two `Chance` instances together.
+    ///
+    /// - Parameters:
+    ///   - lhs: The augend (first summand).
+    ///   - rhs: The addend (second summand).
+    /// - Returns: The sum of the two `Chance` instances.
+    ///
+    /// - Since: 0.17.0
+    static func + (lhs: Chance, rhs: Chance) -> Chance {
+        let lcm = Chance.lcm(lhs.d, rhs.d)
+        let lnum = lhs.n * lcm / lhs.d
+        let rnum = rhs.n * lcm / rhs.d
+        return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
+    }
+
+    /// Subtracts one `Chance` instance from another.
+    ///
+    /// - Parameters:
+    ///   - lhs: The minuend (the value to be subtracted from).
+    ///   - rhs: The subtrahend (the value to subtract).
+    /// - Returns: The difference of the two values.
+    ///
+    /// - Since: 0.17.0
+    static func - (lhs: Chance, rhs: Chance) -> Chance {
+        let lcm = Chance.lcm(lhs.d, rhs.d)
+        let lnum = lhs.n * lcm / lhs.d
+        let rnum = rhs.n * lcm / rhs.d
+        return (try? .init(lnum - rnum, outOf: lcm)) ?? .zero
+    }
+
+    /// Adds the two `Chance` instances and sets the left-hand instance to the sum.
+    ///
+    /// - Parameters:
+    ///   - lhs: The summand that will be set to the sum.
+    ///   - rhs: The summand that will not be set to the sum.
+    ///
+    /// - Since: 0.17.0
+    static func += (lhs: inout Chance, rhs: Chance) {
+        lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
+    }
+}
+
+extension Chance: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        return "\(n) out of \(d)"
+    }
+    public var debugDescription: String {
+        return "\(n)/\(d)"
+    }
+}
+
+fileprivate extension Dictionary.Values where Dictionary.Value == Chance {
+    var sum: Chance {
+        var total = Chance.zero
+        for element in self {
+            total += element
+        }
+        return total
     }
 }
 
@@ -165,7 +279,7 @@ public struct Chances {
     /// - Parameter chances: The rolls and the chances of them occurring.
     public init(chances: [(Roll, Chance)]) {
         self.dict = [:]
-        for (roll, chance) in chances {
+        for (roll, chance) in chances where chance.n > 0 {
             self.dict[roll] = chance
         }
     }
@@ -183,6 +297,17 @@ public struct Chances {
         set {
             dict[roll] = newValue
         }
+    }
+    /// A normalized version of this `Chances` instance. The sum of the `Chance`s will be 1
+    ///
+    /// - Since: 0.17.0
+    public var normalized: Chances {
+        let sum = dict.values.sum.value
+        guard sum != 0 else {
+            return Chances()
+        }
+        let multiplier = 1.0 / sum
+        return Chances(chances: dict.mapValues { Chance(floatLiteral: $0.value * multiplier) })
     }
 }
 extension Chances: Equatable {
@@ -210,7 +335,7 @@ public class WeightedDie {
     /// - Parameter c: The rolls and the chances of them occurring.
     /// - Throws: `Error.emptyDictionary`
     public init(chances c: Chances) throws {
-        chances = c.dict
+        chances = c.normalized.dict
         guard !chances.isEmpty else {
             throw Error.emptyDictionary
         }
@@ -226,6 +351,13 @@ public class WeightedDie {
     public init(copyOf other: WeightedDie) {
         chances = other.chances
     }
+
+    /// The probabilities of all possible rolls.
+    ///
+    /// - Since: 0.17.0
+    public lazy var probabilities: Chances = {
+        return Chances(chances: chances)
+    }()
 }
 
 extension WeightedDie: Rollable {
@@ -239,7 +371,22 @@ extension WeightedDie: Rollable {
             if rand < (chance + baseline) { return roll }
             baseline += chance
         }
-        fatalError("The WeightedDie roll() function never returned")
+        print("""
+
+            <ERROR>
+
+            The WeightedDie roll() function never returned, which shouldn't ever happen.
+            Please create a new issue here: https://github.com/Samasaur1/DiceKit/issues/new
+            and provide the following information:
+
+            chances:        \(self.chances)
+            rand:           \(rand)
+            chances sum:    \(chances.map { $0.value.value }.sum)
+
+            </ERROR>
+
+            """, to: &STDERR)
+        fatalError("The WeightedDie roll() function never returned\n\nSee above\n")
     }
 
     /// The minimum possible result from using the `roll()` method.
@@ -305,11 +452,11 @@ extension WeightedDie: Hashable {
 
 extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        return "A weighted die."
+        return "A weighted die with chances: \(chances)"
     }
 
     public var debugDescription: String {
-        return "A WeightedDie"
+        return "A WeightedDie: \(chances)"
     }
 }
 

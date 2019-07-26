@@ -53,6 +53,18 @@ public class Die {
     public init(copyOf other: Die) {
         sides = other.sides
     }
+
+    /// The probabilities of all possible rolls.
+    ///
+    /// - Since: 0.17.0
+    public lazy var probabilities: Chances = {
+        var chances = Chances()
+        let chance = try! Chance(1, outOf: sides) //swiftlint:disable:this force_try
+        for i in 1...sides {
+            chances[of: i] = chance
+        }
+        return chances
+    }()
 }
 
 extension Die: Rollable {

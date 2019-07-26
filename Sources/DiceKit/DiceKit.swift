@@ -46,6 +46,61 @@ public protocol Rollable {
     ///
     /// - Since: 0.15.0
     func canReach(_ target: Roll, _ comparisonType: RollComparison) -> Bool
+
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    ///
+    /// - Since: 0.17.0
+    func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: Range<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: ClosedRange<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeFrom<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeUpTo<Roll>) -> Chance
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeThrough<Roll>) -> Chance
+
+    /// The probabilities of all possible rolls.
+    ///
+    /// - Since: 0.17.0
+    var probabilities: Chances { get }
 }
 
 public extension Rollable {
@@ -72,15 +127,15 @@ public extension Rollable {
         case .outsides:
             return (rolls.min() ?? 0) + (rolls.max() ?? 0)
         case .dropHighest:
-            guard !rolls.isEmpty else { return 0 }
+            guard rolls.count > 1 else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.max()!)!)
             return rolls.sum
         case .dropLowest:
-            guard !rolls.isEmpty else { return 0 }
+            guard rolls.count > 1 else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.min()!)!)
             return rolls.sum
         case .dropOutsides:
-            guard !rolls.isEmpty else { return 0 }
+            guard rolls.count > 2 else { return 0 }
             rolls.remove(at: rolls.index(of: rolls.max()!)!)
             rolls.remove(at: rolls.index(of: rolls.min()!)!)
             return rolls.sum
@@ -97,6 +152,94 @@ public extension Rollable {
             }
             return rolls.sum
         }
+    }
+
+    /// Determines the chance of rolling the target `Roll`, compared by the given comparison.
+    ///
+    /// - Parameters:
+    ///   - target: The target to check the chance for.
+    ///   - comparisonType: The method of comparison of which the chance of occurring is being returned.
+    /// - Returns: The chance of rolling the target using the given method of comparison.
+    ///
+    /// - Since: 0.17.0
+    func chance(of target: Roll, _ comparisonType: RollComparison) -> Chance {
+        switch comparisonType {
+        case .orLower:
+            guard minimumResult <= target else {
+                return Chance.zero
+            }
+            var sum = Chance.zero
+            for i in minimumResult...target {
+                sum += probabilities[of: i]
+            }
+            return sum
+        case .exactly:
+            return probabilities[of: target]
+        case .orHigher:
+            guard target <= maximumResult else {
+                return Chance.zero
+            }
+            var sum = Chance.zero
+            for i in target...maximumResult {
+                sum += probabilities[of: i]
+            }
+            return sum
+        }
+    }
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: Range<Roll>) -> Chance {
+        var sum = Chance.zero
+        for i in range {
+            sum += probabilities[of: i]
+        }
+        return sum
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: ClosedRange<Roll>) -> Chance {
+        var sum = Chance.zero
+        for i in range {
+            sum += probabilities[of: i]
+        }
+        return sum
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeFrom<Roll>) -> Chance {
+        return chance(of: range.lowerBound, .orHigher)
+    }
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeUpTo<Roll>) -> Chance {
+        return chance(of: range.upperBound, .orLower) - chance(of: range.upperBound, .exactly)
+    }
+
+    /// Determines the chance of rolling in the given range.
+    ///
+    /// - Parameter range: The range to check.
+    /// - Returns: The chance of rolling in the given range.
+    ///
+    /// - Since: 0.17.0
+    func chance(of range: PartialRangeThrough<Roll>) -> Chance {
+        return chance(of: range.upperBound, .orLower)
     }
 }
 
@@ -158,7 +301,7 @@ public enum RollComparison: CaseIterable {
 }
 
 internal extension Array where Element == Roll {
-    internal var sum: Roll {
+    var sum: Roll {
         var total = 0
         for r in self {
             total += r
@@ -168,7 +311,7 @@ internal extension Array where Element == Roll {
 }
 
 internal extension String {
-    internal var isNumeric: Bool {
+    var isNumeric: Bool {
         guard !self.isEmpty else { return false }
         let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         return Set(self).isSubset(of: nums)
@@ -176,7 +319,7 @@ internal extension String {
 }
 
 internal extension Array where Element == Double {
-    internal var sum: Double {
+    var sum: Double {
         var total = 0.0
         for el in self {
             total += el
@@ -260,3 +403,22 @@ public typealias DKWeightedDie = WeightedDie
 public typealias DKChance = Chance
 /// See `Chances`.
 public typealias DKChances = Chances
+
+import Foundation
+internal struct FileHandleOutputStream: TextOutputStream {
+    private let fileHandle: FileHandle
+    let encoding: String.Encoding
+
+    init(_ fileHandle: FileHandle, encoding: String.Encoding = .utf8) {
+        self.fileHandle = fileHandle
+        self.encoding = encoding
+    }
+
+    mutating func write(_ string: String) {
+        if let data = string.data(using: encoding) {
+            fileHandle.write(data)
+        }
+    }
+}
+internal var STDERR = FileHandleOutputStream(.standardError)
+internal var STDOUT = FileHandleOutputStream(.standardOutput)

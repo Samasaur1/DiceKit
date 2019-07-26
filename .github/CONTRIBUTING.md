@@ -92,6 +92,24 @@ Please make this clear by prefixing your PR title with `Formatting:`. For exampl
 
 We recommend creating a new issue to propose your feature before you create a pull request. That way, if we don't feel it fits the spirit of the project, you haven't spent time on it.
 
+#### Writing the Code
+
+- Please follow the [Styleguide](#styleguide)
+- Don't unnecessarily reinvent the wheel. If it makes sense to use a feature already included in DiceKit in your new feature, go ahead. (For an example, see [here](https://github.com/Samasaur1/DiceKit/blob/ba343930afba59e0a18afa013bee521cc413e60d/Sources/DiceKit/Die.swift#L126-L139), where the `canReach` function is used inside the `chance` function).
+- Write test cases for your new feature. Take a look at the `Tests/DiceKitTests` directory to see some examples.
+
+We recommend that you test your code locally so that you aren't surprised if the PR tests fail. As of 2019-06-26, here are the tests we run:
+- `swift test`. Make sure that you have run `swift test --generate-linuxmain` before doing this, to make sure that you run them all. You can also run the tests with `⌘+U` in Xcode.
+- `swiftlint`. [SwiftLint](https://github.com/realm/SwiftLint) is a third-party tool. If you have it installed, just run `swiftlint`, there is a configuration file in the repository already. If you don't have it installed, don't worry, it automatically comments on your pull request and you can address it then.
+- Some code analysis tools. They will comment on the PR, but you can't run them locally.
+- We check for any added `TODO`s, just to make sure you don't forget anything. This shouldn't be a problem
+
+#### Creating the PR
+
+Use the "PR to development" template. If the PR has a corresponding issue, say `closes #5` (except the actual issue number) after the item in the list of new things.
+
+You will need to update the changelog, and please don't check the checkbox until you have done so.
+
 ### Adding Documentation
 
 If you decide to do this, thank you. Keep in mind that we may request changes in order to ensure that the documentation is up to our standards, but we will never refuse a docuementation pull request outright.
@@ -100,8 +118,8 @@ If you decide to do this, thank you. Keep in mind that we may request changes in
 
 Unsure where to begin contributing to DiceKit? You can start by looking through these `good first issue` and `help wanted` issues:
 
-- [Beginner issues][https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22] - issues which should only require a few lines of code, and a test or two.
-- [Help wanted issues][https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22] - issues which are more difficult for me, but that you may find easy.
+- [Beginner issues](https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) - issues which should only require a few lines of code, and a test or two.
+- [Help wanted issues](https://github.com/Samasaur1/DiceKit/issues?utf8=✓&q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) - issues that we're finding more difficult than normal, but that you may find easy.
 
 ## Styleguide
 
