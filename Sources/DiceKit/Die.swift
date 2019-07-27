@@ -52,7 +52,7 @@ public struct Die {
     /// - Parameter other: The other `Die` to copy.
     @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
     public init(copyOf other: Die) {
-        sides = other.sides
+        self.sides = other.sides
     }
 
     private let __probabilities = LazyBox<Die, Chances> { d in
@@ -169,7 +169,7 @@ public extension Die {
     /// - Returns: A copy of the given `Die`, with the same number of sides, at a different memory location.
     @available(*, deprecated, message: "Die is now a struct; copying is not necessary")
     func copy() -> Die {
-        return Die(copyOf: self)
+        return self
     }
 }
 

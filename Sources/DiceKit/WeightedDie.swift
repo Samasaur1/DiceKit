@@ -28,7 +28,7 @@ public struct WeightedDie {
     /// - Parameter other: The other `WeightedDie` to copy.
     @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
     public init(copyOf other: WeightedDie) {
-        chances = other.chances
+        self.chances = other.chances
     }
 
     private let __probabilities = LazyBox<WeightedDie, Chances> { wd in
@@ -149,7 +149,7 @@ public extension WeightedDie {
     /// - Returns: A copy of the given `WeightedDie`, with the same number of sides, at a different memory location.
     @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
     func copy() -> WeightedDie {
-        return WeightedDie(copyOf: self)
+        return self
     }
 }
 

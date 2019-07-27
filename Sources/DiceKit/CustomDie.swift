@@ -52,7 +52,7 @@ public struct CustomDie<Output: Hashable> {
     /// - Parameter other: The other `CustomDie` to copy.
     @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
     public init(copyOf other: CustomDie) {
-        die = other.die.copy()
+        die = other.die
         sides = other.sides
     }
 }
@@ -141,6 +141,6 @@ public extension CustomDie {
     /// - Returns: A copy of the given `CustomDie`, with the same number of sides and `DieSide`s, at a different memory location.
     @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
     func copy() -> CustomDie {
-        return CustomDie(copyOf: self)
+        return self
     }
 }

@@ -256,12 +256,8 @@ public struct Dice {
     /// - Parameter other: The other `Dice` object to copy.
     @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     public init(copyOf other: Dice) {
-        var newDice: [Die: Int] = [:]
-        for (d, c) in other.dice {
-            newDice[d] = c
-        }
-        self.dice = newDice
-        modifier = other.modifier
+        self.dice = other.dice
+        self.modifier = other.modifier
     }
 
     private let __probabilities = LazyBox<Dice, Chances> { d in
@@ -514,7 +510,7 @@ public extension Dice {
     /// - Returns: A copy of the given `Dice`, with the same information, at a different memory location.
     @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     func copy() -> Dice {
-        return Dice(copyOf: self)
+        return self
     }
 }
 
@@ -643,7 +639,7 @@ public extension Dice {
     ///   - rhs: The multiplier.
     /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     static func * (lhs: Dice, rhs: Int) -> Dice {
-        var dice = lhs.copy()
+        var dice = lhs
         for (die, count) in lhs.dice {
             dice += die * (count * (rhs - 1))
         }
@@ -663,7 +659,7 @@ public extension Dice {
     ///   - rhs: The `Dice` object to multiply.
     /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     static func * (lhs: Int, rhs: Dice) -> Dice {
-        var dice = rhs.copy()
+        var dice = rhs
         for (die, count) in rhs.dice {
             dice += die * ((lhs - 1) * count)
         }
