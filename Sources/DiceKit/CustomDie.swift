@@ -1,38 +1,10 @@
-/// A class that masks a side, returning a custom value in lieu of a number.
-///
-/// - Since: 0.16.0
-/// - Author: Samasaur
-public class DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure it is at least Equatable.
-
-    /// Create a new DieSide with the given value.
-    ///
-    /// - Parameter value: The value that this DieSide will return when rolled.
-    public init(_ value: OutputType) {
-        self.value = value
-    }
-
-    /// The value that this DieSide will return when rolled.
-    public let value: OutputType
-
-    public static func == (lhs: DieSide, rhs: DieSide) -> Bool { //IMPORTANT NOTE: THIS DOES NOT ACCEPT `DieSide`s WITH DIFFERENT GENERIC ARGUMENTS
-        guard type(of: lhs.value) == type(of: rhs.value) else {
-            return false
-        }
-        return lhs.value == rhs.value
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(value)
-    }
-}
-
 /// A class that allows for dice with custom sides instead of numbers.
 ///
 /// This class wraps a `Die` instance, and when `roll()` is called on this, it calls the Die's `roll()` method and maps the output to one of the `DieSide`s passed to the initializer.
 ///
 /// - Since: 0.16.0
 /// - Author: Samasaur
-public class CustomDie<Output: Hashable> {
+public struct CustomDie<Output: Hashable> {
     /// The `Die` that internally powers the `CustomDie`.
     private let die: Die
     /// A dictionary that maps the rolls of the die to the `DieSide`s passed to the initializer
@@ -55,7 +27,7 @@ public class CustomDie<Output: Hashable> {
     ///
     /// - Parameter sides: The sides of the die.
     /// - Throws: An `Error.IllegalNumberOfSides` error when the number of sides is less than or equal to 0
-    public convenience init(_ sides: DieSide<Output>...) throws {
+    public init(_ sides: DieSide<Output>...) throws {
         try self.init(sides: sides)
     }
 
@@ -73,14 +45,6 @@ public class CustomDie<Output: Hashable> {
         }
         die = try! Die(sides: sidesArr.count) //swiftlint:disable:this force_try
         sides = sidesDict
-    }
-
-    /// Creates a new `CustomDie` that is a copy of the given `CustomDie`.
-    ///
-    /// - Parameter other: The other `CustomDie` to copy.
-    public init(copyOf other: CustomDie) {
-        die = other.die.copy()
-        sides = other.sides
     }
 }
 
@@ -159,14 +123,5 @@ extension CustomDie: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return "A CustomDie"
-    }
-}
-
-public extension CustomDie {
-    /// Returns a copy of the given `CustomDie` with separate memory.
-    ///
-    /// - Returns: A copy of the given `CustomDie`, with the same number of sides and `DieSide`s, at a different memory location.
-    func copy() -> CustomDie {
-        return CustomDie(copyOf: self)
     }
 }

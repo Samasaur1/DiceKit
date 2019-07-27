@@ -5,7 +5,7 @@
 /// A `Die` object cannot change. Use the addition operators and the `Dice` class to represent more complex dice expressions.
 ///
 /// - Author: Samasaur
-public class Die {
+public struct Die {
     /// The number of sides on this `Die`. This value does not need to be possible (for example, it can be 13), but it *does* need to be larger than 0.
     public let sides: Int
     /// Creates a new `Die` with the given number of sides.
@@ -47,24 +47,22 @@ public class Die {
             throw Error.illegalString(string: str)
         }
     }
-    /// Creates a new `Die` that is a copy of the given `Die`.
-    ///
-    /// - Parameter other: The other `Die` to copy.
-    public init(copyOf other: Die) {
-        sides = other.sides
+
+    private let __probabilities = LazyBox<Die, Chances> { d in
+        var chances = Chances()
+        let chance = try! Chance(1, outOf: d.sides) //swiftlint:disable:this force_try
+        for i in 1...d.sides {
+            chances[of: i] = chance
+        }
+        return chances
     }
 
     /// The probabilities of all possible rolls.
     ///
     /// - Since: 0.17.0
-    public lazy var probabilities: Chances = {
-        var chances = Chances()
-        let chance = try! Chance(1, outOf: sides) //swiftlint:disable:this force_try
-        for i in 1...sides {
-            chances[of: i] = chance
-        }
-        return chances
-    }()
+    public var probabilities: Chances {
+        return __probabilities.value(input: self)
+    }
 }
 
 extension Die: Rollable {
@@ -130,6 +128,10 @@ extension Die: Rollable {
     }
 }
 
+extension Die: IncludableInDice {
+    
+}
+
 extension Die: Equatable {
     public static func == (lhs: Die, rhs: Die) -> Bool {
         return lhs.sides == rhs.sides
@@ -155,15 +157,6 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return "d\(sides)"
-    }
-}
-
-public extension Die {
-    /// Returns a copy of the given `Die` with separate memory.
-    ///
-    /// - Returns: A copy of the given `Die`, with the same number of sides, at a different memory location.
-    func copy() -> Die {
-        return Die(copyOf: self)
     }
 }
 
