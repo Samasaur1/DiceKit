@@ -46,6 +46,15 @@ public struct CustomDie<Output: Hashable> {
         die = try! Die(sides: sidesArr.count) //swiftlint:disable:this force_try
         sides = sidesDict
     }
+
+    /// Creates a new `CustomDie` that is a copy of the given `CustomDie`.
+    ///
+    /// - Parameter other: The other `CustomDie` to copy.
+    @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
+    public init(copyOf other: CustomDie) {
+        die = other.die.copy()
+        sides = other.sides
+    }
 }
 
 public extension CustomDie {
@@ -123,5 +132,15 @@ extension CustomDie: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return "A CustomDie"
+    }
+}
+
+public extension CustomDie {
+    /// Returns a copy of the given `CustomDie` with separate memory.
+    ///
+    /// - Returns: A copy of the given `CustomDie`, with the same number of sides and `DieSide`s, at a different memory location.
+    @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
+    func copy() -> CustomDie {
+        return CustomDie(copyOf: self)
     }
 }

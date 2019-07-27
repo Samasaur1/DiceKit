@@ -47,6 +47,13 @@ public struct Die {
             throw Error.illegalString(string: str)
         }
     }
+    /// Creates a new `Die` that is a copy of the given `Die`.
+    ///
+    /// - Parameter other: The other `Die` to copy.
+    @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
+    public init(copyOf other: Die) {
+        sides = other.sides
+    }
 
     private let __probabilities = LazyBox<Die, Chances> { d in
         var chances = Chances()
@@ -153,6 +160,16 @@ extension Die: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return "d\(sides)"
+    }
+}
+
+public extension Die {
+    /// Returns a copy of the given `Die` with separate memory.
+    ///
+    /// - Returns: A copy of the given `Die`, with the same number of sides, at a different memory location.
+    @available(*, deprecated, message: "Die is now a struct; copying is not necessary")
+    func copy() -> Die {
+        return Die(copyOf: self)
     }
 }
 

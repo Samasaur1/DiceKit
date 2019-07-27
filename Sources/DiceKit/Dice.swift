@@ -254,6 +254,7 @@ public struct Dice {
     /// Creates a new `Dice` object that is a copy of the given `Dice` object.
     ///
     /// - Parameter other: The other `Dice` object to copy.
+    @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     public init(copyOf other: Dice) {
         var newDice: [Die: Int] = [:]
         for (d, c) in other.dice {
@@ -511,6 +512,7 @@ public extension Dice {
     /// Returns a copy of the given `Dice` with separate memory.
     ///
     /// - Returns: A copy of the given `Dice`, with the same information, at a different memory location.
+    @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     func copy() -> Dice {
         return Dice(copyOf: self)
     }

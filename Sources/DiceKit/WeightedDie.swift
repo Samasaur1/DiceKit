@@ -23,6 +23,14 @@ public struct WeightedDie {
         return chances.values.count { $0.n > 0 }
     }
 
+    /// Creates a new `WeightedDie` that is a copy of the given `WeightedDie`.
+    ///
+    /// - Parameter other: The other `WeightedDie` to copy.
+    @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
+    public init(copyOf other: WeightedDie) {
+        chances = other.chances
+    }
+
     private let __probabilities = LazyBox<WeightedDie, Chances> { wd in
         return Chances(chances: wd.chances)
     }
@@ -132,6 +140,16 @@ extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
 
     public var debugDescription: String {
         return "A WeightedDie: \(chances)"
+    }
+}
+
+public extension WeightedDie {
+    /// Returns a copy of the given `WeightedDie` with separate memory.
+    ///
+    /// - Returns: A copy of the given `WeightedDie`, with the same number of sides, at a different memory location.
+    @available(*, deprecated, message: "CustomDie is now a struct; copying is not necessary")
+    func copy() -> WeightedDie {
+        return WeightedDie(copyOf: self)
     }
 }
 
