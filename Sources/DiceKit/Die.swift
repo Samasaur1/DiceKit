@@ -128,10 +128,6 @@ extension Die: Rollable {
     }
 }
 
-extension Die: IncludableInDice {
-    
-}
-
 extension Die: Equatable {
     public static func == (lhs: Die, rhs: Die) -> Bool {
         return lhs.sides == rhs.sides
