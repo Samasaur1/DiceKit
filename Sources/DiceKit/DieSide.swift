@@ -25,3 +25,15 @@ public struct DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure
         hasher.combine(value)
     }
 }
+
+extension DieSide: CustomStringConvertible where OutputType: CustomStringConvertible {
+    public var description: String {
+        return "A DieSide containing {\(value.description)}"
+    }
+}
+
+extension DieSide: CustomDebugStringConvertible where OutputType: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "DieSide(\(value.debugDescription))"
+    }
+}

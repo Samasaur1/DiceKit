@@ -234,7 +234,7 @@ public extension Chance {
     }
 }
 
-extension Chance: CustomStringConvertible, CustomDebugStringConvertible {
+extension Chance: Describable {
     public var description: String {
         return "\(n) out of \(d)"
     }

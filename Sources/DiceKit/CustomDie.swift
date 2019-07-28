@@ -125,13 +125,13 @@ extension CustomDie: Hashable {
     }
 }
 
-extension CustomDie: CustomStringConvertible, CustomDebugStringConvertible {
+extension CustomDie: Describable {
     public var description: String {
-        return "A CustomDie."
+        return "A CustomDie with the following sides: \(sides.values.description)"
     }
 
     public var debugDescription: String {
-        return "A CustomDie"
+        return "CustomDie(\(sides.values.debugDescription))"
     }
 }
 

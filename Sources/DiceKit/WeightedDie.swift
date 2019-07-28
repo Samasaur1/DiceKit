@@ -133,7 +133,7 @@ extension WeightedDie: Hashable {
     }
 }
 
-extension WeightedDie: CustomStringConvertible, CustomDebugStringConvertible {
+extension WeightedDie: Describable {
     public var description: String {
         return "A weighted die with chances: \(chances)"
     }

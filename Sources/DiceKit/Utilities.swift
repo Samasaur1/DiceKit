@@ -64,7 +64,7 @@ private enum LazyValue<Input, Value> {
     case notYetComputed((Input) -> Value)
     case computed(Value)
 }
-final class LazyBox<Input, Result> {
+internal class LazyBox<Input, Result> {
     init(computation: @escaping (Input) -> Result) {
         _value = .notYetComputed(computation)
     }

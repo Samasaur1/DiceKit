@@ -153,7 +153,7 @@ extension Die: Hashable {
     }
 }
 
-extension Die: CustomStringConvertible, CustomDebugStringConvertible {
+extension Die: Describable {
     public var description: String {
         return "A \(sides)-sided die."
     }

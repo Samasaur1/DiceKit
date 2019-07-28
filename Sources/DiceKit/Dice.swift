@@ -422,7 +422,7 @@ extension Dice: Equatable {
     }
 }
 
-extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
+extension Dice: Describable {
     /// A description of this `Dice` object.
     ///
     ///     Dice().description // No dice, without a modifier.

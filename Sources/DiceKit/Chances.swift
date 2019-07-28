@@ -66,6 +66,16 @@ extension Chances: Hashable {
     }
 }
 
+extension Chances: Describable {
+    public var description: String {
+        return "A Chances object with chances \(dict.description)"
+    }
+
+    public var debugDescription: String {
+        return "Chances(\(dict.debugDescription))"
+    }
+}
+
 fileprivate extension Dictionary.Values where Dictionary.Value == Chance {
     var sum: Chance {
         var total = Chance.zero
