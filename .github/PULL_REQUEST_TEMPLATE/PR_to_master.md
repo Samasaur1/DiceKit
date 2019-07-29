@@ -19,6 +19,9 @@ Here's what has to happen:
 - [ ] This
 - [ ] PR
 - [ ] Ensure the changelog has everything new that is being added
+***
+**PLEASE DELETE EVERYTHING BELOW THESE LINES**
+***
 - [ ] Bump version
 1. Wait for CI
 1. Merge
