@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python3 release.py
+python3 scripts/release.py

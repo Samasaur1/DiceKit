@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python3 update_version.py
+python3 scripts/update_version.py
