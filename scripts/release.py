@@ -23,9 +23,17 @@ subprocess.run("git rebase master")
 subprocess.run("git push")
 
 with open("CHANGELOG") as file:
-    changelog = "\n".join(list(takewhile(lambda x: not x.startswith("## "), list(dropwhile(lambda x: not x.startswith("## "), file.readLines()))[3:])))
+    changelog = "\n".join(list(takewhile(lambda x: not x.startswith("## "), list(takewhile(lambda x: not x.startswith("## "), list(dropwhile(lambda x: not x.startswith("## "), file.readlines()))[1:]))[1:])))
+    # lines = file.readlines() # Reads
+    # dropped = list(dropwhile(lambda x: not x.startswith("## "), lines)) # Drops up to but not including "## Upcoming"
+    # droppedMore = dropped[1:] # Drops "## Upcoming"
+    # more = list(takewhile(lambda x: not x.startswith("## "), dropped)) # Drops up to but not including the latest version
+    # moore = more[1:] # Drops the latest version
+    # taken = list(takewhile(lambda x: not x.startswith("## "), droppedMore)) #Takes up to but not including the next version
+    # changelog = "\n".join(taken) #Joins the remaining lines
 
-print("WARNING: If you continue, this script will ruse the GitHub API to make a release.\nOnce this script has been tested, you can remove this confirm check.\n")
+
+print("WARNING: If you continue, this script will use the GitHub API to make a release.\nOnce this script has been tested, you can remove this confirm check.\n")
 input("Input anything to continue, or use Ctrl-C to stop the script")
 
 url = "https://api.github.com/repos/Samasaur1/DiceKit/releases"
@@ -48,4 +56,4 @@ if response.ok:
 else:
     print(f"API call unsuccessful — status code {response.status_code}")
 
-print("A release was created, but as a draft — you need to publish it at https://github.com/Samasaur1/DiceKit/releases")
+print("A release was created, but as a draft — you need to publish it at https://github.com/Samasaur1/DiceKit/releases") #this can be removed if the script works
