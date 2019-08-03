@@ -2,6 +2,13 @@ language: generic
 sudo: false
 dist: trusty
 
+stages:
+- test
+- name: danger
+  if: type = pull_request
+- name: deploy
+  if: branch = master AND type = push
+
 os:
 - osx
 - linux
@@ -30,6 +37,17 @@ jobs:
     os: osx
     env: SWIFT_VERSION=5.0.1
     script: bash .deploy-docs.sh
+  - stage: danger
+    script: swift run danger-swift ci
+    install:
+    - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+    - npm install -g danger
+    - swift build
+
+cache:
+  directories:
+  - .build
+  - ~/.danger-swift
 
 install:
 - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
