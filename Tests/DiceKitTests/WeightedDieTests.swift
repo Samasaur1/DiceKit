@@ -16,9 +16,7 @@ final class WeightedDieTests: XCTestCase {
         let firstDie = try! WeightedDie(chances: Chances(chances: [1: 1.0]))
         let secondDie = WeightedDie(copyOf: firstDie)
         let thirdDie = firstDie.copy()
-        XCTAssertEqual(firstDie, secondDie)
-        XCTAssertEqual(firstDie, thirdDie)
-        XCTAssertEqual(secondDie, thirdDie)
+        XCTAssertAllEqual(firstDie, secondDie, thirdDie)
     }
 
     func testRolling() {

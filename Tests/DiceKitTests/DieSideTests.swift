@@ -3,11 +3,11 @@ import XCTest
 
 final class DieSideTests: XCTestCase {
     func testInitialization() {
-        let _ = DieSide<Bool?>(nil)
-        let _ = DieSide(1)
-        let _ = DieSide("Hello")
-        let _ = DieSide<String>("x")
-        let _ = DieSide<AnyHashable>(5.0)
+        _ = DieSide<Bool?>(nil)
+        _ = DieSide(1)
+        _ = DieSide("Hello")
+        _ = DieSide<String>("x")
+        _ = DieSide<AnyHashable>(5.0)
     }
     
     func testValueProperty() {

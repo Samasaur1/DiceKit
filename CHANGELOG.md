@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.18.0] - 2019-08-04
+### Added
+- Add release.py and updateVersion.py scripts
+- Add [Danger](https://github.com/danger/swift) integration
+  - Checks that PRs to master have Version X.Y.Z: $DESCRIPTION as their title
+  - Checks that there are changes to the CHANGELOG
+  - Checks that the latest date is the date that the PR is merged (technically the date of the last Travis build)
+  - Checks that there are changes in tests files when source files are changed
+  - Checks that `swift test --generate-linuxmain` is run when new tests are written
+- Ensure that all structs conform to a new type, `Describable` (`CustomStringConvertible & CustomDebugStringConvertible`)
+
+### Changed
+- All classes were converted to structs
+- Moves everything to one pull request template so that it comes up by default
+
+### Fixed
+- The image on the generated documentation is no longer cut off
+- Ensures that a pull request template is applied
+
+### Removed
+Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no SSL certificate
+
 ## [0.17.0] - 2019-07-26
 ### Added
 - New feature guidelines
@@ -165,10 +187,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.18.0]: https://github.com/Samasaur1/Dicekit/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/Samasaur1/Dicekit/compare/v0.16.1...v0.17.0
 [0.16.1]: https://github.com/Samasaur1/DiceKit/compare/v0.16.0...v0.16.1
 [0.16.0]: https://github.com/Samasaur1/DiceKit/compare/v0.15.0...v0.16.0
-[0.15.0]: https://github.com/Samasaur1/DiceKit/compare/v0.14.0...v0.15.0
+[0.15.0]: https://github.com/Samasaur1/DiceKit/compare/v0.14.1...v0.15.0
 [0.14.1]: https://github.com/Samasaur1/DiceKit/compare/v0.14.0...v0.14.1
 [0.14.0]: https://github.com/Samasaur1/DiceKit/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/Samasaur1/DiceKit/compare/v0.12.0...v0.13.0

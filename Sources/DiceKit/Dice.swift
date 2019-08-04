@@ -3,7 +3,7 @@
 /// The properties of `Dice` objects are immutable; use the addition operators to combine them with other `Die` objects or modifiers. You can use compound assignment operators if you want, so long as you declare the `Dice` object as a `var` instead of a `let` constant.
 ///
 /// - Author: Samasaur
-public class Dice {
+public struct Dice {
     /// The dice that make up this collection, along with how many times they appear.
     ///
     /// This `[Die: Int]` dictionary stores the types of dice that appear, paired with the number of times they appear. For example:
@@ -254,19 +254,22 @@ public class Dice {
     /// Creates a new `Dice` object that is a copy of the given `Dice` object.
     ///
     /// - Parameter other: The other `Dice` object to copy.
+    @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     public init(copyOf other: Dice) {
-        var newDice: [Die: Int] = [:]
-        for (d, c) in other.dice {
-            newDice[d.copy()] = c
-        }
-        self.dice = newDice
-        modifier = other.modifier
+        self.dice = other.dice
+        self.modifier = other.modifier
+    }
+
+    private let __probabilities = LazyBox<Dice, Chances> { d in
+        return d.calculateChances()
     }
 
     /// The probabilities of all possible rolls.
     ///
     /// - Since: 0.17.0
-    public lazy var probabilities: Chances = calculateChances()
+    public var probabilities: Chances {
+        return __probabilities.value(input: self)
+    }
 }
 
 extension Dice: Rollable {
@@ -419,7 +422,7 @@ extension Dice: Equatable {
     }
 }
 
-extension Dice: CustomStringConvertible, CustomDebugStringConvertible {
+extension Dice: Describable {
     /// A description of this `Dice` object.
     ///
     ///     Dice().description // No dice, without a modifier.
@@ -505,8 +508,9 @@ public extension Dice {
     /// Returns a copy of the given `Dice` with separate memory.
     ///
     /// - Returns: A copy of the given `Dice`, with the same information, at a different memory location.
+    @available(*, deprecated, message: "Dice is now a struct; copying is not necessary")
     func copy() -> Dice {
-        return Dice(copyOf: self)
+        return self
     }
 }
 
@@ -521,7 +525,7 @@ public extension Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         dice.append(rhs)
@@ -537,7 +541,7 @@ public extension Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         dice.append(lhs)
@@ -554,12 +558,12 @@ public extension Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         for (d, c) in rhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         return Dice(dice: dice, withModifier: rhs.modifier + lhs.modifier)
@@ -575,7 +579,7 @@ public extension Dice {
         var dice: [Die] = []
         for (d, c) in lhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         return Dice(dice: dice, withModifier: lhs.modifier + rhs)
@@ -590,7 +594,7 @@ public extension Dice {
         var dice: [Die] = []
         for (d, c) in rhs.dice {
             for _ in 0..<c {
-                dice.append(d.copy())
+                dice.append(d)
             }
         }
         return Dice(dice: dice, withModifier: lhs + rhs.modifier)
@@ -635,7 +639,7 @@ public extension Dice {
     ///   - rhs: The multiplier.
     /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     static func * (lhs: Dice, rhs: Int) -> Dice {
-        var dice = lhs.copy()
+        var dice = lhs
         for (die, count) in lhs.dice {
             dice += die * (count * (rhs - 1))
         }
@@ -655,7 +659,7 @@ public extension Dice {
     ///   - rhs: The `Dice` object to multiply.
     /// - Returns: A new `Dice` object comprising of the given dice multiplied by the multiplier
     static func * (lhs: Int, rhs: Dice) -> Dice {
-        var dice = rhs.copy()
+        var dice = rhs
         for (die, count) in rhs.dice {
             dice += die * ((lhs - 1) * count)
         }

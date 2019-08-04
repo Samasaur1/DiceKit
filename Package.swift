@@ -8,8 +8,11 @@ let package = Package(
     products: [
         .library(name: "DiceKit", targets: ["DiceKit"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/danger/swift.git", from: "1.0.0"),
+    ],
     targets: [
         .target(name: "DiceKit", dependencies: []),
-        .testTarget(name: "DiceKitTests", dependencies: ["DiceKit"]),
+        .testTarget(name: "DiceKitTests", dependencies: ["DiceKit", "Danger"]),
     ]
 )

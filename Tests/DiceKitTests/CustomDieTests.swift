@@ -3,16 +3,13 @@ import XCTest
 
 final class CustomDieTests: XCTestCase {
     func testInitialization() {
-        let d = try? CustomDie<Int>(sides: [])
-        XCTAssertNil(d, "A CustomDie passed an empty array was non-nil")
+        XCTAssertNil(try? CustomDie<Int>(sides: []), "A CustomDie passed an empty array was non-nil")
         let d2 = try? CustomDie<Int>(sides: [DieSide(1)])
         XCTAssertNotNil(d2, "A one-sided CustomDie was nil")
         let d3 = CustomDie<Int>(copyOf: d2!)
         XCTAssertEqual(d2, d3, "A copied CustomDie was different")
-        let d4 = try? CustomDie(sides: [DieSide<Int>(1), DieSide<Int>(2), DieSide<Int>(3)])
-        XCTAssertNotNil(d4)
-        let d5 = try? CustomDie(sides: [DieSide("Hello"), DieSide("World")])
-        XCTAssertNotNil(d5)
+        XCTAssertNotNil(try? CustomDie(sides: [DieSide<Int>(1), DieSide<Int>(2), DieSide<Int>(3)]))
+        XCTAssertNotNil(try? CustomDie(sides: [DieSide("Hello"), DieSide("World")]))
         let d6 = try? CustomDie<AnyHashable>(sides: [DieSide("Hello"), DieSide(1)])
         XCTAssertNotNil(d6)
         let d7 = d6!.copy()

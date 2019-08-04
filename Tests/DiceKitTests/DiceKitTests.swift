@@ -119,11 +119,7 @@ internal func getWeightedDie() throws -> WeightedDie {
     let w: WeightedDie
     do {
         w = try WeightedDie(chances: c)
-//    #if swift(>=5)
     } catch DiceKit.Error.emptyDictionary {
-//    #else
-//    } catch let err as Error {
-//    #endif
         print("Empty dictionary at line \(#line) in file \(#file)", to: &STDERR)
         w = try getWeightedDie()
     } catch let err {
