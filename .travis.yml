@@ -38,12 +38,10 @@ jobs:
     env: SWIFT_VERSION=5.0.1
     script: bash .deploy-docs.sh
   - stage: danger
-    env: SWIFT_VERSION=5.0.1
     os: osx
     osx_image: xcode10.2
     script: swift run danger-swift ci
     install:
-    - eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
     - npm install -g danger
     - swift build
 
