@@ -2,12 +2,15 @@ included:
   - Sources
 excluded:
   - Tests
+  - Package.swift
 analyzer_rules:
   - unused_import
   - unused_private_declaration
 disabled_rules:
   - line_length
   - identifier_name
+  - trailing_comma
+  - redundant_optional_initialization
 opt_in_rules:
   - anyobject_protocol
   - array_init
@@ -24,7 +27,6 @@ opt_in_rules:
   - fallthrough
   - fatal_error_message
   - file_header
-  - file_name
   - first_where
   - identical_operands
   - joined_default_parameter
