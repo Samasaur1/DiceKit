@@ -21,9 +21,7 @@ final class ChancesTests: XCTestCase {
         let c2 = Chances(chances: [])
         let c3 = Chances()
 
-        XCTAssertEqual(c, c2)
-        XCTAssertEqual(c, c3)
-        XCTAssertEqual(c2, c3)
+        XCTAssertAllEqual(c, c2, c3)
     }
 
     func testSubscript() {
@@ -38,8 +36,6 @@ final class ChancesTests: XCTestCase {
         let c2 = Chances(chances: []).hashValue
         let c3 = Chances().hashValue
 
-        XCTAssertEqual(c, c2)
-        XCTAssertEqual(c, c3)
-        XCTAssertEqual(c2, c3)
+        XCTAssertAllEqual(c, c2, c3)
     }
 }

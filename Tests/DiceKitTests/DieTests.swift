@@ -20,9 +20,7 @@ final class DieTests: XCTestCase {
         XCTAssertNotNil(d6_2)
         XCTAssertNotNil(d6_3)
 
-        XCTAssertEqual(d6_1, Die.d6)
-        XCTAssertEqual(d6_2, Die.d6)
-        XCTAssertEqual(d6_3, Die.d6)
+        XCTAssertAllEqual(d6_1, d6_2, d6_3, Die.d6)
     }
 
     func testMultipleDigitStringParsing() {
@@ -34,9 +32,7 @@ final class DieTests: XCTestCase {
         XCTAssertNotNil(d12_2)
         XCTAssertNotNil(d12_3)
 
-        XCTAssertEqual(d12_1, Die.d12)
-        XCTAssertEqual(d12_2, Die.d12)
-        XCTAssertEqual(d12_3, Die.d12)
+        XCTAssertAllEqual(d12_1, d12_2, d12_3, Die.d12)
     }
 
     func testInvalidStringParsing() {
@@ -72,9 +68,7 @@ final class DieTests: XCTestCase {
         let firstDie = Die.d6
         let secondDie = Die(copyOf: firstDie)
         let thirdDie = firstDie.copy()
-        XCTAssertEqual(firstDie, secondDie)
-        XCTAssertEqual(firstDie, thirdDie)
-        XCTAssertEqual(secondDie, thirdDie)
+        XCTAssertAllEqual(firstDie, secondDie, thirdDie)
     }
 
     func testRolling() {
