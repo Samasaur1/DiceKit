@@ -17,38 +17,38 @@ if danger.github.pullRequest.base.ref == "master" {
         fail("$DESCRIPTION placeholder has not been filled in!")
     }
 
-    containsChangelog: if editedFiles.contains("CHANGELOG") {
-        let lineNumber = danger.utils.lines(for: "## ", inFile: "CHANGELOG")[1]
-        let line = danger.utils.readFile("CHANGELOG").split(separator: "\n").filter { $0.hasPrefix("## ") }[1]
+    containsChangelog: if editedFiles.contains("CHANGELOG.md") {
+        let lineNumber = danger.utils.lines(for: "## ", inFile: "CHANGELOG.md")[1]
+        let line = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").filter { $0.hasPrefix("## ") }[1]
         let dateString = String(line.drop { $0 != "]" }.dropFirst(4))
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
         let todaysDate = df.string(from: Date())
         guard df.date(from: dateString) != nil else {
             fail("Illegal date string in CHANGELOG!: '\(dateString)'")
-            fail(message: "Illegal date string in CHANGELOG!", file: "CHANGELOG", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG", line: lineNumber)
+            fail(message: "Illegal date string in CHANGELOG!", file: "CHANGELOG.md", line: lineNumber)
+            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG.md", line: lineNumber)
             break containsChangelog
         }
         if todaysDate != dateString {
             fail("The latest date in the CHANGELOG is not today!")
-            fail(message: "The latest date in the CHANGELOG is not today!", file: "CHANGELOG", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG", line: lineNumber)
+            fail(message: "The latest date in the CHANGELOG is not today!", file: "CHANGELOG.md", line: lineNumber)
+            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG.md", line: lineNumber)
         } else {
             message("The latest date in the CHANGELOG is today, \(dateString)")
         }
     } else {
-        if FileManager.default.fileExists(atPath: "CHANGELOG") {
+        if FileManager.default.fileExists(atPath: "CHANGELOG.md") {
             fail("The CHANGELOG was not updated")
         } else {
             warn("There is no CHANGELOG!")
         }
     }
 } else {
-    if editedFiles.contains("CHANGELOG") {
+    if editedFiles.contains("CHANGELOG.md") {
         message("The CHANGELOG was updated!")
     } else {
-        if FileManager.default.fileExists(atPath: "CHANGELOG") {
+        if FileManager.default.fileExists(atPath: "CHANGELOG.md") {
             fail("The CHANGELOG was not updated! (put your changes in the UPCOMING section)")
         } else {
             warn("There is no CHANGELOG!")
