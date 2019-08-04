@@ -64,7 +64,7 @@ for file in editedFiles where file.hasPrefix("Sources/") {
         message("\(file) has had corresponding changes in its test file")
     } else {
         if FileManager.default.fileExists(atPath: testsFile) {
-            fail("\(file) was changed, but \(testsFile) wasn't!")
+            fail("\(file) was changed, but \(testsFile) wasn't! If you were refactoring, just change the spacing in the corresponding test file")
         } else {
             warn("\(file) was changed, but there is no file at path \(testsFile). Maybe it's under a different path, or maybe there's no tests")
         }
