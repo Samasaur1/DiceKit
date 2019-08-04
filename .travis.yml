@@ -40,7 +40,7 @@ jobs:
   - stage: danger
     script: swift run danger-swift ci
     install:
-    - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+    - eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
     - npm install -g danger
     - swift build
 
@@ -50,7 +50,7 @@ cache:
   - ~/.danger-swift
 
 install:
-- eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+- eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
 
 script:
 - swift test
