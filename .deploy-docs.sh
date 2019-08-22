@@ -5,7 +5,7 @@ gem install jazzy
 rm -rf docs
 rm -rf DiceKit.xcodeproj
 swift package generate-xcodeproj
-jazzy
+jazzy -x -target,DiceKit
 cd docs
 echo 'section > section > p > img { margin-top: 4em; margin-right: 2em; }' >> css/jazzy.css
 git config --global user.name "Documentation Bot"
