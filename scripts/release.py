@@ -7,7 +7,7 @@ with open(".jazzy.yaml") as file:
     data = file.readlines()
 for line in data:
     if line.startswith("module_version: "):
-        version = line[len("module_version: "):-1]
+        version = line[len("module_version: "):-1] #see note in update_version.py
 
 subprocess.run(["git", "checkout", "master"])
 subprocess.run(["git", "pull"])

@@ -42,8 +42,10 @@ jobs:
     osx_image: xcode10.2
     script: swift run danger-swift ci
     install:
+    - python3 scripts/include_dev_dependencies
     - npm install -g danger
     - swift build
+    after_success: python3 scripts/remove_dev_dependencies
 
 cache:
   directories:
