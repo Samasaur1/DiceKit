@@ -12,4 +12,4 @@ for i in range(len(data)):
 with open("Package.swift", "w") as file:
     file.writelines(data)
 
-move("Package.resolved.danger", "Package.swift")
+move("Package.resolved.danger", "Package.resolved")
