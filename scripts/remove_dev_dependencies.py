@@ -12,4 +12,7 @@ for i in range(len(data)):
 with open("Package.swift", "w") as file:
     file.writelines(data)
 
-move("Package.resolved", "Package.resolved.danger")
+if path.exists("Package.resolved"):
+    move("Package.resolved", "Package.resolved.danger")
+if path.exists("Package.resolved.nodanger"):
+    move("Package.resolved.nodanger", "Package.resolved")
