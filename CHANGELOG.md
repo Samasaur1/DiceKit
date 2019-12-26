@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.19.0] — 2019-12-25
+## [0.19.0] - 2019-12-26
 ### Added
 - Scripts to hide/unhide dev dependencies
 
