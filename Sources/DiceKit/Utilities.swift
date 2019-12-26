@@ -25,6 +25,14 @@ internal extension Array where Element == Double {
         return total
     }
 }
+internal extension Dictionary {
+    func mapKeys<T>(_ transform: (Key) throws -> T) rethrows -> [T: Value] {
+        return try self.reduce(into: [:]) { newDict, tuple in
+            let key = try transform(tuple.key)
+            newDict[key] = tuple.value
+        }
+    }
+}
 #if !swift(>=5.1) //Can't use `#if swift(<5.1)` for earlier than Swift 5
 internal extension Sequence {
     func count(where predicate: (Element) throws -> Bool) rethrows -> Int {
