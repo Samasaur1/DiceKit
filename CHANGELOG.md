@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Upcoming]
 
 ## [0.19.0] — 2019-12-25
+### Added
+- Scripts to hide/unhide dev dependencies
+
 ### Changed
 - Documentation will no longer force-push; instead it will update
 - Safety checks were removed from the release script
 
 ### Fixed
 - Dev dependencies, such as Danger, are now only included, downloaded, and built on CI
-  - Added: scripts to hide/unhide dev dependencies
 
 ## [0.18.1] - 2019-08-22
 ### Fixed
