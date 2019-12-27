@@ -1,8 +1,15 @@
 public struct Negation {
     fileprivate let rollable: Rollable
 
-    public init(_ r: Rollable) {
+    private init(_ r: Rollable) {
         rollable = r
+    }
+
+    public static func of(_ r: Rollable) -> Rollable {
+        if let neg = r as? Negation {
+            return neg.rollable
+        }
+        return Negation(r)
     }
 
     private let __probabilities = LazyBox<Negation, Chances> { n in
@@ -32,7 +39,7 @@ extension Negation: Rollable {
         case .orLower:
             return rollable.canReach(-target, .orHigher)
         case .exactly:
-            return rollable.canReach(target, .exactly)
+            return rollable.canReach(-target, .exactly)
         case .orHigher:
             return rollable.canReach(-target, .orLower)
         }
@@ -42,10 +49,12 @@ extension Negation: Rollable {
         return __probabilities.value(input: self)
     }
 }
+extension Negation: Equatable {
+    public static func == (lhs: Negation, rhs: Negation) -> Bool {
+        return lhs.rollable == rhs.rollable
+    }
+}
 
 public prefix func - (rhs: Rollable) -> Rollable {
-    if let neg = rhs as? Negation {
-        return neg.rollable
-    }
-    return Negation(rhs)
+    return Negation.of(rhs)
 }

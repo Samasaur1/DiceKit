@@ -242,3 +242,24 @@ public extension Rollable {
         return chance(of: range.upperBound, .orLower)
     }
 }
+
+public func == (lhs: Rollable, rhs: Rollable) -> Bool {
+    guard type(of: lhs) == type(of: rhs) else {
+        return false
+    }
+    if let l = lhs as? Die, let r = rhs as? Die {
+        return l == r
+    }
+    if let l = lhs as? Dice, let r = rhs as? Dice {
+        return l == r
+    }
+    if let l = lhs as? WeightedDie, let r = rhs as? WeightedDie {
+        return l == r
+    }
+    if let l = lhs as? Negation, let r = rhs as? Negation {
+        return l == r
+    }
+    return false
+}
+
+private let RollableConformingTypes: [Any] = [Die.self, Dice.self, WeightedDie.self, Negation.self]

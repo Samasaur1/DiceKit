@@ -136,6 +136,8 @@ internal func getRollable(die: Bool = false) throws -> Rollable {
         return try getDice()
     case 3:
         return try getWeightedDie()
+    case 4:
+        return Negation.of(try getRollable())
     default:
         return try getRollable(die: true)
     }
