@@ -5,8 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Upcoming]
+
+## [0.19.0] - 2019-12-26
+### Added
+- Scripts to hide/unhide dev dependencies
+
 ### Changed
 - Documentation will no longer force-push; instead it will update
+- Safety checks were removed from the release script
+
+### Fixed
+- Dev dependencies, such as Danger, are now only included, downloaded, and built on CI
 
 ## [0.18.1] - 2019-08-22
 ### Fixed
@@ -194,6 +203,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.19.0]: https://github.com/Samasaur1/DiceKit/compare/v0.18.1...v0.19.0
 [0.18.1]: https://github.com/Samasaur1/DiceKit/compare/v0.18.0...v0.18.1
 [0.18.0]: https://github.com/Samasaur1/Dicekit/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/Samasaur1/Dicekit/compare/v0.16.1...v0.17.0
