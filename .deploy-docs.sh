@@ -7,6 +7,7 @@ rm -rf DiceKit.xcodeproj
 swift package generate-xcodeproj
 git clone --branch=gh-pages https://github.com/Samasaur1/DiceKit.git ghp
 jazzy -o newdocs -x -target,DiceKit
+VERSION=$(python3 scripts/get_version.py)
 mkdir ghp/docs/v$VERSION
 mv newdocs/* ghp/docs/v$VERSION
 rm -rf newdocs/
