@@ -1,7 +1,7 @@
 public struct Negation {
     fileprivate let rollable: Rollable
 
-    private init(_ r: Rollable) {
+    fileprivate init(_ r: Rollable) {
         rollable = r
     }
 
@@ -55,6 +55,10 @@ extension Negation: Equatable {
     }
 }
 
-public prefix func - (rhs: Rollable) -> Rollable {
-    return Negation.of(rhs)
+public prefix func - (val: Negation) -> Rollable {
+    return val.rollable
+}
+
+public prefix func - (rhs: Rollable) -> Negation {
+    return Negation(rhs)
 }
