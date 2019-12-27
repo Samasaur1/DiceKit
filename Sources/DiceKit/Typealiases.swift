@@ -20,3 +20,5 @@ public typealias DKWeightedDie = WeightedDie
 public typealias DKChance = Chance
 /// See `Chances`.
 public typealias DKChances = Chances
+/// See `Negation`.
+public typealias DKNegation = Negation
