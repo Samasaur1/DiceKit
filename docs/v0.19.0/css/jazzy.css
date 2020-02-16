@@ -370,3 +370,4 @@ html.dash .content-wrapper {
 
 html.dash #footer {
   position: static; }
+section > section > p > img { margin-top: 4em; margin-right: 2em; }
