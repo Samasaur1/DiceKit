@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.20.0] — 2020-02-16
+### Changed
+- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been update d to support this.
+
 ## [0.19.0] - 2019-12-26
 ### Added
 - Scripts to hide/unhide dev dependencies
@@ -203,6 +207,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.20.0]: https://github.com/Samasaur1/DiceKit/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/Samasaur1/DiceKit/compare/v0.18.1...v0.19.0
 [0.18.1]: https://github.com/Samasaur1/DiceKit/compare/v0.18.0...v0.18.1
 [0.18.0]: https://github.com/Samasaur1/Dicekit/compare/v0.17.0...v0.18.0
