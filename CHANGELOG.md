@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Scripts to hide/unhide dev dependencies
 
 ### Changed
+- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been update d to support this.
+
+## [0.19.0] - 2019-12-26
+### Added
+- Scripts to hide/unhide dev dependencies
+
+### Changed
 - Documentation will no longer force-push; instead it will update
 - Safety checks were removed from the release script
 
