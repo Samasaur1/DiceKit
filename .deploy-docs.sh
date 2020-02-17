@@ -12,7 +12,7 @@ mkdir ghp/docs/v$VERSION
 mv newdocs/* ghp/docs/v$VERSION
 rm -rf newdocs/
 cd ghp
-echo 'section > section > p > img { margin-top: 4em; margin-right: 2em; }' >> ghp/docs/v$VERSION/css/jazzy.css
+echo 'section > section > p > img { margin-top: 4em; margin-right: 2em; }' >> docs/v$VERSION/css/jazzy.css
 bash ../script/updateLatestDocs.sh $VERSION
 git config --global user.name "Documentation Bot"
 git config --global user.email "docbot@travis-ci.com"
