@@ -17,6 +17,6 @@ bash ../scripts/updateLatestDocs.sh $VERSION
 git config --global user.name "Documentation Bot"
 git config --global user.email "docbot@travis-ci.com"
 git add .
-git commit -m "Update documentation"
+git commit -m "Add documentation for version $VERSION" --no-gpg-sign
 git remote set-url origin https://${GH_TOKEN}@github.com/Samasaur1/DiceKit.git
 git push
