@@ -244,7 +244,7 @@ public struct Dice {
             } else if c == 0 {
                 continue
             }
-            tempDice[try! Die(sides: d)] = c //swiftlint:disable:this force_try
+            tempDice[try Die(sides: d)] = c
         }
         self.dice = tempDice
         self.modifier = mods.sum
