@@ -200,6 +200,7 @@ final class DiceTests: XCTestCase {
         XCTAssertNil(try? Dice("A")) // hexadecimal
         XCTAssertNil(try? Dice("DiceKit")) // string
         XCTAssertNil(try? Dice("d+6")) // split
+        XCTAssertNil(try? Dice("d0")) // 0-sided die
 
         //Negative
         XCTAssertNil(try? Dice("-d6"))
