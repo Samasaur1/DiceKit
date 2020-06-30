@@ -1,3 +1,5 @@
+import Foundation
+
 /// An enum representing the type of result to return from rolling multiple times.
 ///
 /// - sum: Return the sum of all rolls.
@@ -91,4 +93,30 @@ public enum Error: Swift.Error {
     ///
     /// This error was most likely thrown when creating a `Chance` instance. However, a `Chances` object can have `Chance`s that *sum* to over 1.
     case chanceOverOne
+
+    public var localizedDescription: String {
+        switch self {
+        case .illegalNumberOfSides(let sides):
+            return "A number of sides was passed that wasn't allowed (\(sides))."
+        case .emptyString:
+            return "An empty string was passed to a string parser that doesn't accept empty strings."
+        case .nonNumericString:
+            return "A string was passed with nonnumeric characters that weren't expected."
+        case .illegalString(let str):
+            return "An illegal string was passed (\"\(str)\")."
+        case .divisionByZero:
+            return "Zero was passed to something that would have divided by it."
+        case .emptyDictionary:
+            return "An empty dictionary was passed to something that needs a non-empty dictionary."
+        case .negativeArgument:
+            return "Arguments were passed that resulted in something being negative that needed to be positive."
+        case .chanceOverOne:
+            return "The chance of something happening was over 1, an impossibility."
+        }
+    }
+}
+extension Error: LocalizedError {
+    public var errorDescription: String? {
+        return self.localizedDescription
+    }
 }
