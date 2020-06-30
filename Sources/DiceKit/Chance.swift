@@ -140,7 +140,7 @@ extension Chance: ExpressibleByFloatLiteral {
         } catch let err as Error {
             print(err, to: &STDERR)
             self = .zero
-        } catch let err {
+        } catch {
             print("""
 
                 <ERROR>
@@ -150,7 +150,7 @@ extension Chance: ExpressibleByFloatLiteral {
                 and provide the following information:
 
                 floatLiteral:   \(value)
-                err:            \(err)
+                err:            \(error)
 
                 </ERROR>
 

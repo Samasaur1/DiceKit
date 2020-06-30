@@ -44,7 +44,7 @@ final class ChanceTests: XCTestCase {
         XCTAssertTrue(c.fraction == (1, 4))
         let c2 = try! Chance(approximating: 1.0 / 3.0)
         XCTAssertTrue(c2.fraction == (1, 3))
-//        XCTAssertEqual(c.fraction, (1, 4)) This doesn't work for some stupid reason
+//        XCTAssertEqual(c.fraction, (1, 4)) This doesn't work because tuples can't conform to Equatable directly
     }
 
     func testProperties() {

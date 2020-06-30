@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.20.1] — 2020-06-30
+### Added
+- `DKError`/`Error`'s `localizedDescription` field now has a useful value (based off of the documentation for those fields).
+
+### Changed
+- \[internal\] Complies with best practices (not naming an untyped error in catch clauses; no effect for users).
+
+### Fixed
+- Documentation deployment is fixed.
+- Errors thrown by `Die(sides:)` do *not* crash `Dice(_:String)`; instead, they are propagated up the call stack.
+
 ## [0.20.0] — 2020-02-16
 ### Changed
 - The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been update d to support this.
@@ -207,6 +218,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.20.1]: https://github.com/Samasaur1/DiceKit/compare/v0.20.0...v0.20.1
 [0.20.0]: https://github.com/Samasaur1/DiceKit/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/Samasaur1/DiceKit/compare/v0.18.1...v0.19.0
 [0.18.1]: https://github.com/Samasaur1/DiceKit/compare/v0.18.0...v0.18.1
