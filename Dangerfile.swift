@@ -105,15 +105,21 @@ if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
 //   That's the "start of string" character, which I only want to match after I've split
 //   on "\n". Therefore, this only matches lines that start with a task,
 //   which excludes nested tasks.
-if danger.github.pullRequest.body?.range(of: #"\n- \[[x ]\] "#, options: .regularExpression) != nil {
-    let split = danger.github.pullRequest.body!.split(separator: "\n")
-    let allTaskLines = split
-        .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
-    for (num, line) in allTaskLines.enumerated() {
-        if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
-            message("Task #\(num) completed!\n - \(line.dropFirst(6))")
-            continue
+if let body = danger.github.pullRequest.body {
+    if body.range(of: #"\n- \[[x ]\] "#, options: .regularExpression) != nil {
+        let split = body.split(separator: "\n")
+        let allTaskLines = split
+            .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
+        for (num, line) in allTaskLines.enumerated() {
+            if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
+                message("Task #\(num) completed!\n - \(line.dropFirst(6))")
+                continue
+            }
+            fail("Task #\(num) incomplete!\n - \(line.dropFirst(6))")  // "- [ ] "
         }
-        fail("Task #\(num) incomplete!\n - \(line.dropFirst(6))")  // "- [ ] "
+    } else {
+        warn("PR body doesn't appear to have any tasks, which it should")
     }
+} else {
+    warn("Cannot fetch PR body!")
 }
