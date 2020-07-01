@@ -110,6 +110,7 @@ if let body = danger.github.pullRequest.body {
         let split = body.split(separator: "\n")
         let allTaskLines = split
             .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
+        message("\(allTaskLines.count) tasks found")
         for (num, line) in allTaskLines.enumerated() {
             if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
                 message("Task #\(num) completed!\n - \(line.dropFirst(6))")
