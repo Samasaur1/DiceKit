@@ -12,35 +12,48 @@ os:
 - osx
 - linux
 
-osx_image: xcode11
+osx_image:
+- xcode10
+- xcode10.3
+- xcode11.3
 
 env:
+- SWIFT_VERSION=system
 - SWIFT_VERSION=4.2.4
 - SWIFT_VERSION=5.0.3
 - SWIFT_VERSION=5.1.5
+- SWIFT_VERSION=5.2.4
 
 jobs:
-  include:
+  exclude:
   - os: linux
-    osx_image: xcode11.5
+    osx_image: xcode10.3
+  - os: linux
+    osx_image: xcode11.3
+  - os: linux
+    env: SWIFT_VERSION=system
+  - os: osx
+    env: SWIFT_VERSION=4.2.4
+  - os: osx
+    env: SWIFT_VERSION=5.0.3
+  - os: osx
+    env: SWIFT_VERSION=5.1.5
+  - os: osx
     env: SWIFT_VERSION=5.2.4
-    script: swift test
+  include:
   - stage: test
     if: branch != master OR type = pull_request
     os: osx
     osx_image: xcode11.5
-    env: SWIFT_VERSION=5.2.4
     script: swift test
   - stage: deploy
     if: branch = master AND type = push
     os: osx
     osx_image: xcode11.5
-    env: SWIFT_VERSION=5.2.4
     script: bash .deploy-docs.sh
   - stage: danger
     os: osx
     osx_image: xcode11.5
-    env: SWIFT_VERSION=5.2.4
     script: swift run danger-swift ci
     install:
     - python3 scripts/include_dev_dependencies.py
