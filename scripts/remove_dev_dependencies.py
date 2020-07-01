@@ -1,4 +1,5 @@
 from os import rename as move
+from os import path
 
 with open("Package.swift") as file:
     data = file.readlines()
