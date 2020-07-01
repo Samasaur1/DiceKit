@@ -19,4 +19,4 @@ A Swift framework for simulating dice both real and unreal.
 | Swift 4 — 4.0.3 | [v0.15.0](https://github.com/Samasaur1/DiceKit/releases/tag/v0.15.0) |
 | Swift 4.1 — 4.1.3 | [v0.15.0](https://github.com/Samasaur1/DiceKit/releases/tag/v0.15.0) |
 | Swift 4.2 — 4.2.4 | [Latest version](https://github.com/Samasaur1/DiceKit/releases/latest) |
-| Swift 5 — 5.0.1 | [Latest version](https://github.com/Samasaur1/DiceKit/releases/latest) |
+| Swift 5 — 5.2.4 | [Latest version](https://github.com/Samasaur1/DiceKit/releases/latest) |
