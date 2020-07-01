@@ -1,0 +1,61 @@
+# This is a basic workflow to help you get started with Actions
+
+name: PR
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-16.04, ubuntu-latest]
+#        swift: ["4.2", "5.0", "5.1", "5.2"]
+        swift: ["4.2.4", "5.0.3", "5.1.5", "5.2.4"]
+        exclude:
+          - os: macos-latest
+            swift: "5.2.4"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+#      - uses: fwal/setup-swift@v1
+#        with:
+#          swift-version: ${{ matrix.swift }}
+      - name: Install Swift
+        run: |
+          eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
+          swift --version
+        env:
+          SWIFT_VERSION: ${{ matrix.swift }}
+      - run: swift test
+  danger:
+    name: Danger
+    runs-on: macos-latest
+    needs: [test]
+    steps:
+    - uses: actions/checkout@v2
+#    - uses: fwal/setup-swift@v1
+#      with:
+#        swift-version: 5.2.4
+    - name: Install Swift
+      run: |
+        eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
+        swift --version
+      env:
+        SWIFT_VERSION: ${{ matrix.swift }}
+    - name: Install Danger
+      run: |
+        python3 scripts/include_dev_dependencies.py
+        npm install -g danger
+        swift build
+    - name: Run Danger
+      run: swift run danger-swift ci
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Rehide dev dependencies
+      run: python3 scripts/remove_dev_dependencies.py

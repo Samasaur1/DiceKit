@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.21.0] — 2020-07-01
+### Added
+- The internal `Chances` property formerly named `dict` (of type `[Roll: Chance]`) is now public and named `chances`.
+- Adds GitHub Actions for testing
+
+### Changed
+- The GitHub pull request template now uses the `updateVersion.sh` and `release.sh` scripts that were added in PR #66 ([Version 0.18.0](https://github.com/Samasaur1/DiceKit/pull/66))
+- The Travis CI configuration has had significant changes (none of which will impact users of the library):
+  - Now runs on Ubuntu 16.04 "Xenial" instead of 14.04 "Trusty" (matching the Travis default, and allowing for Swift 5.2.x)
+  - Tests on Swift 4.2.4, 5.0.3, 5.1.5, and 5.2.4 (Linux) and 4.2, 5.0.1, 5.1.3, and 5.2.4 (macOS). Previously, it tested on 4.2.4, 5.0.3, and 5.1.3 on both. I would have preferred to use versions tested on Linux on macOS as well, but the current versions are bundled with Xcode, noticeably speeding up builds
+  - Prints the Swift version (mostly to help because of the above point)
+- Updates the Dangerfile
+  - The behavior around adding tests has become more lenient (warnings instead of errors, so that there is less need to change spacing on files to get past Danger)
+  - Danger now checks the body of the PR for empty checkboxes, which should allow me to replace `task-list-completed`. It should also present better (failing the check instead of making it say "in progress")
+- Updates the README to show the latest Swift versions
+
+### Fixed
+- Fixes the `remove_dev_dependencies` script. It turns out that this script had never worked (I don't think), but the place that it was running in CI meant that it didn't matter. It will now work when running on a local machine, though. _Note: this may be becoming irrelevant, as I believe some related feature is coming to a new version of Swift. However, as we currently support as old as 4.2.4, it'll probably be a while before we can drop these scripts completely._
+
 ## [0.20.2] — 2020-07-01
 ### Fixed
 - Dice objects with no dice in them (i.e., modifiers only or empty objects) no longer crash when accessing their probabilities property (closes #75)
@@ -222,6 +241,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.21.0]: https://github.com/Samasaur1/DiceKit/compare/v0.20.2...v0.21.0
 [0.20.2]: https://github.com/Samasaur1/DiceKit/compare/v0.20.1...v0.20.2
 [0.20.1]: https://github.com/Samasaur1/DiceKit/compare/v0.20.0...v0.20.1
 [0.20.0]: https://github.com/Samasaur1/DiceKit/compare/v0.19.0...v0.20.0

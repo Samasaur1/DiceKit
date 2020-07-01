@@ -12,7 +12,7 @@ public struct WeightedDie {
     /// - Parameter c: The rolls and the chances of them occurring.
     /// - Throws: `Error.emptyDictionary`
     public init(chances c: Chances) throws {
-        chances = c.normalized.dict
+        chances = c.normalized.chances
         guard !chances.isEmpty else {
             throw Error.emptyDictionary
         }

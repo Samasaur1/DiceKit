@@ -13,7 +13,7 @@ final class ChancesTests: XCTestCase {
     func testDictionaryProperty() {
         let dict: [Roll: Chance] = [5: 0.234, 8: 0.432]
         let c = Chances(chances: dict)
-        XCTAssertEqual(dict, c.dict)
+        XCTAssertEqual(dict, c.chances)
     }
 
     func testEquatable() {
