@@ -12,7 +12,7 @@ os:
 - osx
 - linux
 
-osx_image: xcode11.5
+osx_image: xcode11
 
 env:
 - SWIFT_VERSION=4.2.4
