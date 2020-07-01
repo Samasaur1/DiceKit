@@ -368,4 +368,18 @@ final class DiceTests: XCTestCase {
         XCTAssertEqual(dice6d12, Dice((Die.d12, 6)))
         XCTAssertEqual(dice980d1, Dice(try! Die(sides: 1), count: 980))
     }
+
+    func testProbabilities() {
+        let empty = Dice(dice: [])
+        let five = Dice(dice: [], withModifier: 5)
+        let d4 = Dice(.d4)
+        let d6plus1 = Dice(.d6, withModifier: 1)
+
+        XCTAssertEqual(empty.probabilities, Chances(chances: [0: .one]))
+        XCTAssertEqual(five.probabilities, Chances(chances: [5: .one]))
+        let c = try! Chance.oneOut(of: 4)
+        XCTAssertEqual(d4.probabilities, Chances(chances: [1: c, 2: c, 3: c, 4: c]))
+        let c2 = try! Chance.oneOut(of: 6)
+        XCTAssertEqual(d6plus1.probabilities, Chances(chances: [2: c2, 3: c2, 4: c2, 5: c2, 6: c2, 7: c2]))
+    }
 }
