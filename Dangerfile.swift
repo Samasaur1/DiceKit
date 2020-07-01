@@ -111,8 +111,9 @@ if danger.github.pullRequest.body?.range(of: #"\n- \[[x ]\] "#, options: .regula
         .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
     for (num, line) in allTaskLines.enumerated() {
         if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
+            message("Task #\(num) completed!\n - \(line.dropFirst(6))")
             continue
         }
-        print("Task #\(num) incomplete!\n - \(line.dropFirst(6))")  // "- [ ] "
+        fail("Task #\(num) incomplete!\n - \(line.dropFirst(6))")  // "- [ ] "
     }
 }
