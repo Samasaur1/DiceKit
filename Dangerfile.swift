@@ -91,3 +91,15 @@ if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
         }
     }
 }
+
+if danger.github.pullRequest.body?.range(of: #"^- \[[x ]\] .*$"#, options: .regularExpression) != nil {
+    let split = danger.github.pullRequest.body!.split(separator: "\n")
+    let allTaskLines = split
+        .filter { $0.range(of: #"^- \[[x ]\] .*$"#, options: .regularExpression) != nil }
+    for (num, line) in allTaskLines.enumerated() {
+        if line.range(of: #"^- \[x\] .*$"#, options: .regularExpression) != nil {
+            continue
+        }
+        fail("Task #\(num) incomplete! (\"\(line.dropFirst(5))\")") // "- [ ] "
+    }
+}
