@@ -1,5 +1,5 @@
 language: generic
-dist: trusty
+dist: xenial
 
 stages:
 - test
@@ -22,7 +22,7 @@ env:
 - SWIFT_VERSION=4.2.4
 - SWIFT_VERSION=5.0.3
 - SWIFT_VERSION=5.1.5
-- SWIFT_VERSION=5.2.2
+- SWIFT_VERSION=5.2.4
 
 jobs:
   exclude:
