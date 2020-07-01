@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.21.0] — 2020-07-01
 ### Added
 - The internal `Chances` property formerly named `dict` (of type `[Roll: Chance]`) is now public and named `chances`.
+- Adds GitHub Actions for testing
 
 ### Changed
 - The GitHub pull request template now uses the `updateVersion.sh` and `release.sh` scripts that were added in PR #66 ([Version 0.18.0](https://github.com/Samasaur1/DiceKit/pull/66))
