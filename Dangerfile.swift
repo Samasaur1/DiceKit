@@ -107,13 +107,13 @@ if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
 //   which excludes nested tasks.
 if let body = danger.github.pullRequest.body {
     if body.range(of: #"\n- \[[x ]\] "#, options: .regularExpression) != nil {
-        let split = body.split(separator: "\n")
+        let split = body.split { $0.isNewline }
         message("newlines: \(body.filter { $0.isNewline }.count), \\n: \(body.filter { $0 == "\n" }.count)")
         let allTaskLines = split
-            .filter { $0.range(of: #"- \[[x ]\] "#, options: .regularExpression) != nil }
+            .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
         message("\(allTaskLines.count) tasks found")
         for (num, line) in allTaskLines.enumerated() {
-            if line.range(of: #"- \[x\] "#, options: .regularExpression) != nil {
+            if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
                 message("Task #\(num) completed!\n \\- \(line.dropFirst(6))")
                 continue
             }
