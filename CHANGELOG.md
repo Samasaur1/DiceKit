@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.20.2] — 2020-07-01
+### Fixed
+- Dice objects with no dice in them (i.e., modifiers only or empty objects) no longer crash when accessing their probabilities property (closes #75)
+
 ## [0.20.1] — 2020-06-30
 ### Added
 - `DKError`/`Error`'s `localizedDescription` field now has a useful value (based off of the documentation for those fields).
@@ -218,6 +222,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.20.2]: https://github.com/Samasaur1/DiceKit/compare/v0.20.1...v0.20.2
 [0.20.1]: https://github.com/Samasaur1/DiceKit/compare/v0.20.0...v0.20.1
 [0.20.0]: https://github.com/Samasaur1/DiceKit/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/Samasaur1/DiceKit/compare/v0.18.1...v0.19.0
