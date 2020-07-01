@@ -21,18 +21,30 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: fwal/setup-swift@v1
-        with:
-          swift-version: ${{ matrix.swift }}
+#      - uses: fwal/setup-swift@v1
+#        with:
+#          swift-version: ${{ matrix.swift }}
+      - name: Install Swift
+        run: |
+          eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
+          swift --version
+        env:
+          SWIFT_VERSION: ${{ matrix.swift }}
       - run: swift test
   danger:
     runs-on: macos-latest
     needs: [test]
     steps:
     - uses: actions/checkout@v2
-    - uses: fwal/setup-swift@v1
-      with:
-        swift-version: 5.2.4
+#    - uses: fwal/setup-swift@v1
+#      with:
+#        swift-version: 5.2.4
+    - name: Install Swift
+      run: |
+        eval "$(curl -sL https://swiftenv.fuller.li/install.sh || curl -sL https://raw.githubusercontent.com/kylef/swiftenv/master/docs/install.sh)"
+        swift --version
+      env:
+        SWIFT_VERSION: ${{ matrix.swift }}
     - name: Install Danger
       run: |
         python3 scripts/include_dev_dependencies.py
