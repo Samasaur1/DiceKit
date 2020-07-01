@@ -108,16 +108,14 @@ if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
 if let body = danger.github.pullRequest.body {
     if body.range(of: #"\n- \[[x ]\] "#, options: .regularExpression) != nil {
         let split = body.split { $0.isNewline }
-        message("newlines: \(body.filter { $0.isNewline }.count), \\n: \(body.filter { $0 == "\n" }.count)")
         let allTaskLines = split
             .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
-        message("\(allTaskLines.count) tasks found")
         for (num, line) in allTaskLines.enumerated() {
             if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
-                message("Task #\(num) completed!\n \\- \(line.dropFirst(6))")
+                message("Task #\(num) completed:\n   \(line.dropFirst(6))")
                 continue
             }
-            fail("Task #\(num) incomplete!\n \\- \(line.dropFirst(6))")  // "- [ ] "
+            fail("Task #\(num) incomplete:\n   \(line.dropFirst(6))")  // "- [ ] "
         }
     } else {
         warn("PR body doesn't appear to have any tasks, which it should")
