@@ -22,20 +22,24 @@ env:
 jobs:
   include:
   - os: linux
+    osx_image: xcode11.5
     env: SWIFT_VERSION=5.2.4
     script: swift test
   - stage: test
     if: branch != master OR type = pull_request
     os: osx
+    osx_image: xcode11.5
     env: SWIFT_VERSION=5.2.4
     script: swift test
   - stage: deploy
     if: branch = master AND type = push
     os: osx
+    osx_image: xcode11.5
     env: SWIFT_VERSION=5.2.4
     script: bash .deploy-docs.sh
   - stage: danger
     os: osx
+    osx_image: xcode11.5
     env: SWIFT_VERSION=5.2.4
     script: swift run danger-swift ci
     install:
