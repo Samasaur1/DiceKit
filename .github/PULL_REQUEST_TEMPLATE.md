@@ -19,17 +19,7 @@ Here's what has to happen:
 - [ ] This
 - [ ] PR
 - [ ] Ensure the changelog has everything new that is being added
-***
-**PLEASE DELETE EVERYTHING BELOW THESE LINES**
-***
-- [ ] Bump version
+- [ ] Bump version (run `updateVersion.sh`)
 1. Wait for CI
 1. Merge
-1. `git checkout master`
-1. `git pull`
-1. `git tag -s v$VERSION -m "Version $VERSION: $DESCRIPTION"`
-1. `git push --tags`
-1. `git checkout development`
-1. `git pull`
-1. `git rebase master`
-1. `git push`
+1. Run `release.sh`
