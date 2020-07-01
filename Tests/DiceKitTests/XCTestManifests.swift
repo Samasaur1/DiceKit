@@ -25,6 +25,7 @@ extension ChancesTests {
         ("testHashable", testHashable),
         ("testInitialization", testInitialization),
         ("testSubscript", testSubscript),
+        ("testSubscriptAndDictionaryProperty", testSubscriptAndDictionaryProperty),
     ]
 }
 
