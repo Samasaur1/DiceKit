@@ -114,10 +114,10 @@ if let body = danger.github.pullRequest.body {
         message("\(allTaskLines.count) tasks found")
         for (num, line) in allTaskLines.enumerated() {
             if line.range(of: #"- \[x\] "#, options: .regularExpression) != nil {
-                message("Task #\(num) completed!\n \- \(line.dropFirst(6))")
+                message("Task #\(num) completed!\n \\- \(line.dropFirst(6))")
                 continue
             }
-            fail("Task #\(num) incomplete!\n \- \(line.dropFirst(6))")  // "- [ ] "
+            fail("Task #\(num) incomplete!\n \\- \(line.dropFirst(6))")  // "- [ ] "
         }
     } else {
         warn("PR body doesn't appear to have any tasks, which it should")
