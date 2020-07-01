@@ -403,11 +403,9 @@ extension Dice: Rollable {
         }
 
         //Maps the compositions to the number of them, which is converted to a Chance and put in a Chances
-        var c = Chances()
-        c.dict = dict.mapValues { (arr: [[Int]]) -> Chance in
+        return Chances(chances: dict.mapValues { (arr: [[Int]]) -> Chance in
             return (try? .init(arr.count, outOf: max)) ?? .zero
-        }
-        return c
+        })
     }
 }
 
