@@ -39,7 +39,7 @@ jobs:
   - os: osx
     env: SWIFT_VERSION=5.1.5
   - os: osx
-    env: SWIFT_VERSION=5.2.2
+    env: SWIFT_VERSION=5.2.4
   include:
   - stage: test
     if: branch != master OR type = pull_request
