@@ -1,12 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: PR
+name: Push
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  pull_request:
-    branches: [ master ]
+on: push
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,8 +31,9 @@ jobs:
         env:
           SWIFT_VERSION: ${{ matrix.swift }}
       - run: swift test
-  danger:
-    name: Danger
+  deploy:
+    name: Deploy
+    if: github.ref == 'master'
     runs-on: macos-latest
     needs: [test]
     steps:
@@ -53,9 +52,5 @@ jobs:
         python3 scripts/include_dev_dependencies.py
         npm install -g danger
         swift build
-    - name: Run Danger
-      run: swift run danger-swift ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: Rehide dev dependencies
-      run: python3 scripts/remove_dev_dependencies.py
+    - name: Deploy Docs
+      run: bash .deploy-docs.sh
