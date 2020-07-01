@@ -6,3 +6,4 @@ var tests = [XCTestCaseEntry]()
 tests += DiceKitTests.__allTests()
 
 XCTMain(tests)
+

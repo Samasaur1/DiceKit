@@ -87,6 +87,7 @@ extension DiceTests {
         ("testMultipleRepeatedDieStringParsing", testMultipleRepeatedDieStringParsing),
         ("testMultipleSeparateDieStringParsing", testMultipleSeparateDieStringParsing),
         ("testNegativeMultipleDieStringParsing", testNegativeMultipleDieStringParsing),
+        ("testProbabilities", testProbabilities),
         ("testRolling", testRolling),
         ("testRollingMultipleTimes", testRollingMultipleTimes),
         ("testSingleDieAndSingleModifierStringParsing", testSingleDieAndSingleModifierStringParsing),

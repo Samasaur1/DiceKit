@@ -352,6 +352,7 @@ extension Dice: Rollable {
     private func calculateChances() -> Chances {
         //Gets an array of all the dice (which can include multiple of the same die) to loop through.
         var sortedDice: [Die] = []
+        if dice.isEmpty { return Chances(chances: [modifier: .one]) }
         for (die, count) in dice {
             for _ in 0..<count {
                 sortedDice.append(die)
