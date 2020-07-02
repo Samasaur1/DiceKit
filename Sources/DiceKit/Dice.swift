@@ -302,6 +302,86 @@ public struct Dice: Caching {
     }
 }
 
+/// Whether or not DiceKit types should cache the results of computations across objects.
+///
+/// **Types that currently support caching:**
+/// * `Dice`
+///
+/// - Since: 0.22.0
+public var enableCaching: Bool {
+    get {
+        return Dice.enableCaching
+    }
+    set {
+        Dice.enableCaching = newValue
+    }
+}
+
+@_functionBuilder struct DiceBuilder {
+    static func buildIf(_ die: Die?) -> Dice {
+        return buildExpression(die)
+    }
+
+    static func buildExpression(_ die: Die?) -> Dice {
+        return Dice(dice: [die].compactMap { $0 })
+    }
+
+    static func buildExpression(_ die: Die) -> Dice {
+        return Dice(dice: [die])
+    }
+
+    static func buildBlock(_ dice: Die...) -> Dice {
+        return Dice(dice: dice)
+    }
+
+    static func buildIf(_ dice: Dice?) -> Dice {
+        return buildExpression(dice)
+    }
+
+    static func buildExpression(_ dice: Dice?) -> Dice {
+        return dice ?? Dice(dice: [])
+    }
+
+    static func buildExpression(_ dice: Dice) -> Dice {
+        return dice
+    }
+
+    static func buildBlock(_ dice: Dice...) -> Dice {
+        return dice.reduce(Dice(dice: []), +)
+    }
+
+    static func buildIf(_ modifier: Int?) -> Dice {
+        return buildExpression(modifier)
+    }
+
+    static func buildExpression(_ modifier: Int?) -> Dice {
+        return Dice(dice: [], withModifier: modifier ?? 0)
+    }
+
+    static func buildExpression(_ modifier: Int) -> Dice {
+        return Dice(dice: [], withModifier: modifier)
+    }
+}
+
+extension Dice {
+    init(@DiceBuilder builder: () -> Dice) {
+        let d = builder()
+        self.dice = d.dice
+        self.modifier = d.modifier
+    }
+
+    static func test() {
+        let d = Dice {
+            Die.d4
+            Die.d4
+            4
+            -3
+            try? Dice("3d8-2")
+        }
+        print(d)
+    }
+}
+
 extension Dice: Rollable {
     /// Rolls this `Dice` object.
     ///
