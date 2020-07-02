@@ -29,6 +29,20 @@ public struct Chances {
         }
     }
     /// The rolls and the chances of them occurring.
+    ///
+    /// This is the property one should use in order to iterate through the possibilities, like so:
+    ///
+    /// ```
+    /// let chances: Chances = getChancesFromSomewhereElse()
+    /// let arr = chances.chances.sorted(by: { first, second in
+    ///     first.key < second.key
+    /// })
+    /// for (roll, chance) in arr {
+    ///     print("The chance of rolling a \(roll) is \(chance.n) out of \(chance.d)")
+    /// }
+    /// ```
+    ///
+    /// - Since: 0.21.0
     public private(set) var chances: [Roll: Chance]
     /// The chance of the given roll occurring.
     ///

@@ -38,4 +38,9 @@ final class ChancesTests: XCTestCase {
 
         XCTAssertAllEqual(c, c2, c3)
     }
+
+    func testSubscriptAndDictionaryProperty() {
+        let c = Chances(chances: [5: 0.234, 8: 0.432])
+        XCTAssertEqual(c.chances[5], c[of: 5])
+    }
 }
