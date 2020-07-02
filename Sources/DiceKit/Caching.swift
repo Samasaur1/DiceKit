@@ -17,7 +17,6 @@ public protocol Caching {
     static var enableCaching: Bool { get set }
 }
 
-
 /// Whether or not DiceKit types should cache the results of probability computations across objects.
 /// 
 /// The results of rolling are **NOT** cached.
