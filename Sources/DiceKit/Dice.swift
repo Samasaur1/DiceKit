@@ -266,9 +266,49 @@ public struct Dice {
 
     /// The probabilities of all possible rolls.
     ///
+    ///  Since 0.22.0, caches previous computations, even if they were on different objects.
+    ///  See `__cache`
+    ///
     /// - Since: 0.17.0
     public var probabilities: Chances {
-        return __probabilities.value(input: self)
+        if let val = Dice.__cache?[self] {
+            return val
+        }
+        let val = __probabilities.value(input: self)
+        Dice.__cache?[self] = val
+        return val
+    }
+
+    fileprivate static var __cache: [Dice: Chances]? = [:]
+
+    /// Whether or not `Dice` should cache the results of computations across objects.
+    ///
+    /// - Since: 0.22.0
+    public static var enableCaching = true {
+        didSet {
+            if enableCaching == false {
+                __cache = nil
+            } else {
+                if __cache == nil {
+                    __cache = [:]
+                }
+            }
+        }
+    }
+}
+
+/// Whether or not DiceKit types should cache the results of computations across objects.
+///
+/// **Types that currently support caching:**
+/// * `Dice`
+///
+/// - Since: 0.22.0
+public var enableCaching: Bool {
+    get {
+        return Dice.enableCaching
+    }
+    set {
+        Dice.enableCaching = newValue
     }
 }
 
@@ -418,6 +458,13 @@ extension Dice: Equatable {
             return false
         }
         return true
+    }
+}
+
+extension Dice: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.dice)
+        hasher.combine(self.modifier)
     }
 }
 
