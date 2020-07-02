@@ -81,6 +81,7 @@ extension DiceTests {
         ("testDiceTimesIntMultiplication", testDiceTimesIntMultiplication),
         ("testEmptyStringParsing", testEmptyStringParsing),
         ("testEquatable", testEquatable),
+        ("testFunctionBuilder", testFunctionBuilder),
         ("testInitialization", testInitialization),
         ("testInvalidStringParsing", testInvalidStringParsing),
         ("testMultipleDieAndMultipleModifierStringParsing", testMultipleDieAndMultipleModifierStringParsing),

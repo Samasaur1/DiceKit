@@ -369,17 +369,6 @@ extension Dice {
         self.dice = d.dice
         self.modifier = d.modifier
     }
-
-    static func test() {
-        let d = Dice {
-            Die.d4
-            Die.d4
-            4
-            -3
-            try? Dice("3d8-2")
-        }
-        print(d)
-    }
 }
 
 extension Dice: Rollable {

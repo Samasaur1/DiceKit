@@ -382,4 +382,15 @@ final class DiceTests: XCTestCase {
         let c2 = try! Chance.oneOut(of: 6)
         XCTAssertEqual(d6plus1.probabilities, Chances(chances: [2: c2, 3: c2, 4: c2, 5: c2, 6: c2, 7: c2]))
     }
+
+    func testFunctionBuilder() {
+        let d = Dice {
+            Die.d4
+            Die.d4
+            4
+            -3
+            try? Dice("3d8-2")
+        }
+        XCTAssertEqual(d, Dice(.d4, .d4, .d8, .d8, .d8, withModifier: 4-3-2))
+    }
 }
