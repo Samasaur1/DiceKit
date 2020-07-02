@@ -316,7 +316,7 @@ public var enableCaching: Bool {
         Dice.enableCaching = newValue
     }
 }
-
+#if swift(>=5.1)
 @_functionBuilder struct DiceBuilder {
     static func buildIf(_ die: Die?) -> Dice {
         return buildExpression(die)
@@ -370,6 +370,7 @@ extension Dice {
         self.modifier = d.modifier
     }
 }
+#endif
 
 extension Dice: Rollable {
     /// Rolls this `Dice` object.

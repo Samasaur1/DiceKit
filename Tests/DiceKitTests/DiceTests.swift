@@ -384,6 +384,7 @@ final class DiceTests: XCTestCase {
     }
 
     func testFunctionBuilder() {
+        #if swift(>=5.1)
         let d = Dice {
             Die.d4
             Die.d4
@@ -392,5 +393,9 @@ final class DiceTests: XCTestCase {
             try? Dice("3d8-2")
         }
         XCTAssertEqual(d, Dice(.d4, .d4, .d8, .d8, .d8, withModifier: 4-3-2))
+        #else
+        print("Function builders are only supported on Swift 5.1 or newer", to: &STDOUT)
+        print("Function builders are only supported on Swift 5.1 or newer", to: &STDERR)
+        #endif
     }
 }
