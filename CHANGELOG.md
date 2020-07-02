@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Upcoming]
+
+## [0.22.0] — 2020-07-02
 ### Added
 - More documentation on the `chances` property introduced in v0.21.0
+- `Dice` caches the result of its computations for `probabilities` between objects (closes [#78](https://github.com/Samasaur1/DiceKit/issues/78)). See the issue (linked) or the pull request [here](https://github.com/Samasaur1/DiceKit/pull/79) for more information on caching.
+- `Dice` now conforms to `Hashable` (adding for caching, but handy in general)
 
 ## [0.21.0] — 2020-07-01
 ### Added
@@ -243,6 +247,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.22.0]: https://github.com/Samasaur1/DiceKit/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/Samasaur1/DiceKit/compare/v0.20.2...v0.21.0
 [0.20.2]: https://github.com/Samasaur1/DiceKit/compare/v0.20.1...v0.20.2
 [0.20.1]: https://github.com/Samasaur1/DiceKit/compare/v0.20.0...v0.20.1

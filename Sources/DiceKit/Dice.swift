@@ -3,7 +3,7 @@
 /// The properties of `Dice` objects are immutable; use the addition operators to combine them with other `Die` objects or modifiers. You can use compound assignment operators if you want, so long as you declare the `Dice` object as a `var` instead of a `let` constant.
 ///
 /// - Author: Samasaur
-public struct Dice {
+public struct Dice: Caching {
     /// The dice that make up this collection, along with how many times they appear.
     ///
     /// This `[Die: Int]` dictionary stores the types of dice that appear, paired with the number of times they appear. For example:
@@ -267,7 +267,7 @@ public struct Dice {
     /// The probabilities of all possible rolls.
     ///
     ///  Since 0.22.0, caches previous computations, even if they were on different objects.
-    ///  See `__cache`
+    ///  See `enableCaching`, `ENABLE_CACHING` for caching configuration
     ///
     /// - Since: 0.17.0
     public var probabilities: Chances {
@@ -281,7 +281,12 @@ public struct Dice {
 
     fileprivate static var __cache: [Dice: Chances]? = [:]
 
-    /// Whether or not `Dice` should cache the results of computations across objects.
+    /// Whether or not `Dice` should cache the results of probability computations across objects.
+    ///
+    /// **Note:** The results of rolling are **NOT** cached.
+    ///
+    /// Setting this value to `false` and then to `true` will clear the cache.
+    /// See `ENABLE_CACHING` for configuration of caching for all types at once.
     ///
     /// - Since: 0.22.0
     public static var enableCaching = true {
@@ -294,21 +299,6 @@ public struct Dice {
                 }
             }
         }
-    }
-}
-
-/// Whether or not DiceKit types should cache the results of computations across objects.
-///
-/// **Types that currently support caching:**
-/// * `Dice`
-///
-/// - Since: 0.22.0
-public var enableCaching: Bool {
-    get {
-        return Dice.enableCaching
-    }
-    set {
-        Dice.enableCaching = newValue
     }
 }
 

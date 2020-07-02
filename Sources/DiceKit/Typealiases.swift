@@ -20,3 +20,7 @@ public typealias DKWeightedDie = WeightedDie
 public typealias DKChance = Chance
 /// See `Chances`.
 public typealias DKChances = Chances
+/// See `Caching`.
+///
+/// - Since: 0.22.0
+public typealias DKCaching = Caching
