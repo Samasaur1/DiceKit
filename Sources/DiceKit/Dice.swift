@@ -316,8 +316,10 @@ public var enableCaching: Bool {
         Dice.enableCaching = newValue
     }
 }
+
 #if swift(>=5.1)
-@_functionBuilder struct DiceBuilder {
+/// A custom parameter attribute that constructs `Dice` from closures.
+@_functionBuilder fileprivate struct DiceBuilder {
     static func buildIf(_ die: Die?) -> Dice {
         return buildExpression(die)
     }
@@ -364,8 +366,31 @@ public var enableCaching: Bool {
 }
 
 extension Dice {
-    init(@DiceBuilder builder: () -> Dice) {
-        let d = builder()
+    /// Creates a new `Dice` object with the specified contents.
+    ///
+    /// This uses the `@functionBuilder` (actually `@_functionBuilder`, currently) attritube introduced in Swift 5.1
+    ///   which means that this initializer is only available in Swift 5.1 or newer.
+    ///
+    /// Valid expressions for this closure are those that result in any of the following types:
+    /// * `Dice`
+    /// * `Die`
+    /// * `Int`
+    ///
+    /// Here's an (admittedly contrived) example:
+    /// ```
+    /// let dice = Dice {
+    ///     Die.d4
+    ///     Die.d4
+    ///     4
+    ///     -3
+    ///     try? Dice("3d8-2")
+    /// }
+    /// ```
+    /// It results in 3d8 + 2d4 - 1
+    ///
+    /// - Parameter content: A dice function builder that creates the contents of this `Dice` object.
+    init(@DiceBuilder content closure: () -> Dice) {
+        let d = closure()
         self.dice = d.dice
         self.modifier = d.modifier
     }
