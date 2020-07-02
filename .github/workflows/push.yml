@@ -30,7 +30,14 @@ jobs:
           swift --version
         env:
           SWIFT_VERSION: ${{ matrix.swift }}
-      - run: swift test
+      - run: |
+          swift --version
+          swift test
+      - run: |
+          swift --version
+          swift test
+        env:
+          SWIFT_VERSION: ${{ matrix.swift }}
   deploy:
     name: Deploy
     if: github.ref == 'master'
