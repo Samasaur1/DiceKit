@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dice Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Dice" class="dashAnchor"></a>
+    <a title="Dice Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">DiceKit 0.15.0 Docs</a> (75% documented)</p>
+        <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">DiceKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Dice Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Rollables.html">Rollables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Rollable.html">Rollable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Die.html">Die</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Dice.html">Dice</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Results.html">Results</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Results.html#/s:7DiceKit4Rolla">Roll</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MultipleRollResult.html">MultipleRollResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RollComparison.html">RollComparison</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RollComparison.html">RollComparison</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Dice</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Dice</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Rollable.html">Rollable</a></span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
+
+                </div>
+              </div>
+            <p>A collection of <code><a href="../Classes/Die.html">Die</a></code> objects and/or a modifier that can be rolled using the <code>roll()</code> method.</p>
+
+<p>The properties of <code>Dice</code> objects are immutable; use the addition operators to combine them with other <code><a href="../Classes/Die.html">Die</a></code> objects or modifiers. You can use compound assignment operators if you want, so long as you declare the <code>Dice</code> object as a <code>var</code> instead of a <code>let</code> constant.</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    Samasaur
+
+</div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4diceSDyAA3DieCSiGvp"></a>
+                    <a name="//apple_ref/swift/Property/dice" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4diceSDyAA3DieCSiGvp">dice</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The dice that make up this collection, along with how many times they appear.</p>
+
+<p>This <code>[Die: Int]</code> dictionary stores the types of dice that appear, paired with the number of times they appear. For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dice1</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">)</span>
+<span class="n">dice1</span><span class="o">.</span><span class="n">dice</span> <span class="c1">// [d6: 1]</span>
+
+<span class="k">let</span> <span class="nv">dice2</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span>
+<span class="n">dice2</span><span class="o">.</span><span class="n">dice</span> <span class="c1">// [d6: 2, d4: 1]</span>
+</code></pre>
+
+<p>To iterate through this dictionary, do the following:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dice</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">die</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span> <span class="k">in</span> <span class="n">dice</span><span class="o">.</span><span class="n">dice</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">die</span><span class="o">.</span><span class="n">description</span><span class="se">)</span><span class="s"> appears </span><span class="se">\(</span><span class="n">count</span><span class="se">)</span><span class="s"> time(s)"</span><span class="p">)</span>
+</code></pre>
+
+<p>Output:</p>
+<pre class="highlight swift"><code><span class="kt">A</span> <span class="n">six</span><span class="o">-</span><span class="n">sided</span> <span class="n">die</span> <span class="n">appears</span> <span class="mi">2</span> <span class="nf">time</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="kt">A</span> <span class="n">four</span><span class="o">-</span><span class="n">sided</span> <span class="n">die</span> <span class="n">appears</span> <span class="mi">1</span> <span class="nf">time</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre>
+
+<p>To add a die to the dictionary (only applicable if using a mutable imitiation):</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dice</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">dieToAdd</span> <span class="o">=</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d8</span>
+<span class="n">dice</span><span class="o">.</span><span class="n">dice</span><span class="p">[</span><span class="n">dieToAdd</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dice</span><span class="o">.</span><span class="n">dice</span><span class="p">[</span><span class="n">dieToAdd</span><span class="p">]</span> <span class="p">??</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1">// dice.dice is [d6: 2, d8: 1, d4: 1]</span>
+<span class="k">let</span> <span class="nv">otherDie</span> <span class="o">=</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span>
+<span class="n">dice</span><span class="o">.</span><span class="n">dice</span><span class="p">[</span><span class="n">otherDie</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dice</span><span class="o">.</span><span class="n">dice</span><span class="p">[</span><span class="n">otherDie</span><span class="p">]</span> <span class="p">??</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1">// dice.dice is [d6: 2, d8: 1, d4: 2]</span>
+</code></pre>
+
+<p>To convert the dictionary to an array of <code>(Die, Int)</code> tuples, sorted by descending size of dice:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dice</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">diceArray</span> <span class="o">=</span> <span class="n">dice</span><span class="o">.</span><span class="n">dice</span><span class="o">.</span><span class="nf">sorted</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">key</span> <span class="o">&gt;</span> <span class="nv">$1</span><span class="o">.</span><span class="n">key</span> <span class="p">})</span>
+<span class="c1">// diceArray is [(d6, 2), (d4, 1)]</span>
+</code></pre>
+
+<p>To convert the dictionary to an array of <code><a href="../Classes/Die.html">Die</a></code> objects, including duplicates:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dice</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">diceArray</span><span class="p">:</span> <span class="p">[</span><span class="kt">Die</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">die</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span> <span class="k">in</span> <span class="n">dice</span><span class="o">.</span><span class="n">dice</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="n">count</span> <span class="p">{</span>
+        <span class="n">diceArray</span> <span class="o">+=</span> <span class="n">die</span><span class="o">.</span><span class="nf">copy</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// diceArray is [d6, d6, d4]</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">dice</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Die.html">Die</a></span> <span class="p">:</span> <span class="kt">Int</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C08numberOfA0Sivp"></a>
+                    <a name="//apple_ref/swift/Property/numberOfDice" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C08numberOfA0Sivp">numberOfDice</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The number of dice in this <code>Dice</code> instance.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.2.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">numberOfDice</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C8modifierSivp"></a>
+                    <a name="//apple_ref/swift/Property/modifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C8modifierSivp">modifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The modifier added or subtracted from these <code>Dice</code></p>
+
+<p>This <code>Int</code> is added to the result whenever the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method is called.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">modifier</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0CyAcA3DieCd_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0CyAcA3DieCd_tcfc">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">dice</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dice</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4diceACSayAA3DieCG_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dice:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4diceACSayAA3DieCG_tcfc">init(dice:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dice</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dice</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C_5countAcA3DieC_Sitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:count:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C_5countAcA3DieC_Sitcfc">init(_:<wbr>count:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the given number of the specified die. This is essentially identical to <code>Dice(copyOf: die * count)</code>, but is more efficient.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.6.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">die</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>die</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The die to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times the specified die should appear.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0CyAcA3DieC3die_Si5counttd_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0CyAcA3DieC3die_Si5counttd_tcfc">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice. They should be in a (die: Die, count: Int) form, with the die being the type of die to add, and the count being the number of times to add it.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.6.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">dieIntTuples</span><span class="p">:</span> <span class="p">(</span><span class="nv">die</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span><span class="o">...</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dieIntTuples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to add, in the form (dieType, count).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C_12withModifierAcA3DieCd_Sitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:withModifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C_12withModifierAcA3DieCd_Sitcfc">init(_:<wbr>withModifier:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice and modifier</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">dice</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="o">...</span><span class="p">,</span> <span class="n">withModifier</span> <span class="nv">modifier</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dice</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The modifier to apply to every roll.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4dice12withModifierACSayAA3DieCG_Sitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dice:withModifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4dice12withModifierACSayAA3DieCG_Sitcfc">init(dice:<wbr>withModifier:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice and modifier</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dice</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">],</span> <span class="n">withModifier</span> <span class="nv">modifier</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dice</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The modifier to apply to every roll</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C_5count12withModifierAcA3DieC_S2itcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:count:withModifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C_5count12withModifierAcA3DieC_S2itcfc">init(_:<wbr>count:<wbr>withModifier:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the given number of the specified die, along with the specified modifier. This is essentially identical to <code>Dice(copyOf: (die * count) + modifier)</code>, but is more efficient.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.6.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">die</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">withModifier</span> <span class="nv">modifier</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>die</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The die to include in this <code>Dice</code> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times the specified die should appear.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The modifier to apply to every roll.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C_12withModifierAcA3DieC3die_Si5counttd_Sitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:withModifier:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C_12withModifierAcA3DieC3die_Si5counttd_Sitcfc">init(_:<wbr>withModifier:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object with the specified dice and modifier. The dice should be in a (die: Die, count: Int) form, with the die being the type of die to add, and the count being the number of times to add it.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.6.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">dieIntTuples</span><span class="p">:</span> <span class="p">(</span><span class="nv">die</span><span class="p">:</span> <span class="kt"><a href="../Classes/Die.html">Die</a></span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span><span class="o">...</span><span class="p">,</span> <span class="n">withModifier</span> <span class="nv">modifier</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dieIntTuples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dice to add, in the form (dieType, count).</p>
+
+<ul>
+<li>modifier: The modifer to apply to every roll.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0CyACSgSScfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0CyACSgSScfc">init(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object from the specified string in dice notation.</p>
+
+<p>You cannot have a negative die <strong>AS A RESULT</strong> (<code>-d6</code>), a die with negative sides (<code>d-6</code>), or a die with 0 sides (<code>d0</code>). You cannot have an unreal modifier or use any operator except for addition and subtraction.</p>
+
+<p>You can have <code>-d6</code>s in your string, so long as they cancel each other out so that the final result is at least <code>0d6</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">_</span> <span class="nv">str</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>str</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string to convert.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C6copyOfA2C_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(copyOf:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C6copyOfA2C_tcfc">init(copyOf:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code>Dice</code> object that is a copy of the given <code>Dice</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">copyOf</span> <span class="nv">other</span><span class="p">:</span> <span class="kt">Dice</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>other</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The other <code>Dice</code> object to copy.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4rollSiyF"></a>
+                    <a name="//apple_ref/swift/Method/roll()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4rollSiyF">roll()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rolls this <code>Dice</code> object.</p>
+
+<p>This function rolls every <code><a href="../Classes/Die.html">Die</a></code> included in this <code>Dice</code> object, adds them together, adds the modifier (if any), and returns the result</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The sum of the rolls of every <code><a href="../Classes/Die.html">Die</a></code> in this <code>Dice</code> + the modifier.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4roll5times_S2i_AA18MultipleRollResultOtF"></a>
+                    <a name="//apple_ref/swift/Method/roll(times:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4roll5times_S2i_AA18MultipleRollResultOtF">roll(times:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rolls this <code>Dice</code> object the given number of times and returns the given result type.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.5.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">(</span><span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">returnType</span><span class="p">:</span> <span class="kt"><a href="../Enums/MultipleRollResult.html">MultipleRollResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>times</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times to roll.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>returnType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The type of result performed with the given number of rolls.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C13minimumResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/minimumResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C13minimumResultSivp">minimumResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The minimum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method.</p>
+
+<p>This method simulates rolling a <code>1</code> on <em>every</em> die in this <code>Dice</code> object. It also includes the modifier, if applicable.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.2.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">minimumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C13maximumResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/maximumResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C13maximumResultSivp">maximumResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The maximum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method.</p>
+
+<p>This method simulates rolling the maximum on every die in this <code>Dice</code> object. It also includes the modifier, if applicable.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.2.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maximumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C13averageResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/averageResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C13averageResultSivp">averageResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The average result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method.
+It is calculated with double numbers to avoid rounding errors.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.15.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">averageResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C8canReachySbSi_AA14RollComparisonOtF"></a>
+                    <a name="//apple_ref/swift/Method/canReach(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C8canReachySbSi_AA14RollComparisonOtF">canReach(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines whether this <code>Dice</code> object can reach the target <code><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></code> using the given comparison type.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.15.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">canReach</span><span class="p">(</span><span class="n">_</span> <span class="nv">target</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">comparisonType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RollComparison.html">RollComparison</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The target to check reachibility for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>comparisonType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The comparison to use when checking reachibility.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whether or not this <code>Dice</code> object can reach the target, using the given comparison.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:SQ2eeoiySbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Dice</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Dice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C11descriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C11descriptionSSvp">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A description of this <code>Dice</code> object.</p>
+<pre class="highlight swift"><code><span class="kt">Dice</span><span class="p">()</span><span class="o">.</span><span class="n">description</span> <span class="c1">// No dice, without a modifier.</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="c1">// 1 6-sided die, with no modifier.</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="c1">// 2 6-sided dice, 1 four-sided die, with no modifier.</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="c1">// A modifier of 5.</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="c1">// 1 six-sided die, with a modifier of 5.</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">,</span> <span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">description</span> <span class="c1">// 2 6-sided dice, 1 four-sided die, with a modifier of 5.</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C16debugDescriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C16debugDescriptionSSvp">debugDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A short, debug-usable description of this <code>Dice</code> object.</p>
+<pre class="highlight swift"><code><span class="kt">Dice</span><span class="p">()</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// 0</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">)</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// 1d6</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">)</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// 2d6 + 1d4</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// + 5</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// 1d6 + 5</span>
+
+<span class="kt">Dice</span><span class="p">(</span><span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d6</span><span class="p">,</span> <span class="kt">Die</span><span class="o">.</span><span class="n">d4</span><span class="p">,</span> <span class="nv">withModifier</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">debugDescription</span> <span class="c1">// 2d6 + 1d4 + 5</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C4copyACyF"></a>
+                    <a name="//apple_ref/swift/Method/copy()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C4copyACyF">copy()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a copy of the given <code>Dice</code> with separate memory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">copy</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Dice</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A copy of the given <code>Dice</code>, with the same information, at a different memory location.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-07-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

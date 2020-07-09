@@ -1,0 +1,215 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 274,
+      "symbol": "Dice.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 284,
+      "symbol": "Dice.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 295,
+      "symbol": "Dice.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 310,
+      "symbol": "Dice.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 319,
+      "symbol": "Dice.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 328,
+      "symbol": "Dice.-(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 331,
+      "symbol": "Dice.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 339,
+      "symbol": "Dice.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 349,
+      "symbol": "Dice.+=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 352,
+      "symbol": "Dice.+=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 355,
+      "symbol": "Dice.+=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 358,
+      "symbol": "Dice.-=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Dice.swift",
+      "line": 361,
+      "symbol": "Dice.*=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 37,
+      "symbol": "DKDie",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 38,
+      "symbol": "DKDice",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 39,
+      "symbol": "DKRoll",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 40,
+      "symbol": "DKRollable",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
+      "line": 133,
+      "symbol": "Die.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
+      "line": 136,
+      "symbol": "Die.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
+      "line": 139,
+      "symbol": "Die.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
+      "line": 142,
+      "symbol": "Die.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
+      "line": 146,
+      "symbol": "Die.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 47,
+      "symbol": "Roll.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 50,
+      "symbol": "Roll.-(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 53,
+      "symbol": "Roll.*(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 56,
+      "symbol": "Roll./(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 62,
+      "symbol": "Roll.+=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 65,
+      "symbol": "Roll.-=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 68,
+      "symbol": "Roll.*=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Roll.swift",
+      "line": 71,
+      "symbol": "Roll./=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit"
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rollables  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Rollables" class="dashAnchor"></a>
+    <a title="Rollables  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">DiceKit 0.6.0 Docs</a> (70% documented)</p>
+        <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">DiceKit Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Rollables  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Rollables.html">Rollables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Die.html">Die</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Dice.html">Dice</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Rollables</h1>
+            
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit3DieC"></a>
+                    <a name="//apple_ref/swift/Class/Die" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit3DieC">Die</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A representation of a single die.</p>
+
+<p>It can be rolled using the <code>roll()</code> method, which will give a <code>Roll</code> result.</p>
+
+<p>A <code>Die</code> object cannot change. Use the addition operators and the <code><a href="Classes/Dice.html">Dice</a></code> class to represent more complex dice expressions.</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    Samasaur
+
+</div>
+
+                        <a href="Classes/Die.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Die</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Die</span><span class="p">:</span> <span class="kt">Rollable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Die</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Die</span><span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Die</span><span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Die</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit0A0C"></a>
+                    <a name="//apple_ref/swift/Class/Dice" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit0A0C">Dice</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A collection of <code><a href="Classes/Die.html">Die</a></code> objects and/or a modifier that can be rolled using the <code>roll()</code> method.</p>
+
+<p>The properties of <code>Dice</code> objects are immutable; use the addition operators to combine them with other <code><a href="Classes/Die.html">Die</a></code> objects or modifiers. You can use compound assignment operators if you want, so long as you declare the <code>Dice</code> object as a <code>var</code> instead of a <code>let</code> constant.</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    Samasaur
+
+</div>
+
+                        <a href="Classes/Dice.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Dice</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Rollable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-07-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
