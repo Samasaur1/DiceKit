@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>DiceKit  Reference</title>
+    <title>Other Enumerations  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,7 +13,8 @@
     <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a title="DiceKit  Reference"></a>
+    <a name="//apple_ref/swift/Section/Other Enumerations" class="dashAnchor"></a>
+    <a title="Other Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">DiceKit 0.11.0 Docs</a> (72% documented)</p>
@@ -29,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="index.html">DiceKit Reference</a>
         <img id="carat" src="img/carat.png" />
-        DiceKit  Reference
+        Other Enumerations  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -70,29 +71,59 @@
       <article class="main-content">
         <section>
           <section class="section">
-            
-            <h1 id='dicekit' class='heading'>DiceKit</h1>
+            <h1>Other Enumerations</h1>
+            <p>The following enumerations are available globally.</p>
 
-<p>A Swift framework for simulating dice both real and unreal.</p>
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit18MultipleRollResultO"></a>
+                    <a name="//apple_ref/swift/Enum/MultipleRollResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit18MultipleRollResultO">MultipleRollResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An enum representing the type of result to return from rolling multiple times.</p>
 
-<table><thead>
-<tr>
-<th>Branch</th>
-<th>Status</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>master</td>
-<td><a href="https://travis-ci.com/Samasaur1/DiceKit"><img src="https://travis-ci.com/Samasaur1/DiceKit.svg?branch=master" alt="master Build Status"></a></td>
-</tr>
-<tr>
-<td>development</td>
-<td><a href="https://travis-ci.com/Samasaur1/DiceKit"><img src="https://travis-ci.com/Samasaur1/DiceKit.svg?branch=development" alt="development Build Status"></a></td>
-</tr>
-</tbody></table>
+<ul>
+<li>sum: Return the sum of all rolls.</li>
+<li>highest: Return the highest roll.</li>
+<li>lowest: Return the lowest roll.</li>
+<li>outsides: Return the sum of the highest and the lowest roll.</li>
+<li>dropHighest: Return the sum of everything but the highest roll.</li>
+<li>dropLowest: Return the sum of everything except the lowest roll.</li>
+<li>dropOutsides: Return the sum of everything except the highest and lowest rolls.</li>
+<li>dropLow: Return the sum of everything except the given number of lowest rolls.</li>
+<li><p>dropHigh: Return the sum of everything except the given number of highest rolls.</p></li>
+</ul><div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.5.0</p>
 
-<p><strong>Documentation</strong>: <a href="https://samasaur1.github.io/DiceKit/">https://samasaur1.github.io/DiceKit/</a></p>
+</div>
 
+                        <a href="Enums/MultipleRollResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">MultipleRollResult</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">

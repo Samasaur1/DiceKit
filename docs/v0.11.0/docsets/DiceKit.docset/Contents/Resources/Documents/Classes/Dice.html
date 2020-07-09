@@ -17,7 +17,7 @@
     <a title="Dice Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiceKit 0.11.0 Docs</a> (70% documented)</p>
+        <p><a href="../index.html">DiceKit 0.11.0 Docs</a> (72% documented)</p>
         <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -40,10 +40,29 @@
             <a href="../Rollables.html">Rollables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/Rollable.html">Rollable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Die.html">Die</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/Dice.html">Dice</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Results.html">Results</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Results.html#/s:7DiceKit4Rolla">Roll</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MultipleRollResult.html">MultipleRollResult</a>
               </li>
             </ul>
           </li>
@@ -57,7 +76,7 @@
                 <div class="language">
                   
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Dice</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Rollable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Rollable.html">Rollable</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span><span class="p">,</span> <span class="kt">CustomDebugStringConvertible</span></code></pre>
 
@@ -196,7 +215,7 @@
                       <div class="abstract">
                         <p>The modifier added or subtracted from these <code>Dice</code></p>
 
-<p>This <code>Int</code> is added to the result whenever the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollyXeXeF">roll()</a></code> method is called.</p>
+<p>This <code>Int</code> is added to the result whenever the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method is called.</p>
 
                       </div>
                       <div class="declaration">
@@ -711,9 +730,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7DiceKit0A0C4rollyXeXeF"></a>
+                    <a name="/s:7DiceKit0A0C4rollSiyF"></a>
                     <a name="//apple_ref/swift/Method/roll()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0C4rollyXeXeF">roll()</a>
+                    <a class="token" href="#/s:7DiceKit0A0C4rollSiyF">roll()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -730,7 +749,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Roll</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
 
                         </div>
                       </div>
@@ -744,9 +763,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7DiceKit0A0C4rollyXeXeF"></a>
+                    <a name="/s:7DiceKit0A0C4roll5times_S2i_AA18MultipleRollResultOtF"></a>
                     <a name="//apple_ref/swift/Method/roll(times:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0C4rollyXeXeF">roll(times:<wbr>_:<wbr>)</a>
+                    <a class="token" href="#/s:7DiceKit0A0C4roll5times_S2i_AA18MultipleRollResultOtF">roll(times:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -766,7 +785,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">(</span><span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">returnType</span><span class="p">:</span> <span class="kt">MultipleRollResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Roll</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">roll</span><span class="p">(</span><span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">returnType</span><span class="p">:</span> <span class="kt"><a href="../Enums/MultipleRollResult.html">MultipleRollResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
 
                         </div>
                       </div>
@@ -811,9 +830,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7DiceKit0A0C13minimumResultXevp"></a>
+                    <a name="/s:7DiceKit0A0C13minimumResultSivp"></a>
                     <a name="//apple_ref/swift/Property/minimumResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0C13minimumResultXevp">minimumResult</a>
+                    <a class="token" href="#/s:7DiceKit0A0C13minimumResultSivp">minimumResult</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -821,7 +840,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The minimum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollyXeXeF">roll()</a></code> method.</p>
+                        <p>The minimum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method.</p>
 
 <p>This method simulates rolling a <code>1</code> on <em>every</em> die in this <code>Dice</code> object. It also includes the modifier, if applicable.</p>
 <div class="aside aside-since">
@@ -835,7 +854,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">minimumResult</span><span class="p">:</span> <span class="kt">Roll</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">minimumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -845,9 +864,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7DiceKit0A0C13maximumResultXevp"></a>
+                    <a name="/s:7DiceKit0A0C13maximumResultSivp"></a>
                     <a name="//apple_ref/swift/Property/maximumResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0C13maximumResultXevp">maximumResult</a>
+                    <a class="token" href="#/s:7DiceKit0A0C13maximumResultSivp">maximumResult</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -855,7 +874,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The maximum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollyXeXeF">roll()</a></code> method.</p>
+                        <p>The maximum possible result from using the <code><a href="../Classes/Dice.html#/s:7DiceKit0A0C4rollSiyF">roll()</a></code> method.</p>
 
 <p>This method simulates rolling the maximum on every die in this <code>Dice</code> object. It also includes the modifier, if applicable.</p>
 <div class="aside aside-since">
@@ -869,7 +888,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maximumResult</span><span class="p">:</span> <span class="kt">Roll</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maximumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
