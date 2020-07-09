@@ -113,6 +113,41 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 87,
+      "symbol": "DKDie",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 88,
+      "symbol": "DKDice",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 89,
+      "symbol": "DKRoll",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 90,
+      "symbol": "DKRollable",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/DiceKit.swift",
+      "line": 91,
+      "symbol": "DKMultipleRollResult",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/sam/Desktop/Files/Stormbreaker_Software/DiceKit/Sources/DiceKit/Die.swift",
       "line": 206,
       "symbol": "Die.+(_:_:)",
