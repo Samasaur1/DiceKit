@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Upcoming]
+### Changed
+- The release script now links to the docs for the specific version (on the releases page), not just the main website.
 
 ## [0.23.0] - 2020-07-09
 ### Added
@@ -61,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0] — 2020-02-16
 ### Changed
-- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been update d to support this.
+- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been updated to support this.
 
 ## [0.19.0] - 2019-12-26
 ### Added
