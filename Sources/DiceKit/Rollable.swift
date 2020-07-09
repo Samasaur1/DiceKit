@@ -128,27 +128,27 @@ public extension Rollable {
             return (rolls.min() ?? 0) + (rolls.max() ?? 0)
         case .dropHighest:
             guard rolls.count > 1 else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
+            rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
             return rolls.sum
         case .dropLowest:
             guard rolls.count > 1 else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
             return rolls.sum
         case .dropOutsides:
             guard rolls.count > 2 else { return 0 }
-            rolls.remove(at: rolls.index(of: rolls.max()!)!)
-            rolls.remove(at: rolls.index(of: rolls.min()!)!)
+            rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
+            rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
             return rolls.sum
         case .dropLow(let amountToDrop):
             guard rolls.count >= amountToDrop else { return 0 }
             for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.min()!)!)
+                rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
             }
             return rolls.sum
         case .dropHigh(let amountToDrop):
             guard rolls.count >= amountToDrop else { return 0 }
             for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.index(of: rolls.max()!)!)
+                rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
             }
             return rolls.sum
         }
