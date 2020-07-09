@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.23.0] — 2020-07-09
+### Added
+- A `Package@swift-5.0.swift` file in order to be able to specify supported platforms
+- Supported versions of Swift are listed in the package manifest file
+
+### Changed
+- Migrate from `Array.index(of:)` to `Array.firstIndex(of:)`
+- Continue to define our own implementation of `count(where:)` until at least Swift 6, because (as I found out) the implementation in the standard library was removed because of its impact on type-checker performance.
+- Makes the GitHub Actions workflow output nicer.
+
+### Fixed
+- Uses the correct Swift version in GitHub Actions tests (closes [#80](https://github.com/Samasaur1/DiceKit/issues/80))
+
 ## [0.22.0] — 2020-07-02
 ### Added
 - More documentation on the `chances` property introduced in v0.21.0
@@ -247,6 +260,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.23.0]: https://github.com/Samasaur1/DiceKit/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/Samasaur1/DiceKit/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/Samasaur1/DiceKit/compare/v0.20.2...v0.21.0
 [0.20.2]: https://github.com/Samasaur1/DiceKit/compare/v0.20.1...v0.20.2
