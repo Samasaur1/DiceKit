@@ -421,3 +421,4 @@ form[role=search] {
   form[role=search] .tt-suggestion:hover .doc-parent-name,
   form[role=search] .tt-suggestion.tt-cursor .doc-parent-name {
     color: #fff; }
+section > section > p > img { margin-top: 4em; margin-right: 2em; }
