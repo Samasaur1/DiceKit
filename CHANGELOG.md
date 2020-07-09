@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.23.0] — 2020-07-09
+## [0.23.0] - 2020-07-09
 ### Added
 - A `Package@swift-5.0.swift` file in order to be able to specify supported platforms
 - Supported versions of Swift are listed in the package manifest file
