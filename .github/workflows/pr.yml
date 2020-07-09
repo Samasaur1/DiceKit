@@ -6,12 +6,13 @@ name: PR
 # events but only for the master branch
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
-    name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: Test Swift ${{ matrix.swift }}.x on ${{ matrix.os }}
     strategy:
       matrix:
         os: [macos-latest, ubuntu-16.04, ubuntu-latest]
