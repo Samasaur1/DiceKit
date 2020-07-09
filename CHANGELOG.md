@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - The release script now links to the docs for the specific version (on the releases page), not just the main website.
 
+### Fixed
+- GitHub Actions can now deploy docs through the use of the GitHub token
+
 ## [0.23.0] - 2020-07-09
 ### Added
 - A `Package@swift-5.0.swift` file in order to be able to specify supported platforms

@@ -42,3 +42,5 @@ jobs:
         swift build
     - name: Deploy Docs
       run: bash .deploy-docs.sh
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
