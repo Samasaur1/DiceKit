@@ -25,7 +25,7 @@ internal extension Array where Element == Double {
         return total
     }
 }
-#if !swift(>=5.1) //Can't use `#if swift(<5.1)` for earlier than Swift 5
+#if !swift(>=6) //Can't use `#if swift(<5.1)` for earlier than Swift 5
 internal extension Sequence {
     func count(where predicate: (Element) throws -> Bool) rethrows -> Int {
         var count = 0
@@ -38,7 +38,8 @@ internal extension Sequence {
     }
 }
 #else
-#error("Do we still need this?")
+#error("Has count(where:) finally been re-added?")
+//For context, `count(where:)` was briefly in the standard library, but was removed for type-checking performance reasons.
 #endif
 
 import Foundation
