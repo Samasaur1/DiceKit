@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Dice" class="dashAnchor"></a>
     <a title="Dice Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiceKit 0.20.0 Docs</a> (94% documented)</p>
+        <p><a href="../index.html">DiceKit 0.20.0 Docs</a> (93% documented)</p>
         <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -129,6 +137,7 @@
             <h1>Dice</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Dice</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Rollable.html">Rollable</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Dice</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
@@ -288,7 +297,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0VyAcA3DieVd_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0VyAcA3DieVd_tcfc">init(_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0VyAcA3DieVd_tcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -334,7 +343,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V4diceACSayAA3DieVG_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(dice:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V4diceACSayAA3DieVG_tcfc">init(dice:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V4diceACSayAA3DieVG_tcfc">init(dice:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -380,7 +389,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V_5countAcA3DieV_Sitcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:count:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V_5countAcA3DieV_Sitcfc">init(_:count:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V_5countAcA3DieV_Sitcfc">init(_:<wbr>count:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -443,7 +452,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0VyAcA3DieV3die_Si5counttd_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0VyAcA3DieV3die_Si5counttd_tcfc">init(_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0VyAcA3DieV3die_Si5counttd_tcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -494,7 +503,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V_12withModifierAcA3DieVd_Sitcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:withModifier:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V_12withModifierAcA3DieVd_Sitcfc">init(_:withModifier:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V_12withModifierAcA3DieVd_Sitcfc">init(_:<wbr>withModifier:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -552,7 +561,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V4dice12withModifierACSayAA3DieVG_Sitcfc"></a>
                     <a name="//apple_ref/swift/Method/init(dice:withModifier:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V4dice12withModifierACSayAA3DieVG_Sitcfc">init(dice:withModifier:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V4dice12withModifierACSayAA3DieVG_Sitcfc">init(dice:<wbr>withModifier:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -610,7 +619,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V_5count12withModifierAcA3DieV_S2itcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:count:withModifier:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V_5count12withModifierAcA3DieV_S2itcfc">init(_:count:withModifier:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V_5count12withModifierAcA3DieV_S2itcfc">init(_:<wbr>count:<wbr>withModifier:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -685,7 +694,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V_12withModifierAcA3DieV3die_Si5counttd_Sitcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:withModifier:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V_12withModifierAcA3DieV3die_Si5counttd_Sitcfc">init(_:withModifier:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V_12withModifierAcA3DieV3die_Si5counttd_Sitcfc">init(_:<wbr>withModifier:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -740,7 +749,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0VyACSSKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0VyACSSKcfc">init(_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0VyACSSKcfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -795,7 +804,7 @@
                     <code>
                     <a name="/s:7DiceKit0A0V6copyOfA2C_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(copyOf:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V6copyOfA2C_tcfc">init(copyOf:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V6copyOfA2C_tcfc">init(copyOf:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1008,7 +1017,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V8canReachySbSi_AA14RollComparisonOtF"></a>
                     <a name="//apple_ref/swift/Method/canReach(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V8canReachySbSi_AA14RollComparisonOtF">canReach(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V8canReachySbSi_AA14RollComparisonOtF">canReach(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1075,7 +1084,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:SQ2eeoiySbx_xtFZ"></a>
                     <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:_:)</a>
+                    <a class="token" href="#/s:SQ2eeoiySbx_xtFZ">==(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1211,7 +1220,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyA2C_AA3DieVtFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_AA3DieVtFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_AA3DieVtFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1273,7 +1282,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyAcA3DieV_ACtFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyAcA3DieV_ACtFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyAcA3DieV_ACtFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1335,7 +1344,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyA2C_ACtFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_ACtFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_ACtFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1397,7 +1406,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyA2C_SitFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_SitFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_SitFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1459,7 +1468,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyACSi_ACtFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyACSi_ACtFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyACSi_ACtFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1521,7 +1530,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyA2C_AA3DieV3die_Si5countttFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_AA3DieV3die_Si5countttFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyA2C_AA3DieV3die_Si5countttFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1583,7 +1592,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1poiyAcA3DieV3die_Si5countt_ACtFZ"></a>
                     <a name="//apple_ref/swift/Method/+(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1poiyAcA3DieV3die_Si5countt_ACtFZ">+(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1poiyAcA3DieV3die_Si5countt_ACtFZ">+(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1645,7 +1654,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1soiyA2C_SitFZ"></a>
                     <a name="//apple_ref/swift/Method/-(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1soiyA2C_SitFZ">-(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1soiyA2C_SitFZ">-(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1707,7 +1716,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1moiyA2C_SitFZ"></a>
                     <a name="//apple_ref/swift/Method/*(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1moiyA2C_SitFZ">*(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1moiyA2C_SitFZ">*(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1775,7 +1784,7 @@ It is calculated with double numbers to avoid rounding errors.</p>
                     <code>
                     <a name="/s:7DiceKit0A0V1moiyACSi_ACtFZ"></a>
                     <a name="//apple_ref/swift/Method/*(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit0A0V1moiyACSi_ACtFZ">*(_:_:)</a>
+                    <a class="token" href="#/s:7DiceKit0A0V1moiyACSi_ACtFZ">*(_:<wbr>_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1843,8 +1852,8 @@ It is calculated with double numbers to avoid rounding errors.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-02-17)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-07-09)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
