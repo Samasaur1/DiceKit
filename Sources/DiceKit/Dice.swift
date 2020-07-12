@@ -267,7 +267,9 @@ public struct Dice: Caching {
     /// The probabilities of all possible rolls.
     ///
     ///  Since 0.22.0, caches previous computations, even if they were on different objects.
-    ///  See `enableCaching`, `ENABLE_CACHING` for caching configuration
+    ///  See `enableCaching`, `ENABLE_CACHING` for caching configuration.
+    ///
+    ///  In 0.24.0, the computation of this value was vastly overhauled, resulting in an up to 99.9% or more decrease in calculation times (up to 1000 or more times as fast)
     ///
     /// - Since: 0.17.0
     public var probabilities: Chances {

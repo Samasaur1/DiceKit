@@ -233,6 +233,13 @@ public extension Chance {
         lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
     }
 
+    /// Multiplies two `Chance` instances together.
+    /// - Parameters:
+    ///   - lhs: The first factor to multiply.
+    ///   - rhs: The second factor to multiply.
+    /// - Returns: The product of the two factors.
+    ///
+    /// - Since: 0.24.0
     static func * (lhs: Chance, rhs: Chance) -> Chance {
         return (try? .init(lhs.n * rhs.n, outOf: lhs.d * rhs.d)) ?? .zero
     }
