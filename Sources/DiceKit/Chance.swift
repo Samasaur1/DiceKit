@@ -232,6 +232,10 @@ public extension Chance {
     static func += (lhs: inout Chance, rhs: Chance) {
         lhs = lhs + rhs //swiftlint:disable:this shorthand_operator
     }
+
+    static func * (lhs: Chance, rhs: Chance) -> Chance {
+        return (try? .init(lhs.n * rhs.n, outOf: lhs.d * rhs.d)) ?? .zero
+    }
 }
 
 extension Chance: Describable {

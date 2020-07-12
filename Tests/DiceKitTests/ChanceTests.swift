@@ -71,6 +71,11 @@ final class ChanceTests: XCTestCase {
         let oneHalf = try! Chance(1, outOf: 2)
 
         XCTAssertEqual(oneSixth + oneThird, oneHalf)
+
+        for c in [oneSixth, oneThird, oneHalf, try! .init(approximating: 0.5432), try! .init(3, outOf: 76)] {
+            XCTAssertEqual(c, c + .zero)
+            XCTAssertEqual(c, .zero + c)
+        }
     }
     
     func testSubtraction() {
@@ -79,5 +84,24 @@ final class ChanceTests: XCTestCase {
         let oneHalf = try! Chance(1, outOf: 2)
         
         XCTAssertEqual(oneHalf - oneSixth, oneThird)
+
+        for c in [oneSixth, oneThird, oneHalf, try! .init(approximating: 0.5432), try! .init(3, outOf: 76)] {
+            XCTAssertEqual(c, c - .zero)
+        }
+    }
+
+    func testMultiplication() {
+        let oneSixth = try! Chance(1, outOf: 6)
+        let oneThird = try! Chance(1, outOf: 3)
+        let oneHalf = try! Chance(1, outOf: 2)
+
+        XCTAssertEqual(oneHalf * oneThird, oneSixth)
+
+        for c in [oneSixth, oneThird, oneHalf, try! .init(approximating: 0.5432), try! .init(3, outOf: 76)] {
+            XCTAssertEqual(c, c * .one)
+            XCTAssertEqual(c, .one * c)
+            XCTAssertEqual(Chance.zero, c * .zero)
+            XCTAssertEqual(Chance.zero, .zero * c)
+        }
     }
 }
