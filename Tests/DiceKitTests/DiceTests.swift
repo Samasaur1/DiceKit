@@ -382,4 +382,48 @@ final class DiceTests: XCTestCase {
         let c2 = try! Chance.oneOut(of: 6)
         XCTAssertEqual(d6plus1.probabilities, Chances(chances: [2: c2, 3: c2, 4: c2, 5: c2, 6: c2, 7: c2]))
     }
+
+    //MARK: - Test probabilities calculation time
+
+    func testEmptyDiceProbabilitiesCalculationTime() {
+        let empty = Dice(dice: [])
+        self.measure {
+            empty.probabilities
+        }
+    }
+
+    func testModifierDiceProbabilitiesCalculationTime() {
+        let mod = Dice(dice: [], withModifier: 5)
+        self.measure {
+            mod.probabilities
+        }
+    }
+
+    func testSingleDieDiceProbabilitiesCalculationTime() {
+        let singleDie = Dice(.d20)
+        self.measure {
+            singleDie.probabilities
+        }
+    }
+
+    func testSingleDiePlusModifierDiceProbabilitiesCalculationTime() {
+        let singleDiePlusModifier = Dice(.d12, withModifier: 5)
+        self.measure {
+            singleDiePlusModifier.probabilities
+        }
+    }
+
+    func testMultipleDiceProbabilitiesCalculationTime() {
+        let multipleDice = Dice(.d4, .d6, .d8, .d10, .d20)
+        self.measure {
+            multipleDice.probabilities
+        }
+    }
+
+    func testMoreDiceProbabilitiesCalculationTime() {
+        let moreDice = Dice((.d6, 5), (.d4, 3))
+        self.measure {
+            moreDice.probabilities
+        }
+    }
 }
