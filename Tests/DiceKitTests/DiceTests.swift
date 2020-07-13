@@ -388,42 +388,42 @@ final class DiceTests: XCTestCase {
     func testEmptyDiceProbabilitiesCalculationTime() {
         let empty = Dice(dice: [])
         self.measure {
-            empty.probabilities
+            _ = empty.probabilities
         }
     }
 
     func testModifierDiceProbabilitiesCalculationTime() {
         let mod = Dice(dice: [], withModifier: 5)
         self.measure {
-            mod.probabilities
+            _ = mod.probabilities
         }
     }
 
     func testSingleDieDiceProbabilitiesCalculationTime() {
         let singleDie = Dice(.d20)
         self.measure {
-            singleDie.probabilities
+            _ = singleDie.probabilities
         }
     }
 
     func testSingleDiePlusModifierDiceProbabilitiesCalculationTime() {
         let singleDiePlusModifier = Dice(.d12, withModifier: 5)
         self.measure {
-            singleDiePlusModifier.probabilities
+            _ = singleDiePlusModifier.probabilities
         }
     }
 
     func testMultipleDiceProbabilitiesCalculationTime() {
         let multipleDice = Dice(.d4, .d6, .d8, .d10, .d20)
         self.measure {
-            multipleDice.probabilities
+            _ = multipleDice.probabilities
         }
     }
 
     func testMoreDiceProbabilitiesCalculationTime() {
         let moreDice = Dice((.d6, 5), (.d4, 3))
         self.measure {
-            moreDice.probabilities
+            _ = moreDice.probabilities
         }
     }
 }
