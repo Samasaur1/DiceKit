@@ -37,7 +37,7 @@ json = {
   "body": f"""{changelog}
 
 [See changelog](https://github.com/Samasaur1/DiceKit/blob/master/CHANGELOG.md)
-[See docs](https://samasaur1.github.io/DiceKit/)
+[See docs](https://samasaur1.github.io/DiceKit/docs/v{version})
 """,
   "draft": False,
   "prerelease": version.startswith("0.")

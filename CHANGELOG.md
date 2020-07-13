@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.24.0] - 2020-07-13
+### Added
+- `Chance` objects can now be multiplied together (which, mathematically, represents the chance of both occurring)
+- More test cases for `Chance`
+
+### Changed
+- `Dice` probabilities computation is now up to 1000x faster (in my tests). From the user's perspective, nothing else about this should have changed.
+- The release script now links to the docs for the specific version (on the releases page), not just the main website.
+
+### Fixed
+- GitHub Actions can now deploy docs through the use of the GitHub token
+- Typos
+
 ## [0.23.0] - 2020-07-09
 ### Added
 - A `Package@swift-5.0.swift` file in order to be able to specify supported platforms
@@ -61,7 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20.0] — 2020-02-16
 ### Changed
-- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been update d to support this.
+- The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been updated to support this.
 
 ## [0.19.0] - 2019-12-26
 ### Added
@@ -260,6 +273,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.24.0]: https://github.com/Samasaur1/DiceKit/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/Samasaur1/DiceKit/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/Samasaur1/DiceKit/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/Samasaur1/DiceKit/compare/v0.20.2...v0.21.0
