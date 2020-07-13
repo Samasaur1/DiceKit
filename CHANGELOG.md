@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.24.0] — 2020-07-12
+## [0.24.0] - 2020-07-13
 ### Added
 - `Chance` objects can now be multiplied together (which, mathematically, represents the chance of both occurring)
 - More test cases for `Chance`
