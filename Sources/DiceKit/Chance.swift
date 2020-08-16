@@ -1,3 +1,5 @@
+import BigInt
+
 /// A struct that represents the chance or probability of something happening.
 ///
 /// Chances are stored as fractions, and the constructors that take decimal values use some algorithm off of StackOverflow to convert them to fractions.
@@ -6,15 +8,15 @@
 /// - Author: Samasaur
 public struct Chance {
     /// The numerator of the fraction
-    public let n: Int
+    public let n: BigInt
     /// The denominator of the fraction
-    public let d: Int
+    public let d: BigInt
     /// The decimal representation of the fraction.
     public var value: Double {
         return Double(n) / Double(d)
     }
     /// The fraction as a tuple (numerator, denominator).
-    public var fraction: (Int, Int) {
+    public var fraction: (BigInt, BigInt) {
         return (n, d)
     }
 
@@ -24,6 +26,15 @@ public struct Chance {
     /// - Returns: A new fraction with the given denominator and a numerator of 1.
     /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public static func oneOut(of d: Int) throws -> Chance {
+        return try self.init(1, outOf: BigInt(d))
+    }
+
+    /// Creates a new `Chance` object of the fraction form 1/d.
+    ///
+    /// - Parameter d: The denominator of the fraction.
+    /// - Returns: A new fraction with the given denominator and a numerator of 1.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
+    public static func oneOut(of d: BigInt) throws -> Chance {
         return try self.init(1, outOf: d)
     }
 
@@ -34,6 +45,16 @@ public struct Chance {
     ///   - d: The denominator of the fraction.
     /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public init(_ n: Int, outOf d: Int) throws {
+        try self.init(BigInt(n), outOf: BigInt(d))
+    }
+
+    /// Creates a new `Chance` object of the fraction form n/d.
+    ///
+    /// - Parameters:
+    ///   - n: The numerator of the fraction.
+    ///   - d: The denominator of the fraction.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
+    public init(_ n: BigInt, outOf d: BigInt) throws {
         guard d != 0 else {
             throw Error.divisionByZero
         }
@@ -45,7 +66,7 @@ public struct Chance {
         guard n <= d else {
             throw Error.chanceOverOne
         }
-        let simplify: (Int, Int) -> (n: Int, d: Int) = { top, bottom in
+        let simplify: (BigInt, BigInt) -> (n: BigInt, d: BigInt) = { top, bottom in
             //swiftline:disable all
             var x = top
             var y = bottom
@@ -70,6 +91,14 @@ public struct Chance {
     /// - Parameter d: The denominator of the fraction.
     /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
     public init(oneOutOf d: Int) throws {
+        try self.init(1, outOf: BigInt(d))
+    }
+
+    /// Creates a new `Chance` object of the fraction form 1/d.
+    ///
+    /// - Parameter d: The denominator of the fraction.
+    /// - Throws: `Error.divisionByZero`, `Error.negativeArgument`, or `Error.chanceOverOne`
+    public init(oneOutOf d: BigInt) throws {
         try self.init(1, outOf: d)
     }
 
@@ -98,12 +127,12 @@ public struct Chance {
         let eps = 1.0E-6
         var x = x0
         var a = x.rounded(.down)
-        var (h1, k1, h, k) = (1, 0, Int(a), 1)
+        var (h1, k1, h, k) = (BigInt(1), BigInt(0), BigInt(a), BigInt(1))
 
         while x - a > eps * Double(k) * Double(k) {
             x = 1.0 / (x - a)
             a = x.rounded(.down)
-            (h1, k1, h, k) = (h, k, h1 + Int(a) * h, k1 + Int(a) * k)
+            (h1, k1, h, k) = (h, k, h1 + BigInt(a) * h, k1 + BigInt(a) * k)
         }
         //swiftlint:enable all
         try self.init(h, outOf: k)
@@ -168,7 +197,7 @@ public extension Chance {
     /// - Returns: The greatest common divisor of the two integers.
     ///
     /// - Since: 0.17.0
-    static func gcd(_ a: Int, _ b: Int) -> Int {
+    static func gcd(_ a: BigInt, _ b: BigInt) -> BigInt {
         var a = abs(a)
         var b = abs(b)
         if b > a {
@@ -188,7 +217,7 @@ public extension Chance {
     /// - Returns: The lowest common multiple of the two integers.
     ///
     /// - Since: 0.17.0
-    static func lcm(_ a: Int, _ b: Int) -> Int {
+    static func lcm(_ a: BigInt, _ b: BigInt) -> BigInt {
         return abs(a * b) / gcd(a, b)
     }
 
