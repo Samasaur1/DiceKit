@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.24.1] - 2020-10-12
+## [0.24.1] - 2020-10-15
 ### Fixed
 - Danger now reports tasks in the correct order
 
