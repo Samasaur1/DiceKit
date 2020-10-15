@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.24.1] - 2020-10-15
+### Fixed
+- Danger now reports tasks in the correct order
+
 ## [0.24.0] - 2020-07-13
 ### Added
 - `Chance` objects can now be multiplied together (which, mathematically, represents the chance of both occurring)
@@ -273,6 +277,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`: a protocol for anything that is rollable
 
 [Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[0.24.1]: https://github.com/Samasaur1/DiceKit/compare/v0.24.0...v0.24.1
 [0.24.0]: https://github.com/Samasaur1/DiceKit/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/Samasaur1/DiceKit/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/Samasaur1/DiceKit/compare/v0.21.0...v0.22.0

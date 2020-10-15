@@ -110,7 +110,7 @@ if let body = danger.github.pullRequest.body {
         let split = body.split { $0.isNewline }
         let allTaskLines = split
             .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
-        for (num, line) in allTaskLines.enumerated() {
+        for (num, line) in allTaskLines.enumerated().reversed() {
             if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
                 message("**Task \(num + 1) completed:** \(line.dropFirst(6))")
                 continue
