@@ -14,10 +14,7 @@ public struct DieSide<OutputType: Hashable>: Hashable {//If not Hashable, ensure
     /// The value that this DieSide will return when rolled.
     public let value: OutputType
 
-    public static func == (lhs: DieSide, rhs: DieSide) -> Bool { //IMPORTANT NOTE: THIS DOES NOT ACCEPT `DieSide`s WITH DIFFERENT GENERIC ARGUMENTS
-        guard type(of: lhs.value) == type(of: rhs.value) else {
-            return false
-        }
+    public static func == (lhs: DieSide, rhs: DieSide) -> Bool {
         return lhs.value == rhs.value
     }
 
