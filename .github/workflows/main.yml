@@ -1,7 +1,7 @@
 name: Main
 
 # Controls when the action will run. Since this action runs only tests, and Danger/deploy is run via Travis, run on pushes and PRs
-on: [push, pull-request]
+on: [push, pull_request]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
