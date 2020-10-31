@@ -14,8 +14,8 @@ jobs:
         exclude:
           - os: macos-latest
             swift: "4.2" #Swift 4.2 is no longer supported on macOS 10.15 (macOS-latest)
-          - os: ubunut-latest
-            swift: "5.3" #Not sure why, but this isn't working
+          - os: macos-latest
+            swift: "5.2" #Not sure why, but this isn't working
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2

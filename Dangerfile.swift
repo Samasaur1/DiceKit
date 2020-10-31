@@ -14,7 +14,7 @@ if danger.github.pullRequest.base.ref == "master" {
         fail("There is no version in the pull request title!")
         newVersion = "0.0.0"
     }
-    //MARK: New version (.jazzy.yaml)
+    // MARK: New version (.jazzy.yaml)
     let jazzyVersion = String(danger.utils.readFile(".jazzy.yaml").split(separator: "\n")[4].dropFirst(17))
     let jazzyVersionUpdated: Bool
     if editedFiles.contains(".jazzy.yaml") {
@@ -43,7 +43,7 @@ if danger.github.pullRequest.base.ref == "master" {
         warn("Remember to run `release.sh` after merging!")
     }
 
-    //MARK: Changelog edited
+    // MARK: Changelog edited
     containsChangelog: if editedFiles.contains("CHANGELOG.md") {
         let lineNumber = danger.utils.lines(for: "## ", inFile: "CHANGELOG.md")[1]
         let line = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").filter { $0.hasPrefix("## ") }[1]
@@ -100,7 +100,7 @@ for file in editedFiles where file.hasPrefix("Sources/") {
     }
 }
 
-//MARK: - Updated test manifests
+// MARK: - Updated test manifests
 // If tests are added, ensure that they're in XCTestManifest / LinuxMain
 if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
     // LinuxMain doesn't need to change anymore, unless a new XCTestManifests file is added
