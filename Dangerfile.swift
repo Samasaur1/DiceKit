@@ -3,87 +3,95 @@ import Foundation
 let danger = Danger()
 let editedFiles = danger.git.modifiedFiles + danger.git.createdFiles
 
-// MARK: - PR to master
-if danger.github.pullRequest.base.ref == "master" {
-    // MARK: New version (PR title)
-    let newVersion: String
-    if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+\.\d+(?=: .+)"#, options: .regularExpression) {
-        newVersion = String(danger.github.pullRequest.title[range])
-        message("The new version is v\(newVersion)")
+// MARK: - New Version PR
+if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+\.\d+(?=: .+)"#, options: .regularExpression) {
+    if danger.github.pullRequest.base.ref != "master" {
+        fail("PRs to non-`master` branches should not have \"Version X.Y.Z\" in the PR title")
     } else {
-        fail("There is no version in the pull request title!")
-        newVersion = "0.0.0"
+        message("Pull request to `master` for new version detected")
     }
+    // MARK: New version (PR title)
+    let newVersion = String(danger.github.pullRequest.title[range])
+    message("The new version is v\(newVersion)")
     // MARK: New version (.jazzy.yaml)
     let jazzyVersion = String(danger.utils.readFile(".jazzy.yaml").split(separator: "\n")[4].dropFirst(17))
-    let jazzyVersionUpdated: Bool
     if editedFiles.contains(".jazzy.yaml") {
-        jazzyVersionUpdated = true
+        message("Version in .jazzy.yaml agrees with PR title")
     } else {
         fail("Version was not updated in .jazzy.yaml!")
         fail(message: "Version was not updated in .jazzy.yaml!", file: ".jazzy.yaml", line: 5)
-        jazzyVersionUpdated = false
     }
-    switch (newVersion, jazzyVersionUpdated) {
-    case ("0.0.0", false):
-        fail("No new version was indicated!")
-    case ("0.0.0", true):
-        message("PR title should be amended to \"Version \(jazzyVersion): \(danger.github.pullRequest.title)\"")
-    case (_, false):
+    if newVersion == jazzyVersion {
+        message("PR title and .jazzy.yaml agree")
+    } else {
+        fail("PR title specifies version \(newVersion), while .jazzy.yaml specifies \(jazzyVersion)")
         suggestion(code: "module_version: \(newVersion)", file: ".jazzy.yaml", line: 5)
-    case (_, true):
-        message("Version was updated in both locations!")
     }
 
-    if danger.github.pullRequest.title.contains("$DESCRIPTION") {
-        fail("$DESCRIPTION placeholder has not been filled in!")
-    }
-
-    if danger.github.pullRequest.body?.split(separator: "\n").suffix(3).map(String.init) != ["1. Wait for CI", "1. Merge", "1. Run `release.sh`"] {
-        warn("Remember to run `release.sh` after merging!")
-    }
-
-    // MARK: Changelog edited
-    containsChangelog: if editedFiles.contains("CHANGELOG.md") {
-        let lineNumber = danger.utils.lines(for: "## ", inFile: "CHANGELOG.md")[1]
-        let line = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").filter { $0.hasPrefix("## ") }[1]
-        let dateString = String(line.drop { $0 != "]" }.dropFirst(4))
+    // MARK: Changelog entry
+    if let lineNumber = danger.utils.lines(for: "## [\(newVersion)]", inFile: "CHANGELOG.md").first, let line = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("## [\(newVersion)]") }) {
+        message("There is a CHANGELOG entry for this version")
+        let dateString = String(line.dropFirst("## [\(newVersion)] - ".count))
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
-        let todaysDate = df.string(from: Date())
-        guard df.date(from: dateString) != nil else {
-            fail("Illegal date string in CHANGELOG!: '\(dateString)'")
-            fail(message: "Illegal date string in CHANGELOG!", file: "CHANGELOG.md", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG.md", line: lineNumber)
-            break containsChangelog
-        }
-        if todaysDate != dateString {
-            fail("The latest date in the CHANGELOG is not today!")
-            fail(message: "The latest date in the CHANGELOG is not today!", file: "CHANGELOG.md", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] - \(todaysDate)", file: "CHANGELOG.md", line: lineNumber)
+        if df.string(from: Date()) == dateString {
+            message("The date for this version's entry is today, \(dateString)")
         } else {
-            message("The latest date in the CHANGELOG is today, \(dateString)")
+            fail("The date for this version's entry is not today!")
+            fail(message: "The date for this version's entry is not today!", file: "CHANGELOG.md", line: lineNumber)
+            suggestion(code: "## [\(newVersion)] — \(df.string(from: Date()))", file: "CHANGELOG.md", line: lineNumber)
+        }
+        // MARK: Changelog compare link
+        if let upcomingLineNumber = danger.utils.lines(for: "[Upcoming]:", inFile: "CHANGELOG.md").first,
+           let upcomingLine = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("[Upcoming]:") }) {
+            if upcomingLine == "[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v\(newVersion)...master" {
+                message("Upcoming link was updated to show changes between latest version and `master`")
+            } else {
+                fail("Upcoming link was not updated to show the latest changes")
+                suggestion(code: "[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v\(newVersion)...master", file: "CHANGELOG.md", line: upcomingLineNumber)
+            }
+        } else {
+            fail("The upcoming changes compare link line is missing!")
+        }
+        if let linkLineNumber = danger.utils.lines(for: "[\(newVersion)]:", inFile: "CHANGELOG.md").first,
+           let linkLine = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("[\(newVersion)]:") }) {
+            if linkLine.hasSuffix("...v\(newVersion)") {
+                message("Link line compares to the new version")
+            } else {
+                fail(message: "Link line does not compare to the new version, v\(newVersion)", file: "CHANGELOG.md", line: linkLineNumber)
+            }
+        } else {
+            fail("There is no link line to compare the new version to the previous version!")
         }
     } else {
-        if FileManager.default.fileExists(atPath: "CHANGELOG.md") {
-            fail("The CHANGELOG was not updated")
-        } else {
-            warn("There is no CHANGELOG!")
-        }
+        fail("There is no CAHNGELOG entry for this version!")
     }
-} else {
-    if editedFiles.contains("CHANGELOG.md") {
-        message("The CHANGELOG was updated!")
+} else { // MARK: - Non-new version PR
+    message("Non-new version PR detected, to branch \(danger.github.pullRequest.base.ref)")
+    if danger.github.pullRequest.base.ref != "master" {
+        warn("Most PRs should be made directly to `master`. If you know why you're making it to a different branch, ignore this warning.")
+    }
+    if danger.github.pullRequest.head.repo.fullName == "Samasaur1/DiceKit" {
+        message("Internal PR detected")
     } else {
-        if FileManager.default.fileExists(atPath: "CHANGELOG.md") {
-            fail("The CHANGELOG was not updated! (put your changes in the UPCOMING section)")
-        } else {
-            warn("There is no CHANGELOG!")
-        }
+        message("PR from fork detected — thanks for contributing!")
     }
 }
 
-// MARK: - Updated tests
+// MARK: - All PRs
+
+// MARK: Changelog updated
+if editedFiles.contains("CHANGELOG.md") {
+    message("The CHANGELOG was updated")
+} else {
+    if FileManager.default.fileExists(atPath: "CHANGELOG.md") {
+        fail("The CHANGELOG was not updated! (put your changes in the UPCOMING section)")
+    } else {
+        warn("There is no CHANGELOG!")
+    }
+}
+
+// MARK: Updated tests
 // Make sure source changes have their tests updated
 for file in editedFiles where file.hasPrefix("Sources/") {
     let dir = file.dropFirst("Sources/".count).split(separator: "/")[0]
@@ -100,7 +108,7 @@ for file in editedFiles where file.hasPrefix("Sources/") {
     }
 }
 
-// MARK: - Updated test manifests
+// MARK: Updated test manifests
 // If tests are added, ensure that they're in XCTestManifest / LinuxMain
 if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
     // LinuxMain doesn't need to change anymore, unless a new XCTestManifests file is added
@@ -129,7 +137,7 @@ if danger.git.createdFiles.contains(where: { $0.hasPrefix("Tests/") }) {
     }
 }
 
-// MARK: - Tasks in PR body
+// MARK: Tasks in PR body
 // Check for incomplete tasks in the PR body
 // Note the difference between the first regex and the later two ("\n" vs "^").
 //   That's the "start of string" character, which I only want to match after I've split
