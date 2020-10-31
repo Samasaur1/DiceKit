@@ -14,7 +14,7 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
     let newVersion = String(danger.github.pullRequest.title[range])
     message("The new version is v\(newVersion)")
     // MARK: New version (.jazzy.yaml)
-    let jazzyVersion = String(danger.utils.readFile(".jazzy.yaml").split(separator: "\n")[4].dropFirst(17))
+    let jazzyVersion = String(danger.utils.readFile(".jazzy.yaml").split(separator: "\n")[4].dropFirst(16))
     if editedFiles.contains(".jazzy.yaml") {
         message("Version in .jazzy.yaml agrees with PR title")
     } else {
@@ -64,7 +64,7 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
             fail("There is no link line to compare the new version to the previous version!")
         }
     } else {
-        fail("There is no CAHNGELOG entry for this version!")
+        fail("There is no CHANGELOG entry for this version!")
     }
 } else { // MARK: - Non-new version PR
     message("Non-new version PR detected, to branch \(danger.github.pullRequest.base.ref)")
