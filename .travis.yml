@@ -16,6 +16,9 @@ jobs:
   - stage: deploy
     script: bash .deploy-docs.sh
   - stage: danger
+    env:
+    - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_BOT_ACCOUNT
+    - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_MAIN_ACCOUNT
     script: swift run danger-swift ci
     install:
     - python3 scripts/include_dev_dependencies.py
