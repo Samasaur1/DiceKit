@@ -23,6 +23,7 @@ jobs:
     install:
     - python3 scripts/include_dev_dependencies.py
     - npm install -g danger
+    - swift build
     after_success: python3 scripts/remove_dev_dependencies.py
   - stage: danger
     name: "Main account (status check)"
@@ -32,6 +33,7 @@ jobs:
     install:
     - python3 scripts/include_dev_dependencies.py
     - npm install -g danger
+    - swift build
     after_success: python3 scripts/remove_dev_dependencies.py
 
 cache:
