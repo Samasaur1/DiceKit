@@ -16,14 +16,22 @@ jobs:
   - stage: deploy
     script: bash .deploy-docs.sh
   - stage: danger
+    name: "Bot account (issue comment)"
     env:
     - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_BOT_ACCOUNT
+    script: swift run danger-swift ci
+    install:
+    - python3 scripts/include_dev_dependencies.py
+    - npm install -g danger
+    after_success: python3 scripts/remove_dev_dependencies.py
+  - stage: danger
+    name: "Main account (status check)"
+    env:
     - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_MAIN_ACCOUNT
     script: swift run danger-swift ci
     install:
     - python3 scripts/include_dev_dependencies.py
     - npm install -g danger
-    - swift build
     after_success: python3 scripts/remove_dev_dependencies.py
 
 cache:
