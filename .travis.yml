@@ -19,7 +19,7 @@ jobs:
     name: "Bot account (issue comment)"
     env:
     - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_BOT_ACCOUNT
-    script: swift run danger-swift ci
+    script: swift run danger-swift ci --use-github-checks
     install:
     - python3 scripts/include_dev_dependencies.py
     - npm install -g danger
@@ -29,7 +29,7 @@ jobs:
     name: "Main account (status check)"
     env:
     - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN_MAIN_ACCOUNT
-    script: swift run danger-swift ci
+    script: swift run danger-swift ci --use-github-checks
     install:
     - python3 scripts/include_dev_dependencies.py
     - npm install -g danger
