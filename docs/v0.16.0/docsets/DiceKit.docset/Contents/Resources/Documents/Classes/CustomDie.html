@@ -17,7 +17,7 @@
     <a title="CustomDie Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiceKit 0.16.0 Docs</a> (91% documented)</p>
+        <p><a href="../index.html">DiceKit 0.16.0 Docs</a> (93% documented)</p>
         <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -40,6 +40,9 @@
             <a href="../Rollables.html">Rollables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/Rollable.html">Rollable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Die.html">Die</a>
               </li>
               <li class="nav-group-task">
@@ -47,6 +50,14 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/WeightedDie.html">WeightedDie</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Results.html">Results</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Results.html#/s:7DiceKit4Rolla">Roll</a>
               </li>
             </ul>
           </li>
@@ -69,6 +80,52 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Chance.html">Chance</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MultipleRollResult.html">MultipleRollResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RollComparison.html">RollComparison</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Typealiases.html">Other Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit8DKChancea">DKChance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit9DKChancesa">DKChances</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit6DKDicea">DKDice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit5DKDiea">DKDie</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit7DKErrora">DKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit20DKMultipleRollResulta">DKMultipleRollResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit6DKRolla">DKRoll</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit10DKRollablea">DKRollable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit13DKWeightedDiea">DKWeightedDie</a>
               </li>
             </ul>
           </li>
@@ -101,6 +158,9 @@
 
 </div>
 
+              <div class="slightly-smaller">
+                <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L35-L85">Show on GitHub</a>
+              </div>
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -108,9 +168,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7DiceKit9CustomDieC5sidesXevp"></a>
+                    <a name="/s:7DiceKit9CustomDieC5sidesSDySiAA0D4SideCyxGGvp"></a>
                     <a name="//apple_ref/swift/Property/sides" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7DiceKit9CustomDieC5sidesXevp">sides</a>
+                    <a class="token" href="#/s:7DiceKit9CustomDieC5sidesSDySiAA0D4SideCyxGGvp">sides</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -125,9 +185,12 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">sides</span><span class="p">:</span> <span class="p">[</span><span class="kt">Roll</span> <span class="p">:</span> <span class="kt"><a href="../Classes/DieSide.html">DieSide</a></span><span class="o">&lt;</span><span class="kt">Output</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">sides</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">:</span> <span class="kt"><a href="../Classes/DieSide.html">DieSide</a></span><span class="o">&lt;</span><span class="kt">Output</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L39">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -191,6 +254,9 @@
                         <h4>Return Value</h4>
                         <p>A new <code>CustomDie</code>, after the first side has been replaced with the second.</p>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L47-L52">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -242,6 +308,9 @@
                           </tbody>
                         </table>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L58-L60">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -270,7 +339,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Classes/CustomDie.html#/s:7DiceKit9CustomDieC5sidesXevp">sides</a></span> <span class="nv">sidesArr</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/DieSide.html">DieSide</a></span><span class="o">&lt;</span><span class="kt">Output</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n"><a href="../Classes/CustomDie.html#/s:7DiceKit9CustomDieC5sidesSDySiAA0D4SideCyxGGvp">sides</a></span> <span class="nv">sidesArr</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/DieSide.html">DieSide</a></span><span class="o">&lt;</span><span class="kt">Output</span><span class="o">&gt;</span><span class="p">])</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -292,6 +361,9 @@
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L66-L76">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -339,6 +411,9 @@
                           </tbody>
                         </table>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L81-L84">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -370,6 +445,9 @@
                         <h4>Return Value</h4>
                         <p>One of the <code><a href="../Classes/DieSide.html">DieSide</a></code>s passed to the initializer.</p>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L91-L102">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -395,6 +473,9 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">CustomDie</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">CustomDie</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L106-L132">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -422,6 +503,9 @@
 
                         </div>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L136-L139">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -448,6 +532,9 @@
 
                         </div>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L143-L145">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -473,6 +560,9 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L147-L149">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -505,6 +595,9 @@
                         <h4>Return Value</h4>
                         <p>A copy of the given <code>CustomDie</code>, with the same number of sides and <code><a href="../Classes/DieSide.html">DieSide</a></code>s, at a different memory location.</p>
                       </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Samasaur1/DiceKit/tree/v0.16.0/Sources/DiceKit/CustomDie.swift#L156-L158">Show on GitHub</a>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -513,8 +606,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-07-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2020 <a class="link" href="https://samasaur1.github.io" target="_blank" rel="external">Samasaur</a>. All rights reserved. (Last updated: 2020-12-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -1,110 +1,110 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Describable.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Describable.swift",
       "line": 1,
       "symbol": "Describable",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 675,
       "symbol": "Dice.+=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 678,
       "symbol": "Dice.+=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 681,
       "symbol": "Dice.+=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 684,
       "symbol": "Dice.+=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 687,
       "symbol": "Dice.-=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Dice.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Dice.swift",
       "line": 690,
       "symbol": "Dice.*=(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 210,
       "symbol": "Die.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 213,
       "symbol": "Die.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 216,
       "symbol": "Die.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 219,
       "symbol": "Die.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 222,
       "symbol": "Die.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 225,
       "symbol": "Die.*(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Die.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Die.swift",
       "line": 229,
       "symbol": "Die.*(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/Samasaur1/DiceKit/Sources/DiceKit/Enums.swift",
+      "file": "/Users/sam/Desktop/DiceKit/Sources/DiceKit/Enums.swift",
       "line": 97,
       "symbol": "Error.localizedDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/Samasaur1/DiceKit"
+  "source_directory": "/Users/sam/Desktop/DiceKit"
 }
