@@ -8,9 +8,7 @@ mkdir doks
 for VERSION in "$@"
 do
     git checkout v$VERSION
-    rm -rf DiceKit.xcodeproj
-    swift package generate-xcodeproj
-    jazzy -o newdocs -x -target,DiceKit
+    jazzy -o newdocs --author_url https://samasaur1.github.io --github-file-prefix https://github.com/Samasaur1/DiceKit/tree/v$VERSION --swift-build-tool spm
     mkdir doks/v$VERSION
     mv newdocs/* doks/v$VERSION
     rm -rf newdocs
