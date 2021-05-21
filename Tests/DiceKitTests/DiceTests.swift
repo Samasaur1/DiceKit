@@ -426,4 +426,11 @@ final class DiceTests: XCTestCase {
             _ = moreDice.probabilities
         }
     }
+
+    func testLargeProbabilities() {
+        let dice = Dice(.d100, count: 10)
+        self.measure {
+            _ = dice.probabilities
+        }
+    }
 }

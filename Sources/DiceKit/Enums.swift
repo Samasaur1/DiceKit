@@ -117,6 +117,8 @@ public enum Error: Swift.Error, Equatable {
     ///   - minimum: The minimum number of rolls required in order to not throw this error. Call the same function, but increase the number of rolls requested to this number.
     case insufficientRollsForCalculation(attempt: Int, minimum: Int)
 
+    case overflow
+
     public var localizedDescription: String {
         switch self {
         case .illegalNumberOfSides(let sides):
@@ -137,6 +139,8 @@ public enum Error: Swift.Error, Equatable {
             return "The chance of something happening was over 1, an impossibility."
         case let .insufficientRollsForCalculation(attempt, minimum):
             return "Attempted to perform a calculation with \(attempt) rolls but it needed \(minimum)."
+        case .overflow:
+            return "Calculations were too large."
         }
     }
 }
