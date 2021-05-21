@@ -198,7 +198,11 @@ public extension Chance {
             let __lcm = gcd(b, __gcd)
             let _b = b / __lcm
             let ___gcd = __gcd / __lcm
-            return abs(_a * _b) / ___gcd
+            let _prod = _a.multipliedReportingOverflow(by: _b)
+            if _prod.overflow {
+                return -1
+            }
+            return abs(_prod.partialValue) / ___gcd
         } else {
             return abs(product.partialValue) / _gcd
         }
@@ -216,6 +220,9 @@ public extension Chance {
     /// - Since: 0.17.0
     static func + (lhs: Chance, rhs: Chance) -> Chance {
         let lcm = Chance.lcm(lhs.d, rhs.d)
+        if lcm == -1 {
+            return try! Chance(approximating: lhs.value + rhs.value)
+        }
         let lnum = lhs.n * (lcm / lhs.d)
         let rnum = rhs.n * (lcm / rhs.d)
         return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
