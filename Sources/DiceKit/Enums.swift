@@ -94,6 +94,8 @@ public enum Error: Swift.Error {
     /// This error was most likely thrown when creating a `Chance` instance. However, a `Chances` object can have `Chance`s that *sum* to over 1.
     case chanceOverOne
 
+    case overflow
+
     public var localizedDescription: String {
         switch self {
         case .illegalNumberOfSides(let sides):
@@ -112,6 +114,8 @@ public enum Error: Swift.Error {
             return "Arguments were passed that resulted in something being negative that needed to be positive."
         case .chanceOverOne:
             return "The chance of something happening was over 1, an impossibility."
+        case .overflow:
+            return "Calculations were too large."
         }
     }
 }

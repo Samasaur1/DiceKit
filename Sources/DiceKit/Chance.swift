@@ -189,7 +189,21 @@ public extension Chance {
     ///
     /// - Since: 0.17.0
     static func lcm(_ a: Int, _ b: Int) -> Int {
-        return abs(a * b) / gcd(a, b)
+        let product = a.multipliedReportingOverflow(by: b)
+        let _gcd = gcd(a, b)
+        if product.overflow {
+            let _lcm = gcd(a, _gcd)
+            let _a = a / _lcm
+            let __gcd = _gcd / _lcm
+            let __lcm = gcd(b, __gcd)
+            let _b = b / __lcm
+            let ___gcd = __gcd / __lcm
+            return abs(_a * _b) / ___gcd
+        } else {
+            return abs(product.partialValue) / _gcd
+        }
+////        return abs(a * b) / gcd(a, b)
+//        return abs(a * (b / gcd(a, b)))
     }
 
     /// Adds two `Chance` instances together.
@@ -202,8 +216,8 @@ public extension Chance {
     /// - Since: 0.17.0
     static func + (lhs: Chance, rhs: Chance) -> Chance {
         let lcm = Chance.lcm(lhs.d, rhs.d)
-        let lnum = lhs.n * lcm / lhs.d
-        let rnum = rhs.n * lcm / rhs.d
+        let lnum = lhs.n * (lcm / lhs.d)
+        let rnum = rhs.n * (lcm / rhs.d)
         return (try? .init(lnum + rnum, outOf: lcm)) ?? .one
     }
 
@@ -241,7 +255,16 @@ public extension Chance {
     ///
     /// - Since: 0.24.0
     static func * (lhs: Chance, rhs: Chance) -> Chance {
-        return (try? .init(lhs.n * rhs.n, outOf: lhs.d * rhs.d)) ?? .zero
+        let _n = lhs.n.multipliedReportingOverflow(by: rhs.n)
+        let _d = lhs.d.multipliedReportingOverflow(by: rhs.d)
+        if _n.overflow || _d.overflow {
+//            throw Error.overflow
+            let _lhs = try! self.init(approximating: lhs.value)
+            let _rhs = try! self.init(approximating: rhs.value)
+            print("Multiplication overflow!", to: &STDERR)
+            return (try? .init(_lhs.n * _rhs.n, outOf: _lhs.d * _rhs.d)) ?? .zero
+        }
+        return (try? .init(_n.partialValue, outOf: _d.partialValue)) ?? .zero
     }
 }
 
