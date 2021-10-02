@@ -43,4 +43,11 @@ final class ChancesTests: XCTestCase {
         let c = Chances(chances: [5: 0.234, 8: 0.432])
         XCTAssertEqual(c.chances[5], c[of: 5])
     }
+
+    func testSequence() {
+        let chances = Chances(chances: [5: 0.234, 8: 0.432])
+        for (r, c) in chances {
+            print("The chance of rolling \(r) is \(c)")
+        }
+    }
 }
