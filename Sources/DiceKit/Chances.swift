@@ -99,3 +99,8 @@ fileprivate extension Dictionary.Values where Dictionary.Value == Chance {
         return total
     }
 }
+extension Chances: Sequence {
+    public func makeIterator() -> IndexingIterator<[Dictionary<Roll, Chance>.Element]> {
+        return chances.sorted { $0.key < $1.key }.makeIterator()
+    }
+}
