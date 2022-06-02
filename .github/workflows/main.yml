@@ -9,7 +9,8 @@ jobs:
     name: Test Swift ${{ matrix.swift }}.x on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-10.15, macos-11, macos-12, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+        #os: [macos-10.15, macos-11, macos-12, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+        os: [macos-10.15, macos-11, macos-12, ubuntu-18.04, ubuntu-20.04]
           #swift: ["4.2", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"] #setup-swift finds the latest bug fix version
           #exclude:
           #- os: macos-latest
@@ -19,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: fwal/setup-swift@v1
+      - uses: swift-actions/setup-swift@v1
         #with:
           #swift-version: ${{ matrix.swift }}
       - run: swift --version #make sure we have the version of swift we want, and that it can be seen in the logs
