@@ -9,8 +9,8 @@ jobs:
     name: Test Swift ${{ matrix.swift }}.x on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-16.04, ubuntu-latest]
-        swift: ["4.2", "5.0", "5.1", "5.2", "5.3"] #setup-swift finds the latest bug fix version
+        os: [macos-10.15, macos-11, macos-12, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+        swift: ["4.2", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"] #setup-swift finds the latest bug fix version
         exclude:
           - os: macos-latest
             swift: "4.2" #Swift 4.2 is no longer supported on macOS 10.15 (macOS-latest)
