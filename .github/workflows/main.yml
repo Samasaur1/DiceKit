@@ -11,9 +11,9 @@ jobs:
       matrix:
         os: [macos-10.15, macos-11, macos-12, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
           #swift: ["4.2", "5.0", "5.1", "5.2", "5.3", "5.4", "5.5"] #setup-swift finds the latest bug fix version
-        exclude:
-          - os: macos-latest
-            swift: "4.2" #Swift 4.2 is no longer supported on macOS 10.15 (macOS-latest)
+          #exclude:
+          #- os: macos-latest
+          #swift: "4.2" #Swift 4.2 is no longer supported on macOS 10.15 (macOS-latest)
 #          - os: macos-latest
 #            swift: "5.2" #Not sure why, but this isn't working
     runs-on: ${{ matrix.os }}
