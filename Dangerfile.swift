@@ -150,6 +150,7 @@ if let body = danger.github.pullRequest.body {
         let allTaskLines = split
             .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
         for (num, line) in allTaskLines.enumerated()/*.reversed()*/ {
+            message("task \(num)")
             if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
                 message("**Task \(num + 1) completed:** \(line.dropFirst(6))")
                 continue
@@ -157,7 +158,7 @@ if let body = danger.github.pullRequest.body {
             fail("**Task \(num + 1) incomplete:** \(line.dropFirst(6))")  // "- [ ] "
         }
     } else {
-        warn("PR body doesn't appear to have any tasks, which it should")
+        warn("PR has no tasks (are you sure?)")
     }
 } else {
     warn("Cannot fetch PR body!")
