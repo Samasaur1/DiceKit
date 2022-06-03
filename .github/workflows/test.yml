@@ -44,7 +44,7 @@ jobs:
       - uses: swift-actions/setup-swift@v1
         with:
           swift-version: ${{ matrix.swift }}
-        run: |
+      - run: |
           swift --version
           echo "Using '$(swift --version | head -n 1)'" >> $GITHUB_STEP_SUMMARY
       - run: swift test
