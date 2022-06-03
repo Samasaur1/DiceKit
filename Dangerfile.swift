@@ -16,10 +16,11 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
     // MARK: New version (.jazzy.yaml)
     let jazzyVersion = String(danger.utils.readFile(".jazzy.yaml").split(separator: "\n")[4].dropFirst(16))
     if editedFiles.contains(".jazzy.yaml") {
-        message("Version in .jazzy.yaml agrees with PR title")
+        message(".jazzy.yaml was updated")
     } else {
         fail("Version was not updated in .jazzy.yaml!")
         fail(message: "Version was not updated in .jazzy.yaml!", file: ".jazzy.yaml", line: 5)
+        suggestion(code: "module_version: \(newVersion)", file: ".jazzy.yaml", line: 5)
     }
     if newVersion == jazzyVersion {
         message("PR title and .jazzy.yaml agree")
@@ -148,7 +149,7 @@ if let body = danger.github.pullRequest.body {
         let split = body.split { $0.isNewline }
         let allTaskLines = split
             .filter { $0.range(of: #"^- \[[x ]\] "#, options: .regularExpression) != nil }
-        for (num, line) in allTaskLines.enumerated().reversed() {
+        for (num, line) in allTaskLines.enumerated()/*.reversed()*/ {
             if line.range(of: #"^- \[x\] "#, options: .regularExpression) != nil {
                 message("**Task \(num + 1) completed:** \(line.dropFirst(6))")
                 continue
