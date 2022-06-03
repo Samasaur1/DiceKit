@@ -1,12 +1,12 @@
-name: Deploy Docs
+name: Deploy
 
 on:
   push:
     tags: 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy-docs:
+    name: Deploy Docs
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,18 +21,41 @@ jobs:
       with:
         ref: gh-pages
         path: ghp
+    - name: Determine VERSION
+      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
     - name: Process docs
       run: |
-        VERSION=${GITHUB_REF:#refs/tags/v} #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
         mkdir ghp/docs/v$VERSION
         mv newdocs/* ghpd/docs/v$VERSION
         cd ghp
         echo 'section > section > p > img { margin-top: 4em; margin-right: 2em; }' >> docs/v$VERSION/css/jazzy.css
         bash ../scripts/updateLatestDocs.sh $VERSION
+        cd ..
     - name: Push updated docs
       run: |
+        cd ghp
         git config user.name github-actions
         git config user.email github-actions@github.com
         git add .
         git commit -m "Add documentation for version $VERSION"
         git push
+  deploy-release:
+    name: Deploy Release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Determine VERSION
+      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+    - name: Determine release name
+      run: |
+        NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
+        echo "NAME='$NAME'" >> $GITHUB_ENV
+        echo "Determined release name as '$NAME'" >> $GITHUB_STEP_SUMMARY
+    - name: Determine release body (from CHANGELOG)
+      run: cat CHANGELOG.md | sed '1,/^## /d' | sed '1,/^## /d' | sed '/^## /,$d' | tee body.md
+    - uses: ncipollo/release-action@v1.10.0
+      with:
+        name: ${{ env.NAME }}
+        bodyFile: "body.md"
+        draft: true
+        prerelease: true

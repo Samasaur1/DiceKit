@@ -22,21 +22,25 @@ jobs:
             swift: "5.2"
           - os: macos-11 #the vast majority of these fail, so we exclude the OS and include the specific Swift versions
           - os: macos-12
-              #- os: ubuntu-20.04 # These may be transient errors; more testing required
-              #swift: "4.2"
-              #- os: ubuntu-20.04
-              #swift: "5.0"
-              #- os: ubuntu-20.04
-              #swift: "5.1"
+          - os: ubuntu-20.04
+            swift: "4.2"
+          - os: ubuntu-20.04
+            swift: "5.0"
+          - os: ubuntu-20.04
+            swift: "5.1"
           - os: ubuntu-22.04 #Not supported by setup-swift
         include:
           - os: macos-11
             swift: "5.5"
+          - os: macos-11
+            swift: "5.6"
           - os: macos-12
             swift: "5.5"
+          - os: macos-12
+            swift: "5.6"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: swift-actions/setup-swift@v1
         with:
           swift-version: ${{ matrix.swift }}
