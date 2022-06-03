@@ -50,5 +50,5 @@ jobs:
       - run: swift test --parallel --xunit-output output.xml
       - uses: test-summary/action@v1
         with:
-          path: output.xml
+          paths: output.xml
           show: all
