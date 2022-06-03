@@ -1,0 +1,46 @@
+name: Push (master)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Test Swift ${{ matrix.swift }}.x on ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-16.04, ubuntu-latest]
+        swift: ["4.2", "5.0", "5.1", "5.2"]
+        exclude:
+          - os: macos-latest
+            swift: "5.2"
+          - os: macos-latest
+            swift: "4.2"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: fwal/setup-swift@v1
+        with:
+          swift-version: ${{ matrix.swift }}
+      - run: swift --version
+      - run: swift test
+  deploy:
+    name: Deploy
+    runs-on: macos-latest
+    needs: [test]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: fwal/setup-swift@v1
+      with:
+        swift-version: "5"
+    - run: swift --version
+    - name: Install Danger
+      run: |
+        python3 scripts/include_dev_dependencies.py
+        npm install -g danger
+        swift build
+    - name: Deploy Docs
+      run: bash .deploy-docs.sh
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
