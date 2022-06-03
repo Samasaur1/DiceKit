@@ -46,5 +46,9 @@ jobs:
           swift-version: ${{ matrix.swift }}
       - run: |
           swift --version
-          echo "Using '$(swift --version | head -n 1)'" >> $GITHUB_STEP_SUMMARY
-      - run: swift test
+          echo "Using \`$(swift --version | head -n 1)\`" >> $GITHUB_STEP_SUMMARY
+      - run: swift test --parallel --xunit-output output.xml
+      - uses: test-summary/action@v1
+        with:
+          path: output.xml
+          show: all
