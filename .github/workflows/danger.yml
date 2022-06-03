@@ -10,7 +10,7 @@ jobs:
     runs-on: macos-10.15
     steps:
       - uses: actions/checkout@v2
-      - uses: danger/swift@3
+      - uses: danger/swift@3.3.0
         with:
           args: --use-github-checks --verbose
         env:
