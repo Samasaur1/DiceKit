@@ -165,7 +165,7 @@ if let body = danger.github.pullRequest.body {
             fail("**Task \(num + 1) incomplete:** \(line.dropFirst(6))")  // "- [ ] "
         }
     } else {
-        warn("PR has no tasks (are you sure?)")
+        message("PR has no tasks (are you sure?)")
     }
 } else {
     warn("Cannot fetch PR body!")
