@@ -32,17 +32,18 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
     // MARK: Changelog entry
     if let lineNumber = danger.utils.lines(for: "## [\(newVersion)]", inFile: "CHANGELOG.md").first, let line = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("## [\(newVersion)]") }) {
         message("There is a CHANGELOG entry for this version")
-        let dateString = String(line.dropFirst("## [\(newVersion)] - ".count))
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
         let ds = df.string(from: Date())
-        if ds == dateString {
-            message("The date for this version's entry is today, \(dateString)")
+        let correct = "## [\(newVersion)] — \(ds)"
+        if line == correct {
+            message("The CHANGELOG entry heading is correct")
         } else {
-            fail("The date for this version's entry is not today!")
-            fail(message: "The date for this version's entry is not today!", file: "CHANGELOG.md", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] — \(ds)", file: "CHANGELOG.md", line: lineNumber)
+            fail("There is something wrong with the CHANGELOG entry heading!")
+            fail(message: "There is something wrong with this CHANGELOG entry heading!", file: "CHANGELOG.md", line: lineNumber)
+            suggestion(code: correct, file: "CHANGELOG.md", line: lineNumber)
         }
+        //if line.range(of: #"## \[.+\] - \d\d\d\d-\d\d-\d\d"#, options: .regularExpression) != nil {
         // MARK: Changelog compare link
         if let upcomingLineNumber = danger.utils.lines(for: "[Upcoming]:", inFile: "CHANGELOG.md").first,
            let upcomingLine = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("[Upcoming]:") }) {
