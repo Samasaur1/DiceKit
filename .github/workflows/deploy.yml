@@ -30,7 +30,7 @@ jobs:
     - name: Process docs
       run: |
         mkdir ghp/docs/v$VERSION
-        mv newdocs/* ghpd/docs/v$VERSION
+        mv newdocs/* ghp/docs/v$VERSION
         cd ghp
         echo 'section > section > p > img { margin-top: 4em; margin-right: 2em; }' >> docs/v$VERSION/css/jazzy.css
         bash ../scripts/updateLatestDocs.sh $VERSION
@@ -57,7 +57,7 @@ jobs:
     - name: Determine release name
       run: |
         NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
-        echo "NAME='$NAME'" >> $GITHUB_ENV
+        echo "NAME=$NAME" >> $GITHUB_ENV
         echo "Determined release name as '$NAME'" >> $GITHUB_STEP_SUMMARY
     - name: Determine release body (from CHANGELOG)
       run: cat CHANGELOG.md | sed '1,/^## /d' | sed '1,/^## /d' | sed '/^## /,$d' | tee body.md

@@ -5,10 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Upcoming]
+### Fixed
+- Various required cleanup tasks due to the deploy scripts not working imemdiately
+
+## [0.25.3] — 2022-06-04
+### Fixed
+- Continued debugging of auto-deployment
+
+## [0.25.2] — 2022-06-04
+### Fixed
+- Continued debugging of auto-deployment
 
 ## [0.25.1] — 2022-06-04
-### Fixed
-- Automated deployment should now work for docs and releases
+### Changed
+- Continued debugging of auto-deployment
 
 ## [0.25.0] — 2022-06-04
 ### Added
