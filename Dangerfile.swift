@@ -43,7 +43,6 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
             fail(message: "There is something wrong with this CHANGELOG entry heading!", file: "CHANGELOG.md", line: lineNumber)
             suggestion(code: correct, file: "CHANGELOG.md", line: lineNumber)
         }
-        //if line.range(of: #"## \[.+\] - \d\d\d\d-\d\d-\d\d"#, options: .regularExpression) != nil {
         // MARK: Changelog compare link
         if let upcomingLineNumber = danger.utils.lines(for: "[Upcoming]:", inFile: "CHANGELOG.md").first,
            let upcomingLine = danger.utils.readFile("CHANGELOG.md").split(separator: "\n").first(where: { $0.hasPrefix("[Upcoming]:") }) {
