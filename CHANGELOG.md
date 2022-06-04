@@ -311,7 +311,8 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Roll`: the result of rolling a `Rollable`
 - `Rollable`: a protocol for anything that is rollable
 
-[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v0.25.3...master
+[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v0.25.4...master
+[0.25.4]: https://github.com/Samasaur1/DiceKit/compare/v0.25.3...v0.25.4
 [0.25.3]: https://github.com/Samasaur1/DiceKit/compare/v0.25.2...v0.25.3
 [0.25.2]: https://github.com/Samasaur1/DiceKit/compare/v0.25.1...v0.25.2
 [0.25.1]: https://github.com/Samasaur1/DiceKit/compare/v0.25.0...v0.25.1
