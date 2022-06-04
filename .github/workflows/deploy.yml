@@ -1,4 +1,4 @@
-name: Deploy
+name: deploy
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         ref: gh-pages
         path: ghp
     - name: Determine VERSION
-      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
     - name: Process docs
       run: |
         mkdir ghp/docs/v$VERSION
@@ -45,7 +45,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Determine VERSION
-      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
     - name: Determine release name
       run: |
         NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
