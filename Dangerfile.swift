@@ -71,7 +71,7 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
 
     // MARK: Changelog hyphen vs emdash
     let contents = danger.utils.readFile("CHANGELOG.md").split(separator: "\n")
-    for (_ln, line) in contents.enumerated() where line.range(of: #"## [.+] - \d\d\d\d-\d\d-\d\d"#, options: .regularExpression) != nil {
+    for (_ln, line) in contents.enumerated() where line.range(of: #"## \[.+\] - \d\d\d\d-\d\d-\d\d"#, options: .regularExpression) != nil {
         fail(message: "Use emdashes instead of hyphens!", file: "CHANGELOG.md", line: _ln + 1)
         suggestion(code: line.replacingOccurrences(of: " - ", with: " — "), file: "CHANGELOG.md", line: _ln + 1)
     }
