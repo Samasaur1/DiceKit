@@ -35,12 +35,13 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
         let dateString = String(line.dropFirst("## [\(newVersion)] - ".count))
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
-        if df.string(from: Date()) == dateString {
+        let ds = df.string(from: Date())
+        if ds == dateString {
             message("The date for this version's entry is today, \(dateString)")
         } else {
             fail("The date for this version's entry is not today!")
             fail(message: "The date for this version's entry is not today!", file: "CHANGELOG.md", line: lineNumber)
-            suggestion(code: "## [\(newVersion)] — \(df.string(from: Date()))", file: "CHANGELOG.md", line: lineNumber)
+            suggestion(code: "## [\(newVersion)] — \(ds)", file: "CHANGELOG.md", line: lineNumber)
         }
         // MARK: Changelog compare link
         if let upcomingLineNumber = danger.utils.lines(for: "[Upcoming]:", inFile: "CHANGELOG.md").first,
@@ -66,6 +67,13 @@ if let range = danger.github.pullRequest.title.range(of: #"(?<=Version )\d+\.\d+
         }
     } else {
         fail("There is no CHANGELOG entry for this version!")
+    }
+
+    // MARK: Changelog hyphen vs emdash
+    let contents = danger.utils.readFile("CHANGELOG.md").split(separator: "\n")
+    for (_ln, line) in contents.enumerated() where line.range(of: #"## [.+] - \d\d\d\d-\d\d-\d\d"#, options: .regularExpression) != nil {
+        fail(message: "Use emdashes instead of hyphens!", file: "CHANGELOG.md", line: _ln + 1)
+        suggestion(code: line.replacingOccurrences(of: " - ", with: " — "), file: "CHANGELOG.md", line: _ln + 1)
     }
 } else { // MARK: - Non-new version PR
     message("Non-new version PR detected, to branch \(danger.github.pullRequest.base.ref)")
