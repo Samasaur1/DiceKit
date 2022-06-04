@@ -54,9 +54,15 @@ jobs:
         VERSION=${GITHUB_REF_NAME:1} #drop the v from the tag
         echo "VERSION=$VERSION" >> $GITHUB_ENV
         echo "Determined version as \`$VERSION\`" >> $GITHUB_STEP_SUMMARY
+    - name: debugging info
+      run: |
+        git tag -l v$VERSION
+        git tag -l --format='%(contents)' v$VERSION
+        git tag -n1 v$VERSION
     - name: Determine release name
       run: |
         NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
+        NAME=$(git tag -n1 v$VERSION | tail -c +17)
         echo "NAME=$NAME" >> $GITHUB_ENV
         echo "Determined release name as '$NAME'" >> $GITHUB_STEP_SUMMARY
     - name: Determine release body (from CHANGELOG)
