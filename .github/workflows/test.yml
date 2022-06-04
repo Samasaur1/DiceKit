@@ -56,7 +56,7 @@ jobs:
         with:
           paths: output.xml
           show: fail #none | all | (fail)?,(pass)?,(skip)?
-      - run: echo ':white_check_mark: Tests succeeded!' >> $GITHUB_STEP_SUMMARY
+      - run: 'echo ":white_check_mark: Tests succeeded!" >> $GITHUB_STEP_SUMMARY'
         if: ${{ success() && startsWith(matrix.os, 'macos') }}
-      - run: echo ':x: Some tests failing!' >> $GITHUB_STEP_SUMMARY #perhaps :heavy_exclamation_mark:
+      - run: 'echo ":x: Some tests failing!" >> $GITHUB_STEP_SUMMARY' #perhaps :heavy_exclamation_mark:
         if: ${{ failure() && startsWith(matrix.os, 'macos') }}
