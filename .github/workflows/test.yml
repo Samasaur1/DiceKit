@@ -48,7 +48,11 @@ jobs:
           swift --version
           echo "Using \`$(swift --version | head -n 1)\`" >> $GITHUB_STEP_SUMMARY
       - run: swift test --parallel --xunit-output output.xml
+        if: startsWith(matrix.os, 'ubuntu')
+      - run: swift test
+        if: startsWith(matrix.os, 'macos')
       - uses: test-summary/action@v1
+        if: always() && startsWith(matrix.os, 'ubuntu')
         with:
           paths: output.xml
-          show: all
+          show: fail #none | all | (fail)?,(pass)?,(skip)?
