@@ -6,11 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.24.1] - 2020-10-15
+## [0.25.0] — 2022-06-04
+### Added
+- Releases are now auto-deployed from GitHub Actions
+- Extra checks in Danger
+
+### Changed
+- Improve PR template and guidelines
+- Danger now runs in GitHub Actions, not Travis CI
+- Documentation is now auto-deployed from GitHub Actions, not Travis CI
+
+### Fixed
+- We now test on Swift 4.2–5.6, and use the current allowed versions of macOS and Ubuntu
+
+### Removed
+- Extra now-obsolete GitHub Actions
+- All uses of Travis CI are now gone
+
+## [0.24.1] — 2020-10-15
 ### Fixed
 - Danger now reports tasks in the correct order
 
-## [0.24.0] - 2020-07-13
+## [0.24.0] — 2020-07-13
 ### Added
 - `Chance` objects can now be multiplied together (which, mathematically, represents the chance of both occurring)
 - More test cases for `Chance`
@@ -23,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub Actions can now deploy docs through the use of the GitHub token
 - Typos
 
-## [0.23.0] - 2020-07-09
+## [0.23.0] — 2020-07-09
 ### Added
 - A `Package@swift-5.0.swift` file in order to be able to specify supported platforms
 - Supported versions of Swift are listed in the package manifest file
@@ -80,7 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - The structure of the GitHub Pages site has changed. There is now a `docs` directory, with subdirectories for each version. The auto-deployment of documentation has been updated to support this.
 
-## [0.19.0] - 2019-12-26
+## [0.19.0] — 2019-12-26
 ### Added
 - Scripts to hide/unhide dev dependencies
 
@@ -91,12 +108,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Dev dependencies, such as Danger, are now only included, downloaded, and built on CI
 
-## [0.18.1] - 2019-08-22
+## [0.18.1] — 2019-08-22
 ### Fixed
 - The release script has been fixed (closes #67)
 - The automatic documentation has been fixed
 
-## [0.18.0] - 2019-08-04
+## [0.18.0] — 2019-08-04
 ### Added
 - Add release.py and updateVersion.py scripts
 - Add [Danger](https://github.com/danger/swift) integration
@@ -118,7 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no SSL certificate
 
-## [0.17.0] - 2019-07-26
+## [0.17.0] — 2019-07-26
 ### Added
 - New feature guidelines
 - Issue and pull request templates
@@ -142,14 +159,14 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Rollable`
   - `roll(times:_:)` would crash when called like so: `roll(times: 1, .dropOutsides)`
 
-## [0.16.1] - 2019-06-24
+## [0.16.1] — 2019-06-24
 ### Added
 - Testing on Swift 5.0.1 and Xcode 10.2
 
 ### Fixed
 - Auto-deploying docs
 
-## [0.16.0] - 2019-06-24
+## [0.16.0] — 2019-06-24
 ### Added
 - `CustomDie`
 - `DieSide`
@@ -169,7 +186,7 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 ### Removed
 - Support for Swift 4.0 through Swift 4.1.3
 
-## [0.15.0] - 2018-12-02
+## [0.15.0] — 2018-12-02
 ### Added
 - CODE_OF_CONDUCT.md
 - CONTRIBUTING.md
@@ -186,48 +203,48 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
   - Include modifiers in `Dice` addition functions
   - Properly multiply `Die`s in `Dice` multiplication functions.
 
-## [0.14.1] - 2018-11-15
+## [0.14.1] — 2018-11-15
 ### Fixed
 - `Die`
   - Die rolling bug (#44): All dice Swift 4.2+ were being treated as `d6`s by [@Taufi](https://github.com/Taufi)
 
-## [0.14.0] - 2018-10-31
+## [0.14.0] — 2018-10-31
 ### Added
 - `Die`
   - `init?(_ str: String)`: String parsing
 - `Dice`
   - `init?(_ str: String)`: String parsing
 
-## [0.13.0] - 2018-10-11
+## [0.13.0] — 2018-10-11
 ### Changed
 - Changed LICENSE from MIT to AFL v3.0
 
-## [0.12.0] - 2018-10-09
+## [0.12.0] — 2018-10-09
 ### Added
 - Logo by [@richardbmx](https://github.com/richardbmx)
 
-## [0.11.0] - 2018-10-1
+## [0.11.0] — 2018-10-1
 ### Added
 - More documentation
 
-## [0.10.0] - 2018-09-29
+## [0.10.0] — 2018-09-29
 ### Added
 - Automatic documentation deployment for the latest version
 
-## [0.9.0] - 2018-09-28
+## [0.9.0] — 2018-09-28
 ### Added
 - Linux support
 
-## [0.8.0] - 2018-09-22
+## [0.8.0] — 2018-09-22
 ### Changed
 - Changed `Roll` to `Int` typealias
 
-## [0.7.0] - 2018-09-22
+## [0.7.0] — 2018-09-22
 ### Added
 - LICENSE
 - Swift 4.2/Xcode 10 compatibility
 
-## [0.6.0] - 2018-09-17
+## [0.6.0] — 2018-09-17
 ### Added
 - `Dice`
   - `init(_ die: Die, count: Int)`
@@ -239,14 +256,14 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Die`
   - Addition operators for `Die` and `(Die, Int)` -> `Dice`
 
-## [0.5.0] - 2018-09-13
+## [0.5.0] — 2018-09-13
 ### Added
 - `Rollable`
   - `roll(times:_:)`: rolls a given number of times and performs the given operation on them.
 - `MultipleRollResult`: denotes the operation to do on `roll(times:_:)`
 - `public typealias DKMultipleRollResult = MultipleRollResult`
 
-## [0.4.0] - 2018-09-12
+## [0.4.0] — 2018-09-12
 ### Added
 - Typealiases
   - `public typealias DKDie = Die`
@@ -254,14 +271,14 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
   - `public typealias DKRoll = Roll`
   - `public typealias DKRollable = Rollable`
 
-## [0.3.0] - 2018-09-11
+## [0.3.0] — 2018-09-11
 ### Added
 - `Die`
   - multiplication operators for `Die` and `Int` that return `Dice`
 - `Dice`
   - multiplication operators for `Dice` and `Int` that return `Dice`
 
-## [0.2.0] - 2018-09-02
+## [0.2.0] — 2018-09-02
 ### Added
 - `Dice`
   - `numberOfDice`: the number of `Die`s in the object
@@ -269,14 +286,15 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
   - `minimumResult`: the lowest possible roll
   - `maximumResult`: the highest possible roll
 
-## [0.1.0] - 2018-09-01
+## [0.1.0] — 2018-09-01
 ### Added
 - `Die`: class; conforms to `Rollable`
 - `Dice`: class; conforms to `Rollable`
 - `Roll`: the result of rolling a `Rollable`
 - `Rollable`: a protocol for anything that is rollable
 
-[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/development
+[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v0.25.0...master
+[0.25.0]: https://github.com/Samasaur1/DiceKit/compare/v0.24.1...v0.25.0
 [0.24.1]: https://github.com/Samasaur1/DiceKit/compare/v0.24.0...v0.24.1
 [0.24.0]: https://github.com/Samasaur1/DiceKit/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/Samasaur1/DiceKit/compare/v0.22.0...v0.23.0
