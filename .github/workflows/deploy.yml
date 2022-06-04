@@ -1,4 +1,4 @@
-name: Deploy
+name: deploy
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         ref: gh-pages
         path: ghp
     - name: Determine VERSION
-      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
     - name: Process docs
       run: |
         mkdir ghp/docs/v$VERSION
@@ -45,7 +45,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Determine VERSION
-      run: echo 'VERSION=${GITHUB_REF:#refs/tags/v}' >> $GITHUB_ENV #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
     - name: Determine release name
       run: |
         NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
@@ -53,6 +53,12 @@ jobs:
         echo "Determined release name as '$NAME'" >> $GITHUB_STEP_SUMMARY
     - name: Determine release body (from CHANGELOG)
       run: cat CHANGELOG.md | sed '1,/^## /d' | sed '1,/^## /d' | sed '/^## /,$d' | tee body.md
+    - name: Add links to release body
+      run: |
+        CH_VERSION=$(echo $VERSION | tr -d .)
+        CH_DATE=$(grep "## .$VERSION." CHANGELOG.md | tail -c 11 | head -n 10)
+        echo "[See changelog](https://github.com/Samasaur1/DiceKit/blob/master/CHANGELOG.md#$CH_VERSION--$CH_DATE)" | tee -a body.md
+        echo "[See docs](https://samasaur1.github.io/DiceKit/docs/v$VERSION)" | tee -a body.md
     - uses: ncipollo/release-action@v1.10.0
       with:
         name: ${{ env.NAME }}
