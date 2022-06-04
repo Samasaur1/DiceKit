@@ -22,7 +22,11 @@ jobs:
         ref: gh-pages
         path: ghp
     - name: Determine VERSION
-      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      #VERSION=${GITHUB_REF#refs/tags/v}
+      run: |
+        VERSION=${GITHUB_REF_NAME:1} #drop the v from the tag
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Determined version as \`$VERSION\`" >> $GITHUB_STEP_SUMMARY
     - name: Process docs
       run: |
         mkdir ghp/docs/v$VERSION
@@ -45,7 +49,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Determine VERSION
-      run: 'echo "VERSION=${GITHUB_REF:#refs/tags/v}" >> $GITHUB_ENV' #lops of that part from the beginning of the string, could be ${GITHUB_REF:11} to chop off 11 characters
+      #VERSION=${GITHUB_REF#refs/tags/v}
+      run: |
+        VERSION=${GITHUB_REF_NAME:1} #drop the v from the tag
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Determined version as \`$VERSION\`" >> $GITHUB_STEP_SUMMARY
     - name: Determine release name
       run: |
         NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
