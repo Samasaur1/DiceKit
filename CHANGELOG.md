@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
+## [0.25.1] — 2022-06-04
+### Fixed
+- Automated deployment should now work for docs and releases
+
 ## [0.25.0] — 2022-06-04
 ### Added
 - Releases are now auto-deployed from GitHub Actions
