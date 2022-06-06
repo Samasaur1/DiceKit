@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rollable Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/Rollable" class="dashAnchor"></a>
+    <a title="Rollable Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">DiceKit 0.25.5 Docs</a> (93% documented)</p>
+        <p class="header-right"><a href="https://github.com/Samasaur1/DiceKit"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">DiceKit Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        Rollable Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Rollables.html">Rollables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Rollable.html">Rollable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Die.html">Die</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Dice.html">Dice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WeightedDie.html">WeightedDie</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Results.html">Results</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Results.html#/s:7DiceKit4Rolla">Roll</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Custom%20Dice.html">Custom Dice</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CustomDie.html">CustomDie</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DieSide.html">DieSide</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Probability.html">Probability</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Chances.html">Chances</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Chance.html">Chance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Caching.html">Caching</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Probability.html#/s:7DiceKit14ENABLE_CACHINGSbvp">ENABLE_CACHING</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Enums.html">Other Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MultipleRollResult.html">MultipleRollResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RollComparison.html">RollComparison</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Other%20Typealiases.html">Other Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit9DKCachinga">DKCaching</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit8DKChancea">DKChance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit9DKChancesa">DKChances</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit6DKDicea">DKDice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit5DKDiea">DKDie</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit7DKErrora">DKError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit20DKMultipleRollResulta">DKMultipleRollResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit6DKRolla">DKRoll</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit10DKRollablea">DKRollable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Other%20Typealiases.html#/s:7DiceKit13DKWeightedDiea">DKWeightedDie</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Rollable</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Rollable</span></code></pre>
+
+                </div>
+              </div>
+            <p>An object that is rollable. It must have a <code>roll()</code> method that returns a <code><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></code> object.</p>
+
+<p><strong>Implemented By</strong></p>
+
+<ul>
+<li><code><a href="../Structs/Die.html">Die</a></code></li>
+<li><code><a href="../Structs/Dice.html">Dice</a></code></li>
+<li><p><code><a href="../Structs/WeightedDie.html">WeightedDie</a></code></p></li>
+</ul><div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Samasaur</p>
+
+</div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP4rollSiyF"></a>
+                    <a name="//apple_ref/swift/Method/roll()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP4rollSiyF">roll()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rolls this object and returns the result.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">roll</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The result of the roll.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP4roll5times_S2i_AA18MultipleRollResultOtF"></a>
+                    <a name="//apple_ref/swift/Method/roll(times:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP4roll5times_S2i_AA18MultipleRollResultOtF">roll(times:<wbr>_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Rolls this object the given number of times and returns the given result type.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.5.0</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Rolls this object the given number of times and returns the given result type.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.5.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">roll</span><span class="p">(</span><span class="nv">times</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">returnType</span><span class="p">:</span> <span class="kt"><a href="../Enums/MultipleRollResult.html">MultipleRollResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>times</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of times to roll.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>returnType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The type of result performed with the given number of rolls.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP13minimumResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/minimumResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP13minimumResultSivp">minimumResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The minimum possible result from using the <code><a href="../Protocols/Rollable.html#/s:7DiceKit8RollableP4rollSiyF">roll()</a></code> method.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.2.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">minimumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP13maximumResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/maximumResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP13maximumResultSivp">maximumResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The maximum possible result from using the <code><a href="../Protocols/Rollable.html#/s:7DiceKit8RollableP4rollSiyF">roll()</a></code> method.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.2.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">maximumResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP13averageResultSivp"></a>
+                    <a name="//apple_ref/swift/Property/averageResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP13averageResultSivp">averageResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The average result from using the <code><a href="../Protocols/Rollable.html#/s:7DiceKit8RollableP4rollSiyF">roll()</a></code> method.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.15.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">averageResult</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP8canReachySbSi_AA14RollComparisonOtF"></a>
+                    <a name="//apple_ref/swift/Method/canReach(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP8canReachySbSi_AA14RollComparisonOtF">canReach(_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines whether or not this object can reach the target Roll, compared by the given comparison.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.15.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">canReach</span><span class="p">(</span><span class="n">_</span> <span class="nv">target</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">comparisonType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RollComparison.html">RollComparison</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The target to check reachibility for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>comparisonType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The method of checking reachibility.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whether or not this object can reach the target using the given method of comparison.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2of_AA6ChanceVSi_AA14RollComparisonOtF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2of_AA6ChanceVSi_AA14RollComparisonOtF">chance(of:<wbr>_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling the target <code><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></code>, compared by the given comparison.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Determines the chance of rolling the target <code>Roll</code>, compared by the given comparison.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">target</span><span class="p">:</span> <span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">comparisonType</span><span class="p">:</span> <span class="kt"><a href="../Enums/RollComparison.html">RollComparison</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The target to check the chance for.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>comparisonType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The method of comparison of which the chance of occurring is being returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling the target using the given method of comparison.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2ofAA6ChanceVSnySiG_tF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2ofAA6ChanceVSnySiG_tF">chance(of:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling in the given range.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2ofAA6ChanceVSNySiG_tF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2ofAA6ChanceVSNySiG_tF">chance(of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">ClosedRange</span><span class="o">&lt;</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling in the given range.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2ofAA6ChanceVs16PartialRangeFromVySiG_tF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2ofAA6ChanceVs16PartialRangeFromVySiG_tF">chance(of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">PartialRangeFrom</span><span class="o">&lt;</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling in the given range.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2ofAA6ChanceVs16PartialRangeUpToVySiG_tF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2ofAA6ChanceVs16PartialRangeUpToVySiG_tF">chance(of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">PartialRangeUpTo</span><span class="o">&lt;</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling in the given range.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP6chance2ofAA6ChanceVs19PartialRangeThroughVySiG_tF"></a>
+                    <a name="//apple_ref/swift/Method/chance(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP6chance2ofAA6ChanceVs19PartialRangeThroughVySiG_tF">chance(of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines the chance of rolling in the given range.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>0.17.0</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">chance</span><span class="p">(</span><span class="n">of</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">PartialRangeThrough</span><span class="o">&lt;</span><span class="kt"><a href="../Results.html#/s:7DiceKit4Rolla">Roll</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Chance.html">Chance</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>range</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The range to check.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The chance of rolling in the given range.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DiceKit8RollableP13probabilitiesAA7ChancesVvp"></a>
+                    <a name="//apple_ref/swift/Property/probabilities" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DiceKit8RollableP13probabilitiesAA7ChancesVvp">probabilities</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The probabilities of all possible rolls.</p>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    0.17.0
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">probabilities</span><span class="p">:</span> <span class="kt"><a href="../Structs/Chances.html">Chances</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2022 <a class="link" href="https://github.com/Samasaur1" target="_blank" rel="external noopener">Samasaur</a>. All rights reserved. (Last updated: 2022-06-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
