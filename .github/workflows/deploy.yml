@@ -48,21 +48,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: 'Actually fetch annotated tag' # See https://github.com/actions/checkout/issues/290
+      run: git fetch --tags --force
     - name: Determine VERSION
       #VERSION=${GITHUB_REF#refs/tags/v}
       run: |
         VERSION=${GITHUB_REF_NAME:1} #drop the v from the tag
         echo "VERSION=$VERSION" >> $GITHUB_ENV
         echo "Determined version as \`$VERSION\`" >> $GITHUB_STEP_SUMMARY
-    - name: debugging info
-      run: |
-        git tag -l v$VERSION
-        git tag -l --format='%(contents)' v$VERSION
-        git tag -n1 v$VERSION
     - name: Determine release name
       run: |
-        NAME=$(git tag -l --format='%(contents)' v$VERSION | head -n 1)
-        NAME=$(git tag -n1 v$VERSION | tail -c +17)
+        NAME=$(git tag -l --format='%(subject)' v$VERSION)
         echo "NAME=$NAME" >> $GITHUB_ENV
         echo "Determined release name as '$NAME'" >> $GITHUB_STEP_SUMMARY
     - name: Determine release body (from CHANGELOG)

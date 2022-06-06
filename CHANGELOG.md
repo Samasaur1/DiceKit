@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Various required cleanup tasks due to the deploy scripts not working imemdiately
 
+## [0.25.5] — 2022-06-05
+### Fixed
+- The auto-release deployment name should now be correct
+
 ## [0.25.4] — 2022-06-04
 ### Fixed
 - Continued debugging of automatic release deployment name
@@ -311,7 +315,8 @@ Update .travis.yml in case https://swiftenv.fuller.li/install.sh is down/has no 
 - `Roll`: the result of rolling a `Rollable`
 - `Rollable`: a protocol for anything that is rollable
 
-[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v0.25.4...master
+[Upcoming]: https://github.com/Samasaur1/DiceKit/compare/v0.25.5...master
+[0.25.5]: https://github.com/Samasaur1/DiceKit/compare/v0.25.4...v0.25.5
 [0.25.4]: https://github.com/Samasaur1/DiceKit/compare/v0.25.3...v0.25.4
 [0.25.3]: https://github.com/Samasaur1/DiceKit/compare/v0.25.2...v0.25.3
 [0.25.2]: https://github.com/Samasaur1/DiceKit/compare/v0.25.1...v0.25.2
