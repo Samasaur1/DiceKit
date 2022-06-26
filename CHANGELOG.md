@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Upcoming]
 
-## [0.26.0] — 2022-06-09
+## [0.26.0] — 2022-06-26
 ### Changed
 - Removed draft marker from automatic releases
 
