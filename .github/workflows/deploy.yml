@@ -73,5 +73,5 @@ jobs:
       with:
         name: ${{ env.NAME }}
         bodyFile: "body.md"
-        draft: true
+        draft: false
         prerelease: true
