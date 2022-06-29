@@ -125,12 +125,12 @@ public extension Rollable {
             return rolls.sum
         case .highest:
             guard let highest = rolls.max() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return highest
         case .lowest:
             guard let lowest = rolls.min() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return lowest
         case .outsides:
@@ -138,19 +138,19 @@ public extension Rollable {
                 throw Error.insufficientRollsForCalculation(attempt: times, minimum: 2)
             }
             guard let min = rolls.min(), let max = rolls.max() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return min + max
         case .dropHighest:
             guard times > 1 else { return 0 }
             guard let highest = rolls.max() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return rolls.sum - highest
         case .dropLowest:
             guard times > 1 else { return 0 }
             guard let lowest = rolls.min() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return rolls.sum - lowest
         case .dropOutsides:
@@ -159,7 +159,7 @@ public extension Rollable {
             }
             guard times > 2 else { return 0 }
             guard let min = rolls.min(), let max = rolls.max() else {
-                fatalError()
+                fatalError("This should be unreachable")
             }
             return rolls.sum - (min + max)
         case .dropLow(let amountToDrop):
