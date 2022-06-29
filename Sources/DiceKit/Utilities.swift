@@ -1,4 +1,4 @@
-internal extension Array where Element == Roll {
+internal extension Sequence where Element == Roll {
     var sum: Roll {
         var total = 0
         for r in self {
