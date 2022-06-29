@@ -26,7 +26,7 @@ final class WeightedDieTests: XCTestCase {
                 XCTFail()
             }
         }
-        XCTAssertEqual(_100percent.roll(times: 1_000, .sum), 1_000, "The sum of 1000 rolls wasn't 1000 (i.e. some roll wasn't 1")
+        XCTAssertEqual(try! _100percent.roll(times: 1_000, .sum), 1_000, "The sum of 1000 rolls wasn't 1000 (i.e. some roll wasn't 1")
 
         let _100percent2 = try! WeightedDie(chances: Chances(chances: [3: .oneOut(of: 10), 4: .zero]))
         for _ in 0..<1_000 {
@@ -34,7 +34,7 @@ final class WeightedDieTests: XCTestCase {
                 XCTFail()
             }
         }
-        XCTAssertEqual(_100percent2.roll(times: 1_000, .sum), 3_000, "The sum of 1000 rolls wasn't 3000 (i.e. some roll wasn't 3")
+        XCTAssertEqual(try! _100percent2.roll(times: 1_000, .sum), 3_000, "The sum of 1000 rolls wasn't 3000 (i.e. some roll wasn't 3")
 
         let equalChances = try! WeightedDie(chances: Chances(chances: [5: .oneOut(of: 2), 6: .oneOut(of: 2)]))
         var fives = 0
@@ -43,7 +43,7 @@ final class WeightedDieTests: XCTestCase {
             if r == 5 { fives += 1 }
         }
         XCTAssertTrue(abs(50_000 - fives) < 10_000, "\(abs(50_000 - fives))")
-        XCTAssertTrue(abs(550_000 - equalChances.roll(times: 100_000, .sum)) < 1_000)
+        XCTAssertTrue(abs(try! 550_000 - equalChances.roll(times: 100_000, .sum)) < 1_000)
 
         let equalChances2 = try! WeightedDie(chances: Chances(chances: [7: .oneOut(of: 6), 8: .oneOut(of: 6)]))
         var sevens = 0
@@ -52,7 +52,7 @@ final class WeightedDieTests: XCTestCase {
             if r == 7 { sevens += 1 }
         }
         XCTAssertTrue(abs(50_000 - sevens) < 10_000, "\(abs(50_000 - sevens))")
-        XCTAssertTrue(abs(750_000 - equalChances2.roll(times: 100_000, .sum)) < 1_000)
+        XCTAssertTrue(abs(try! 750_000 - equalChances2.roll(times: 100_000, .sum)) < 1_000)
 
         let w = try! WeightedDie(chances: Chances(chances: [9: .init(1, outOf: 10), 10: .init(3, outOf: 10)]))
         var nines = 0

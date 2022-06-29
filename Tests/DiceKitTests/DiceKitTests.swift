@@ -37,60 +37,6 @@ final class DiceKitTests: XCTestCase {
         XCTAssertEqual(.d6 * 3, dice)
     }
 
-    func testRollable() {
-        for i in 0...3 {
-            let r = try! getRollable()
-            print("\(r)", to: &STDOUT)
-            for _ in 0...3 {
-                let roll = r.roll()
-                XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-                XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
-                XCTAssert(r.canReach(roll, .exactly))
-            }
-            print("Rollable {\(r)}, #\(i+1) completed", to: &STDOUT)
-        }
-    }
-    
-    func testDieRollable() {
-        let r = try! getDie()
-        for _ in 0...3 {
-            let roll = r.roll()
-            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
-            XCTAssert(r.canReach(roll, .exactly))
-        }
-    }
-    
-    func testWeightedDieRollable() {
-        let r = try! getWeightedDie()
-        print("\(r)", to: &STDOUT)
-        for _ in 0...3 {
-            let roll = r.roll()
-            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0)
-            XCTAssert(r.canReach(roll, .exactly))
-        }
-    }
-    
-    func testDiceRollable() {
-        let r = try! getDice()
-        print("\(r)", to: &STDOUT)
-        for _ in 0...3 {
-            let roll = r.roll()
-            XCTAssert((r.minimumResult...r.maximumResult).contains(roll))
-            XCTAssertGreaterThan(r.probabilities[of: roll].value, 0, "Roll was \(roll)")
-            XCTAssert(r.canReach(roll, .exactly))
-        }
-    }
-    
-    func test2d5plusd18minus4() {
-        let d = try! Dice("2d25+d18-4")
-        for _ in 0...3 {
-            let roll = d.roll()
-            XCTAssertGreaterThan(d.probabilities[of: roll].value, 0, "Roll was \(roll)")
-        }
-    }
-    
     func testFileHandleOutputStream__INTERNAL_UTILITY_METHOD() {
         print("STDOUT", to: &STDOUT)
         print("STDERR", to: &STDERR)

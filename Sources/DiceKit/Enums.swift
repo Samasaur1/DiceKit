@@ -69,7 +69,7 @@ public enum RollComparison: CaseIterable {
 /// - chanceOverOne: The chance of something happening was over 1, an impossibility.
 ///
 /// - Since: 0.16.0
-public enum Error: Swift.Error {
+public enum Error: Swift.Error, Equatable {
     /// A number of sides was passed that wasn't allowed.
     /// - Parameter attempt: The number of sides that was passed.
     case illegalNumberOfSides(attempt: Int)
@@ -93,6 +93,29 @@ public enum Error: Swift.Error {
     ///
     /// This error was most likely thrown when creating a `Chance` instance. However, a `Chances` object can have `Chance`s that *sum* to over 1.
     case chanceOverOne
+    /// Attempted to perform a calculation but didn't perform enough rolls to do so.
+    /// 
+    /// This error was most likely thrown when calling `Rollable.roll(times:_:)`. If `times` is less than 1, this error will always be thrown. If `times` is one or greater, but not enough for the requested calculation (for example, if `times` is 1 and the calculation is `MultipleRollResult.outsides`), this error will also be thrown.
+    ///
+    /// Here is an example of how to use it:
+    /// ```
+    /// var times = -3
+    /// while true {
+    ///     do {
+    ///         return try dice.roll(times: times, .dropLowest)
+    ///     } catch let DiceKit.Error.insufficientRollsForCalculation(attempt, minimum) {
+    ///         print("Could not perform calculation with \(attempt) roll(s); attempting with \(minimum)")
+    ///         times = minimum
+    ///     } catch {
+    ///         fatalError("Crash on any other errors")
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - attempt: The number of rolls requested (usually the `times` paramter in the call that threw this error).
+    ///   - minimum: The minimum number of rolls required in order to not throw this error. Call the same function, but increase the number of rolls requested to this number.
+    case insufficientRollsForCalculation(attempt: Int, minimum: Int)
 
     public var localizedDescription: String {
         switch self {
@@ -112,6 +135,8 @@ public enum Error: Swift.Error {
             return "Arguments were passed that resulted in something being negative that needed to be positive."
         case .chanceOverOne:
             return "The chance of something happening was over 1, an impossibility."
+        case let .insufficientRollsForCalculation(attempt, minimum):
+            return "Attempted to perform a calculation with \(attempt) rolls but it needed \(minimum)."
         }
     }
 }

@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Upcoming]
+### Added
+- An additional case to the `DiceKit.Error` enum, `.insufficientRollForCalculation(attempt:minimum:)`
+- More tests for `Rollable.roll(times:_:)`
+
+### Changed
+- `Rollable`
+  - `roll(times:_:)` is now a throwing function
+- The extension to `Array<Roll>` that provides the `.sum` property is now an extension on `Sequence<Roll>`, which means it also works on `ArraySlice<Roll>`.
+
+### Fixed
+- `Rollable`
+  - Fixed `roll(times:_:)` bugs when rulling too few times (closes #88)
 
 ## [0.26.0] — 2022-06-26
 ### Changed

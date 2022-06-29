@@ -20,7 +20,7 @@ public protocol Rollable {
     /// - Returns: The type of result performed with the given number of rolls.
     ///
     /// - Since: 0.5.0
-    func roll(times: Int, _ returnType: MultipleRollResult) -> Roll
+    func roll(times: Int, _ returnType: MultipleRollResult) throws -> Roll
 
     /// The minimum possible result from using the `roll()` method.
     ///
@@ -112,7 +112,10 @@ public extension Rollable {
     /// - Returns: The type of result performed with the given number of rolls.
     ///
     /// - Since: 0.5.0
-    func roll(times: Int, _ returnType: MultipleRollResult) -> Roll {
+    func roll(times: Int, _ returnType: MultipleRollResult) throws -> Roll {
+        guard times > 0 else {
+            throw Error.insufficientRollsForCalculation(attempt: times, minimum: 1)
+        }
         var rolls: [Roll] = []
         for _ in 0..<times {
             rolls.append(roll())
@@ -121,36 +124,58 @@ public extension Rollable {
         case .sum:
             return rolls.sum
         case .highest:
-            return rolls.max() ?? 0
+            guard let highest = rolls.max() else {
+                fatalError("This should be unreachable")
+            }
+            return highest
         case .lowest:
-            return rolls.min() ?? 0
+            guard let lowest = rolls.min() else {
+                fatalError("This should be unreachable")
+            }
+            return lowest
         case .outsides:
-            return (rolls.min() ?? 0) + (rolls.max() ?? 0)
+            guard times > 1 else {
+                throw Error.insufficientRollsForCalculation(attempt: times, minimum: 2)
+            }
+            guard let min = rolls.min(), let max = rolls.max() else {
+                fatalError("This should be unreachable")
+            }
+            return min + max
         case .dropHighest:
-            guard rolls.count > 1 else { return 0 }
-            rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
-            return rolls.sum
+            guard times > 1 else { return 0 }
+            guard let highest = rolls.max() else {
+                fatalError("This should be unreachable")
+            }
+            return rolls.sum - highest
         case .dropLowest:
-            guard rolls.count > 1 else { return 0 }
-            rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
-            return rolls.sum
+            guard times > 1 else { return 0 }
+            guard let lowest = rolls.min() else {
+                fatalError("This should be unreachable")
+            }
+            return rolls.sum - lowest
         case .dropOutsides:
-            guard rolls.count > 2 else { return 0 }
-            rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
-            rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
-            return rolls.sum
+            guard times >= 2 else {
+                throw Error.insufficientRollsForCalculation(attempt: times, minimum: 2)
+            }
+            guard times > 2 else { return 0 }
+            guard let min = rolls.min(), let max = rolls.max() else {
+                fatalError("This should be unreachable")
+            }
+            return rolls.sum - (min + max)
         case .dropLow(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.firstIndex(of: rolls.min()!)!)
+            guard times >= amountToDrop else {
+                throw Error.insufficientRollsForCalculation(attempt: times, minimum: amountToDrop)
             }
-            return rolls.sum
+            guard times > amountToDrop else { return 0 }
+            let sorted = rolls.sorted(by: <)
+            return sorted.dropFirst(amountToDrop).sum
         case .dropHigh(let amountToDrop):
-            guard rolls.count >= amountToDrop else { return 0 }
-            for _ in 0..<amountToDrop {
-                rolls.remove(at: rolls.firstIndex(of: rolls.max()!)!)
+            guard times >= amountToDrop else {
+                throw Error.insufficientRollsForCalculation(attempt: times, minimum: amountToDrop)
             }
-            return rolls.sum
+            guard times > amountToDrop else { return 0 }
+            let sorted = rolls.sorted(by: >)
+            return sorted.dropFirst(amountToDrop).sum
         }
     }
 
