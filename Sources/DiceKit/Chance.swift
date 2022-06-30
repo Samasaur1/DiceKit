@@ -121,6 +121,24 @@ extension Chance: Equatable {
         return lhs.fraction == rhs.fraction
     }
 }
+extension Chance: Comparable {
+    public static func < (lhs: Chance, rhs: Chance) -> Bool {
+        guard lhs != rhs else { return false }
+        //let commonDenominator = lhs.d * rhs.d
+        let newLhsN = lhs.n * rhs.d
+        let newRhsN = rhs.n * lhs.d
+        return newLhsN < newRhsN
+        /*
+        let lval = lhs.value
+        let rval = rhs.value
+        guard lval != rval else {
+            //The fractions are too close to use their decimal approximations, so we need to compare the fractions themselves.
+            return false
+        }
+        return lval < rval
+        */
+    }
+}
 extension Chance: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(n)
@@ -242,6 +260,58 @@ public extension Chance {
     /// - Since: 0.24.0
     static func * (lhs: Chance, rhs: Chance) -> Chance {
         return (try? .init(lhs.n * rhs.n, outOf: lhs.d * rhs.d)) ?? .zero
+    }
+
+    static func == (lhs: Chance, rhs: Int) -> Bool {
+        switch rhs {
+            case 0: return lhs.n == 0
+            case 1: return lhs.n == lhs.d
+            default: return false
+        }
+    }
+    static func == (lhs: Int, rhs: Chance) -> Bool {
+        return rhs == lhs
+    }
+    static func < (lhs: Chance, rhs: Int) -> Bool {
+        // lhs: Chance < rhs: Int
+        if rhs <= 0 {
+            // A Chance can be minimum 0
+            return false
+        } else if rhs == 1 {
+            //Is this chance guaranteed or not?
+            return lhs.n < lhs.d
+        } else {
+            //A Chance can be maximum 1
+            return true
+        }
+    }
+    static func < (lhs: Int, rhs: Chance) -> Bool {
+        //lhs: Int < rhs: Chance
+        if lhs < 0 {
+            return true
+        } else if lhs == 0 {
+            return rhs.n > 0
+        } else {
+            return false
+        }
+    }
+    static func > (lhs: Chance, rhs: Int) -> Bool {
+        return rhs < lhs
+    }
+    static func > (lhs: Int, rhs: Chance) -> Bool {
+        return rhs < lhs
+    }
+    static func <= (lhs: Chance, rhs: Int) -> Bool {
+        return lhs == rhs || lhs < rhs
+    }
+    static func <= (lhs: Int, rhs: Chance) -> Bool {
+        return lhs == rhs || lhs < rhs
+    }
+    static func >= (lhs: Chance, rhs: Int) -> Bool {
+        return lhs == rhs || lhs > rhs
+    }
+    static func >= (lhs: Int, rhs: Chance) -> Bool {
+        return lhs == rhs || lhs > rhs
     }
 }
 
