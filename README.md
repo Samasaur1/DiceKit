@@ -37,7 +37,7 @@ import DiceKit
 let myDie = Die.d6
 let result = myDie.roll()
 
-let myAbilityScore = myDie.roll(times: 4, .dropLowest)
+let myAbilityScore = try! myDie.roll(times: 4, .dropLowest)
 
 let damageRoll = Dice("3d6 + 5")
 let probabilityDistribution = damageRoll.probabilities
